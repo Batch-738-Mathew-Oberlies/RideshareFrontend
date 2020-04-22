@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +9,7 @@ export class HomePageComponent implements OnInit {
   
   errorText: string; //Contains some error message
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit() {
   }
