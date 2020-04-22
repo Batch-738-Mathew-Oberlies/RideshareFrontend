@@ -11,7 +11,7 @@ const baseUri = `http://localhost`;
 const port = '8081';
 
 /**
- * google map api key 
+ * google map api key
  */
 const googleKey = '';
  /**
@@ -19,12 +19,12 @@ const googleKey = '';
    */
 
 export const environment = {
- 
+
   production: false,
   environmentName: 'Default Environment',
   userUri: `${baseUri}:${port}/rideshare/users/`,
   loginUri: `${baseUri}:${port}/rideshare/login/`,
-  batchesUri: `${baseUri}:${port}/ridesharebatches/`,
+  batchesUri: `${baseUri}:${port}/rideshare/batches/`,
   carUri: `${baseUri}:${port}/rideshare/cars/`,
   adminUri: `${baseUri}:${port}/rideshare/admins/`,
   googleMapKey: `${googleKey}`,
