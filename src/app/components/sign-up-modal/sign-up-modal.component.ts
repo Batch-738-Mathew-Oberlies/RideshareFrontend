@@ -75,10 +75,10 @@ export class SignupModalComponent implements OnInit {
     this.hCityError='';
     this.hZipError='';
     this.success='';
-    this.user.wAddress = this.user.hAddress;
-    this.user.wState = this.user.hState;
-    this.user.wCity = this.user.hCity;
-    this.user.wZip = this.user.hZip;
+    this.user.waddress = this.user.haddress;
+    this.user.waddress.state = this.user.haddress.state;
+    this.user.waddress.city = this.user.haddress.city;
+    this.user.waddress.zip = this.user.haddress.zip;
     let driver = <HTMLInputElement> document.getElementById("driver");  
     let rider = <HTMLInputElement> document.getElementById("rider");  
 
@@ -117,23 +117,23 @@ export class SignupModalComponent implements OnInit {
           i = 1;
 
         }
-        if(res.hState != undefined){
-          this.hStateError = res.hState[0];
+        if(res.haddress.state != undefined){
+          this.hStateError = res.haddress.state[0];
           i = 1;
 
         }
-        if(res.hAddress != undefined){
-          this.hAddressError = res.hAddress[0];
+        if(res.haddress != undefined){
+          this.hAddressError = res.haddress[0];
           i = 1;
 
         }
-        if(res.hCity != undefined){
-          this.hCityError = res.hCity[0];
+        if(res.haddress.city != undefined){
+          this.hCityError = res.haddress.city[0];
           i = 1;
 
         }
-        if(res.hZip != undefined){
-          this.hZipError = res.hZip[0];
+        if(res.haddress.zip != undefined){
+          this.hZipError = res.haddress.zip[0];
           i = 1;
 
         }
