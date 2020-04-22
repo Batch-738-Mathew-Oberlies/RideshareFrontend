@@ -32,22 +32,30 @@ export class DriverContactModalComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   
-getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
-                         new Promise((resolve) => {
-                           let script: HTMLScriptElement = document.createElement('script');
-                           script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
-                     }); 
-               }    
-           }
-       );
-   }
+// getGoogleApi()  {
+//     this.http.get(`${environment.loginUri}getGoogleApi`)
+//        .subscribe(
+//                  (response) => {
+//                      //console.log(response);
+//                      if(response["googleMapAPIKey"] != undefined){
+//                          new Promise((resolve) => {
+//                            let script: HTMLScriptElement = document.createElement('script');
+//                            script.addEventListener('load', r => resolve());
+//                            script.src = `https://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+//                            document.head.appendChild(script);      
+//                      }); 
+//                }    
+//            }
+//        );
+//    }
+
+  getGoogleApi() {
+    if (environment.googleMapKey !== undefined) {
+      const script: HTMLScriptElement = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
+      document.head.appendChild(script);
+    }
+  }
 
   showDriversOnMap(origin, destination){
      

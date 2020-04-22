@@ -11,15 +11,15 @@ const baseUri = `http://localhost`;
 const port = '8081';
 
 /**
- * google map api key
+ * google map api key 
  */
-const googleKey = '';
+const googleKey = 'AIzaSyAN5Tn6XJpmSh0r4HdowjcV5I5u-YmTHfE';
  /**
    * This is the environment config.
    */
 
 export const environment = {
-
+ 
   production: false,
   environmentName: 'Default Environment',
   userUri: `${baseUri}:${port}/rideshare/users/`,
