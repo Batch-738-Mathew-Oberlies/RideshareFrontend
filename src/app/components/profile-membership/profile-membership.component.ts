@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user';
  * The profile membership component.
  */
 export class ProfileMembershipComponent implements OnInit {
-  profileObject : User;
+  profileObject = new User();
   currentUser: any = '';
   isDriver: boolean;
   active: boolean;

@@ -24,13 +24,13 @@ export class ProfileLocationComponent implements OnInit {
    * logged in user as it appears in the database.
    */
   ngOnInit() {
-   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
       this.currentUser = response;
-      this.zipcode = response.hZip;
-      this.city = response.hCity;
-      this.address = response.hAddress;
-      this.address2 = response.wAddress;
-      this.hState = response.hState;
+      this.zipcode = +response.haddress.zip;
+      this.city = response.haddress.city;
+      this.address = response.haddress.street;
+      this.address2 = response.waddress.street;
+      this.hState = response.haddress.state;
 
     });
   }
@@ -40,11 +40,11 @@ export class ProfileLocationComponent implements OnInit {
    * and persists those changes to the database.
    */
   updatesContactInfo(){
-    this.currentUser.hZip = this.zipcode;
-    this.currentUser.hCity = this.city;
-    this.currentUser.hAddress = this.address;
-    this.currentUser.wAddress = this.address2;
-    this.currentUser.hState = this.hState;
+    this.currentUser.haddress.zip = this.zipcode.toString();
+    this.currentUser.haddress.city = this.city;
+    this.currentUser.haddress.street = this.address;
+    this.currentUser.waddress.street = this.address2;
+    this.currentUser.haddress.state = this.hState;
     //console.log(this.currentUser);
     this.userService.updateUserInfo(this.currentUser);
     this.success = "Updated Successfully!";
