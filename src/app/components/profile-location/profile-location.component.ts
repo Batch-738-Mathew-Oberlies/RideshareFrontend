@@ -19,6 +19,10 @@ export class ProfileLocationComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
+  /**
+   * Sets the user location information of this component to match that of the currently
+   * logged in user as it appears in the database.
+   */
   ngOnInit() {
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
@@ -31,6 +35,10 @@ export class ProfileLocationComponent implements OnInit {
     });
   }
 
+  /**
+   * Updates the location information of the current user to match that found in this component,
+   * and persists those changes to the database.
+   */
   updatesContactInfo(){
     this.currentUser.hZip = this.zipcode;
     this.currentUser.hCity = this.city;

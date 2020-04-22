@@ -11,6 +11,9 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
   templateUrl: './sign-up-modal.component.html',
   styleUrls: ['./sign-up-modal.component.css']
 })
+/**
+ * The sign up modal component.
+ */
 export class SignupModalComponent implements OnInit {
   fname :string;
   lname :string;
@@ -51,18 +54,23 @@ export class SignupModalComponent implements OnInit {
       }
     );
 
+  
   this.batchService.getAllBatchesByLocation1().subscribe(
       res => {
          this.batches = res;
           },
       );
   }
-  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
-
+  /**
+   * Opens 'sign up' modal that takes in a template of type 'ng-template'.
+  */
   openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }
 
+  /**
+   * Initializes a new user based on document fields and persists it to the database.
+   */
   submitUser() {
     this.user.userId = 0;
     this.firstNameError = '';

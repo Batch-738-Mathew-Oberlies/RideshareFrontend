@@ -1,5 +1,8 @@
 import { Batch } from './batch';
 
+/**
+ * A model representing the User class.
+ */
 export class User {
     /**
      * Set User model

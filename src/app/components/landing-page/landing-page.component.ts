@@ -11,6 +11,9 @@ import { environment } from '../../../environments/environment';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
+/**
+ * The landing-page component.
+ */
 export class LandingPageComponent implements OnInit {
 
   location_s : string =''; //sample: Morgantown, WV
@@ -24,6 +27,7 @@ export class LandingPageComponent implements OnInit {
   constructor(private http: HttpClient,private userService: UserService) {
     //load google map api
   }
+
 
   ngOnInit(): void {
      //load google map  api
@@ -41,10 +45,16 @@ export class LandingPageComponent implements OnInit {
 
  }
 
+/**
+ * DUPLICATED
+ */
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * DUPLICATED
+ */
  getGoogleApi()  {
   this.http.get(`${environment.loginUri}getGoogleApi`)
      .subscribe(
@@ -62,6 +72,10 @@ sleep(ms) {
      );
  }
 
+ /**
+  * Searches for drivers, collects the google maps services, and calls the display route method.
+  * VERY similar to the showDriversOnMap method found in driver-contact-modal and driver-list.
+  */
  searchDriver(){
   //call service search algorithm ()
   //console.log(this.location_s);
@@ -81,7 +95,9 @@ sleep(ms) {
   });
  }
 
- 
+ /**
+ * DUPLICATED
+ */
 displayRoute(origin, destination, service, display) {
   service.route({
     origin: origin,
