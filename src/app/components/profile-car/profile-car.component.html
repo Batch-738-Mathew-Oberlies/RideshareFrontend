@@ -1,10 +1,10 @@
 <div class="container mainContainer">
-    
+
         <i class="fa fa-car" style="font-family:'FontAwesome';"></i>
-        
-    
+
+
         <h4>Car Information:</h4>
-        
+
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="make" class="col-sm-4 col-form-label">Make:</label>
@@ -12,7 +12,7 @@
                     <input type="text" class="form-control" id="make" [(ngModel)]=make>
                 </div>
         </div>
-        
+
         <div class="form-group row">
                 <div class="col-sm-1"></div>
             <label for="model" class="col-sm-4 col-form-label">Model:</label>
@@ -33,7 +33,6 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <p *ngIf="success != ''" class="success">{{success}}</p>
             </div>
         </div>
 
@@ -44,9 +43,9 @@
             <input type="text" class="form-control" id="availableSeats" [(ngModel)]=availableSeats>
         </div>
         </div>
-        
         <button type="submit" class="btn btn-primary myBtn" (click)="updatesCarInfo()">Save</button>
-    </div>
-    
-        
-    
+        <p *ngIf="success != ''" class="success">{{success}}</p>
+
+      </div>
+
+
