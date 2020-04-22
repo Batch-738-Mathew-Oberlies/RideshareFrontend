@@ -75,10 +75,14 @@ export class SignupModalComponent implements OnInit {
     this.hCityError='';
     this.hZipError='';
     this.success='';
+<<<<<<< HEAD
     this.user.waddress = this.user.haddress;
     this.user.waddress.state = this.user.haddress.state;
     this.user.waddress.city = this.user.haddress.city;
     this.user.waddress.zip = this.user.haddress.zip;
+=======
+    this.user.wAddress = this.user.hAddress;
+>>>>>>> Added address model and realigned code and models to reflect this change
     let driver = <HTMLInputElement> document.getElementById("driver");  
     let rider = <HTMLInputElement> document.getElementById("rider");  
 
@@ -117,6 +121,7 @@ export class SignupModalComponent implements OnInit {
           i = 1;
 
         }
+<<<<<<< HEAD
         if(res.haddress.state != undefined){
           this.hStateError = res.haddress.state[0];
           i = 1;
@@ -137,6 +142,13 @@ export class SignupModalComponent implements OnInit {
           i = 1;
 
         }
+=======
+        if(res.hAddress != undefined){
+          this.hAddressError = res.hAddress[0];
+          i = 1;
+
+        }
+>>>>>>> Added address model and realigned code and models to reflect this change
         if(i === 0) {
           i = 0;
           this.success = "Registered successfully!";

@@ -51,6 +51,7 @@ export class User {
      * Set accepting ride as a boolean
      */
     isAcceptingRides: boolean;
+<<<<<<< HEAD
     
     /**
      * Home Address
@@ -61,4 +62,8 @@ export class User {
      * Work Address
      */
     waddress: Address;
+=======
+    hAddress: Address;
+    wAddress: Address;
+>>>>>>> Added address model and realigned code and models to reflect this change
 }

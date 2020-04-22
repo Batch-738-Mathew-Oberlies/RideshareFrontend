@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileLocationComponent implements OnInit {
 
-  zipcode: number;
+  zipcode: string;
   city:string;
   address:string;
   address2:string;
@@ -22,21 +22,37 @@ export class ProfileLocationComponent implements OnInit {
   ngOnInit() {
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
       this.currentUser = response;
+<<<<<<< HEAD
       this.zipcode = +response.haddress.zip;
       this.city = response.haddress.city;
       this.address = response.haddress.street;
       this.address2 = response.waddress.street;
       this.hState = response.haddress.state;
+=======
+      this.zipcode = response.hAddress.zip;
+      this.city = response.hAddress.city;
+      this.address = response.hAddress.street;
+      this.address2 = response.wAddress.street;
+      this.hState = response.hAddress.state;
+>>>>>>> Added address model and realigned code and models to reflect this change
 
     });
   }
 
   updatesContactInfo(){
+<<<<<<< HEAD
     this.currentUser.haddress.zip = this.zipcode.toString();
     this.currentUser.haddress.city = this.city;
     this.currentUser.haddress.street = this.address;
     this.currentUser.waddress.street = this.address2;
     this.currentUser.haddress.state = this.hState;
+=======
+    this.currentUser.hAddress.zip = this.zipcode;
+    this.currentUser.hAddress.city = this.city;
+    this.currentUser.hAddress.street = this.address;
+    this.currentUser.wAddress.street = this.address2;
+    this.currentUser.hAddress.state = this.hState;
+>>>>>>> Added address model and realigned code and models to reflect this change
     //console.log(this.currentUser);
     this.userService.updateUserInfo(this.currentUser);
     this.success = "Updated Successfully!";
