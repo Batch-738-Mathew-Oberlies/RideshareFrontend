@@ -13,6 +13,7 @@ export class ProfileCarComponent implements OnInit {
   model:string;
   nrSeats:number;
   currentCar: Car;
+  availableSeats:number;
   success :string;
 
   constructor(private carService: CarService) { }
@@ -24,6 +25,7 @@ export class ProfileCarComponent implements OnInit {
       this.make = response.make;
       this.model = response.model;
       this.nrSeats = response.seats;
+      this.availableSeats = response.availableSeats;
 
     });
   }
@@ -32,6 +34,7 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.make = this.make;
     this.currentCar.model= this.model;
     this.currentCar.seats = this.nrSeats;
+    this.currentCar.availableSeats = this.availableSeats;
     //console.log(this.currentUser);
     this.carService.updateCarInfo(this.currentCar);
     this.success = "Updated Successfully!";
