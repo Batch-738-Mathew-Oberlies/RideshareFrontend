@@ -60,25 +60,18 @@ export class HomePageComponent implements OnInit {
           console.log("Valid Address");
         }else if(desc.length>0 && rT.length<=0){ //If address is invalid
           console.log("Invalid");
-          for (let i = 0; i<desc.length; i++){
+          console.log(desc[0].textContent);
 
-            console.log(desc[i].textContent); //Will print out the text content
+          this.errorText = desc[0].textContent;
+          alert(this.errorText);
 
-            this.errorText = desc[i].textContent;
-            alert(this.errorText);
-            // console.log(this.errorText);
-          }
         } else if(desc.length<=0 && rT.length>0){ //If address is valid but needs more info
           console.log("Valid but need more info");
+          console.log(rT[0].textContent);
 
-          for (let i = 0; i<rT.length; i++){
-
-            console.log(rT[i].textContent); //Will print out the text content
-
-            this.errorText = rT[i].textContent;
+          this.errorText = rT[0].textContent;
             alert(this.errorText);
-            // console.log(this.errorText);
-          }
+
         }
         
       })
