@@ -22,11 +22,11 @@ export const environment = {
  
   production: false,
   environmentName: 'Default Environment',
-  userUri: `${baseUri}:${port}/users/`,
-  loginUri: `${baseUri}:${port}/login/`,
-  batchesUri: `${baseUri}:${port}/batches/`,
-  carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`,
+  userUri: `${baseUri}:${port}/rideshare/users/`,
+  loginUri: `${baseUri}:${port}/rideshare/login/`,
+  batchesUri: `${baseUri}:${port}/ridesharebatches/`,
+  carUri: `${baseUri}:${port}/rideshare/cars/`,
+  adminUri: `${baseUri}:${port}/rideshare/admins/`,
   googleMapKey: `${googleKey}`,
 };
 
