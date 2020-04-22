@@ -37,6 +37,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -77,7 +78,8 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UserService,

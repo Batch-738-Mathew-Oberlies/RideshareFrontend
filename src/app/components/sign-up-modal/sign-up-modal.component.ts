@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { Address } from 'src/app/models/address';
 
 @Component({
   selector: 'signupmodal',
@@ -17,7 +19,7 @@ export class SignupModalComponent implements OnInit {
   username :string;
   email :string;
   phone :string;
-  address :string;
+  address = new Address();
   isDriver: boolean;
   isRider: boolean;
 
@@ -44,6 +46,21 @@ export class SignupModalComponent implements OnInit {
             'WI','WY'];
   constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
 
+  signup = new FormGroup({
+    fName: new FormControl(''),
+    lName: new FormControl(''),
+    username: new FormControl(''),
+    email: new FormControl(''),
+    pNumber: new FormControl(''),
+    streetAddress: new FormControl('', Validators.required),
+    streetAddress2: new FormControl(''),
+    city: new FormControl(''),
+    state: new FormControl(''),
+    zip: new FormControl(''),
+    rider: new FormControl(false),
+    driver: new FormControl(false),
+  });
+  
   ngOnInit() {
     this.userService.getAllUsers().subscribe(
       res => {
@@ -64,6 +81,7 @@ export class SignupModalComponent implements OnInit {
   }
 
   submitUser() {
+<<<<<<< HEAD
     this.user.userId = 0;
     this.firstNameError = '';
     this.lastNameError = '';
@@ -114,12 +132,17 @@ export class SignupModalComponent implements OnInit {
         if(res.email != undefined){
           this.emailError = res.email[0];
           i = 1;
+=======
+      this.address.street1 = this.signup.controls.streetAddress.value;
+      this.address.street2 = this.signup.controls.streetAddress2.value;
+      this.address.city = this.signup.controls.city.value;
+      this.address.state = this.signup.controls.state.value;
+      this.address.zip = this.signup.controls.zip.value;
+>>>>>>> Changed sign up form removed radial buttons and implemnted form
 
-        }
-        if(res.userName != undefined){
-          this.userNameError = res.userName[0];
-          i = 1;
+      console.log(this.address);
 
+<<<<<<< HEAD
         }
 <<<<<<< HEAD
         if(res.haddress.state != undefined){
@@ -161,4 +184,8 @@ export class SignupModalComponent implements OnInit {
     );
   
     }
+=======
+>>>>>>> Changed sign up form removed radial buttons and implemnted form
     }
+
+}

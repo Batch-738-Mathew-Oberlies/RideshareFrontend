@@ -4,12 +4,17 @@
  */
 
 export class Address {
+<<<<<<< HEAD
     id: number;
     
     // Street Address
     street: string;
     
     // City
+=======
+    street1: string;
+    street2: string;
+>>>>>>> Changed sign up form removed radial buttons and implemnted form
     city: string;
 
     // State
