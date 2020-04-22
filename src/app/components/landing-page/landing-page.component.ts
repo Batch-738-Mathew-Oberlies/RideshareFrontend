@@ -65,7 +65,7 @@ sleep(ms) {
 getGoogleApi() {
   if (environment.googleMapKey !== undefined) {
     const script: HTMLScriptElement = document.createElement('script');
-    script.src = `http://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
     document.head.appendChild(script);
   }
 }
