@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
 	users: User[] = [];
 	allUsers: User[] = [];
+	arr: any[] = [];
 
 	chosenUser: User;
 	chosenUserFullName: string = '';
@@ -146,6 +147,27 @@ export class LoginComponent implements OnInit {
 
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
+		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
+    //need to hide this API userID------------>____________Aventura
+    let xml = `<AddressValidateRequest USERID="605REVAT4789"><Revision>1</Revision><Address ID="0"><Address1></Address1><Address2>29851 Aventura</Address2><City/><State>CA</State><Zip5>92688</Zip5><Zip4/></Address></AddressValidateRequest>`;
+  console.log(url + xml);
+  //this.http.get(url + xml).subscribe()
+  fetch(url + xml)
+      .then(response => {
+        return response.text();
+  })
+      .then(text => {
+        console.log(text);
+        let parser = new DOMParser();
+        let xmlDoc = parser.parseFromString(text, 'text/xml');
+		var sizex = xmlDoc.getElementsByTagNameNS("*", "*");
+		for (let i = 0 ; i < sizex.length ; i++) {
+			console.log(xmlDoc.getElementsByTagNameNS("*","*"));
+			this.arr.push(xmlDoc.getElementsByTagNameNS("*", "*"));
+		}
+        //<ReturnText> will hold a description.
+        //on <Error>, <Description> will hold a description
+      })
 	}
 
 	/**

@@ -76,9 +76,6 @@ export class SignupModalComponent implements OnInit {
     this.hZipError='';
     this.success='';
     this.user.wAddress = this.user.hAddress;
-    this.user.wState = this.user.hState;
-    this.user.wCity = this.user.hCity;
-    this.user.wZip = this.user.hZip;
     let driver = <HTMLInputElement> document.getElementById("driver");  
     let rider = <HTMLInputElement> document.getElementById("rider");  
 
@@ -117,23 +114,8 @@ export class SignupModalComponent implements OnInit {
           i = 1;
 
         }
-        if(res.hState != undefined){
-          this.hStateError = res.hState[0];
-          i = 1;
-
-        }
         if(res.hAddress != undefined){
           this.hAddressError = res.hAddress[0];
-          i = 1;
-
-        }
-        if(res.hCity != undefined){
-          this.hCityError = res.hCity[0];
-          i = 1;
-
-        }
-        if(res.hZip != undefined){
-          this.hZipError = res.hZip[0];
           i = 1;
 
         }

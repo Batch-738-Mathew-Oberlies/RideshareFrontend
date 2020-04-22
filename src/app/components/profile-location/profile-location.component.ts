@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileLocationComponent implements OnInit {
 
-  zipcode: number;
+  zipcode: string;
   city:string;
   address:string;
   address2:string;
@@ -22,21 +22,21 @@ export class ProfileLocationComponent implements OnInit {
   ngOnInit() {
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentUser = response;
-      this.zipcode = response.hZip;
-      this.city = response.hCity;
-      this.address = response.hAddress;
-      this.address2 = response.wAddress;
-      this.hState = response.hState;
+      this.zipcode = response.hAddress.zip;
+      this.city = response.hAddress.city;
+      this.address = response.hAddress.street;
+      this.address2 = response.wAddress.street;
+      this.hState = response.hAddress.state;
 
     });
   }
 
   updatesContactInfo(){
-    this.currentUser.hZip = this.zipcode;
-    this.currentUser.hCity = this.city;
-    this.currentUser.hAddress = this.address;
-    this.currentUser.wAddress = this.address2;
-    this.currentUser.hState = this.hState;
+    this.currentUser.hAddress.zip = this.zipcode;
+    this.currentUser.hAddress.city = this.city;
+    this.currentUser.hAddress.street = this.address;
+    this.currentUser.wAddress.street = this.address2;
+    this.currentUser.hAddress.state = this.hState;
     //console.log(this.currentUser);
     this.userService.updateUserInfo(this.currentUser);
     this.success = "Updated Successfully!";

@@ -1,4 +1,5 @@
 import { Batch } from './batch';
+import { Address } from './address';
 
 export class User {
     /**
@@ -41,12 +42,6 @@ export class User {
      * Set accepting ride as a boolean
      */
     isAcceptingRides: boolean;
-    hState: string;
-    hAddress: string;
-    hCity: string;
-    hZip: number;
-    wAddress: string;
-    wCity: string;
-    wState: string;
-    wZip: number;
+    hAddress: Address;
+    wAddress: Address;
 }
