@@ -15,7 +15,6 @@ export class ProfileCarComponent implements OnInit {
   currentCar: Car;
   availableSeats:number;
   success :string;
-  availableOptions: number[];
 
   
 
@@ -45,14 +44,5 @@ export class ProfileCarComponent implements OnInit {
     this.success = "Updated Successfully!";
   }
 
-  updateAvailableOptions(){
-    var x = this.nrSeats;
-    var y = [];
-    for(let i = 1; i < x; x++ ){
-      var length = y.push(i);
-    }
-    this.availableOptions=y;
-    console.log(this.availableOptions);
-  }
 
 }
