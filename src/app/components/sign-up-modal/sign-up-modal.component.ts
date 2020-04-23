@@ -95,7 +95,18 @@ export class SignupModalComponent implements OnInit {
         test = result;
       })
 
-      console.log(test);
+      if (test) {
+        alert("An error occured with your address validation.\n Error message: " + test);
+      } else {
+        this.modalService.hide(1);
+        //ADD USER, THEN:
+        //AUTOMATICALLY LOG IN,
+        //OR
+        //ALERT USER THAT SIGN UP WAS SUCCESSFUL
+        //OR BOTH
+        return;
+      }
+      
 
     }
 
