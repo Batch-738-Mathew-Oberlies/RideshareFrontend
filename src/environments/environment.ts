@@ -4,29 +4,38 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
-const baseUri = `http://localhost`;
 /**
- * Set the port to 8080
+ * API base URI
+ */
+const baseUri = `http://localhost`;
+
+/**
+ * Base URI port
  */
 const port = '8080';
 
 /**
- * google map api key 
+ * API context path
+ */
+const contextPath = `rideshare`;
+
+/**
+ * Google Maps API key
  */
 const googleKey = '';
- /**
-   * This is the environment config.
-   */
 
+/**
+ * Constants for a development config
+ */
 export const environment = {
- 
   production: false,
-  environmentName: 'Default Environment',
-  userUri: `${baseUri}:${port}/users/`,
-  loginUri: `${baseUri}:${port}/login/`,
-  batchesUri: `${baseUri}:${port}/batches/`,
-  carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`,
+  environmentName: 'Development Environment',
+  userUri: `${baseUri}:${port}/${contextPath}/users/`,
+  loginUri: `${baseUri}:${port}/${contextPath}/login/`,
+  batchesUri: `${baseUri}:${port}/${contextPath}/batches/`,
+  carUri: `${baseUri}:${port}/${contextPath}/cars/`,
+  adminUri: `${baseUri}:${port}/${contextPath}/admins/`,
+  tripsURI: `${baseUri}:${port}/${contextPath}/trips/`,
   googleMapKey: `${googleKey}`,
 };
 
