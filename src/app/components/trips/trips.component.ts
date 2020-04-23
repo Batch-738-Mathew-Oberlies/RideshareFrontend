@@ -79,7 +79,7 @@ export class CreateTripComponent {
 
   submit() {
     this.trip.name = this.tripModalForm.value.name;
-    this.trip.time = this.tripModalForm.value.time;
+    this.trip.date = this.tripModalForm.value.time;
     this.trip.availableSeats = this.tripModalForm.value.availableSeats;
     console.log(this.trip);
 
