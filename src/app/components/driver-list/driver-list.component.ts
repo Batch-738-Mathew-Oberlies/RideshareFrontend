@@ -22,6 +22,7 @@ export class DriverListComponent implements OnInit {
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
+  availableDrivers;
 
 
   @ViewChild('map',null) mapElement: any;
@@ -31,62 +32,34 @@ export class DriverListComponent implements OnInit {
 
   ngOnInit() {
     this.drivers = [];
-
-    this.userService.getRidersForLocation1(this.location).subscribe(
-      res => {
-           console.log(res);
-           res.forEach(element => {
-              this.drivers.push({
-                   'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.haddress.city+","+element.haddress.state,
-                'email': element.email,
-                'phone':element.phoneNumber
-              });
-          });
-      //get all routes
-      this.displayDriversList(this.location, this.drivers);
-      //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
-      });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
     this.getGoogleApi();
-
-    this.sleep(2000).then(() => {
-      this.mapProperties = {
-         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
-         zoom: 15,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-    });
+    
+    this.userService.getRidersForLocation1(this.location).subscribe(
+      (res) => {
+        res.forEach(element => {
+          this.drivers.push({
+            'id': element.userId,
+            'name': element.firstName+" "+element.lastName,
+            'origin':element.haddress.city+","+element.haddress.state,
+            'email': element.email,
+            'phone':element.phoneNumber,
+          });
+        });
+        
+        this.mapProperties = {
+          center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+        
+        //get all routes
+        this.displayDriversList(this.location, this.drivers);
+        //show drivers on map
+        this.showDriversOnMap(this.location, this.drivers);
+        });
+    
   }
-
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-// getGoogleApi()  {
-//     this.http.get(`${environment.loginUri}getGoogleApi`)
-//        .subscribe(
-//                  (response) => {
-//                      //console.log(response);
-//                      if(response["googleMapAPIKey"] != undefined){
-//                          new Promise((resolve) => {
-//                            let script: HTMLScriptElement = document.createElement('script');
-//                            script.addEventListener('load', r => resolve());
-//                            script.src = `https://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-//                            document.head.appendChild(script);
-//                      });
-//                }
-//            }
-//        );
-//    }
 
   getGoogleApi() {
     if (environment.googleMapKey !== undefined) {
@@ -108,13 +81,13 @@ export class DriverListComponent implements OnInit {
   }
 
 
-displayRoute(origin, destination, service, display) {
+  displayRoute(origin, destination, service, display) {
     service.route({
       origin: origin,
       destination: destination,
       travelMode: 'DRIVING',
       //avoidTolls: true
-    }, function(response, status) {
+    }, (response, status) => {
       if (status === 'OK') {
         display.setDirections(response);
       } else {
@@ -124,19 +97,21 @@ displayRoute(origin, destination, service, display) {
   }
 
 
-displayDriversList(origin, drivers) {
+  displayDriversList(origin, drivers) {
     let  origins = [];
     //set origin
     origins.push(origin)
+    this.availableDrivers = [];
 
-    var outputDiv = document.getElementById('output');
-    console.log(drivers);
     drivers.forEach(element => {
       var availableSeats: number;
+      var totalSeats: number;
+
       this.carService.getCarByUserId2(element.id).subscribe(
         (result) => {
           console.log(result);
           availableSeats = result.availableSeats;
+          totalSeats = result.seats;
         }
       );
       var service = new google.maps.DistanceMatrixService;
@@ -147,51 +122,34 @@ displayDriversList(origin, drivers) {
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         avoidHighways: false,
         avoidTolls: false
-      }, function(response, status) {
+      }, (response, status) => {
         if (status !== 'OK') {
           alert('Error was: ' + status);
         } else {
-          var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          var results = response.rows[0].elements;
+          
+          const originList = response.originAddresses;
+          const destinationList = response.destinationAddresses;
+          const results = response.rows[0].elements;
           console.log(results[0].distance.text);
-          var name =  element.name;
-          outputDiv.innerHTML += `<tr><td class="col">${name}</td>
-                                  <td class="col">${results[0].distance.text}</td>
-                                  <td class="col">${results[0].duration.text}</td>
-                                  <td class="col">${availableSeats}</td>
-                                  <td class="col">
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
-                                    <div class="col-lg-5">
-                                     <div class="modal" id="exampleModalCentered${element.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <h5 class="modal-title" id="exampleModalCenteredLabel">Contact Info:</h5>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                     <span aria-hidden="true">×</span>
-                                                   </button>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <h1>${name}</h1>
-                                                  <h3>Email: ${element.email}</h3>
-                                                  <h3>Phone: ${element.phone}</h3>
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              </div>
-                                            </div>
-                                         </div>
-                                       </div>
-                                  </div>
-                                  <div class="col-lg-6">
-                                      <div #maps id="gmap" class="img-responsive"></div>
-                                  </div>
-                                </td></tr>`;
-      }
-    });
 
+          this.availableDrivers.push({
+            label: `exampleModalCentered${element.id}`,
+            origin: originList,
+            destinationList: destinationList,
+            results: results,
+            user: {
+              id: element.id,
+              name: element.name,
+              email: element.email,
+              phone: element.phone
+            },
+            availableSeats: availableSeats,
+            totalSeats: totalSeats
+          })
+        }
+      });
    });
-}
+   console.log(this.availableDrivers);
+  }
 
 }
