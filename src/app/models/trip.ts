@@ -24,15 +24,11 @@ export class Trip{
      */
     availableSeats: number
     /**
-     * Set car as a Car
-     */
-    vehicle: Car
-    /**
      * Set destination as Address
      */
     destination: Address
     /**
-     * Set time as String
+     * Set date and time as String from Date object
      */
-    time: Date
+    date: string
 }

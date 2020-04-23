@@ -28,6 +28,7 @@ export const environment = {
   carUri: `${baseUri}:${port}/cars/`,
   adminUri: `${baseUri}:${port}/admins/`,
   googleMapKey: `${googleKey}`,
+  tripUri: `${baseUri}:${port}/trips/`
 };
 
 /*
