@@ -76,6 +76,9 @@ export class ValidationService {
 	}
 
 	
+  /**
+   * Used to test http get request to USPS API for address valiidation
+   */
 	validateAddress(address: Address) {
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
     	//need to hide this API userID------------>____________
