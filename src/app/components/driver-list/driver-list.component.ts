@@ -27,7 +27,7 @@ export class DriverListComponent implements OnInit {
   @ViewChild('map',null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService) { }
+  constructor(private http: HttpClient,private userService: UserService, private carService: CarService) { }
 
   ngOnInit() {
     this.drivers = [];
@@ -44,7 +44,10 @@ export class DriverListComponent implements OnInit {
                 'phone':element.phoneNumber
               });
           });
-
+      //get all routes
+      this.displayDriversList(this.location, this.drivers);
+      //show drivers on map
+      this.showDriversOnMap(this.location, this.drivers);
       });
     /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
@@ -61,10 +64,6 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes
-      this.displayDriversList(this.location, this.drivers);
-      //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
     });
   }
 
@@ -133,7 +132,13 @@ displayDriversList(origin, drivers) {
     var outputDiv = document.getElementById('output');
     console.log(drivers);
     drivers.forEach(element => {
-
+      var availableSeats: number;
+      this.carService.getCarByUserId2(element.id).subscribe(
+        (result) => {
+          console.log(result);
+          availableSeats = result.availableSeats;
+        }
+      );
       var service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix({
         origins: origins,
@@ -154,6 +159,7 @@ displayDriversList(origin, drivers) {
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
+                                  <td class="col">${availableSeats}</td>
                                   <td class="col">
                                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered${element.id}"> View</button>
                                     <div class="col-lg-5">
