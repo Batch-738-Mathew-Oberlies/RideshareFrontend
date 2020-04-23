@@ -11,7 +11,7 @@ Run `ng serve` for a dev server. Navigate to `http://http://54.174.82.153:4200/`
 
 ## Connect with the backend
 
-Clone the [User Service Backend](https://github.com/Batch-738-Mathew-Oberlies/RideshareBackend.git). Set the env variables `${pass_word}` and ```${user_name}``` and  ```${db_url}```. Database must be Postgres. Run the java program as a Spring Boot Application. It will be served on port 8080.  Once served, documentation for the api can be found here [User Service API](http://http://54.174.82.153:8080/swagger-ui.html#/).
+Clone the [User Service Backend](https://github.com/Batch-738-Mathew-Oberlies/RideshareBackend). Set the env variables `${pass_word}` and ```${user_name}``` and  ```${db_url}```. Database must be Postgres. Run the java program as a Spring Boot Application. It will be served on port 8080.  Once served, documentation for the api can be found here [User Service API](http://http://54.174.82.153:8080/swagger-ui.html#/).
 
 ## Build
 

@@ -52,7 +52,7 @@ export class UserService {
 	}
 	
 	/**
-	 * A GET method fto retrieve one user from the database with the given id. Return a promise.
+	 * A GET method to retrieve one user from the database with the given id. Return a promise.
 	 * @param idParam 
 	 */
 	getUserById(idParam: number){

@@ -46,14 +46,16 @@ export class LandingPageComponent implements OnInit {
  }
 
 /**
- * DUPLICATED
+ * Resolves a promise after the given number of milliseconds.
+ * @param ms 
  */
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /**
- * DUPLICATED
+ * Inserts the google maps api script into the document head. This seems to be duplicated code.
+ * Duplicate code.
  */
  getGoogleApi()  {
   this.http.get(`${environment.loginUri}getGoogleApi`)
@@ -95,8 +97,15 @@ sleep(ms) {
   });
  }
 
- /**
- * DUPLICATED
+/**
+ * Uses the given service of type google.maps.DirectionsService and display of type
+ * google.maps.DirectionsRenderer to compute the route and display it on the map.
+ * 
+ * Duplicated code.
+ * @param origin 
+ * @param destination 
+ * @param service 
+ * @param display 
  */
 displayRoute(origin, destination, service, display) {
   service.route({

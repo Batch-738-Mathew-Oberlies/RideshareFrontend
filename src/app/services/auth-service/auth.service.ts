@@ -18,7 +18,7 @@ export class AuthService {
 
 
 	/**
-	 * Creates a router instance
+	 * Constructor with an injected router instance
 	 * @param router 
 	 */
 	constructor(private router: Router) { }
