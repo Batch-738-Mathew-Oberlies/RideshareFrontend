@@ -23,16 +23,17 @@
 
         <div class="form-group row">
             <div class="col-sm-1"></div>
-                <label for="Nrseats" class="col-sm-4 col-form-label ">Number of available seats:</label>
+                <label for="Nrseats" class="col-sm-4 col-form-label ">Total seats:</label>
                 <div class="col-sm-4">
-                <select class="form-control" id="Nrseats" [(ngModel)]=nrSeats>
+                <input type="number" name="nrSeats" id="nrSeats" [(ngModel)]=nrSeats min=0 max=5>
+                <!-- <select class="form-control" id="Nrseats" [(ngModel)]=nrSeats>
                     <option>Choose the number of seats</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                </select>
+                </select> -->
             </div>
         </div>
 
@@ -40,7 +41,16 @@
             <div class="col-sm-1"></div>
         <label for="availableSeats" class="col-sm-4 col-form-label">Available Seats:</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="availableSeats" [(ngModel)]=availableSeats>
+            <input type="number" name="availableSeats" id="availableSeats" [(ngModel)]=availableSeats min=0 [max]="nrSeats">
+            <!-- <select class="form-control" id="availableSeats" [(ngModel)]=availableSeats>
+                <option *ngFor="let options of availableOptions" value="{{options}}">{{options}}</option>
+                <option>Choose the number of seats</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option> 
+            </select> -->
         </div>
         </div>
         <button type="submit" class="btn btn-primary myBtn" (click)="updatesCarInfo()">Save</button>
