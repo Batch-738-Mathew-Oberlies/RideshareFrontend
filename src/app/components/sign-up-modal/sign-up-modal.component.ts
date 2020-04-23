@@ -53,12 +53,11 @@ export class SignupModalComponent implements OnInit {
     email: new FormControl('', Validators.email),
     pNumber: new FormControl('', Validators.pattern('[2-9]{1}[0-9]{9}')),
     streetAddress: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
-    streetAddress2: new FormControl('', [Validators.required, Validators.pattern('[a-z A-Z0-9]*')]),
+    streetAddress2: new FormControl('', Validators.pattern('[a-z A-Z0-9]*')),
     city: new FormControl('', [Validators.required, Validators.pattern('[A-Z]{1}[a-z A-Z]*')]),
     state: new FormControl('', Validators.required),
     zip: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
-    rider: new FormControl(false),
-    driver: new FormControl(false),
+    driver: new FormControl(''),
   });
   
   ngOnInit() {
@@ -82,11 +81,29 @@ export class SignupModalComponent implements OnInit {
   }
 
   async submitUser() {
+      // Pulls the information from the forms into our address object
+
       this.address.street1 = this.signup.controls.streetAddress.value;
       this.address.street2 = this.signup.controls.streetAddress2.value;
       this.address.city = this.signup.controls.city.value;
       this.address.state = this.signup.controls.state.value;
       this.address.zip = this.signup.controls.zip.value;
+
+      console.log(this.address);
+
+      //Switch Statement to set the user to either a rider, driver, or both
+      switch(this.signup.controls.driver.value){
+        case "driver":{
+          this.user.isDriver = true;
+        }
+        case "rider":{
+          this.user.isAcceptingRides = true;
+        }
+        case "both":{
+          this.user.isAcceptingRides = true;
+          this.user.isDriver = true;
+        }
+      }
 
       //we need to instantite a container for error messages, assuming we are still collecting them
       //and showing them to the user. "test" should be an empty array
@@ -95,7 +112,12 @@ export class SignupModalComponent implements OnInit {
         test = result;
       })
 
-      console.log(test);
+      if(test){
+        alert(test);
+        //this.userService.addUser(this.user);
+      }else{
+        alert("An error occured when validating your address.\n Error message: " + test);
+      }
 
     }
 
