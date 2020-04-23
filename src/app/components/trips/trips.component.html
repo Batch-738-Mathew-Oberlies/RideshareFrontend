@@ -1,1 +1,7 @@
-<p>trips works!</p>
+<br>
+<div class="container">
+    <span>List of Trips</span>
+    <span *ngIf="this.user.isDriver" class="pull-right">
+        <button (click)="open(this.user, this.car)">Create a Trip</button>
+    </span>
+</div>
