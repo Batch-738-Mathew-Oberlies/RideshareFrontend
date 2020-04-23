@@ -16,7 +16,6 @@ import { ProfileContactComponent } from './components/profile-contact/profile-co
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
 import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
-import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -41,7 +40,6 @@ const routes: Routes = [
 {path: 'profile/car', component: ProfileCarComponent},
 {path: 'profile/membership', component: ProfileMembershipComponent},
 {path: 'profile/location', component: ProfileLocationComponent},
-{path: 'driver', component: DriverContactModalComponent},
 {path: 'navbar', component: NavbarComponent},
 {path: '', component: HomePageComponent},
 {path: '**', pathMatch: 'full', redirectTo: ''}];
