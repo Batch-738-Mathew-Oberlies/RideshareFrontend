@@ -76,18 +76,11 @@ export class ValidationService {
 	}
 
 	
-  /**
-   * Used to test http get request to USPS API for address valiidation
-   */
 	validateAddress(address: Address) {
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
     	//need to hide this API userID------------>____________
 		let xml = `<AddressValidateRequest USERID="605REVAT4789"><Revision>1</Revision><Address ID="0"><Address1>${address.street1}</Address1><Address2>${address.street2}</Address2><City>${address.city}</City><State>${address.state}</State><Zip5>${address.zip}</Zip5><Zip4/></Address></AddressValidateRequest>`;
-		// let response = await fetch(url + xml);
-		// let text = response.text();
-		// return text.then(data => {
-		// 	return data;
-		// })
+		
 		return fetch(url + xml)
         .then(response => {
           return response.text();
@@ -103,10 +96,10 @@ export class ValidationService {
 			
 			//Checks to see if address is Valid
 			if(desc.length <= 0 && rT.length <= 0){ //If address is valid
-				return  false;
+				return false;
 			
 			}else if(desc.length>0 && rT.length<=0){ //If address is invalid
-				return  desc[0].textContent;
+				return desc[0].textContent;
 
 			} else if(desc.length<=0 && rT.length>0){ //If address is valid but needs more info
 				return rT[0].textContent;
