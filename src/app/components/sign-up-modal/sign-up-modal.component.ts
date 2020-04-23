@@ -67,7 +67,6 @@ export class SignupModalComponent implements OnInit {
     //     //console.log(res);
     //   }
       
-      res => {
     // );
     this.batchService.getAllBatchesByLocation1().subscribe(
         res => {
