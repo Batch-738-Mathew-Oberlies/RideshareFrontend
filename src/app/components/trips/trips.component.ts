@@ -22,12 +22,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
           <input type="text" formControlName="name"/>
         </div>
         <div class="form-group">
+          <label for="trip.availableSeats">Available Seats</label><br>
+          <select formControlName="availableSeats">
+            <option value="">Choose number of available seats</option>
+            <option *ngFor="let num of this.numberArray" [value]="num">{{num}}</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label>Address</label><br>
           <input type="text"/>
         </div>
         <div class="form-group">
           <label for="trip.time">Departure Time</label><br>
-          <input type="time" formControlName="time"/>
+          <input type="datetime-local" formControlName="time"/>
         </div>
       </form>
     </div>
@@ -41,20 +48,39 @@ export class CreateTripComponent {
   @Input() user: User;
   @Input() trip: Trip = new Trip();
   tripModalForm: FormGroup;
+  numberArray: number[] = [];
 
 
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder
   ) { 
+    console.log(this.trip);
     this.tripModalForm = this.formBuilder.group({
       name: [''],
-      time: ['']
+      time: [''],
+      availableSeats: ['']
     });
+
+    for (let i = 1; i <= this.trip.availableSeats; i++) {
+      this.numberArray.push(i);
+      console.log(this.numberArray);
+    }
+
+    console.log(this.numberArray);
+  }
+
+  ngOnInit(): void {
+    for (let i = 1; i <= this.trip.availableSeats; i++) {
+      this.numberArray.push(i);
+      console.log(this.numberArray);
+    }
   }
 
   submit() {
-    this.trip = this.tripModalForm.value;
+    this.trip.name = this.tripModalForm.value.name;
+    this.trip.time = this.tripModalForm.value.time;
+    this.trip.availableSeats = this.tripModalForm.value.availableSeats;
     console.log(this.trip);
 
   }
