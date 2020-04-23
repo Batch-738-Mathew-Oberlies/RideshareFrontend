@@ -18,48 +18,54 @@ import { environment } from '../../../environments/environment';
 })
 export class DriverListComponent implements OnInit {
 
-  location : string = 'Morgantown, WV';
-  mapProperties :{};
-  availableCars : Array<any> = [];
-  drivers : Array<any> = [];
+  location: string = 'Morgantown, WV';
+  mapProperties: {};
+  availableCars: Array<any> = [];
+  drivers: Array<any> = [];
+  currentUserID: number; // sessionStorage 'userid' value
 
 
-  @ViewChild('map',null) mapElement: any;
+  @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService, private carService: CarService) { }
+  constructor(private http: HttpClient, private userService: UserService, private carService: CarService) { }
 
   ngOnInit() {
     this.drivers = [];
-
+    this.currentUserID = +sessionStorage.getItem('userid');
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
            console.log(res);
            res.forEach(element => {
-              this.drivers.push({
-                   'id': element.userId,
-                 'name': element.firstName+" "+element.lastName,
-               'origin':element.haddress.city+","+element.haddress.state,
-                'email': element.email,
-                'phone':element.phoneNumber
-              });
+             // check to see that the currentUserID is not equal to the element userId
+              if (element.userId != this.currentUserID) {
+                // If not, then add it to the drivers list.
+                this.drivers.push({
+                    id: element.userId,
+                  name: element.firstName +' '+ element.lastName,
+                origin: element.haddress.city +','+ element.haddress.state,
+                  email: element.email,
+                  phone: element.phoneNumber
+                });
+
+              }
           });
-      //get all routes
-      this.displayDriversList(this.location, this.drivers);
-      //show drivers on map
-      this.showDriversOnMap(this.location, this.drivers);
+      // get all routes
+           this.displayDriversList(this.location, this.drivers);
+      // show drivers on map
+           this.showDriversOnMap(this.location, this.drivers);
       });
     /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
     this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
+    // console.log(this.drivers);
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
       this.mapProperties = {
-         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+         center: new google.maps.LatLng(Number(sessionStorage.getItem('lat')), Number(sessionStorage.getItem('lng'))),
          zoom: 15,
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
@@ -96,24 +102,24 @@ export class DriverListComponent implements OnInit {
     }
   }
 
-  showDriversOnMap(origin, drivers){
+  showDriversOnMap(origin, drivers) {
      drivers.forEach(element => {
-      var directionsService = new google.maps.DirectionsService;
-      var directionsRenderer = new google.maps.DirectionsRenderer({
+      let directionsService = new google.maps.DirectionsService;
+      let directionsRenderer = new google.maps.DirectionsRenderer({
          draggable: true,
          map: this.map
        });
-       this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
+      this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
     });
   }
 
 
 displayRoute(origin, destination, service, display) {
     service.route({
-      origin: origin,
-      destination: destination,
+      origin,
+      destination,
       travelMode: 'DRIVING',
-      //avoidTolls: true
+      // avoidTolls: true
     }, function(response, status) {
       if (status === 'OK') {
         display.setDirections(response);
@@ -125,23 +131,23 @@ displayRoute(origin, destination, service, display) {
 
 
 displayDriversList(origin, drivers) {
-    let  origins = [];
-    //set origin
-    origins.push(origin)
+    const  origins = [];
+    // set origin
+    origins.push(origin);
 
-    var outputDiv = document.getElementById('output');
+    let outputDiv = document.getElementById('output');
     console.log(drivers);
     drivers.forEach(element => {
-      var availableSeats: number;
+      let availableSeats: number;
       this.carService.getCarByUserId2(element.id).subscribe(
         (result) => {
           console.log(result);
           availableSeats = result.availableSeats;
         }
       );
-      var service = new google.maps.DistanceMatrixService;
+      let service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix({
-        origins: origins,
+        origins,
         destinations: [element.origin],
         travelMode: google.maps.TravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
@@ -151,11 +157,11 @@ displayDriversList(origin, drivers) {
         if (status !== 'OK') {
           alert('Error was: ' + status);
         } else {
-          var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
-          var results = response.rows[0].elements;
+          let originList = response.originAddresses;
+          let destinationList = response.destinationAddresses;
+          let results = response.rows[0].elements;
           console.log(results[0].distance.text);
-          var name =  element.name;
+          let name =  element.name;
           outputDiv.innerHTML += `<tr><td class="col">${name}</td>
                                   <td class="col">${results[0].distance.text}</td>
                                   <td class="col">${results[0].duration.text}</td>
