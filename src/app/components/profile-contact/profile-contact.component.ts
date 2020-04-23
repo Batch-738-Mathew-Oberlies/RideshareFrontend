@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-contact',
@@ -10,36 +11,66 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileContactComponent implements OnInit {
 
-  profileObject : User;
+  profileObject: User;
   currentUser: any = '';
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  success :string;
-  constructor(private router: Router, private userService: UserService) { }
 
-  ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
+  contactInfoForm: FormGroup;
+
+  firstName = new FormControl('', Validators.required);
+  lastName = new FormControl('', Validators.required);
+  email = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
+  phone = new FormControl('', Validators.required);
+
+  errorExists: boolean;
+  errorMessage: string;
+  success: string;
+
+  constructor(private router: Router, private userService: UserService, private formBuilder: FormBuilder) {
+
+
+
+    this.currentUser = this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe((response) => {
       this.profileObject = response;
-
-      this.firstName = this.profileObject.firstName;
-      this.lastName = this.profileObject.lastName;
-      this.email = this.profileObject.email;
-      this.phone = this.profileObject.phoneNumber;
+      // console.log(this.profileObject.haddress);
+      // console.log(this.profileObject.waddress);
+      this.firstName.setValue(this.profileObject.firstName);
+      this.lastName.setValue(this.profileObject.lastName);
+      this.email.setValue(this.profileObject.email);
+      this.phone.setValue(this.profileObject.phoneNumber);
 
     });
-    
+
+    this.contactInfoForm = this.formBuilder.group({
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      phone: this.phone
+    });
+
   }
 
-  updatesContactInfo(){
-    this.profileObject.firstName = this.firstName;
-    this.profileObject.lastName = this.lastName;
-    this.profileObject.email = this.email;
-    this.profileObject.phoneNumber = this.phone;
+  ngOnInit() {
 
-    this.userService.updateUserInfo(this.profileObject);
-    this.success = "Updated Successfully!";
+
+  }
+
+  updatesContactInfo() {
+    this.profileObject.firstName = this.firstName.value;
+    this.profileObject.lastName = this.lastName.value;
+    this.profileObject.email = this.email.value;
+    this.profileObject.phoneNumber = this.phone.value;
+
+    console.log(this.profileObject);
+
+    this.userService.updateUserInfo(this.profileObject).subscribe(
+      (input) => { this.success = 'Updated Successfully!'; },
+      (errorObj) => {
+        this.errorExists = true;
+        if (errorObj.error.message == 'Email Taken') {
+            this.errorMessage = '' + errorObj.error.userEmail + ' already exists.';
+        }
+      }
+    );
   }
 
 

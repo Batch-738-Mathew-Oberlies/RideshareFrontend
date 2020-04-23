@@ -32,7 +32,9 @@ export class DriverListComponent implements OnInit {
 
   ngOnInit() {
     this.drivers = [];
+
     this.currentUserID = +sessionStorage.getItem('userid');
+
     this.userService.getRidersForLocation1(this.location).subscribe(
       res => {
            console.log(res);

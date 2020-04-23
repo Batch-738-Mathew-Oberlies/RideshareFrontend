@@ -1,45 +1,69 @@
 
 <div class="container mainContainer">
-    
+  <div *ngIf="errorExists == true">
+    <div class="row justify-content-center">
+      <div class="alert alert-danger col-5">{{ errorMessage }}</div>
+    </div>
+  </div>
+  <div class="row">
+    <form [formGroup]="contactInfoForm" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
     <i class="fa fa-user" style="font-family:'FontAwesome';"></i>
-       
         <h4>Contact Information:</h4>
-    
+
         <div class="form-group row">
             <div class="col-sm-1"></div>
-                <label for="f_name" class="col-sm-4 col-form-label">First Name:</label>
+                <label for="firstName" class="col-sm-4 col-form-label">First Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="f_name" [(ngModel)]=firstName value="{{ profileObject?.firstName }}">
+                    <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" value="{{ profileObject?.firstName }}" required>
+                    <span class="text-danger" *ngIf="(firstName.dirty || firstName.touched) && firstName.invalid && firstName.errors.required">
+                      First Name is required.
+                    </span>
                 </div>
+
         </div>
-        
+
         <div class="form-group row">
-                <div class="col-sm-1"></div>
-            <label for="l_name" class="col-sm-4 col-form-label">Last Name:</label>
+            <div class="col-sm-1"></div>
+            <!------------------LASTNAME------------------>
+            <label for="lastName" class="col-sm-4 col-form-label">Last Name:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="l_name" [(ngModel)]=lastName value="{{ profileObject?.lastName }}">
-            </div>
+                <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" value="{{ profileObject?.lastName }}">
+                <span class="text-danger" *ngIf="(lastName.dirty || lastName.touched) && lastName.invalid && lastName.errors.required">
+                  Last Name is required.
+                </span>
+           </div>
         </div>
-    
+
         <div class="form-group row">
-                <div class="col-sm-1"></div>
+            <div class="col-sm-1"></div>
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
             <div class="col-sm-4">
-                <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" [(ngModel)]=email value="{{ profileObject?.email }}">
+                <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" formControlName="email" value="{{ profileObject?.email }}" required>
+                <span class="text-danger" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
+                  Email is required.
+                </span>
+                <span class="text-danger" *ngIf="email.errors?.pattern">
+                  Invalid email.
+                </span>
             </div>
         </div>
-    
+
         <div class="form-group row">
-                <div class="col-sm-1"></div>
+            <div class="col-sm-1"></div>
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="phone" [(ngModel)]=phone value="{{ profileObject?.phoneNumber }}">
+                <input type="text" class="form-control" id="phone" formControlName="phone" required>
+                <span class="text-danger" *ngIf="(phone.dirty || phone.touched) && phone.invalid && phone.errors.required">
+                  Phone is required.
+                </span>
                 <p *ngIf="success != ''" class="success">{{success}}</p>
             </div>
-        </div>
-        
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
-    </div>
-  
-        
-    
+          </div>
+          <div class="form-group row justify-content-center">
+          <button type="submit" class="btn btn-primary myBtn">Save</button>
+          </div>
+      </form>
+  </div>
+</div>
+
+
