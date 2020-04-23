@@ -23,20 +23,25 @@ export class DriverListComponent implements OnInit {
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
   availableDrivers;
+  currentUserID: number; // sessionStorage 'userid' value
 
 
-  @ViewChild('map',null) mapElement: any;
+  @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
-  constructor(private http: HttpClient,private userService: UserService, private carService: CarService) { }
+  constructor(private http: HttpClient, private userService: UserService, private carService: CarService) { }
 
   ngOnInit() {
     this.drivers = [];
+    this.currentUserID = +sessionStorage.getItem('userid');
     this.getGoogleApi();
     
     this.userService.getRidersForLocation1(this.location).subscribe(
       (res) => {
         res.forEach(element => {
+          // check to see that the currentUserID is not equal to the element userId
+          if (element.userId != this.currentUserID) {
+            // If not, then add it to the drivers list.
           this.drivers.push({
             'id': element.userId,
             'name': element.firstName+" "+element.lastName,
@@ -44,7 +49,7 @@ export class DriverListComponent implements OnInit {
             'email': element.email,
             'phone':element.phoneNumber,
           });
-        });
+        }});
         
         this.mapProperties = {
           center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
@@ -69,22 +74,22 @@ export class DriverListComponent implements OnInit {
     }
   }
 
-  showDriversOnMap(origin, drivers){
+  showDriversOnMap(origin, drivers) {
      drivers.forEach(element => {
-      var directionsService = new google.maps.DirectionsService;
-      var directionsRenderer = new google.maps.DirectionsRenderer({
+      let directionsService = new google.maps.DirectionsService;
+      let directionsRenderer = new google.maps.DirectionsRenderer({
          draggable: true,
          map: this.map
        });
-       this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
+      this.displayRoute(origin, element.origin, directionsService, directionsRenderer);
     });
   }
 
 
   displayRoute(origin, destination, service, display) {
     service.route({
-      origin: origin,
-      destination: destination,
+      origin,
+      destination,
       travelMode: 'DRIVING',
       //avoidTolls: true
     }, (response, status) => {
@@ -114,9 +119,9 @@ export class DriverListComponent implements OnInit {
           totalSeats = result.seats;
         }
       );
-      var service = new google.maps.DistanceMatrixService;
+      let service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix({
-        origins: origins,
+        origins,
         destinations: [element.origin],
         travelMode: google.maps.TravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
