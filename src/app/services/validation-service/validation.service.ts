@@ -79,33 +79,38 @@ export class ValidationService {
 	validateAddress(address: Address) {
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
     	//need to hide this API userID------------>____________
-    	let xml = `<AddressValidateRequest USERID="605REVAT4789"><Revision>1</Revision><Address ID="0"><Address1>${address.street1}</Address1><Address2>${address.street2}</Address2><City>${address.city}</City><State>${address.state}</State><Zip5>${address.zip}</Zip5><Zip4/></Address></AddressValidateRequest>`;
-    fetch(url + xml)
+		let xml = `<AddressValidateRequest USERID="605REVAT4789"><Revision>1</Revision><Address ID="0"><Address1>${address.street1}</Address1><Address2>${address.street2}</Address2><City>${address.city}</City><State>${address.state}</State><Zip5>${address.zip}</Zip5><Zip4/></Address></AddressValidateRequest>`;
+		// let response = await fetch(url + xml);
+		// let text = response.text();
+		// return text.then(data => {
+		// 	return data;
+		// })
+		return fetch(url + xml)
         .then(response => {
           return response.text();
-	})
-      .then(text => {
-        //Parse the string returned into an XML document
-        let parser = new DOMParser();
-        let xmlDoc = parser.parseFromString(text, 'text/xml');
-        //We can filter the Collection array to contain specified tags that we want by inputing the localName
-        let desc = xmlDoc.getElementsByTagNameNS("*", "Description"); //Only found if address is invalid
-        let rT = xmlDoc.getElementsByTagNameNS("*", "ReturnText"); //Only found if address needs more info
-        console.log(xmlDoc.getElementsByTagNameNS("*", "*")); //Returns entire array
-        
-        //Checks to see if address is Valid
-        if(desc.length <= 0 && rT.length <= 0){ //If address is valid
-		  return null;
-		  
-        }else if(desc.length>0 && rT.length<=0){ //If address is invalid
-          return desc[0].textContent;
+		})
+		.then(text => {
+			//Parse the string returned into an XML document
+			let parser = new DOMParser();
+			let xmlDoc = parser.parseFromString(text, 'text/xml');
+			//We can filter the Collection array to contain specified tags that we want by inputing the localName
+			let desc = xmlDoc.getElementsByTagNameNS("*", "Description"); //Only found if address is invalid
+			let rT = xmlDoc.getElementsByTagNameNS("*", "ReturnText"); //Only found if address needs more info
+			console.log(xmlDoc.getElementsByTagNameNS("*", "*")); //Returns entire array
+			
+			//Checks to see if address is Valid
+			if(desc.length <= 0 && rT.length <= 0){ //If address is valid
+				return  false;
+			
+			}else if(desc.length>0 && rT.length<=0){ //If address is invalid
+				return  desc[0].textContent;
 
-        } else if(desc.length<=0 && rT.length>0){ //If address is valid but needs more info
-          return rT[0].textContent;
+			} else if(desc.length<=0 && rT.length>0){ //If address is valid but needs more info
+				return rT[0].textContent;
 
-        }
-        
-	})
+			}
+			
+		})
 	}	
   
 }

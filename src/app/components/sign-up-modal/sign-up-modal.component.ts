@@ -80,14 +80,21 @@ export class SignupModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  submitUser() {
+  async submitUser() {
       this.address.street1 = this.signup.controls.streetAddress.value;
       this.address.street2 = this.signup.controls.streetAddress2.value;
       this.address.city = this.signup.controls.city.value;
       this.address.state = this.signup.controls.state.value;
       this.address.zip = this.signup.controls.zip.value;
 
-      console.log(this.address);
+      //we need to instantite a container for error messages, assuming we are still collecting them
+      //and showing them to the user. "test" should be an empty array
+      let test;
+      await this.validationService.validateAddress(this.address).then((result) => {
+        test = result;
+      })
+
+      console.log(test);
 
     }
 
