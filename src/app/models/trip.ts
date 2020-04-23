@@ -1,6 +1,6 @@
 import { User } from './user'
 import { Car } from './car'
-//import { Address } from './address'
+import { Address } from './address'
  
 export class Trip{
     /**
@@ -30,7 +30,7 @@ export class Trip{
     /**
      * Set destination as Address
      */
-    //destination: Address
+    destination: Address
     /**
      * Set time as String
      */
