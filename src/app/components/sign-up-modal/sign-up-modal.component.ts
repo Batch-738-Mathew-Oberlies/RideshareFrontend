@@ -62,26 +62,27 @@ export class SignupModalComponent implements OnInit {
   });
   
   ngOnInit() {
-    this.userService.getAllUsers().subscribe(
-      res => {
-        //console.log(res);
-      }
+    // this.userService.getAllUsers().subscribe(
+    //   res => {
+    //     //console.log(res);
+    //   }
       
-    );
-
-  this.batchService.getAllBatchesByLocation1().subscribe(
       res => {
-         this.batches = res;
-          },
-      );
+    // );
+    this.batchService.getAllBatchesByLocation1().subscribe(
+        res => {
+          this.batches = res;
+            },
+        );  
   }
-  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
 
+  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
   openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }
 
   async submitUser() {
+    
       this.address.street1 = this.signup.controls.streetAddress.value;
       this.address.street2 = this.signup.controls.streetAddress2.value;
       this.address.city = this.signup.controls.city.value;
