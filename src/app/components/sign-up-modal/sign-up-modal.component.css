@@ -115,6 +115,15 @@ h3{
     font-size: 16px;
 }
 
+/*for form validation green means success red means failure*/
+.ng-valid[required], .ng-valid.required  {
+    border: 5px solid #42A948; /* green */
+}
+  
+.ng-invalid:not(form)  {
+    border: 5px solid #a94442; /* red */
+}
+
 /**success*/
 .success {
     border-radius: 5px;

@@ -47,16 +47,16 @@ export class SignupModalComponent implements OnInit {
   constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
 
   signup = new FormGroup({
-    fName: new FormControl(''),
-    lName: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-    pNumber: new FormControl(''),
-    streetAddress: new FormControl('', Validators.required),
-    streetAddress2: new FormControl(''),
-    city: new FormControl(''),
-    state: new FormControl(''),
-    zip: new FormControl(''),
+    fName: new FormControl('', [Validators.required, Validators.pattern('[A-Z]{1}[a-z A-Z]*'), Validators.minLength(3)]),
+    lName: new FormControl('', [Validators.required, Validators.pattern('[A-Z]{1}[a-z A-Z]*'), Validators.minLength(3)]),
+    username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
+    email: new FormControl('', Validators.email),
+    pNumber: new FormControl('', Validators.pattern('[2-9]{1}[0-9]{9}')),
+    streetAddress: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
+    streetAddress2: new FormControl('', [Validators.required, Validators.pattern('[a-z A-Z0-9]*')]),
+    city: new FormControl('', [Validators.required, Validators.pattern('[A-Z]{1}[a-z A-Z]*')]),
+    state: new FormControl('', Validators.required),
+    zip: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
     rider: new FormControl(false),
     driver: new FormControl(false),
   });
@@ -66,6 +66,7 @@ export class SignupModalComponent implements OnInit {
       res => {
         //console.log(res);
       }
+      
     );
 
   this.batchService.getAllBatchesByLocation1().subscribe(

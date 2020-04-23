@@ -11,20 +11,24 @@
     </div>
     <div class="modal-body">
       <label for="firstname">First Name</label>
-      <input (keydown)="firstNameError = ''" id="firstname" type="text" formControlName="fName" class="form-control" />
-      <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
-
+      <input id="firstname" type="text" formControlName="fName" class="form-control" />
+      <p *ngIf="signup.controls.fName.hasError('required')" class="error">First name required please enter one.</p>
+      <p *ngIf="signup.controls.fName.hasError('minlength')" class="error">Name must be at least 3 characters long.</p>
+      <p *ngIf="signup.controls.fName.hasError('pattern')" class="error">Please enter a valid name. Numbers and special characters not allowed and the first letter must be capitalized.</p>
+      
       <label for="lastname">Last Name</label>
       <input (keydown)="lastNameError = ''" id="lastname" type="text" formControlName="lName" class="form-control" />
-      <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
+      <p *ngIf="signup.controls.fName.hasError('required')" class="error">Last name required please enter one.</p>
+      <p *ngIf="signup.controls.fName.hasError('minlength')" class="error">Name must be at least 3 characters long.</p>
+      <p *ngIf="signup.controls.fName.hasError('pattern')" class="error">Please enter a valid name. Numbers and special characters not allowed and the first letter must be capitalized.</p>
 
       <label for="email">Email</label>
       <input (keydown)="emailError = ''" id="email" type="email" formControlName="email" class="form-control"/>
-      <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
+      <p *ngIf="signup.controls.email.hasError('email')" class="error">Must enter a valid email address.</p>
 
       <label for="phoneNumber">Phone Number</label>
       <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" formControlName="pNumber" class="form-control" />
-      <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
+      <p *ngIf="signup.controls.pNumber.hasError('pattern')" class="error">Phone number must be 10 numbers long.</p>
 
       <label for="userName">User Name</label>
       <input (keydown)="userNameError = ''" id="userName" type="text" formControlName="username" class="form-control" />
@@ -73,7 +77,7 @@
         </select>      
       
       <div class="btn-container">
-        <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+        <button type="submit" class="btn btn-primary register" [disabled]="signup.hasError('required')" (click)="submitUser()">Submit</button>
       </div>
     </div>
   </form>
