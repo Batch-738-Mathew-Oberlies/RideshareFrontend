@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./profile-membership.component.css']
 })
 export class ProfileMembershipComponent implements OnInit {
-  profileObject : User;
+  profileObject = new User();
   currentUser: any = '';
   isDriver: boolean;
   active: boolean;
