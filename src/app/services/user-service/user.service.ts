@@ -185,9 +185,9 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-    console.log(user);
+    console.log(user.userId);
 
-		return this.http.put(this.url, user);
+		return this.http.put(this.url + user.userId, user);
 	}
 	/**
 	 * A GET method that retrieves a driver by Id
