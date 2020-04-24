@@ -117,12 +117,16 @@ h3{
 
 /*for form validation green means success red means failure*/
 .ng-valid[required], .ng-valid.required  {
-    border: 5px solid #42A948; /* green */
+    border: 5px solid #42A948; 
 }
   
-.ng-invalid:not(form)  {
-    border: 5px solid #a94442; /* red */
-}
+/* .ng-invalid:not(form)  {
+    border: 5px solid #a94442; 
+}  */
+
+/* .ng-dirty:not(form) {
+    border: 5px solid #a94442; 
+} */
 
 /**success*/
 .success {

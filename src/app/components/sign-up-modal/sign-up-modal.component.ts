@@ -47,17 +47,19 @@ export class SignupModalComponent implements OnInit {
   constructor(private modalService :BsModalService, private userService :UserService, private batchService :BatchService, private validationService :ValidationService) { }
 
   signup = new FormGroup({
-    fName: new FormControl('', [Validators.required, Validators.pattern('[A-Z]{1}[a-z A-Z]*'), Validators.minLength(3)]),
-    lName: new FormControl('', [Validators.required, Validators.pattern('[A-Z]{1}[a-z A-Z]*'), Validators.minLength(3)]),
-    username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-    email: new FormControl('', Validators.email),
-    pNumber: new FormControl('', Validators.pattern('[2-9]{1}[0-9]{9}')),
-    streetAddress: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
-    streetAddress2: new FormControl('', Validators.pattern('[a-z A-Z0-9]*')),
-    city: new FormControl('', [Validators.required, Validators.pattern('[A-Z]{1}[a-z A-Z]*')]),
-    state: new FormControl('', Validators.required),
+    fName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z\\u00C0-\\u017F]+[- ]?[a-zA-Z\\u00C0-\\u017F]+$'), Validators.maxLength(30)]),
+    lName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z\\u00C0-\\u017F]+[- ]?[a-zA-Z\\u00C0-\\u017F]+$'), Validators.maxLength(30)]),
+    username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12), Validators.pattern('^\\w+\\.?\\w+$')]),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
+    pNumber: new FormControl('', [Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$'), Validators.required]),
+    // apt/suite number
+    streetAddress: new FormControl('',  Validators.pattern('[a-z A-Z0-9]*')),
+    // The actual street address
+    streetAddress2: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
+    city: new FormControl('', [Validators.required, Validators.pattern('[a-z A-Z]*')]),
+    state: new FormControl('AL', Validators.required),
     zip: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
-    driver: new FormControl(''),
+    driver: new FormControl('rider'),
   });
   
   ngOnInit() {
@@ -80,14 +82,11 @@ export class SignupModalComponent implements OnInit {
   }
 
   async submitUser() {
-<<<<<<< HEAD
       // Pulls the information from the forms into our address object
+      //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
 
-=======
-    
->>>>>>> 71ac8a9787942e7b6e844563af54d74985de99ea
-      this.address.street1 = this.signup.controls.streetAddress.value;
-      this.address.street2 = this.signup.controls.streetAddress2.value;
+      this.address.apt = this.signup.controls.streetAddress.value;
+      this.address.street = this.signup.controls.streetAddress2.value;
       this.address.city = this.signup.controls.city.value;
       this.address.state = this.signup.controls.state.value;
       this.address.zip = this.signup.controls.zip.value;
@@ -115,14 +114,6 @@ export class SignupModalComponent implements OnInit {
         test = result;
       })
 
-<<<<<<< HEAD
-      if(test){
-        alert(test);
-        //this.userService.addUser(this.user);
-      }else{
-        alert("An error occured when validating your address.\n Error message: " + test);
-      }
-=======
       if (test) {
         alert("An error occured with your address validation.\n Error message: " + test);
         this.hAddressError = test;
@@ -136,7 +127,6 @@ export class SignupModalComponent implements OnInit {
         return;
       }
       
->>>>>>> 71ac8a9787942e7b6e844563af54d74985de99ea
 
     }
 

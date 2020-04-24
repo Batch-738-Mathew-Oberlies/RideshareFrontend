@@ -4,8 +4,8 @@
  */
 
 export class Address {
-    street1: string;
-    street2: string;
+    street: string;
+    apt: string;
     city: string;
     state: string;
     zip: string;

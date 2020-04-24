@@ -24,8 +24,8 @@ export class ProfileLocationComponent implements OnInit {
       this.currentUser = response;
       this.zipcode = response.hAddress.zip;
       this.city = response.hAddress.city;
-      this.address = response.hAddress.street2;
-      this.address2 = response.hAddress.street1;
+      this.address = response.hAddress.apt;
+      this.address2 = response.hAddress.street;
       this.hState = response.hAddress.state;
 
     });
@@ -36,8 +36,8 @@ export class ProfileLocationComponent implements OnInit {
 
     this.currentUser.hAddress.zip = this.zipcode;
     this.currentUser.hAddress.city = this.city;
-    this.currentUser.hAddress.street2 = this.address;
-    this.currentUser.hAddress.street1 = this.address2;
+    this.currentUser.hAddress.apt = this.address;
+    this.currentUser.hAddress.street = this.address2;
     this.currentUser.hAddress.state = this.hState;
 
     //console.log(this.currentUser);
