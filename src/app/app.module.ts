@@ -38,6 +38,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { TripsComponent, CreateTripComponent } from './components/trips/trips.component';
+import { DpDatePickerModule } from 'ng2-date-picker';
 
 
 
@@ -81,7 +82,8 @@ import { TripsComponent, CreateTripComponent } from './components/trips/trips.co
     FormsModule,
     ModalModule.forRoot(),
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DpDatePickerModule
   ],
   providers: [
     UserService,
