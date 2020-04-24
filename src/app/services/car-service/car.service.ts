@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 /**
- * This is a car service
+ * The car service.
  */
 export class CarService {
 	/**
@@ -23,7 +23,7 @@ export class CarService {
 	user: User = new User();
 
 	/**
-	 * This constructor injects a HTTP client, a router and an user service
+	 * Constructor injects a HTTP client, a router and an user service
 	 * @param http An HTTP client
 	 * @param router A router
 	 * @param userService An user service
@@ -32,7 +32,7 @@ export class CarService {
 	constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
 
 	/**
-	 * This function fetches all cars from the database.
+	 * Fetches all cars from the database.
 	 */
 
 	getAllCars() {
@@ -40,17 +40,22 @@ export class CarService {
 	}
 
 	/**
-	 * This function returns an car by user ID.
-	 * @param userId
+	 * Returns a car by user ID.
+	 * @param userId 
 	 */
 
 	getCarByUserId(userId: number) {
 		return this.http.get<Car>(`${this.url}users/${userId}`).toPromise();
 	}
 
+	/**
+	 * Identical to the above method except that it returns an observable.
+	 * @param userId 
+	 */
 	getCarByUserId2(userId: string): Observable<Car> {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
+
 
 	updateCarInfo(car: Car) {
 		//console.log(user);
@@ -60,9 +65,9 @@ export class CarService {
 
 
 	/**
-	 * This function creates a car.
-	 * @param car
-	 * @param userId
+	 * Creates a car, assigns it to the given user, and makes that user a driver.
+	 * @param car 
+	 * @param userId 
 	 */
 
 	createCar(car, userId) {
@@ -84,8 +89,8 @@ export class CarService {
 	}
 
 	/**
-	 * This function removes a Car.
-	 * @param carId
+	 * Deletes the car with the given id from the database.
+	 * @param carId 
 	 */
 
 	removeCar(carId: number) {

@@ -1,5 +1,8 @@
 import { User } from './user';
 
+/**
+ * A model representing the Car class.
+ */
 export class Car {
     /**
      * Set Car model
