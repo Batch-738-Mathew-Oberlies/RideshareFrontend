@@ -79,6 +79,7 @@ export class SignupModalComponent implements OnInit {
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
   openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
+    
   }
 
   async submitUser() {
@@ -118,7 +119,7 @@ export class SignupModalComponent implements OnInit {
         alert("An error occured with your address validation.\n Error message: " + test);
         this.hAddressError = test;
       } else {
-        this.modalService.hide(1);
+        this.modalRef.hide();
         //ADD USER, THEN:
         //AUTOMATICALLY LOG IN,
         //OR
