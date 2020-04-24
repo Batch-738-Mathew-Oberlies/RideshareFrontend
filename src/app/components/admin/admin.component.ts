@@ -47,11 +47,18 @@ export class AdminComponent implements OnInit {
       }
   }
 
+  /**
+   * Searches the list of users in a non-case-sensitive fashion, based on whether the username
+   * includes the searchText.
+   */
   searchUser(){
     this.users = this.listofUsers.filter(user =>
       user.userName.toLowerCase().includes(this.searchText.toLowerCase()))
   }
 
+  /**
+   * Calls the banUser method on the given user.
+   */
   banning(user: User) {
     user.active = !user.active;
     this.adminservice.banUser(user);

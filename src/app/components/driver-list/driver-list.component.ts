@@ -16,6 +16,11 @@ import { environment } from '../../../environments/environment';
   templateUrl: './driver-list.component.html',
   styleUrls: ['./driver-list.component.css']
 })
+/**
+ * The DriverListComponent component.
+ * 
+ * Large portions of this component are duplicated from driver-contact-modal.
+ */
 export class DriverListComponent implements OnInit {
 
   location : string = 'Morgantown, WV';
@@ -67,10 +72,17 @@ export class DriverListComponent implements OnInit {
     });
   }
 
+  /**
+   * Resolves a promise after the given number of milliseconds.
+   * @param ms 
+   */
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   
+/**
+ * Inserts the google maps api script into the document head. This seems to be duplicated code.
+ */
 getGoogleApi()  {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
@@ -88,6 +100,12 @@ getGoogleApi()  {
        );
    }
 
+  /**
+   * Inititates services from the google maps api needed for displaying the route, and then
+   * calls displayRoute()/
+   * @param origin 
+   * @param destination 
+   */
   showDriversOnMap(origin, drivers){
      drivers.forEach(element => {
       var directionsService = new google.maps.DirectionsService;
@@ -99,7 +117,14 @@ getGoogleApi()  {
     });
   }
 
-
+/**
+ * Uses the given service of type google.maps.DirectionsService and display of type
+ * google.maps.DirectionsRenderer to compute the route and display it on the map.
+ * @param origin 
+ * @param destination 
+ * @param service 
+ * @param display 
+ */
 displayRoute(origin, destination, service, display) {
     service.route({
       origin: origin,
@@ -115,7 +140,11 @@ displayRoute(origin, destination, service, display) {
     });
   }
 
-
+/**
+ * Displays a list of drivers, appended directly to the DOM.
+ * @param origin 
+ * @param drivers 
+ */
 displayDriversList(origin, drivers) {
     let  origins = [];
     //set origin

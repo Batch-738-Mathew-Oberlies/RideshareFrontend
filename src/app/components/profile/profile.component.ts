@@ -19,10 +19,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.showCont = true;
-  /**
-   * A GET method that retrieves user's information
-   */
+  
 }
+
   showContact() {
     this.showCont = true;
     this.showCar = false;

@@ -56,6 +56,7 @@ export class CarRegisterComponent implements OnInit {
   }
 
  /**
+  * Sets the year field of the car field to the value selected by the user.
   * @param event
   * @returns {void}
   */
