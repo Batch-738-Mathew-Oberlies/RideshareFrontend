@@ -63,7 +63,6 @@ export class DriverListComponent implements OnInit {
         //show drivers on map
         this.showDriversOnMap(this.location, this.drivers);
         });
-
   }
 
   getGoogleApi() {
@@ -132,7 +131,6 @@ export class DriverListComponent implements OnInit {
         if (status !== 'OK') {
           alert('Error was: ' + status);
         } else {
-
           const originList = response.originAddresses;
           const destinationList = response.destinationAddresses;
           const results = response.rows[0].elements;

@@ -5,11 +5,12 @@
 
         <h4>Car Information:</h4>
 
+        <form [formGroup]="carForm">
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="make" class="col-sm-4 col-form-label">Make:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="make" [(ngModel)]=make>
+                    <input type="text" class="form-control" id="make" formControlName="make" [(ngModel)]="make">
                 </div>
         </div>
 
@@ -17,7 +18,7 @@
                 <div class="col-sm-1"></div>
             <label for="model" class="col-sm-4 col-form-label">Model:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="model" [(ngModel)]=model>
+                <input type="text" class="form-control" id="model" formControlName="model" [(ngModel)]="model">
             </div>
         </div>
 
@@ -25,15 +26,7 @@
             <div class="col-sm-1"></div>
                 <label for="Nrseats" class="col-sm-4 col-form-label ">Total seats:</label>
                 <div class="col-sm-4">
-                <input type="number" name="nrSeats" id="nrSeats" [(ngModel)]=nrSeats min=0 max=5>
-                <!-- <select class="form-control" id="Nrseats" [(ngModel)]=nrSeats>
-                    <option>Choose the number of seats</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select> -->
+                <input type="number" name="nrSeats" id="nrSeats" formControlName="nrSeats" [(ngModel)]="nrSeats" min=0 max=5>
             </div>
         </div>
 
@@ -41,19 +34,11 @@
             <div class="col-sm-1"></div>
         <label for="availableSeats" class="col-sm-4 col-form-label">Available Seats:</label>
         <div class="col-sm-4">
-            <input type="number" name="availableSeats" id="availableSeats" [(ngModel)]=availableSeats min=0 [max]="nrSeats">
-            <!-- <select class="form-control" id="availableSeats" [(ngModel)]=availableSeats>
-                <option *ngFor="let options of availableOptions" value="{{options}}">{{options}}</option>
-                <option>Choose the number of seats</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option> 
-            </select> -->
+            <input type="number" name="availableSeats" id="availableSeats" formControlName="availableSeats" [(ngModel)]="availableSeats" min=0 [max]="nrSeats">
         </div>
         </div>
         <button type="submit" class="btn btn-primary myBtn" (click)="updatesCarInfo()">Save</button>
+        </form>
         <p *ngIf="success != ''" class="success">{{success}}</p>
 
       </div>
