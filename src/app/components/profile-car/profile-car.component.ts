@@ -11,40 +11,47 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class ProfileCarComponent implements OnInit {
 
 
-  make: string;
-  model:string;
-  nrSeats:number;
+  // make: string;
+  // model:string;
+  // nrSeats:number;
   currentCar: Car;
-  availableSeats:number;
+  // availableSeats:number;
   success :string;
 
   carForm: FormGroup;
-  formMake = new FormControl('', Validators.required);
-  formModel = new FormControl('', Validators.required);
-  formNrSeats = new FormControl('', Validators.required);
-  formCurrentCar = new FormControl('', Validators.required);
-  formAvailableSeats = new FormControl('', Validators.required);
-
+  make = new FormControl('', Validators.required);
+  model = new FormControl('', Validators.required);
+  nrSeats = new FormControl('', [Validators.required, Validators.min(1), Validators.max(6)]);
+  availableSeats = new FormControl('', [Validators.required, Validators.min(0)]);
 
   constructor(private carService: CarService, private formBuilder: FormBuilder) {
+    // this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    //   this.currentCar = response;
+    //   console.log(this.currentCar);
+    //   this.make.setValue(this.currentCar.make);
+    //   this.model.setValue(this.currentCar.model);
+    //   this.nrSeats.setValue(this.currentCar.seats);
+    //   this.availableSeats.setValue(0);
+    // });
     this.carForm = this.formBuilder.group({
-      make: this.formMake,
-      model: this.formModel,
-      nrSeats: this.formNrSeats,
-      currentCar: this.formCurrentCar,
-      availableSeats: this.formAvailableSeats
+      make: this.make,
+      model: this.model,
+      nrSeats: this.nrSeats,
+      currentCar: this.currentCar,
+      availableSeats: this.availableSeats
     })
   }
 
+  
   ngOnInit() {
 
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentCar = response;
-      this.make = response.make;
-      this.model = response.model;
-      this.nrSeats = response.seats;
-      this.availableSeats = response.availableSeats;
-
+      console.log(this.currentCar);
+      this.make.setValue(this.currentCar.make);
+      this.model.setValue(this.currentCar.model);
+      this.nrSeats.setValue(this.currentCar.seats);
+      this.availableSeats.setValue(0);
     });
 
 
