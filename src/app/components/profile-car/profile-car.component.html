@@ -5,12 +5,15 @@
 
         <h4>Car Information:</h4>
 
-        <form [formGroup]="carForm">
+        <form (ngSubmit)="updatesCarInfo()"[formGroup]="carForm">
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="make" class="col-sm-4 col-form-label">Make:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="make" formControlName="make" [(ngModel)]="make">
+                    <input type="text" class="form-control" id="make" name="make" formControlName="make" value="{{ currentCar?.make }}">
+                    <span class="text-danger" *ngIf="(make.dirty || make.touched) && make.invalid && make.errors.required">
+                        Make is required.
+                    </span>
                 </div>
         </div>
 
@@ -18,7 +21,10 @@
                 <div class="col-sm-1"></div>
             <label for="model" class="col-sm-4 col-form-label">Model:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="model" formControlName="model" [(ngModel)]="model">
+                <input type="text" class="form-control" id="model" name="model" formControlName="model" value="{{ currentCar?.model }}" required>
+                <span class="text-danger" *ngIf="(model.dirty || model.touched) && model.invalid && model.errors.required">
+                    Model is required.
+                </span>
             </div>
         </div>
 
@@ -26,7 +32,16 @@
             <div class="col-sm-1"></div>
                 <label for="Nrseats" class="col-sm-4 col-form-label ">Total seats:</label>
                 <div class="col-sm-4">
-                <input type="number" name="nrSeats" id="nrSeats" formControlName="nrSeats" [(ngModel)]="nrSeats" min=0 max=5>
+                <input type="number" class="form-control" id="nrSeats" name="nrSeats" formControlName="nrSeats" value="{{ currentCar?.nrSeats }}" min=1 max=6 required>
+                <span class="text-danger" *ngIf="nrSeats.dirty && nrSeats.invalid && nrSeats.errors?.required">
+                    Total seats is required.
+                </span>
+                <span class="text-danger" *ngIf="nrSeats.errors?.max">
+                    Total seats must not exceed 6.
+                </span>
+                <span class="text-danger" *ngIf="nrSeats.errors?.min">
+                    Total seats must be at least 1.
+                </span>
             </div>
         </div>
 
@@ -34,10 +49,17 @@
             <div class="col-sm-1"></div>
         <label for="availableSeats" class="col-sm-4 col-form-label">Available Seats:</label>
         <div class="col-sm-4">
-            <input type="number" name="availableSeats" id="availableSeats" formControlName="availableSeats" [(ngModel)]="availableSeats" min=0 [max]="nrSeats">
+            <input type="number" class="form-control" id="availableSeats" name="availableSeats" formControlName="availableSeats" value="{{ currentCar?.availableSeats }}" oninput="validity.valid||(value='');" min=0 max="{{ carForm?.value.nrSeats }}">
+            <span class="text-danger" *ngIf="availableSeats.dirty && availableSeats.invalid && availableSeats.errors.required">
+                Available seats is required.
+            </span>
+            <span class="text-danger" *ngIf="availableSeats.errors.min">
+                Total seats must be at least 0.
+            </span>
+
         </div>
         </div>
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesCarInfo()">Save</button>
+        <button type="submit" [disabled]="!carForm.valid" class="btn btn-primary myBtn">Save</button>
         </form>
         <p *ngIf="success != ''" class="success">{{success}}</p>
 

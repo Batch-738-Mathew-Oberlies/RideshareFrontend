@@ -7,6 +7,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
   templateUrl: './profile-membership.component.html',
   styleUrls: ['./profile-membership.component.css']
 })
+/**
+ * The profile membership component.
+ */
 export class ProfileMembershipComponent implements OnInit {
   profileObject = new User();
   currentUser: any = '';
@@ -23,6 +26,9 @@ export class ProfileMembershipComponent implements OnInit {
   errorMessage: string;
   success: string;
 
+  /**
+   * Sets this component's currentUser field to match the currently logged in user.
+   */
   constructor(private userService: UserService, private formBuilder: FormBuilder) {
     // this.membershipInfoForm = this.formBuilder.group ({
     //   status: this.status,
@@ -37,6 +43,10 @@ export class ProfileMembershipComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Updates the membership parameters of the currentUser field to match those given by
+   * this component, and persists those changes to the database.
+   */
   updatesMembershipInfo(){
     console.log(this.isDriver, this.active);
 

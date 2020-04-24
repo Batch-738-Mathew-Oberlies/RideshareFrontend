@@ -105,7 +105,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A toggle function
+	 * Toggles whether the dropdown is displayed.
 	 */
 
 	toggleDropDown() {
@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * Set next page
+	 * Increments the current page of user search results.
 	 */
 	nextPage() {
 		this.curPage++;
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * Set prev page
+	 * Decrements the current page of user search results.
 	 */
 
 	prevPage() {
@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A function that indicate a fail to login
+	 * A function to handle failed logins.
 	 */
 
 
@@ -139,17 +139,25 @@ export class LoginComponent implements OnInit {
 		this.failed = true;
 	}
 
+	/**
+	 * Handles attempts by banned users to log in.
+	 */
 	loginBanned(){
 		this.userName = '';
 		this.banned = true;
 	}
 
+	/**
+	 * Opens the given modal template.
+	 * @param template 
+	 */
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
 	}
 
 	/**
-	 * A login function
+	 * A login function which directly sends a get request to the login uri containing username and
+	 * password, and attempts to log in as that user.
 	 */
 
 	login() {

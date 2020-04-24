@@ -1,5 +1,8 @@
 import { User } from './user';
 
+/**
+ * A model representing the Car class.
+ */
 export class Car {
     /**
      * Set Car model
@@ -10,11 +13,11 @@ export class Car {
      */
     color: string;
     /**
-     * Set set as a number
+     * Set seat as a number
      */
     seats: number;
     /**
-     * Set make as a string
+     * Set availableSeats as a number
      */
     availableSeats: number;
     /**
