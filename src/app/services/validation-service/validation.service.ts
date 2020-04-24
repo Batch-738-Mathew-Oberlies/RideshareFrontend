@@ -107,6 +107,11 @@ export class ValidationService {
 			}
 			
 		})
-	}	
+	}
+	
+	capitalizeFirstLetter(s): String {
+		if (typeof s !== 'string') return null;
+		return s.charAt(0).toUpperCase() + s.slice(1)
+	}
   
 }

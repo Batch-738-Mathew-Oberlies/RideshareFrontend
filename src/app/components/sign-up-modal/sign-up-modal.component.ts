@@ -107,8 +107,6 @@ export class SignupModalComponent implements OnInit {
         //OR BOTH
         return;
       }
-      
-
     }
 
 }
