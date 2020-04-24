@@ -35,7 +35,7 @@ export class DriverListComponent implements OnInit {
     this.drivers = [];
     this.currentUserID = +sessionStorage.getItem('userid');
     this.getGoogleApi();
-    
+
     this.userService.getRidersForLocation1(this.location).subscribe(
       (res) => {
         res.forEach(element => {
@@ -50,20 +50,19 @@ export class DriverListComponent implements OnInit {
             'phone':element.phoneNumber,
           });
         }});
-        
+
         this.mapProperties = {
           center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-        
+
         //get all routes
         this.displayDriversList(this.location, this.drivers);
         //show drivers on map
         this.showDriversOnMap(this.location, this.drivers);
         });
-    
   }
 
   getGoogleApi() {
@@ -132,7 +131,6 @@ export class DriverListComponent implements OnInit {
         if (status !== 'OK') {
           alert('Error was: ' + status);
         } else {
-          
           const originList = response.originAddresses;
           const destinationList = response.destinationAddresses;
           const results = response.rows[0].elements;
