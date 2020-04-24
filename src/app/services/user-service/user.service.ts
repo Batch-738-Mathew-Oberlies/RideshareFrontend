@@ -185,8 +185,7 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-    console.log(user);
-
+    console.log(user.userId);
 		return this.http.put(this.url + "/" + user.userId, user);
 	}
 	/**
@@ -206,7 +205,6 @@ export class UserService {
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
 		return this.http.put(this.url+id, data).toPromise()
-
 	  }
 
 	  getRidersForLocation(location: string): Observable <any>{
