@@ -32,16 +32,16 @@
             <div class="col-sm-1"></div>
                 <label for="Nrseats" class="col-sm-4 col-form-label ">Total seats:</label>
                 <div class="col-sm-4">
-                <input type="number" class="form-control" id="nrSeats" name="nrSeats" formControlName="nrSeats" value="{{ currentCar?.nrSeats }}" oninput="validity.valid||(value='');" min=0 max=6 required>
-                <span class="text-danger" *ngIf="(nrSeats.dirty || nrSeats.touched) && nrSeats.errors.required">
+                <input type="number" class="form-control" id="nrSeats" name="nrSeats" formControlName="nrSeats" value="{{ currentCar?.nrSeats }}" min=1 max=6 required>
+                <span class="text-danger" *ngIf="nrSeats.dirty && nrSeats.invalid && nrSeats.errors?.required">
                     Total seats is required.
                 </span>
-                <!-- <span class="text-danger" *ngIf="nrSeats.errors.max">
+                <span class="text-danger" *ngIf="nrSeats.errors?.max">
                     Total seats must not exceed 6.
-                </span> -->
-                <!-- <span class="text-danger" *ngIf="nrSeats.errors.min">
+                </span>
+                <span class="text-danger" *ngIf="nrSeats.errors?.min">
                     Total seats must be at least 1.
-                </span> -->
+                </span>
             </div>
         </div>
 
@@ -49,10 +49,14 @@
             <div class="col-sm-1"></div>
         <label for="availableSeats" class="col-sm-4 col-form-label">Available Seats:</label>
         <div class="col-sm-4">
-            <input type="number" class="form-control" id="availableSeats" name="availableSeats" formControlName="availableSeats" value="{{ currentCar?.availableSeats }}" oninput="validity.valid||(value='');" min=0 max="{{ carForm?.value.nrSeats }}" required>
-            <span class="text-danger" *ngIf="(availableSeats.dirty || availableSeats.touched) && availableSeats.invalid && availableSeats.errors.required">
+            <input type="number" class="form-control" id="availableSeats" name="availableSeats" formControlName="availableSeats" value="{{ currentCar?.availableSeats }}" oninput="validity.valid||(value='');" min=0 max="{{ carForm?.value.nrSeats }}">
+            <span class="text-danger" *ngIf="availableSeats.dirty && availableSeats.invalid && availableSeats.errors.required">
                 Available seats is required.
             </span>
+            <span class="text-danger" *ngIf="availableSeats.errors.min">
+                Total seats must be at least 0.
+            </span>
+
         </div>
         </div>
         <button type="submit" [disabled]="!carForm.valid" class="btn btn-primary myBtn">Save</button>
