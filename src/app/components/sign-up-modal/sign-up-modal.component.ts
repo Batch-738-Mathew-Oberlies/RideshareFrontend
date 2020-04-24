@@ -97,6 +97,7 @@ export class SignupModalComponent implements OnInit {
 
       if (test) {
         alert("An error occured with your address validation.\n Error message: " + test);
+        this.hAddressError = test;
       } else {
         this.modalService.hide(1);
         //ADD USER, THEN:
