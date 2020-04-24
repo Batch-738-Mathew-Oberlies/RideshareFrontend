@@ -3,7 +3,7 @@
 }
 
 h4{
-   
+
     font-weight:bold;
     text-align:left;
 }
@@ -16,9 +16,12 @@ h4{
     font-size: 16px;
 }
 
+.row{
+    text-align:center;
+}
 .mainContainer {
     margin: 5% auto;
-    width: 61%;  
+    width: 61%;
     border:1px outset gray;
     box-shadow:2px 2px 5px rgb(212, 212, 212);
     background-color:rgb(243, 243, 243);
@@ -57,7 +60,7 @@ h4{
     display:inline-block;
     text-align:center;
 }
- 
+
 .myBtn:hover{
     background-color:white;
     color:#F26925;
@@ -111,7 +114,7 @@ h4{
         width:80%;
         position:inherit;
         left:0%;
-        
+
     }
     .form-control{
         width:100%
