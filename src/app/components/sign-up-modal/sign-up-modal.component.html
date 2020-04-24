@@ -52,6 +52,7 @@
       <label for="hAddress">Address</label>
       <input (keydown)="hAddressError = ''" id="hAddress" type="text" formControlName="streetAddress2" class="form-control" />
       <p *ngIf="signup.controls.streetAddress2.hasError('required') && signup.controls.streetAddress2.touched" class="error">Street Address required please enter one.</p>
+      <p *ngIf="signup.controls.streetAddress2.hasError('pattern')" class="error">Street Address format is incorrect</p>
 
       <label for="Address2">Apt/Suite Number</label>
       <input (keydown)="hAddressError = ''" id="Address2" type="text" formControlName="streetAddress" class="form-control" />      

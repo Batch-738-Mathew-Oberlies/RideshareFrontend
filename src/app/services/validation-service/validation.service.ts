@@ -80,7 +80,7 @@ export class ValidationService {
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
     	//need to hide this API userID------------>____________
 		let xml = `<AddressValidateRequest USERID="605REVAT4789"><Revision>1</Revision><Address ID="0"><Address1>${address.apt}</Address1><Address2>${address.street}</Address2><City>${address.city}</City><State>${address.state}</State><Zip5>${address.zip}</Zip5><Zip4/></Address></AddressValidateRequest>`;
-		
+
 		return fetch(url + xml)
         .then(response => {
           return response.text();
@@ -92,17 +92,56 @@ export class ValidationService {
 			//We can filter the Collection array to contain specified tags that we want by inputing the localName
 			let desc = xmlDoc.getElementsByTagNameNS("*", "Description"); //Only found if address is invalid
 			let rT = xmlDoc.getElementsByTagNameNS("*", "ReturnText"); //Only found if address needs more info
-			console.log(xmlDoc.getElementsByTagNameNS("*", "*")); //Returns entire array
-			
+			let fullResponse = xmlDoc.getElementsByTagNameNS("*", "*"); //Returns entire array
+			console.log(fullResponse);
 			//Checks to see if address is Valid
+			let addressReference = new Address();
 			if(desc.length <= 0 && rT.length <= 0){ //If address is valid
+				console.log(fullResponse[2].textContent);
+				if (fullResponse.length == 17) {
+					addressReference.apt = fullResponse[2].textContent;
+					addressReference.street = fullResponse[3].textContent;
+					addressReference.city = fullResponse[4].textContent;
+					addressReference.state = fullResponse[5].textContent;
+					addressReference.zip = fullResponse[6].textContent;
+
+					if (confirm(`We found this address. Would you like to continue with this address or make a change?` + `\n\n${addressReference.street}, ${addressReference.apt}\n${addressReference.city}, ${addressReference.state} ${addressReference.zip}`).valueOf()) {
+						return false;
+					} else {
+						return true;
+					}
+		
+				} else if (fullResponse.length == 16) {
+					addressReference.apt = '';
+					addressReference.street = fullResponse[2].textContent;
+					addressReference.city = fullResponse[3].textContent;
+					addressReference.state = fullResponse[4].textContent;
+					addressReference.zip = fullResponse[5].textContent;
+					console.log(addressReference, address)
+
+					if (confirm(`We found this address. Would you like to continue with this address or make a change?` + `\n\n${addressReference.street}, ${addressReference.apt}\n${addressReference.city}, ${addressReference.state} ${addressReference.zip}`).valueOf()) {
+						return false;
+					} else {
+						return true;
+					}
+
+				}
+
+				
+
+				
+
+				// addressReference.street = fullResponse[1].textContent
+
 				return false;
 			
 			}else if(desc.length>0 && rT.length<=0){ //If address is invalid
-				return desc[0].textContent;
+				alert("An error occured when validating your address. " + desc[0].textContent)
+				return true;
 
 			} else if(desc.length<=0 && rT.length>0){ //If address is valid but needs more info
-				return rT[0].textContent;
+				alert("An error occured when validation your address " + rT[0].textContent)	
+				return true;
 
 			}
 			

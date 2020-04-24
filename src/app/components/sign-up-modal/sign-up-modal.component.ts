@@ -116,10 +116,11 @@ export class SignupModalComponent implements OnInit {
       })
 
       if (test) {
-        alert("An error occured with your address validation.\n Error message: " + test);
-        this.hAddressError = test;
+        //alert("An error occured with your address validation.\n Error message: " + test);
+        return;
       } else {
         this.modalRef.hide();
+        //@TODO
         //ADD USER, THEN:
         //AUTOMATICALLY LOG IN,
         //OR
