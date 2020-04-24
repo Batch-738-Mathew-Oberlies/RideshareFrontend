@@ -61,28 +61,31 @@ export class SignupModalComponent implements OnInit {
   });
   
   ngOnInit() {
-    this.userService.getAllUsers().subscribe(
-      res => {
-        //console.log(res);
-      }
+    // this.userService.getAllUsers().subscribe(
+    //   res => {
+    //     //console.log(res);
+    //   }
       
-    );
-
-  this.batchService.getAllBatchesByLocation1().subscribe(
-      res => {
-         this.batches = res;
-          },
-      );
+    // );
+    this.batchService.getAllBatchesByLocation1().subscribe(
+        res => {
+          this.batches = res;
+            },
+        );  
   }
-  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
 
+  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
   openModal(template :TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
   }
 
   async submitUser() {
+<<<<<<< HEAD
       // Pulls the information from the forms into our address object
 
+=======
+    
+>>>>>>> 71ac8a9787942e7b6e844563af54d74985de99ea
       this.address.street1 = this.signup.controls.streetAddress.value;
       this.address.street2 = this.signup.controls.streetAddress2.value;
       this.address.city = this.signup.controls.city.value;
@@ -112,12 +115,28 @@ export class SignupModalComponent implements OnInit {
         test = result;
       })
 
+<<<<<<< HEAD
       if(test){
         alert(test);
         //this.userService.addUser(this.user);
       }else{
         alert("An error occured when validating your address.\n Error message: " + test);
       }
+=======
+      if (test) {
+        alert("An error occured with your address validation.\n Error message: " + test);
+        this.hAddressError = test;
+      } else {
+        this.modalService.hide(1);
+        //ADD USER, THEN:
+        //AUTOMATICALLY LOG IN,
+        //OR
+        //ALERT USER THAT SIGN UP WAS SUCCESSFUL
+        //OR BOTH
+        return;
+      }
+      
+>>>>>>> 71ac8a9787942e7b6e844563af54d74985de99ea
 
     }
 
