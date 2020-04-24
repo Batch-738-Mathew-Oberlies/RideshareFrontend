@@ -17,7 +17,7 @@ const port = '8080';
 /**
  * API context path
  */
-const contextPath = `rideshare`;
+const contextPath = ``;
 
 /**
  * Google Maps API key
@@ -25,7 +25,7 @@ const contextPath = `rideshare`;
 const googleKey = '';
 
 /**
- * Constants for a development config
+ * Constants for a local development config
  */
 export const environment = {
   production: false,
