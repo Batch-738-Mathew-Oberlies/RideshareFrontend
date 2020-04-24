@@ -4,12 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "build": "ng build --prod",
+    "test": "ng test --single-run true",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar": "sonarcloud/scan",
-    "pipeline": "ng build && ng test && ng e3e && npm run sonar",
+    "pipeline": "ng build --dev && npm run test && npm run e2e && npm run sonar",
     "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme vagrant"
   },
   "private": true,
