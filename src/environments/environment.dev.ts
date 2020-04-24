@@ -1,7 +1,7 @@
 /**
  * This is the base URI
  */
-const baseUri = `http://localhost`;
+const baseUri = `http://rideshare.revatureprojects.com:8081/rideshare/`;
 
 const port = '8080';
   /**
@@ -11,9 +11,9 @@ export const environment = {
 
   production: false,
   environmentName: 'Default Dev Environment',
-  userUri: `${baseUri}:${port}/users/`,
-  loginUri: `${baseUri}:${port}/login/`,
-  batchesUri: `${baseUri}:${port}/batches/`,
-  carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`
+  userUri: `${baseUri}/users/`,
+  loginUri: `${baseUri}/login/`,
+  batchesUri: `${baseUri}/batches/`,
+  carUri: `${baseUri}/cars/`,
+  adminUri: `${baseUri}/admins/`
 };
