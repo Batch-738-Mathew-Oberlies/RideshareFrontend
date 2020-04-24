@@ -151,6 +151,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rideshare-frontend"
+    }
+  },
+  "defaultProject": "rideshare-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
