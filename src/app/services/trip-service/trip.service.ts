@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Trip } from '../../models/trip';
 import { Router } from '@angular/router';
 import { LogService } from '../log.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,12 @@ export class TripService {
   /**
    * Set up the url string to the env var
    * Creates a new trip object
-   */   
-  url: string = environment.userUri;
+   */
+  url: string = environment.tripUri;
   trip: Trip = new Trip();
 
   /**
-   * 
+   *
    * @param http An HTTP client object
    * @param router A router
    * @param log A log service
@@ -41,7 +42,7 @@ export class TripService {
     getAllTrips() {
       return this.http.get<Trip[]>(this.url);
     }
-    
+
     /**
      * A GET method for a specific trip
      * @param id id of trip requested
@@ -61,13 +62,13 @@ export class TripService {
      * @param id rider id
      */
     getTripsByRiderId(id: number){
-      return this.http.get<Trip[]>(this.url + 'driver' + `/${id}`)
+      return this.http.get<Trip[]>(this.url + 'rider' + `/${id}`)
     }
 
     /**
     * A POST method to add a new trip
     */
-   addTrip(trip: Trip){
+   addTrip(trip: Trip): Observable<Trip> {
      return this.http.post<Trip>(this.url, trip);
    }
 

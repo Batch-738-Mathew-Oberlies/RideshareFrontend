@@ -1,6 +1,6 @@
 import { User } from './user'
 import { Address } from './address'
- 
+
 export class Trip{
     /**
      * Set Trip model
@@ -33,5 +33,5 @@ export class Trip{
     /**
      * Set date and time as String from Date object
      */
-    date: Date
+    tripDate: Date
 }

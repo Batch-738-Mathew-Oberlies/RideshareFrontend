@@ -7,6 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'src/app/models/address';
 //import { TripService } from 'src/app/services/trip.service'
 import {NgbDateStruct, NgbCalendar, NgbInputDatepicker} from '@ng-bootstrap/ng-bootstrap';
+import {TripService} from '../../services/trip-service/trip.service';
+import {UserService} from '../../services/user-service/user.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-create-trip-modal',
@@ -24,7 +27,7 @@ import {NgbDateStruct, NgbCalendar, NgbInputDatepicker} from '@ng-bootstrap/ng-b
           <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }"/>
           <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
               <div *ngIf="this.tripModalForm.controls.name.errors?.required">Name is required</div>
-          </div> 
+          </div>
         </div>
         <div class="form-group">
           <label for="availableSeats">Available Seats</label><br>
@@ -102,7 +105,7 @@ import {NgbDateStruct, NgbCalendar, NgbInputDatepicker} from '@ng-bootstrap/ng-b
           <button type="button" class="btn btn-danger" (click)="submit()">Submit</button>
         </div>
       </form>
-    </div> 
+    </div>
   `,
   styleUrls: ['./trips.component.css']
 })
@@ -123,12 +126,14 @@ export class CreateTripComponent {
   meridian = true;
   depDate: string;
   depTime: string;
+  // TODO: Validate address
   depAddress: string;
   departureOptions: string[] = [];
 
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private tripService: TripService,
   ) { }
 
   ngOnInit(): void {
@@ -161,24 +166,40 @@ export class CreateTripComponent {
       return;
     }
 
+    this.trip.tripId = 0;
     this.trip.name = this.tripModalForm.value.name;
     this.depDate = this.tripModalForm.value.date.year + ' ' + this.tripModalForm.value.date.month + ' ' + this.tripModalForm.value.date.day;
     this.depTime = this.tripModalForm.value.time.hour + ':' + this.tripModalForm.value.time.minute;
     this.depAddress = this.tripModalForm.value.departure;
+    this.trip.destination.id = 0;
     this.trip.destination.street = this.tripModalForm.value.street;
     this.trip.destination.city = this.tripModalForm.value.city;
     this.trip.destination.state = this.tripModalForm.value.state;
     this.trip.destination.zip = this.tripModalForm.value.zip;
     this.trip.availableSeats = this.tripModalForm.value.availableSeats;
     this.time = this.tripModalForm.value.time;
-    this.trip.date = new Date(this.depDate + ' ' + this.depTime)
+    this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime)
     if (this.depAddress === "Home") {
-      this.trip.departure = this.trip.destination;
+      this.trip.departure = this.user.haddress;
     } else {
-      this.trip.departure = this.trip.destination;
+      this.trip.departure = this.user.waddress;
     }
+
     console.log(this.trip);
-    this.activeModal.close();
+
+    this.tripService.addTrip(this.trip).subscribe(trip => {
+      if (trip !== null) {
+        console.log(trip);
+        this.activeModal.close();
+      } else {
+        console.log('Did not submit successfully');
+      }
+
+      console.log('Submitted successfully');
+
+    });
+
+    // this.activeModal.close();
 
   }
 
@@ -198,20 +219,36 @@ export class CreateTripComponent {
   styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
-
-  user: User;
+  isDriver: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  user: User = new User();
   //constructor(private tripserv: TripService) { }
-  constructor(private modalService: NgbModal) {}
-
-  ngOnInit(): void {
-    this.user = new User();
-    this.user.isDriver=true;
+  constructor(
+    private modalService: NgbModal,
+    private userService: UserService,
+  ) {
+    // TODO: Since we aren't implementing robust login, fetch userId from session storage
+    const userId: number = parseInt(sessionStorage.getItem('userid'), 10);
+    this.userService.getUserById3(userId).subscribe((user: User) => {
+      if (user !== null) {
+        console.log(user);
+        if (user.driver !== null) {
+          this.isDriver.next(true);
+        }
+        this.user = user;
+      }
+    });
   }
 
-  open(user: User, car: Car) {
+  ngOnInit(): void {
+    // this.user = new User();
+    // this.user.isDriver = ;
+  }
+
+  open(user: User) {
     const modalRef = this.modalService.open(CreateTripComponent);
     modalRef.componentInstance.user = user;
     modalRef.componentInstance.trip.driver = user;
+    // TODO: Dynamically get driver's car
     modalRef.componentInstance.trip.availableSeats = 4;
   }
 
