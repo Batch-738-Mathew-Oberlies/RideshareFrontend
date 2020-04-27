@@ -19,7 +19,7 @@ export class SignupModalComponent implements OnInit {
   username :string;
   email :string;
   phone :string;
-  address = new Address();
+  address = new Address("", "", "", "", "");
   isDriver: boolean;
   isRider: boolean;
 
@@ -108,14 +108,13 @@ export class SignupModalComponent implements OnInit {
         }
       }
 
-      //we need to instantite a container for error messages, assuming we are still collecting them
-      //and showing them to the user. "test" should be an empty array
+
       let test;
       await this.validationService.validateAddress(this.address).then((result) => {
         test = result;
       })
 
-      if (test) {
+      if (test == null) {
         //alert("An error occured with your address validation.\n Error message: " + test);
         return;
       } else {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Address } from 'src/app/models/address';
+import { getTestBed } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -75,12 +76,15 @@ export class ValidationService {
 		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
 	}
 
-	
+
+	//explore putting this function in a closure to prevent callers from needing to wrap it in their own asynchronous function
+
 	validateAddress(address: Address) {
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
-    	//need to hide this API userID------------>____________
+    	//probably need to hide this API userID--->____________
 		let xml = `<AddressValidateRequest USERID="605REVAT4789"><Revision>1</Revision><Address ID="0"><Address1>${address.apt}</Address1><Address2>${address.street}</Address2><City>${address.city}</City><State>${address.state}</State><Zip5>${address.zip}</Zip5><Zip4/></Address></AddressValidateRequest>`;
-
+		let returnedAddress = new Address("", "", "", "", "");
+		
 		return fetch(url + xml)
         .then(response => {
           return response.text();
@@ -89,62 +93,85 @@ export class ValidationService {
 			//Parse the string returned into an XML document
 			let parser = new DOMParser();
 			let xmlDoc = parser.parseFromString(text, 'text/xml');
-			//We can filter the Collection array to contain specified tags that we want by inputing the localName
-			let desc = xmlDoc.getElementsByTagNameNS("*", "Description"); //Only found if address is invalid
-			let rT = xmlDoc.getElementsByTagNameNS("*", "ReturnText"); //Only found if address needs more info
-			let fullResponse = xmlDoc.getElementsByTagNameNS("*", "*"); //Returns entire array
-			console.log(fullResponse);
-			//Checks to see if address is Valid
-			let addressReference = new Address();
-			if(desc.length <= 0 && rT.length <= 0){ //If address is valid
-				console.log(fullResponse[2].textContent);
-				if (fullResponse.length == 17) {
-					addressReference.apt = fullResponse[2].textContent;
-					addressReference.street = fullResponse[3].textContent;
-					addressReference.city = fullResponse[4].textContent;
-					addressReference.state = fullResponse[5].textContent;
-					addressReference.zip = fullResponse[6].textContent;
+			
+			let dpvConfirmation = xmlDoc.getElementsByTagName("DPVConfirmation");
+			let errorDescription = xmlDoc.getElementsByTagName("Description");
+			
+			
+			if (dpvConfirmation.length != 0) {
+				console.log("dpvConfirmation: ", dpvConfirmation.item(0).textContent);
+				switch(dpvConfirmation.item(0).textContent) {
+					//Information on DPV Codes can be found here: https://www.accuzip.com/webhelp/Appendix/DPV_Codes_and_Information.htm
+					case "Y":
+						//"Y = Address was DPV confirmed for both primary and (if present) secondary numbers."
+						//We submit the address that usps has returned in the xml doc as the zip code or state may have been corrected automatically
+						console.log("before if statement", address);
+						if (address.apt == "") {
+							returnedAddress.apt = "";
+						} else {
+							console.log("address.apt == " + address.apt);
+							returnedAddress.apt = xmlDoc.getElementsByTagName("Address1").item(0).textContent;
+						}
+						returnedAddress.street = xmlDoc.getElementsByTagName("Address2").item(0).textContent;
+						returnedAddress.city = xmlDoc.getElementsByTagName("City").item(0).textContent;
+						returnedAddress.state = xmlDoc.getElementsByTagName("State").item(0).textContent;
+						returnedAddress.zip = xmlDoc.getElementsByTagName("Zip5").item(0).textContent;
 
-					if (confirm(`We found this address. Would you like to continue with this address or make a change?` + `\n\n${addressReference.street}, ${addressReference.apt}\n${addressReference.city}, ${addressReference.state} ${addressReference.zip}`).valueOf()) {
-						return false;
-					} else {
-						return true;
-					}
-		
-				} else if (fullResponse.length == 16) {
-					addressReference.apt = '';
-					addressReference.street = fullResponse[2].textContent;
-					addressReference.city = fullResponse[3].textContent;
-					addressReference.state = fullResponse[4].textContent;
-					addressReference.zip = fullResponse[5].textContent;
-					console.log(addressReference, address)
+						if (returnedAddress.state != address.state || returnedAddress.zip != address.zip || returnedAddress.city != address.city.toLocaleUpperCase() || returnedAddress.apt != address.apt.toLocaleUpperCase()) {
+							if (confirm(`We found this address for you. Continue or make a change?` + `\n\n${returnedAddress.street}, ${returnedAddress.apt}\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
+								console.log("returnedAddress: ", returnedAddress)
+								console.log("returned address: ", returnedAddress)
+								return returnedAddress;
+	
+							} else {
+								return null;
+							}
+						}
 
-					if (confirm(`We found this address. Would you like to continue with this address or make a change?` + `\n\n${addressReference.street}, ${addressReference.apt}\n${addressReference.city}, ${addressReference.state} ${addressReference.zip}`).valueOf()) {
-						return false;
-					} else {
-						return true;
-					}
+						return returnedAddress;
+			
+					case "D":
+						//"D = Address was DPV confirmed for the primary number only, and Secondary number information was missing."
+						//meaning we need the user to input their secondary address information (display ReturnText tag)
+						alert(xmlDoc.getElementsByTagName("ReturnText").item(0).textContent);
+						break;
 
+					case "S":
+						//"S = Address was DPV confirmed for the primary number only, and Secondary number information was present but unconfirmed."
+						//this means the user needs to correct the secondary address (display ReturnText tag)... but the primary address is technically deliverable.
+						//maybe display a message asking if they would like to submit their address without the seconday address, as we have located the primary address
+						if (address.apt = "") {
+							returnedAddress.apt = "";
+						} else {
+							returnedAddress.apt = xmlDoc.getElementsByTagName("Address1").item(0).textContent;
+						}
+						returnedAddress.street = xmlDoc.getElementsByTagName("Address2").item(0).textContent;
+						returnedAddress.city = xmlDoc.getElementsByTagName("City").item(0).textContent;
+						returnedAddress.state = xmlDoc.getElementsByTagName("State").item(0).textContent;
+						returnedAddress.zip = xmlDoc.getElementsByTagName("Zip5").item(0).textContent;
+
+						if (confirm(`We found this address. Would you like to continue with this address or make a change?` + `\n\n${returnedAddress.street},\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
+							console.log("returnedAddress: ", returnedAddress)
+							return returnedAddress;
+
+						} else {
+							return null;
+						}
+
+					case "N":
+						//"N = Both Primary and (if present) Secondary number information failed to DPV Confirm."
+						//We will actually not get a DPVConfimation tag in this case. We will instead get an Error tag.
+						//This case will never be reached
+						break;
+					case "BLANK":
+						break;
 				}
-
-				
-
-				
-
-				// addressReference.street = fullResponse[1].textContent
-
-				return false;
-			
-			}else if(desc.length>0 && rT.length<=0){ //If address is invalid
-				alert("An error occured when validating your address. " + desc[0].textContent)
-				return true;
-
-			} else if(desc.length<=0 && rT.length>0){ //If address is valid but needs more info
-				alert("An error occured when validation your address " + rT[0].textContent)	
-				return true;
-
+			} else if (errorDescription.length != 0) {
+				//"N = Both Primary and (if present) Secondary number information failed to DPV Confirm."
+				//this is technically case "N", and we need to have the user input a different address (display Description tag)
+				console.log("errorDescription: ", errorDescription.item(0).textContent);
+				alert(errorDescription.item(0).textContent);
 			}
-			
 		})
 	}
 	
