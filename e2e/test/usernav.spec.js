@@ -76,6 +76,7 @@ describe('User logged in nav bar tests', function(){
     //checks to make sure that the search button takes the user to the search drivers page on a smaller screen
     //change when the front end is being hosted
     it('User Presses the Search Button and goes to the driver search page on a phone', function(){
+        browser.get('http://localhost:4200/drivers');
         browser.waitForAngular();
         browser.ignoreSynchronization=true
         browser.driver.manage().window().setSize(xPhone,y);
@@ -105,6 +106,7 @@ describe('User logged in nav bar tests', function(){
     //checks to make sure that the profile button takes the user to the profile page on a smaller screen
     //change when the front end is being hosted
     it('User Presses the Profile Button and goes to the Profile page on a phone', function(){
+        browser.get('http://localhost:4200/drivers');
         browser.waitForAngular();
         browser.ignoreSynchronization=true
         browser.driver.manage().window().setSize(xPhone,y);

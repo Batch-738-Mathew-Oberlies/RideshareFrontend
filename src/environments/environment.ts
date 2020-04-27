@@ -4,7 +4,7 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
-const baseUri = `http://localhost`;
+const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
 /**
  * Set the port to 8081
  */
