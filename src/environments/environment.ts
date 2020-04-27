@@ -5,7 +5,6 @@
  */
 
 const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
-//rideshare.revatureprojects.com
 
 /**
  * Set the port to 8080
@@ -24,11 +23,11 @@ export const environment = {
  
   production: false,
   environmentName: 'Default Environment',
-  userUri: `${baseUri}:${port}/users/`,
-  loginUri: `${baseUri}:${port}/login/`,
-  batchesUri: `${baseUri}:${port}/batches/`,
-  carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`,
+  userUri: `${baseUri}/users/`,
+  loginUri: `${baseUri}/login/`,
+  batchesUri: `${baseUri}/batches/`,
+  carUri: `${baseUri}/cars/`,
+  adminUri: `${baseUri}/admins/`,
   googleMapKey: `${googleKey}`,
 };
 

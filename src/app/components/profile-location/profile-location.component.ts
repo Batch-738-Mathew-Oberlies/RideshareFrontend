@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { Address } from 'src/app/models/address';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
   selector: 'app-profile-location',
@@ -25,8 +26,8 @@ export class ProfileLocationComponent implements OnInit {
   success :string;
 
   updatedAddress: Address;
-
-  constructor(private userService: UserService) { }
+  transientAddress: Address;
+  constructor(private userService: UserService, private validationService: ValidationService) { }
 
   ngOnInit() {
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
@@ -41,21 +42,29 @@ export class ProfileLocationComponent implements OnInit {
   }
 
   addressChange = new FormGroup({
-    address1: new FormControl('', Validators.pattern('[a-z A-Z0-9]*')),
-    address2: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
-    city: new FormControl('', [Validators.required, Validators.pattern('[a-z A-Z]*')]),
-    state: new FormControl('AL', Validators.required),
-    zip: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
+    address1: new FormControl(`${this.currentUser.hAddress.apt}`, Validators.pattern('[a-z A-Z0-9]*')),
+    address2: new FormControl(`${this.currentUser.hAddress.street}`, [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
+    city: new FormControl(`${this.currentUser.hAddress.city}`, [Validators.required, Validators.pattern('[a-z A-Z]*')]),
+    state: new FormControl(`${this.currentUser.hAddress.state}`, Validators.required),
+    zip: new FormControl(`${this.currentUser.hAddress.zip}`, [Validators.required, Validators.pattern('[0-9]{5}')]),
   })
 
-  updatesContactInfo(){
+  async updatesContactInfo(){
 
     console.log(this.addressChange.value);
 
-    this.currentUser.hAddress = this.addressChange.value;
+    this.updatedAddress = this.addressChange.value;
 
-    //console.log(this.currentUser);
-   // this.userService.updateUserInfo(this.currentUser);
-   // this.success = "Updated Successfully!";
+    await this.validationService.validateAddress(this.updatedAddress).then( data => {
+      this.transientAddress = data;
+    })
+
+    if(this.transientAddress == null){
+      return;
+    }else {
+      this.currentUser.hAddress = this.transientAddress;
+      console.log(this.currentUser);
+      this.userService.updateUserInfo(this.currentUser);
+    }
   }
 }

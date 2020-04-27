@@ -9,6 +9,8 @@
                     <label for="address" class="col-sm-4 col-form-label" >Street Address:</label>
                     <div class="col-sm-4">
                         <input type="text" formControlName="address2" class="form-control" id="address">
+                        <p *ngIf="addressChange.controls.streetAddress2.hasError('required') && addressChange.controls.streetAddress2.touched" class="error">Street Address required please enter one.</p>
+                        <p *ngIf="addressChange.controls.streetAddress2.hasError('pattern')" class="error">Street Address format is incorrect</p>
                     </div>
             </div>
             
@@ -25,6 +27,8 @@
                         <label for="city" class="col-sm-4 col-form-label">City:</label>
                         <div class="col-sm-4">
                         <input type="text" formControlName="city" class="form-control" id="city">
+                        <p *ngIf="addressChange.controls.city.hasError('required') && addressChange.controls.city.touched" class="error">A city is required please enter one.</p>
+                        <p *ngIf="addressChange.controls.city.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
                     </div>
             </div>
                 
@@ -35,6 +39,7 @@
                         <select class="form-control" formControlName="state" name="states" id="state">
                             <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
                         </select>
+                        <p *ngIf="addressChange.controls.state.hasError('required')" class="error">State is required please choose one</p>
                     </div>
                 </div>
 
@@ -43,7 +48,8 @@
                             <label for="zipcode" class="col-sm-4 col-form-label">Zipcode:</label>
                             <div class="col-sm-4">
                             <input type="text" formControlName="zip" class="form-control" id="zipcode">
-                            <p *ngIf="success != ''" class="success">{{success}}</p>
+                            <p *ngIf="addressChange.controls.zip.hasError('required') && addressChange.controls.zip.touched" class="error">Zip code required please enter one.</p>
+                            <p *ngIf="addressChange.controls.zip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
                         </div>
                 </div>
             

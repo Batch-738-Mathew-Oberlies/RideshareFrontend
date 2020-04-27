@@ -14,30 +14,14 @@ import { Address } from 'src/app/models/address';
   styleUrls: ['./sign-up-modal.component.css']
 })
 export class SignupModalComponent implements OnInit {
-  fname :string;
-  lname :string;
-  username :string;
-  email :string;
-  phone :string;
+
   address = new Address("", "", "", "", "");
   isDriver: boolean;
   isRider: boolean;
-
   user :User = new User();
   batch: Batch = new Batch();
   batches: Batch[];
-  // validation
-  firstNameError :string;
-  lastNameError :string;
-  emailError :string;
-  phoneNumberError :string;
-  userNameError :string;
-  hAddressError :string;
-  hStateError :string;
-  hCityError :string;
-  hZipError :string;
-  
-  success :string;
+
   //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef :BsModalRef;
   states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
@@ -63,12 +47,7 @@ export class SignupModalComponent implements OnInit {
   });
   
   ngOnInit() {
-    // this.userService.getAllUsers().subscribe(
-    //   res => {
-    //     //console.log(res);
-    //   }
-      
-    // );
+    
     this.batchService.getAllBatchesByLocation1().subscribe(
         res => {
           this.batches = res;
@@ -83,9 +62,17 @@ export class SignupModalComponent implements OnInit {
   }
 
   async submitUser() {
+
+      //Pulls the information from forms into the user object
+
+      this.user.userName = this.signup.controls.username.value;
+      this.user.firstName = this.signup.controls.fName.value;
+      this.user.lastName = this.signup.controls.lName.value;
+      this.user.email = this.signup.controls.email.value;
+      this.user.phoneNumber = this.signup.controls.pNumber.value;
+
       // Pulls the information from the forms into our address object
       //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
-
       this.address.apt = this.signup.controls.streetAddress.value;
       this.address.street = this.signup.controls.streetAddress2.value;
       this.address.city = this.signup.controls.city.value;
@@ -108,23 +95,19 @@ export class SignupModalComponent implements OnInit {
         }
       }
 
+      //Sets the final confirmed address and then attaches it to user model to be sent.
 
-      let test;
+      let finalAddress;
       await this.validationService.validateAddress(this.address).then((result) => {
-        test = result;
+        finalAddress = result;
       })
 
-      if (test == null) {
-        //alert("An error occured with your address validation.\n Error message: " + test);
+      if (finalAddress == null) {
         return;
       } else {
         this.modalRef.hide();
-        //@TODO
-        //ADD USER, THEN:
-        //AUTOMATICALLY LOG IN,
-        //OR
-        //ALERT USER THAT SIGN UP WAS SUCCESSFUL
-        //OR BOTH
+        this.user.hAddress = finalAddress;
+        this.userService.addUser(this.user);
         return;
       }
     }
