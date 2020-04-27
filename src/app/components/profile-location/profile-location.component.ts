@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { Address } from 'src/app/models/address';
 
 @Component({
   selector: 'app-profile-location',
@@ -9,6 +11,11 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileLocationComponent implements OnInit {
 
+  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
+            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
+            'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
+            'WI','WY'];
+
   zipcode: string;
   city:string;
   address:string;
@@ -16,6 +23,8 @@ export class ProfileLocationComponent implements OnInit {
   hState: string;
   currentUser: User;
   success :string;
+
+  updatedAddress: Address;
 
   constructor(private userService: UserService) { }
 
@@ -31,17 +40,22 @@ export class ProfileLocationComponent implements OnInit {
     });
   }
 
+  addressChange = new FormGroup({
+    address1: new FormControl('', Validators.pattern('[a-z A-Z0-9]*')),
+    address2: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
+    city: new FormControl('', [Validators.required, Validators.pattern('[a-z A-Z]*')]),
+    state: new FormControl('AL', Validators.required),
+    zip: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
+  })
 
   updatesContactInfo(){
 
-    this.currentUser.hAddress.zip = this.zipcode;
-    this.currentUser.hAddress.city = this.city;
-    this.currentUser.hAddress.apt = this.address;
-    this.currentUser.hAddress.street = this.address2;
-    this.currentUser.hAddress.state = this.hState;
+    console.log(this.addressChange.value);
+
+    this.currentUser.hAddress = this.addressChange.value;
 
     //console.log(this.currentUser);
-    this.userService.updateUserInfo(this.currentUser);
-    this.success = "Updated Successfully!";
+   // this.userService.updateUserInfo(this.currentUser);
+   // this.success = "Updated Successfully!";
   }
 }
