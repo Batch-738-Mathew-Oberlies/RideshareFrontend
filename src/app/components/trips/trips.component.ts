@@ -33,9 +33,20 @@ import {NgbDateStruct, NgbCalendar, NgbInputDatepicker} from '@ng-bootstrap/ng-b
             <option *ngFor="let num of this.numberArray" [value]="num">{{num}}</option>
           </select>
           <div *ngIf="submitted && controls.availableSeats.errors" class="invalid-feedback">
-              <div *ngIf="controls.name.errors?.required">Please select a number of available seats</div>
+              <div *ngIf="controls.availableSeats.errors?.required">Please select a number of available seats</div>
           </div>
         </div>
+        <div class="form-group">
+          <label for="departure">Departure Address</label><br>
+          <select formControlName="departure" [ngClass]="{ 'is-invalid': submitted && controls.departure.errors }">
+            <option value="">Choose your departure address</option>
+            <option *ngFor="let opt of this.departureOptions" [value]="opt">{{opt}}</option>
+          </select>
+          <div *ngIf="submitted && controls.departure.errors" class="invalid-feedback">
+              <div *ngIf="controls.departure.errors?.required">Please select a departure address</div>
+          </div>
+        </div>
+        <label> Enter a Destination Address</label>
         <div class="form-group">
           <label for="street">Street</label><br>
           <input type="text" formControlName="street" [ngClass]="{ 'is-invalid': submitted && controls.street.errors }"/>
@@ -112,7 +123,8 @@ export class CreateTripComponent {
   meridian = true;
   depDate: string;
   depTime: string;
-
+  depAddress: string;
+  departureOptions: string[] = [];
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -124,9 +136,13 @@ export class CreateTripComponent {
       this.numberArray.push(i);
       // console.log(this.numberArray);
     }
+    this.departureOptions.push("Home");
+    this.departureOptions.push("Work");
+
     this.tripModalForm = this.formBuilder.group({
       name: ['', Validators.required],
       date: [''],
+      departure: ['', Validators.required],
       street: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
@@ -148,6 +164,7 @@ export class CreateTripComponent {
     this.trip.name = this.tripModalForm.value.name;
     this.depDate = this.tripModalForm.value.date.year + ' ' + this.tripModalForm.value.date.month + ' ' + this.tripModalForm.value.date.day;
     this.depTime = this.tripModalForm.value.time.hour + ':' + this.tripModalForm.value.time.minute;
+    this.depAddress = this.tripModalForm.value.departure;
     this.trip.destination.street = this.tripModalForm.value.street;
     this.trip.destination.city = this.tripModalForm.value.city;
     this.trip.destination.state = this.tripModalForm.value.state;
@@ -155,6 +172,11 @@ export class CreateTripComponent {
     this.trip.availableSeats = this.tripModalForm.value.availableSeats;
     this.time = this.tripModalForm.value.time;
     this.trip.date = new Date(this.depDate + ' ' + this.depTime)
+    if (this.depAddress === "Home") {
+      this.trip.departure = this.trip.destination;
+    } else {
+      this.trip.departure = this.trip.destination;
+    }
     console.log(this.trip);
     this.activeModal.close();
 
