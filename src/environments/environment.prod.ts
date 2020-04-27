@@ -8,6 +8,11 @@ const baseUri = ``;
  */
 const port = '8080';
 
+/**
+ * google map api key 
+ */
+const googleKey = '';
+
   /**
  * These are the constants for the production config
  */
@@ -20,5 +25,7 @@ export const environment = {
   loginUri: `${baseUri}:${port}/login/`,
   batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`
+  tripUri: `${baseUri}:${port}/trips/`,
+  adminUri: `${baseUri}:${port}/admins/`,
+  googleMapKey: `${googleKey}`,
 };
