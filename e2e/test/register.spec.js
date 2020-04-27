@@ -16,6 +16,7 @@ describe('Sign Up tests', function(){
     
     it('Sign up link on login page opens Sign up modal', function() {
         browser.get('http://localhost:4200');
+        browser.waitForAngular();
         elSignUpLink.click();
         expect(elRegisterHeader.getText()).toBe('Sign Up');
     });
@@ -36,5 +37,6 @@ describe('Sign Up tests', function(){
         expect(browser.getCurrentUrl()).toBe('http://localhost:4200/');
         // Test is passing for right now. 
         // However this test will likely need to be refined. 
+        browser.get('http://localhost:4200/');
     });
 });

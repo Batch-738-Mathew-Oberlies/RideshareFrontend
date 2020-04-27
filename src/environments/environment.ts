@@ -4,7 +4,11 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
+<<<<<<< HEAD
 const baseUri = `http://rideshare.revatureprojects.com:8081/rideshare`;
+=======
+const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
+>>>>>>> f5045a078e96e77e3ee483acc39fdd37024259a9
 /**
  * Set the port to 8080
  */
