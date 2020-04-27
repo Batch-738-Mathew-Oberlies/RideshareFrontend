@@ -6,27 +6,27 @@
 
 const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
 /**
- * Set the port to 8081
+ * Set the port to 8080
  */
-const port = '8081';
+const port = '8080';
 
 /**
- * google map api key
+ * google map api key 
  */
-const googleKey = 'AIzaSyDeYWLQk9mA3eaV_xhVy-0jzeUDRS2sBKE';
+const googleKey = '';
  /**
    * This is the environment config.
    */
 
 export const environment = {
-
+ 
   production: false,
   environmentName: 'Default Environment',
-  userUri: `${baseUri}:${port}/rideshare/users/`,
-  loginUri: `${baseUri}:${port}/rideshare/login/`,
-  batchesUri: `${baseUri}:${port}/rideshare/batches/`,
-  carUri: `${baseUri}:${port}/rideshare/cars/`,
-  adminUri: `${baseUri}:${port}/rideshare/admins/`,
+  userUri: `${baseUri}/users/`,
+  loginUri: `${baseUri}/login/`,
+  batchesUri: `${baseUri}/batches/`,
+  carUri: `${baseUri}/cars/`,
+  adminUri: `${baseUri}/admins/`,
   googleMapKey: `${googleKey}`,
 };
 
