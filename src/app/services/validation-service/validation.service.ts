@@ -5,12 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class ValidationService {
    /**
-    * This is the contructor for the validation service.
+    * The contructor for the validation service.
 	*/
   constructor() { }
   
    /** 
-  * this function validates the number of seats of the car.
+  * Validates the number of seats of the car. The number of seats must be
+  * an integer between 1 and 6 inclusive. We can assume this means a 7 seat
+  * vehicle minus the driver.
   * @function
   * @returns {boolean}
   */
@@ -19,34 +21,42 @@ export class ValidationService {
   }
 
 
-//   this function checks for special characters in the username and validates the length
+  /**
+   * Checks for special characters in the username and validates the length.
+   * Usernames cannot be longer than 12 characters, less than 3 characters, or
+   * contain special characters.
+  */
   validateUserName(userName: string) {
 		return /^\w+\.?\w+$/.test(userName) && userName.length >= 3 && userName.length <= 12;
 	}
 
   /**
 	 * This function is validates the length of the name and checks if there is any numeric values in the name string.
+	 * First and last names cannot be longer than 29 characters.
 	 */
 	validateName(name: string) {
 		return /^[a-zA-Z\u00C0-\u017F]+[- ]?[a-zA-Z\u00C0-\u017F]+$/.test(name) && name.length < 30;
 	}
 
   /**
-	 * This function checks the email that the user entered.
+	 * Checks the email that the user entered.
+	 * Emails must be formatted like one.
 	 */
 	validateEmail(email: string) {
 		return /^\w+\.?\w+@\w+\.[a-zA-Z]{2,4}$/.test(email);
 	}
 
   /**
-	 * This function validates the phone number.
+	 * Validates the phone number.
+	 * Phone numbers must be formatted like one.
 	 */
 	validatePhone(phone: string) {
 		return /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/.test(phone);
   }
   
   /**
-	 * This function formats the name string.
+	 * This function formats the name string automatically, capitalizing any letters
+	 * following spaces or hyphens.
 	 */
 	nameFormat(name: string) {
 
@@ -68,7 +78,7 @@ export class ValidationService {
 	}
 
   /**
-	 * This function formats the phone number.
+	 * This function formats the phone number, automatically adding the hyphens.
 	 */
 	phoneFormat(phone: string) {
 		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");

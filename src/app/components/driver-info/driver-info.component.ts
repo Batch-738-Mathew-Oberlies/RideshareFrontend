@@ -12,6 +12,9 @@ import { Batch } from 'src/app/models/batch';
   templateUrl: './driver-info.component.html',
   styleUrls: ['./driver-info.component.css']
 })
+/**
+ * The driver-info component
+ */
 export class DriverInfoComponent implements OnInit {
 
   /**
@@ -133,10 +136,10 @@ export class DriverInfoComponent implements OnInit {
      car.user.batch.batchLocation.toLowerCase().includes(this.searchLocation.toLowerCase()))
     }
   /**
-   * A function that filters by location
-   *
+   * A function that filters drivers by the location given by the user through the event parameter.
+   * @param event
    */
-  
+
   filterDriverByLocation(event) {
     this.noUserFound = false;
     this.availableCars = this.allAvailableCars.filter(car => car.user.batch.batchLocation == event.target.value);
@@ -147,7 +150,7 @@ export class DriverInfoComponent implements OnInit {
   }
 
   /**
-   * A GET method that retrieves all driver
+   * A GET method that retrieves all drivers
    */
   showAllDrivers() {
     this.searchName = '';

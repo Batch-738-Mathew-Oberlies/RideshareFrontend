@@ -12,6 +12,9 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
   templateUrl: './driver.component.html',
   styleUrls: ['./driver.component.css']
 })
+/**
+ * The DriverComponent component.
+ */
 export class DriverComponent implements OnInit {
 
   /**
@@ -33,6 +36,10 @@ export class DriverComponent implements OnInit {
   
   constructor(private userService: UserService, private router: Router, private authService: AuthService) { }
 
+  /**
+   * Sets the value of instance variables by getting them from various services.
+   * Suffers from nested subscriptions.
+   */
   ngOnInit() {
     let userId = this.authService.user.userId;
     if (userId) {
@@ -54,7 +61,7 @@ export class DriverComponent implements OnInit {
     }
 
   /**
-   * A PUT method that changes accepting ride status
+   * Toggles the acceptingRides field of userdriver, and persists this to the database.
    * @param userdriver 
    */
 
@@ -72,7 +79,7 @@ export class DriverComponent implements OnInit {
   }
 
   /**
-   * Logs out the user
+   * Logs the current user out.
    */
 
 

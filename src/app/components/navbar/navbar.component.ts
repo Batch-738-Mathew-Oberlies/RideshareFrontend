@@ -18,10 +18,6 @@ import {SignupModalComponent} from '../sign-up-modal/sign-up-modal.component';
 
 export class NavbarComponent implements OnInit {
   modal :SignupModalComponent;
-  /**
-   * This is a name string.
-   */
-
   name: string = '';
   admin: string = '';
 
@@ -71,7 +67,7 @@ export class NavbarComponent implements OnInit {
 
    /**
    * Function that takes no parameters. 
-   * It will clear the sesssion storage.
+   * It will clear the sesssion storage to log out the user.
    * @return {void} 
    * 
    */
@@ -90,6 +86,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  /**
+   * Redirects to the home page for either riders or drivers depending on which
+   * the current user is.
+   */
   redirectToHome() {
     this.authService.user.driver ? this.router.navigate(['home/riders']) : this.router.navigate(['home/drivers']);
   }

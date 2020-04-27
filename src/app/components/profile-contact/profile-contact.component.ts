@@ -19,6 +19,10 @@ export class ProfileContactComponent implements OnInit {
   success :string;
   constructor(private router: Router, private userService: UserService) { }
 
+  /**
+   * Sets the user field of this component to match the currently logged in user as they appear
+   * in the database.
+   */
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
@@ -32,6 +36,10 @@ export class ProfileContactComponent implements OnInit {
     
   }
 
+  /**
+   * Updates the fields in the profile object to match those of this component, and persists
+   * those changes to the database.
+   */
   updatesContactInfo(){
     this.profileObject.firstName = this.firstName;
     this.profileObject.lastName = this.lastName;

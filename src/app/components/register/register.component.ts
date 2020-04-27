@@ -18,7 +18,7 @@ import { User } from 'src/app/models/user';
 	 ]
 	})
 /**
- * This is the Driver Register
+ * This is the Driver Registration component.
  */
 
 export class RegisterComponent implements OnInit {
@@ -38,7 +38,9 @@ export class RegisterComponent implements OnInit {
 
   /**
    * This is an OnInit function that sets the token to the parsed token string.
-   * The system will check if the token is valid; once validated a batch service is called.
+   * The system will check if the token is valid once validated a batch service is called.
+   * 
+   * If the authorization is successful, it will redirect to home, otherwise it will do nothing.
    */
 	ngOnInit() {
 		if (sessionStorage.getItem('auth')) {
@@ -53,7 +55,7 @@ export class RegisterComponent implements OnInit {
 	}
 
 	/**
-	 * This function allows the user to select the batch location.
+	 * Allows the user to select the batch location.
 	 */
 	changeLocation(event) {
 		let option = event.target.options.selectedIndex;
@@ -61,13 +63,18 @@ export class RegisterComponent implements OnInit {
 	}
 
 	/**
-	 * This function creates a driver if all the validations are true.
+	 * Creates a driver as the current user.
 	 */
 	signUpDriver() {
 		//if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'driver');
 		//}
 	}
+
+
+	/**
+	 * Creates a driver only if validation was successful.
+	 */
 	signUpRider() {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'rider');

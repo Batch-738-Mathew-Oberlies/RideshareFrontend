@@ -14,6 +14,9 @@ export class BatchService {
 
 	url: string = environment.batchesUri;
 	
+	/**
+	 * Initializes all the batches in an array called Batch[].
+	 */
 	batches: Batch[] = [
 		{batchNumber: 1, batchLocation: 'VWU - Morgantown, WV'},
 		{batchNumber: 2, batchLocation: 'UTA - Arlington, TX'},
@@ -25,16 +28,25 @@ export class BatchService {
 	constructor(private http: HttpClient) { }
 
 	/**
-	 * This function fetches all the batches.
+	 * Fetches all the batches from the above array.
 	 */
 	getAllBatches() {
 		return this.batches;
 	}
 
+	/**
+	 * THIS METHOD REFERENCES A NON-EXISTANT ENDPOINT.
+	 * @param location 
+	 */
 	getAllBatchesByLocation(location: string): Observable<Batch[]> {
 		return this.http.get<Batch[]>(`${this.url}?location=${location}`);
 	}
 
+
+	/**
+	 * Calls in all of the batches from the database with the default GetMapping on the
+	 * BatchController.
+	 */
 	getAllBatchesByLocation1(): Observable<Batch[]> {
 		return this.http.get<Batch[]>(`${this.url}`);
 	}

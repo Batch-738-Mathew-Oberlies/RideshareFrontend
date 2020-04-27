@@ -1,3 +1,6 @@
+/**
+ * A model representing the Batch class.
+ */
 export class Batch {
 
     /**
