@@ -1,5 +1,3 @@
-
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,8 +36,6 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { TripsComponent, CreateTripComponent } from './components/trips/trips.component';
-import { DpDatePickerModule } from 'ng2-date-picker';
-
 
 
 @NgModule({
@@ -83,7 +79,6 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     ModalModule.forRoot(),
     NgbModule,
     ReactiveFormsModule,
-    DpDatePickerModule
   ],
   providers: [
     UserService,

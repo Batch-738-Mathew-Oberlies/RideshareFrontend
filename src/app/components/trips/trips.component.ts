@@ -6,6 +6,7 @@ import { Car } from 'src/app/models/car';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'src/app/models/address';
 //import { TripService } from 'src/app/services/trip.service'
+import {NgbDateStruct, NgbCalendar, NgbInputDatepicker} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-create-trip-modal',
@@ -23,8 +24,7 @@ import { Address } from 'src/app/models/address';
           <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }"/>
           <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
               <div *ngIf="this.tripModalForm.controls.name.errors?.required">Name is required</div>
-          </div>
-          
+          </div> 
         </div>
         <div class="form-group">
           <label for="availableSeats">Available Seats</label><br>
@@ -68,21 +68,34 @@ import { Address } from 'src/app/models/address';
           </div>
         </div>
         <div class="form-group">
-          <label for="date">Departure Time</label><br>
-          <input type="datetime-local" formControlName="date" [ngClass]="{ 'is-invalid': submitted && controls.date.errors }"/>
-          <div *ngIf="submitted && controls.date.errors" class="invalid-feedback">
-              <div *ngIf="controls.date.errors?.required">Departure Time field is required</div>
+          <label for="date">Date</label><br>
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                    name="date" formControlName="date" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
           </div>
+        </div>
+        <div class="form-group">
+          <label for="time">Time</label><br>
+          <ngb-timepicker class="input-group" name="time" formControlName=time [meridian]="meridian"></ngb-timepicker>
+          <button class="btn btn-sm btn-outline-{{meridian ? 'success' : 'danger'}}" (click)="toggleMeridian()">
+          Meridian - {{meridian ? "ON" : "OFF"}}
+          </button>
+        </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel click')">Cancel</button>
           <button type="button" class="btn btn-danger" (click)="submit()">Submit</button>
         </div>
       </form>
-    </div>
-   
-  `
+    </div> 
+  `,
+  styleUrls: ['./trips.component.css']
 })
+
 export class CreateTripComponent {
   @Input() user: User;
   @Input() trip: Trip = new Trip();
@@ -94,6 +107,11 @@ export class CreateTripComponent {
             'WI','WY'];
 
   submitted = false;
+  model: NgbDateStruct;
+  time: string;
+  meridian = true;
+  depDate: string;
+  depTime: string;
 
 
   constructor(
@@ -108,12 +126,13 @@ export class CreateTripComponent {
     }
     this.tripModalForm = this.formBuilder.group({
       name: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [''],
       street: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
       zip: ['', Validators.required],
-      availableSeats: ['', Validators.required]
+      availableSeats: ['', Validators.required],
+      time: ['']
     });
 
     this.trip.destination = new Address();
@@ -127,15 +146,22 @@ export class CreateTripComponent {
     }
 
     this.trip.name = this.tripModalForm.value.name;
-    this.trip.date = this.tripModalForm.value.date;
+    this.depDate = this.tripModalForm.value.date.year + ' ' + this.tripModalForm.value.date.month + ' ' + this.tripModalForm.value.date.day;
+    this.depTime = this.tripModalForm.value.time.hour + ':' + this.tripModalForm.value.time.minute;
     this.trip.destination.street = this.tripModalForm.value.street;
     this.trip.destination.city = this.tripModalForm.value.city;
     this.trip.destination.state = this.tripModalForm.value.state;
     this.trip.destination.zip = this.tripModalForm.value.zip;
     this.trip.availableSeats = this.tripModalForm.value.availableSeats;
+    this.time = this.tripModalForm.value.time;
+    this.trip.date = new Date(this.depDate + ' ' + this.depTime)
     console.log(this.trip);
     this.activeModal.close();
 
+  }
+
+  toggleMeridian() {
+    this.meridian = !this.meridian;
   }
 
   get controls() {

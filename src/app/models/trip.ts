@@ -23,11 +23,15 @@ export class Trip{
      */
     availableSeats: number
     /**
+     * Set starting address
+     */
+    departure: Address
+    /**
      * Set destination as Address
      */
     destination: Address
     /**
      * Set date and time as String from Date object
      */
-    date: string
+    date: Date
 }
