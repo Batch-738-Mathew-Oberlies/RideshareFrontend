@@ -14,7 +14,7 @@ describe('landing page tests', function(){
     //checks to make sure that the user reaches the landing page correctly
     //change when the front end is being hosted
     it('Make sure user is on the landing page', function(){
-        expect(elPageHead.getText()).toBe('RideShareFrontend');
+        expect(elPageHead.getText()).toBe('RideForce');
     });
 
     //checks to make sure that the login button reroutes to the correct modal
