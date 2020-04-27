@@ -7,6 +7,7 @@
 .btn-group-vertical{
     margin:8% auto;
     color: black;
+    text-align:center;
   
 }
 .btn  {
@@ -21,10 +22,6 @@
     
 } 
 
-.btn-group-vertical{
-    text-align:center;
-
-}
 
 /* media queries */
 @media(min-width: 768px){
