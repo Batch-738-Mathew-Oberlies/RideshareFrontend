@@ -13,11 +13,21 @@ export class ProfileLocationComponent implements OnInit {
 
   locationInfoForm: FormGroup;
 
-  zipcode = new FormControl('', Validators.required);
-  city = new FormControl('', Validators.required);
-  address = new FormControl('', Validators.required);
-  address2 = new FormControl('', Validators.required);
-  hState = new FormControl('', Validators.required);
+  homeStreet = new FormControl('', Validators.required);
+  homeCity = new FormControl('', Validators.required);
+  homeState = new FormControl('', Validators.required);
+  homeZipcode = new FormControl('', Validators.required);
+
+  workStreet = new FormControl('', Validators.required);
+  workCity = new FormControl('', Validators.required);
+  workState = new FormControl('', Validators.required);
+  workZipcode = new FormControl('', Validators.required);
+
+  // zipcode = new FormControl('', Validators.required);
+  // city = new FormControl('', Validators.required);
+  // homeAddress = new FormControl('', Validators.required);
+  // address2 = new FormControl('', Validators.required);
+  // hState = new FormControl('', Validators.required);
 
   errorExists: boolean;
   errorMessage: string;
@@ -31,20 +41,26 @@ export class ProfileLocationComponent implements OnInit {
   constructor(private userService: UserService, private formBuilder: FormBuilder ) {
     this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
       this.currentUser = response;
-      this.zipcode.setValue(+response.haddress.zip);
-      this.city.setValue(response.haddress.city);
-      this.address.setValue(response.haddress.street);
-      this.address2.setValue(response.waddress.street);
-      this.hState.setValue(response.haddress.state);
+      this.homeStreet.setValue(response.haddress.street);
+      this.homeCity.setValue(response.haddress.city);
+      this.homeState.setValue(response.haddress.state);
+      this.homeZipcode.setValue(response.haddress.zip);
+      this.workStreet.setValue(response.waddress.street);
+      this.workCity.setValue(response.waddress.city);
+      this.workState.setValue(response.waddress.state);
+      this.workZipcode.setValue(response.waddress.zip);
 
     });
 
     this.locationInfoForm = this.formBuilder.group({
-      zipcode:this.zipcode,
-      city: this.city,
-      haddress: this.address,
-      waddress: this.address2,
-      hState: this.hState
+      homeStreet: this.homeStreet,
+      homeCity: this.homeCity,
+      homeState: this.homeState,
+      homeZipcode: this.homeZipcode,
+      workStreet: this.workStreet,
+      workCity: this.workCity,
+      workState: this.workState,
+      workZipcode: this.workZipcode,
     });
 
 
@@ -59,11 +75,15 @@ export class ProfileLocationComponent implements OnInit {
    * and persists those changes to the database.
    */
   updatesContactInfo(){
-    this.currentUser.haddress.zip = this.zipcode.value;
-    this.currentUser.haddress.city = this.city.value;
-    this.currentUser.haddress.street = this.address.value;
-    this.currentUser.waddress.street = this.address2.value;
-    this.currentUser.haddress.state = this.hState.value;
+    this.currentUser.haddress.street = this.homeStreet.value;
+    this.currentUser.haddress.city = this.homeCity.value;
+    this.currentUser.haddress.state = this.homeState.value;
+    this.currentUser.haddress.zip = this.homeZipcode.value;
+    this.currentUser.waddress.street = this.workStreet.value;
+    this.currentUser.waddress.city = this.workCity.value;
+    this.currentUser.waddress.state = this.workState.value;
+    this.currentUser.waddress.zip = this.workZipcode.value;
+
     //console.log(this.currentUser);
     this.userService.updateUserInfo(this.currentUser).subscribe(
       (input) => { this.success = 'Updated Successfully!'; },

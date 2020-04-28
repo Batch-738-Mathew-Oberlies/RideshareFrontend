@@ -11,42 +11,38 @@
 
     <div class="innercontainer">
 
-        <!-- <form [formGroup]="membershipInfoForm" (ngSubmit)="updatesMembershipInfo()"> -->
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <h5>Batch:</h5>
-                    <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
-                </div>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <h5>Batch:</h5>
+                <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
             </div>
-                    
-            <div class="form-group row">
-                <div class="col-sm-4 t">
-                    <h6>Status:</h6>
-                    <select class="form-control" id="status" [(ngModel)]=active value="{{profileObject.active}}">
-                        <option value="true">Active</option>
-                        <option value="false">Inactive</option>
-                    </select>
-                </div>
+        </div>
+                
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <h6>Status:</h6>
+                <select class="form-control" [(ngModel)]="isActive">
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
             </div>
+        </div>
 
-            <div class="form-group row">
-                <div class="col-sm-4 t">
-                    <h6>Role:</h6>
-                    <select class="form-control" id="role" [(ngModel)]=isDriver value="{{profileObject.driver}}">
-                        <option value="true">Driver</option>
-                        <option value="false">Rider</option>
-                    </select>
-                </div>
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <h6>Role:</h6>
+                <select class="form-control" [(ngModel)]="isDriver">
+                    <option value="true">Driver</option>
+                    <option value="false">Rider</option>
+                </select>
             </div>
+        </div>
+        <p *ngIf="success" class="success">{{success}}</p>
 
-            <div class="form-group row justify-content-center">
-                <button type="submit" (click)="updatesMembershipInfo()" class="btn btn-primary myBtn">Save</button>
-            </div>
+        <div class="form-group row justify-content-center">
+            <button type="submit" (click)="updatesMembershipInfo()" class="btn btn-primary myBtn">Save</button>
+        </div>
 
-        <!-- </form> -->
     </div>
 
-</div>
-            
-       
-    
+</div> 

@@ -14,30 +14,26 @@ export class ProfileMembershipComponent implements OnInit {
   profileObject = new User();
   currentUser: any = '';
 
-  membershipInfoForm: FormGroup;
-
-  // status = new FormControl('', Validators.required);
-  // role = new FormControl('', Validators.required);
-
-  isDriver: string;
-  active: string;
+  isDriver: boolean;
+  isActive: boolean;
 
   errorExists: boolean;
   errorMessage: string;
   success: string;
 
   /**
-   * Sets this component's currentUser field to match the currently logged in user.
+   * Sets this component's currentUser, isDriver, and isActive fields to match the currently logged in user.
    */
-  constructor(private userService: UserService, private formBuilder: FormBuilder) {
-    // this.membershipInfoForm = this.formBuilder.group ({
-    //   status: this.status,
-    //   role: this.role,
-    // })
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileObject = response;
-      console.log(this.profileObject);
-    });
+  constructor(private userService: UserService) {
+    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
+      (response) => {
+        this.profileObject = response;
+
+        // @ts-ignore
+        this.isDriver = this.profileObject.driver;
+        this.isActive = this.profileObject.active;
+      }
+    );
    }
 
   ngOnInit() {
@@ -48,16 +44,15 @@ export class ProfileMembershipComponent implements OnInit {
    * this component, and persists those changes to the database.
    */
   updatesMembershipInfo(){
-    console.log(this.isDriver, this.active);
 
     // @ts-ignore
-    this.profileObject.driver = (this.isDriver == "true");
-    this.profileObject.active = (this.active == "true");
-
-    console.log(this.profileObject);
+    this.profileObject.driver = this.isDriver;
+    this.profileObject.active = this.isActive;
 
     this.userService.updateUserInfo(this.profileObject).subscribe(
-      (input) => { this.success = 'Updated Successfully!'; },
+      () => { 
+        this.success = 'Updated Successfully!'; 
+      },
       (errorObj) => {
         this.errorExists = true;
         console.log(errorObj);
