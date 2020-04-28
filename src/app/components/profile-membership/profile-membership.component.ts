@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
   templateUrl: './profile-membership.component.html',
   styleUrls: ['./profile-membership.component.css']
 })
+
 /**
  * The profile membership component.
  */
@@ -20,6 +21,7 @@ export class ProfileMembershipComponent implements OnInit {
   errorExists: boolean;
   errorMessage: string;
   success: string;
+  button: boolean;
 
   /**
    * Sets this component's currentUser, isDriver, and isActive fields to match the currently logged in user.
@@ -34,6 +36,8 @@ export class ProfileMembershipComponent implements OnInit {
         this.isActive = this.profileObject.active;
       }
     );
+
+    this.disableButton();
    }
 
   ngOnInit() {
@@ -58,5 +62,17 @@ export class ProfileMembershipComponent implements OnInit {
         console.log(errorObj);
       }
     );
+  }
+
+  /**
+   * Disables submit button if the form fields have not been changed from their original value.
+   */
+  disableButton(){
+    // @ts-ignore
+    if(this.isDriver != this.profileObject.driver || this.isActive != this.profileObject.active){
+      this.button = false;
+    } else {
+      this.button = true;
+    }
   }
 }

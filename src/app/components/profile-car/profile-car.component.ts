@@ -22,23 +22,23 @@ export class ProfileCarComponent implements OnInit {
   make = new FormControl('', Validators.required);
   model = new FormControl('', Validators.required);
   nrSeats = new FormControl('', [Validators.required, Validators.min(1), Validators.max(6)]);
-  availableSeats = new FormControl('', [Validators.required, Validators.min(0)]);
+  // availableSeats = new FormControl('', [Validators.required, Validators.min(0)]);
 
   constructor(private carService: CarService, private formBuilder: FormBuilder) {
-    // this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
-    //   this.currentCar = response;
-    //   console.log(this.currentCar);
-    //   this.make.setValue(this.currentCar.make);
-    //   this.model.setValue(this.currentCar.model);
-    //   this.nrSeats.setValue(this.currentCar.seats);
-    //   this.availableSeats.setValue(0);
-    // });
+    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+      this.currentCar = response;
+      console.log(this.currentCar);
+      this.make.setValue(this.currentCar.make);
+      this.model.setValue(this.currentCar.model);
+      this.nrSeats.setValue(this.currentCar.seats);
+      //this.availableSeats.setValue(0);
+    });
     this.carForm = this.formBuilder.group({
       make: this.make,
       model: this.model,
       nrSeats: this.nrSeats,
       currentCar: this.currentCar,
-      availableSeats: this.availableSeats
+      // availableSeats: this.availableSeats
     })
   }
 
@@ -47,14 +47,14 @@ export class ProfileCarComponent implements OnInit {
    */
   ngOnInit() {
 
-    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.currentCar = response;
-      console.log(this.currentCar);
-      this.make.setValue(this.currentCar.make);
-      this.model.setValue(this.currentCar.model);
-      this.nrSeats.setValue(this.currentCar.seats);
-      this.availableSeats.setValue(0);
-    });
+    // this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
+    //   this.currentCar = response;
+    //   console.log(this.currentCar);
+    //   this.make.setValue(this.currentCar.make);
+    //   this.model.setValue(this.currentCar.model);
+    //   this.nrSeats.setValue(this.currentCar.seats);
+    //   // this.availableSeats.setValue(0);
+    // });
 
 
   }
@@ -66,7 +66,7 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.make = this.carForm.value.make;
     this.currentCar.model= this.carForm.value.model;
     this.currentCar.seats = this.carForm.value.nrSeats;
-    this.currentCar.availableSeats = this.carForm.value.availableSeats;
+    // this.currentCar.availableSeats = this.carForm.value.availableSeats;
     //console.log(this.currentUser);
     this.carService.updateCarInfo(this.currentCar);
     this.success = "Updated Successfully!";
