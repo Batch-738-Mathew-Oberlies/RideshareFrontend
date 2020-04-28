@@ -29,6 +29,7 @@ describe('Sign Up tests', function(){
         phoneInput.sendKeys('1234567890');
         addressInput.sendKeys('123 Fake Street');
         cityInput.sendKeys('Pottsdam');
+        browser.waitForAngular();
         let state = element.all(by.tagName('option')).get(5);
         state.click();
         zipCodeInput.sendKeys('23456');
