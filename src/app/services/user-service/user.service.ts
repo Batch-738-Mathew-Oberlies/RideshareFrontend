@@ -68,7 +68,7 @@ export class UserService {
 	 * Identical to the above, except that it does not give a promise.
 	 * @param idParam2 
 	 */
-	getUserById2(idParam2: String): Observable<User>{
+	getUserById2(idParam2: string): Observable<User>{
 		
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);

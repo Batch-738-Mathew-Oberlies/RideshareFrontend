@@ -1,13 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
+
 import { UserService } from 'src/app/services/user-service/user.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Batch } from 'src/app/models/batch';
-import { Car } from 'src/app/models/car';
-import { CarService } from 'src/app/services/car-service/car.service';
-import { Router } from '@angular/router';
-import { BatchService } from 'src/app/services/batch-service/batch.service';
+
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -50,12 +44,7 @@ export class DriverListComponent implements OnInit {
               });
           });
       });
-    /*this.drivers.push({'id': '1','name': 'Ed Ogeron','origin':'Reston, VA', 'email': 'ed@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '2','name': 'Nick Saban','origin':'Oklahoma, OK', 'email': 'nick@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '3','name': 'Bobbie sfsBowden','origin':'Texas, TX', 'email': 'bobbie@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '4','name': 'Les Miles','origin':'New York, NY', 'email': 'les@gmail.com', 'phone':'555-555-5555'});
-    this.drivers.push({'id': '5','name': 'Bear Bryant','origin':'Arkansas, AR', 'email': 'bear@gmail.com', 'phone':'555-555-5555'});*/
-    //console.log(this.drivers);
+    
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -165,8 +154,6 @@ displayDriversList(origin, drivers) {
         if (status !== 'OK') {
           alert('Error was: ' + status);
         } else {
-          var originList = response.originAddresses;
-          var destinationList = response.destinationAddresses;
           var results = response.rows[0].elements;
           //console.log(results[0].distance.text);
           var name =  element.name;

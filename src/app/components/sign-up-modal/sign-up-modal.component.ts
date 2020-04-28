@@ -146,14 +146,10 @@ export class SignupModalComponent implements OnInit {
 
         }
         if(i === 0) {
-          i = 0;
           this.success = "Registered successfully!";
         }
       } 
-      /*res => {
-        console.log("failed to add user");
-        console.log(res);
-      }*/
+      
     );
   
     }

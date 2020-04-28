@@ -48,7 +48,7 @@ h4{
     background-color: #F26925;
     color:white;
     width:150px;
-    font-family:"Overpass";
+    font-family:"Overpass", sans-serif;
     font-weight:bold;
     font-size:22px;
     border-radius:27px;
@@ -63,7 +63,7 @@ h4{
     color:#F26925;
     border: 2px solid #F26925;
     border-radius: 22px ;
-    font-family:"Overpass";
+    font-family:"Overpass", sans-serif;
     font-size:23px;
 }
 @media(min-width: 768px){
