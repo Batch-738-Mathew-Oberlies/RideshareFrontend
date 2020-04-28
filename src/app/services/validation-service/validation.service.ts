@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Address } from 'src/app/models/address';
-import { getTestBed } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -185,7 +184,7 @@ export class ValidationService {
 		})
 	}
 	
-	capitalizeFirstLetter(s): String {
+	capitalizeFirstLetter(s): string {
 		if (typeof s !== 'string') return null;
 		return s.charAt(0).toUpperCase() + s.slice(1)
 	}

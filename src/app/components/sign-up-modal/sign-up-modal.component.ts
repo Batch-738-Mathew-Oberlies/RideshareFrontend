@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user';
 import { Batch } from 'src/app/models/batch';
 import { BatchService } from 'src/app/services/batch-service/batch.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
-import { FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'src/app/models/address';
 
 @Component({
@@ -88,13 +88,16 @@ export class SignupModalComponent implements OnInit {
       switch(this.signup.controls.driver.value){
         case "driver":{
           this.user.isDriver = true;
+          break;
         }
         case "rider":{
           this.user.isAcceptingRides = true;
+          break;
         }
         case "both":{
           this.user.isAcceptingRides = true;
           this.user.isDriver = true;
+          break;
         }
       }
 
