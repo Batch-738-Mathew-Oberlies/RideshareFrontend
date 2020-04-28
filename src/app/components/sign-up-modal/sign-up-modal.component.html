@@ -41,11 +41,12 @@
 
 
       <label id="state">Batch</label>
-      <select class="form-control">
-            <option value="none" >  
+      <select class="form-control" formControlName="batch">
+            <option value="none" disabled>Please Select One...  
             </option>
-            <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
+            <option *ngFor="let batch of batches" >{{batch.batchNumber}} {{batch.batchLocation}}</option>
       </select>
+      <p *ngIf="signup.controls.batch.hasError('required') && signup.controls.batch.touched" class="error">Batch required please select one.</p>
 
       <label for="hAddress">Address</label>
       <input (keydown)="hAddressError = ''" id="hAddress" type="text" formControlName="streetAddress2" class="form-control" />
@@ -62,6 +63,7 @@
 
       <label for="hState">State</label>
       <select (keydown)="hStateError = ''" class="form-control" formControlName="state" id="hState" >
+        <option value="none" disabled>Please Select One...  </option>
         <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
       </select>
       <p *ngIf="signup.controls.state.hasError('required')" class="error">State is required please choose one</p>
@@ -73,6 +75,8 @@
          
         <label for="drive">Ride? Drive? Both?</label>
         <select class="form-control" formControlName="driver" id="drive">
+          <option value="none" disabled>Please Select One...  
+          </option>
           <option value="rider" selected>Rider</option>
           <option value="driver">Driver</option>
           <option value="both">Both</option>

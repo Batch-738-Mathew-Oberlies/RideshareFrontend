@@ -39,14 +39,15 @@ export class SignupModalComponent implements OnInit {
     username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12), Validators.pattern('^\\w+\\.?\\w+$')]),
     email: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
     pNumber: new FormControl('', [Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$'), Validators.required]),
+    batch: new FormControl('none', Validators.required),
     // apt/suite number
     streetAddress: new FormControl('',  Validators.pattern('[a-z A-Z0-9]*')),
     // The actual street address
     streetAddress2: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
     city: new FormControl('', [Validators.required, Validators.pattern('[a-z A-Z]*')]),
-    state: new FormControl('AL', Validators.required),
+    state: new FormControl('none', Validators.required),
     zip: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
-    driver: new FormControl('rider'),
+    driver: new FormControl('none'),
   });
   
   ngOnInit() {
@@ -60,8 +61,11 @@ export class SignupModalComponent implements OnInit {
 
   //Opens 'sign up' modal that takes in a template of type 'ng-template'.
   openModal(template :TemplateRef<any>){
+    this.signup.reset();
+    this.signup.controls.state.reset('none')
+    this.signup.controls.batch.reset('none')
+    this.signup.controls.driver.reset('none')
     this.modalRef = this.modalService.show(template);
-    
   }
 
   async submitUser() {
@@ -73,6 +77,7 @@ export class SignupModalComponent implements OnInit {
       this.user.lastName = this.signup.controls.lName.value;
       this.user.email = this.signup.controls.email.value;
       this.user.phoneNumber = this.signup.controls.pNumber.value;
+      this.user.batch = this.signup.controls.batch.value;
 
       // Pulls the information from the forms into our address object
       //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
