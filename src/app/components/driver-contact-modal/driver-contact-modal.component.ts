@@ -7,6 +7,9 @@ import { environment } from '../../../environments/environment'
   templateUrl: './driver-contact-modal.component.html',
   styleUrls: ['./driver-contact-modal.component.css']
 })
+/**
+ * The DriverContactModalComponent component.
+ */
 export class DriverContactModalComponent implements OnInit {
 
   origin : string = 'Morgantown, WV';
@@ -17,6 +20,9 @@ export class DriverContactModalComponent implements OnInit {
   map: google.maps.Map;
   constructor(private http: HttpClient) { }
 
+  /**
+   * Initializes the component by calling its methods.
+   */
   ngOnInit() {
 
     this.getGoogleApi();
@@ -27,11 +33,18 @@ export class DriverContactModalComponent implements OnInit {
      
     });
   }
-
+  /**
+   * Sends a promise after the given number of milliseconds.
+   * @param ms 
+   */
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   
+
+/**
+ * Appends the google maps api script to the document head.
+ */
 getGoogleApi()  {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
@@ -48,7 +61,12 @@ getGoogleApi()  {
            }
        );
    }
-
+  /**
+   * Inititates services from the google maps api needed for displaying the route, and then
+   * calls displayRoute()/
+   * @param origin 
+   * @param destination 
+   */
   showDriversOnMap(origin, destination){
      
       var directionsService = new google.maps.DirectionsService;
@@ -60,7 +78,14 @@ getGoogleApi()  {
   
   }
 
-
+/**
+ * Uses the given service of type google.maps.DirectionsService and display of type
+ * google.maps.DirectionsRenderer to compute the route and display it on the map.
+ * @param origin 
+ * @param destination 
+ * @param service 
+ * @param display 
+ */
 displayRoute(origin, destination, service, display) {
     service.route({
       origin: origin,

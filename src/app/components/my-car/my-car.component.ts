@@ -11,6 +11,10 @@ import { LogService } from 'src/app/services/log.service';
   templateUrl: './my-car.component.html',
   styleUrls: ['./my-car.component.css']
 })
+
+/**
+ * The my-car component.
+ */
 export class MyCarComponent implements OnInit {
 
   /**
@@ -32,7 +36,7 @@ export class MyCarComponent implements OnInit {
   constructor(private carService: CarService, private router: Router, private userService: UserService, private logService: LogService, private authService: AuthService) { }
 
   /**
-   * This is OnInit functiion
+   * Sets the userId based on the currently logged in user, and redirects if the userId is zero.
    */
   ngOnInit() {
     this.userId = this.authService.user.userId;
@@ -48,7 +52,7 @@ export class MyCarComponent implements OnInit {
   }
 
   /**
-   * A POST method that removes a car
+   * A POST method that removes the currently logged in user's car.
    */
 
   removeMyCar() {
