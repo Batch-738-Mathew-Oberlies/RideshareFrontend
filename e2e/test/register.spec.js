@@ -14,29 +14,33 @@ describe('Sign Up tests', function(){
     let driverRadio = element(by.xpath('//*[@id="driver"]'));
     let submitButton = element('/html/body/modal-container/div/div/div[2]/div[2]/button');
     
-    it('Sign up link on login page opens Sign up modal', function() {
+    it('insert text into form', () => {
         browser.get('http://localhost:4200');
         browser.waitForAngular();
-        elSignUpLink.click();
-        expect(elRegisterHeader.getText()).toBe('Sign Up');
-    });
+        element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[2]'))
+                .click();
 
-    it ('After submit routes to landing page', function() {
-        firstNameInput.sendKeys('bob');
-        lastNameInput.sendKeys('ross');
-        usernameInput.sendKeys('bobross');
-        emailInput.sendKeys('bobross@bobross.com');
-        phoneInput.sendKeys('1234567890');
-        addressInput.sendKeys('123 Fake Street');
-        cityInput.sendKeys('Pottsdam');
-        let state = element.all(by.tagName('option')).get(5);
-        state.click();
-        zipCodeInput.sendKeys('23456');
-        //driverRadio.click();
-        //submitButton.click();
-        expect(browser.getCurrentUrl()).toBe('http://localhost:4200/');
-        // Test is passing for right now. 
-        // However this test will likely need to be refined. 
-        browser.get('http://localhost:4200/');
-    });
+    })
+
+    // it('Sign up link on login page opens Sign up modal', function() {
+    //     browser.get('http://localhost:4200');
+    //     browser.waitForAngular();
+    //     elSignUpLink.click();
+    //     expect(elRegisterHeader.getText()).toBe('Sign Up');
+    // });
+
+    // it ('After submit routes to landing page', function() {
+    //     firstNameInput.sendKeys('bob');
+    //     lastNameInput.sendKeys('ross');
+    //     usernameInput.sendKeys('bobross');
+    //     emailInput.sendKeys('bobross@bobross.com');
+    //     phoneInput.sendKeys('1234567890');
+    //     addressInput.sendKeys('123 Fake Street');
+    //     cityInput.sendKeys('Pottsdam');
+    //     let state = element.all(by.tagName('option')).get(5);
+    //     state.click();
+    //     zipCodeInput.sendKeys('23456');
+    //     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/');
+    //     browser.get('http://localhost:4200/');
+    // });
 });
