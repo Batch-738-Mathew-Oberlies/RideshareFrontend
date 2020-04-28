@@ -24,6 +24,7 @@ describe('User logged in nav bar tests', function(){
     //checks to make sure that the login button reroutes to the correct modal
     //change when the front end is being hosted
     it('User Presses the login button and signs in as the logged in user', function(){
+        browser.get('http://localhost:4200');
         browser.driver.manage().window().setSize(xComp,y);
         elLoginButton.click();
         //These are based off of dummy data currently. Change if desired

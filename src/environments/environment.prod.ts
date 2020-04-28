@@ -20,5 +20,6 @@ export const environment = {
   loginUri: `${baseUri}:${port}/login/`,
   batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`
+  adminUri: `${baseUri}:${port}/admins/`,
+
 };
