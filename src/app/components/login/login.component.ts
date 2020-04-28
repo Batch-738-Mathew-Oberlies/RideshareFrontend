@@ -181,7 +181,6 @@ export class LoginComponent implements OnInit {
 						sessionStorage.setItem("userid", response["userid"]);
 						
 						//call landing page
-						//this.router.navigate(['landingPage']);
 						location.replace('landingPage');
 					  }
 					  if(response["userNotFound"] != undefined){
