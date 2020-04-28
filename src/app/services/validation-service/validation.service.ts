@@ -85,9 +85,6 @@ export class ValidationService {
 		return phone.replace(/[^0-9]/g, '').replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
 	}
 
-
-	//explore putting this function in a closure to prevent callers from needing to wrap it in their own asynchronous function
-
 	validateAddress(address: Address) {
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
     	//probably need to hide this API userID--->____________
@@ -104,7 +101,6 @@ export class ValidationService {
 					`</Address>`								 +
 				`</AddressValidateRequest>`;
 
-
 		return fetch(url + xml)
         .then(response => {
           return response.text();
@@ -116,7 +112,6 @@ export class ValidationService {
 			
 			let dpvConfirmation = xmlDoc.getElementsByTagName("DPVConfirmation");
 			let errorDescription = xmlDoc.getElementsByTagName("Description");
-			
 			
 			if (dpvConfirmation.length != 0) {
 				console.log("dpvConfirmation: ", dpvConfirmation.item(0).textContent);
@@ -213,15 +208,4 @@ export class ValidationService {
 			return null;
 		}
 	}
-
-	initializeAddressXML(xmlDoc: XMLDocument): Address {
-		return new Address(
-			"", 
-			xmlDoc.getElementsByTagName("Address2").item(0).textContent,
-			xmlDoc.getElementsByTagName("City").item(0).textContent, 
-			xmlDoc.getElementsByTagName("State").item(0).textContent, 
-			xmlDoc.getElementsByTagName("Zip5").item(0).textContent
-		);
-	}
-  
 }
