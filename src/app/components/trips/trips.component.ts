@@ -5,11 +5,11 @@ import { Trip } from 'src/app/models/trip';
 import { Car } from 'src/app/models/car';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'src/app/models/address';
-//import { TripService } from 'src/app/services/trip.service'
 import {NgbDateStruct, NgbCalendar, NgbInputDatepicker} from '@ng-bootstrap/ng-bootstrap';
 import {TripService} from '../../services/trip-service/trip.service';
 import {UserService} from '../../services/user-service/user.service';
 import {BehaviorSubject} from 'rxjs';
+import { CarService } from 'src/app/services/car-service/car.service';
 
 @Component({
   selector: 'app-create-trip-modal',
@@ -139,7 +139,6 @@ export class CreateTripComponent {
   ngOnInit(): void {
     for (let i = 1; i <= this.trip.availableSeats; i++) {
       this.numberArray.push(i);
-      // console.log(this.numberArray);
     }
     this.departureOptions.push("Home");
     this.departureOptions.push("Work");
@@ -159,6 +158,7 @@ export class CreateTripComponent {
     this.trip.destination = new Address();
   }
 
+  //Submit button for creating a new trip
   submit() {
     this.submitted = true;
 
@@ -166,41 +166,41 @@ export class CreateTripComponent {
       return;
     }
 
-    this.trip.tripId = 0;
-    this.trip.name = this.tripModalForm.value.name;
+
     this.depDate = this.tripModalForm.value.date.year + ' ' + this.tripModalForm.value.date.month + ' ' + this.tripModalForm.value.date.day;
     this.depTime = this.tripModalForm.value.time.hour + ':' + this.tripModalForm.value.time.minute;
     this.depAddress = this.tripModalForm.value.departure;
+
+    
+     // builds the trip object to be sent to the back end
+    this.trip.tripId = 0;
+    this.trip.name = this.tripModalForm.value.name;
+
     this.trip.destination.id = 0;
     this.trip.destination.street = this.tripModalForm.value.street;
     this.trip.destination.city = this.tripModalForm.value.city;
     this.trip.destination.state = this.tripModalForm.value.state;
     this.trip.destination.zip = this.tripModalForm.value.zip;
+
     this.trip.availableSeats = this.tripModalForm.value.availableSeats;
+
     this.time = this.tripModalForm.value.time;
+
     this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime)
+
     if (this.depAddress === "Home") {
       this.trip.departure = this.user.haddress;
     } else {
       this.trip.departure = this.user.waddress;
     }
 
-    console.log(this.trip);
-
     this.tripService.addTrip(this.trip).subscribe(trip => {
       if (trip !== null) {
-        console.log(trip);
         this.activeModal.close();
       } else {
         console.log('Did not submit successfully');
       }
-
-      console.log('Submitted successfully');
-
     });
-
-    // this.activeModal.close();
-
   }
 
   toggleMeridian() {
@@ -225,24 +225,13 @@ export class TripsComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private userService: UserService,
+    private carService: CarService,
   ) {
     // TODO: Since we aren't implementing robust login, fetch userId from session storage
-    const userId: number = parseInt(sessionStorage.getItem('userid'), 10);
-    this.userService.getUserById3(userId).subscribe((user: User) => {
-      if (user !== null) {
-        console.log(user);
-        console.log(userService.retrieveUser());
-        if (user.driver !== null) {
-          this.isDriver.next(true);
-        }
-        this.user = user;
-      }
-    });
+    this.user = this.userService.retrieveUser();
   }
 
   ngOnInit(): void {
-    // this.user = new User();
-    // this.user.isDriver = ;
   }
 
   open(user: User) {
@@ -250,7 +239,8 @@ export class TripsComponent implements OnInit {
     modalRef.componentInstance.user = user;
     modalRef.componentInstance.trip.driver = user;
     // TODO: Dynamically get driver's car
-    modalRef.componentInstance.trip.availableSeats = 4;
-  }
-
+    this.carService.getCarByUserId2(this.user.userId.toString()).subscribe((value: Car) => {
+      modalRef.componentInstance.trip.availableSeats = value.seats
+    });
+  };
 }
