@@ -5,7 +5,6 @@ const baseUri = `http://localhost`;
 
 const port = '8080';
 
-const googleKey = '';
   /**
    * These are the dev environment variables
    */
@@ -17,6 +16,5 @@ export const environment = {
   loginUri: `${baseUri}:${port}/login/`,
   batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
-  adminUri: `${baseUri}:${port}/admins/`,
-  googleMapKey: `${googleKey}`
+  adminUri: `${baseUri}:${port}/admins/`
 };

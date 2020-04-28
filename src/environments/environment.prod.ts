@@ -12,8 +12,6 @@ const port = '8080';
  * These are the constants for the production config
  */
 
-const googleKey = '';
-
 export const environment = {
 
   production: true,
@@ -23,5 +21,5 @@ export const environment = {
   batchesUri: `${baseUri}:${port}/batches/`,
   carUri: `${baseUri}:${port}/cars/`,
   adminUri: `${baseUri}:${port}/admins/`,
-  googleMapKey: `${googleKey}`
+
 };

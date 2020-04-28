@@ -117,5 +117,4 @@ export class SignupModalComponent implements OnInit {
         return;
       }
     }
-
 }
