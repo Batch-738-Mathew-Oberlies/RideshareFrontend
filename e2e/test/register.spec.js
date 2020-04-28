@@ -8,11 +8,11 @@ describe('Sign Up tests', function(){
     let emailInput = element(by.xpath('//*[@id="email"]'));
     let phoneInput = element(by.xpath('//*[@id="phoneNumber"]'));
     let addressInput = element(by.xpath('//*[@id="hAddress"]'));
-    let cityInput = element(by.xpath('//*[@id="hCity"]'));
+    let cityInput = element(by.xpath('//*[@id="hCity"]/following-sibling::input[1]'));
     let stateInput = element(by.xpath('//*[@id="hState"]'));
-    let zipCodeInput = element(by.xpath('//*[@id="hZip"]'));
-    let driverRadio = element(by.xpath('//*[@id="driver"]'));
-    let submitButton = element('//*[@id="registerSubmit"]');
+    let zipCodeInput = element(by.xpath('//*[@id="hZip"]/following-sibling::input[1]'));
+    let rideDriveSelect = element(by.xpath('//*[@for="drive"]/following-sibling::select[1]'));
+    let submitButton = element('//*[@type="submit"]');
     
     it('Sign up link on login page opens Sign up modal', function() {
         browser.get('http://localhost:4200');
