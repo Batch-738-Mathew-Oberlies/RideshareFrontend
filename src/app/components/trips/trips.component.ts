@@ -221,6 +221,7 @@ export class CreateTripComponent {
 export class TripsComponent implements OnInit {
   isDriver: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   user: User = new User();
+  car: Car = new Car();
   //constructor(private tripserv: TripService) { }
   constructor(
     private modalService: NgbModal,
@@ -229,9 +230,16 @@ export class TripsComponent implements OnInit {
   ) {
     // TODO: Since we aren't implementing robust login, fetch userId from session storage
     this.user = this.userService.retrieveUser();
+    console.log(this.user);
   }
 
   ngOnInit(): void {
+
+    if (this.user.driver) {
+      this.carService.getCarByUserId2(this.user.userId.toString()).subscribe((value: Car) => {
+        this.car = value;
+      });
+    }
   }
 
   open(user: User) {
@@ -239,8 +247,6 @@ export class TripsComponent implements OnInit {
     modalRef.componentInstance.user = user;
     modalRef.componentInstance.trip.driver = user;
     // TODO: Dynamically get driver's car
-    this.carService.getCarByUserId2(this.user.userId.toString()).subscribe((value: Car) => {
-      modalRef.componentInstance.trip.availableSeats = value.seats
-    });
+    modalRef.componentInstance.trip.availableSeats = this.car.seats;
   };
 }
