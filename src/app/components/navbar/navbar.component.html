@@ -1,14 +1,14 @@
 
-    <nav class="navbar navbar-expand-lg navbar-light mainnav">
-        <!-- <div class="content"> -->
+    <nav class="navbar navbar-expand-lg navbar-light mainnav" aria-label="Site navigation menu">
+
           <a class="navbar-brand logoRev" href="#">
-              <img class="imageLogo" src="../assets/revature-logo-600x219.png" routerLink="/" >
+              <img class="imageLogo" src="../assets/revature-logo-600x219.png" routerLink="/" alt="The Revature logo.">
             </a>
             
             <button class="navbar-toggler ml-auto " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" ></span>
               </button>	     
-               <!-- </div> -->
+
                <div *ngIf="currentUser != ''" class="collapse navbar-collapse myColapse" id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">	
                 <li class="nav-item">
@@ -37,7 +37,7 @@
                 </li>
               </ul>
             </div>
-          <nav *ngIf="admin" class="navbar navbar-expand-lg navbar-light ">
+          <nav *ngIf="admin" class="navbar navbar-expand-lg navbar-light " aria-label="Admin site navigation menu">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
