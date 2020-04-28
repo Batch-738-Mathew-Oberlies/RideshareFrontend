@@ -13,6 +13,9 @@ import { Address } from 'src/app/models/address';
   templateUrl: './sign-up-modal.component.html',
   styleUrls: ['./sign-up-modal.component.css']
 })
+/**
+ * The sign up modal component.
+ */
 export class SignupModalComponent implements OnInit {
 
   address = new Address("", "", "", "", "");

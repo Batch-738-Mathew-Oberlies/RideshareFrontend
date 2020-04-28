@@ -13,7 +13,7 @@ import { User } from 'src/app/models/user';
 })
 
 /**
- * This is the Driver Register
+ * This is the Driver Register component
  */
 
 export class UserRegisterComponent implements OnInit {
@@ -56,13 +56,16 @@ export class UserRegisterComponent implements OnInit {
 	}
 
 	/**
-	 * This function creates a driver if all the validations are true.
+	 * Creates a driver if all the validations pass.
 	 */
 	signUpDriver() {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'driver');
 		}
 	}
+	/**
+	 * Creates a rider if all the validations pass.
+	 */
 	signUpRider() {
 		if (this.validationService.validateUserName(this.user.userName) && this.validationService.validateName(this.user.firstName) && this.validationService.validateName(this.user.lastName) && this.validationService.validateEmail(this.user.email) && this.validationService.validatePhone(this.user.phoneNumber)) {
 			this.userService.createDriver(this.user, 'rider');

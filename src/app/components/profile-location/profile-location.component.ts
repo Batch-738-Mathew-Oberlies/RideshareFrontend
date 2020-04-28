@@ -29,6 +29,10 @@ export class ProfileLocationComponent implements OnInit {
   transientAddress: Address;
   constructor(private userService: UserService, private validationService: ValidationService) { }
 
+  /**
+   * Sets the user location information of this component to match that of the currently
+   * logged in user as it appears in the database.
+   */
   ngOnInit() {
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
       this.currentUser = response;

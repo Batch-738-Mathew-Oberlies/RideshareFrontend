@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
+/**
+ * The homepage component, which contains no methods or fields.
+ */
 export class HomePageComponent implements OnInit {
 
   constructor() { }

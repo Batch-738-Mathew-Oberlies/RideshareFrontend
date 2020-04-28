@@ -5,7 +5,6 @@
  */
 
 const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
-
 /**
  * Set the port to 8080
  */
