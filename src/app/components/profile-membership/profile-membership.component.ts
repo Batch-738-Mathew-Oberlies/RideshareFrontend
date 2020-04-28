@@ -27,6 +27,7 @@ export class ProfileMembershipComponent implements OnInit {
   constructor(private userService: UserService) {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
       (response) => {
+        this.profileObject = response;
 
         // @ts-ignore
         this.isDriver = this.profileObject.driver;
