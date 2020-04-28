@@ -24,6 +24,12 @@ h5{
     margin-top:40px;
     
 }
+/**success*/
+.success {
+    border-radius: 5px;
+    color: green;
+    font-size: 16px;
+}
 .fa-users{
     z-index: 2;
     border:1.5px solid black;
