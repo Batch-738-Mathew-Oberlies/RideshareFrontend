@@ -1,5 +1,3 @@
-
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -37,8 +35,9 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-
-
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
+import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
 
 @NgModule({
   declarations: [
@@ -66,8 +65,9 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     DriverListComponent,
     UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent
-    
+    BsNavbarComponent,
+    ScheduleComponent,
+    ViewMyRidesComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,9 +85,13 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     BatchService,
     AuthService,
     ValidationService,
-    BsModalService
+    BsModalService,
+    ScheduleService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule 
+{ 
+
+}
 
