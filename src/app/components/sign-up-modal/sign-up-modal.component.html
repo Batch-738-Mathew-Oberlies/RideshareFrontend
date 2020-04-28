@@ -40,15 +40,15 @@
     </select>
 
     <label for="hAddress">Address</label>
-    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
+    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.haddress.street" class="form-control" />
     <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
 
     <label id="hCity">City</label>
-    <input (keydown)="hCityError = ''" type="text" [(ngModel)]="user.hCity" class="form-control" />
+    <input (keydown)="hCityError = ''" id="hCity" type="text" [(ngModel)]="user.haddress.city" class="form-control" />
     <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
 
     <label id="hState">State</label>
-    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="hState" >
+    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.haddress.state" id="hState" >
             <option value="none" selected disabled hidden>  
             </option>
             <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
@@ -56,7 +56,7 @@
     <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
 
     <label id="hZip">Zip Code</label>
-    <input (keydown)="hZipError = ''" type="number" [(ngModel)]="user.hZip" class="form-control" />
+    <input (keydown)="hZipError = ''" id="hZip" type="number" [(ngModel)]="user.haddress.zip" class="form-control" />
     <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
 
     <div class="radiobody">
@@ -71,7 +71,7 @@
   </div>
     </div>
     <div class="btn-container">
-      <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
+      <button type="submit" id="registerSubmit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
     </div>
   </div>
 </ng-template> 
