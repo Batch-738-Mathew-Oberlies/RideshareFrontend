@@ -231,6 +231,7 @@ export class TripsComponent implements OnInit {
     this.userService.getUserById3(userId).subscribe((user: User) => {
       if (user !== null) {
         console.log(user);
+        console.log(userService.retrieveUser());
         if (user.driver !== null) {
           this.isDriver.next(true);
         }

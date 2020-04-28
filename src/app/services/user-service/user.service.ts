@@ -238,4 +238,19 @@ export class UserService {
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
 	}
+
+	/**
+	 * This method will store an entire user object in session storage.
+	 * @param user 
+	 */
+	storeUser(user: User) {
+		sessionStorage.setItem('user', JSON.stringify(user));
+	}
+	
+	/**
+	 * This method will retrive the user object stored in the session storage.
+	 */
+	retrieveUser(): User {
+		return JSON.parse(sessionStorage.getItem('user'));
+	}
 }
