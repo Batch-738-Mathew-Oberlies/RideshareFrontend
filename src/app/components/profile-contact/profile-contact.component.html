@@ -1,4 +1,3 @@
-
 <div class="container mainContainer">
   <div *ngIf="errorExists == true">
     <div class="row justify-content-center">
@@ -10,30 +9,32 @@
     <i class="fa fa-user" style="font-family:'FontAwesome';"></i>
         <h4>Contact Information:</h4>
 
+        <!------------------FIRST NAME------------------>
         <div class="form-group row">
             <div class="col-sm-1"></div>
                 <label for="firstName" class="col-sm-4 col-form-label">First Name:</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" value="{{ profileObject?.firstName }}" required>
                     <span class="text-danger" *ngIf="(firstName.dirty || firstName.touched) && firstName.invalid && firstName.errors.required">
-                      First Name is required.
+                      First name is required.
                     </span>
                 </div>
 
         </div>
 
+        <!------------------LAST NAME------------------>
         <div class="form-group row">
             <div class="col-sm-1"></div>
-            <!------------------LASTNAME------------------>
             <label for="lastName" class="col-sm-4 col-form-label">Last Name:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" value="{{ profileObject?.lastName }}">
                 <span class="text-danger" *ngIf="(lastName.dirty || lastName.touched) && lastName.invalid && lastName.errors.required">
-                  Last Name is required.
+                  Last name is required.
                 </span>
            </div>
         </div>
 
+        <!------------------EMAIL------------------>
         <div class="form-group row">
             <div class="col-sm-1"></div>
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
@@ -48,23 +49,23 @@
             </div>
         </div>
 
+        <!------------------PHONE NUMBER------------------>
         <div class="form-group row">
             <div class="col-sm-1"></div>
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="phone" formControlName="phone" required>
                 <span class="text-danger" *ngIf="(phone.dirty || phone.touched) && phone.invalid && phone.errors.required">
-                  Phone is required.
+                  Phone number is required.
                 </span>
                 <p *ngIf="success != ''" class="success">{{success}}</p>
             </div>
           </div>
+
+        <!------------------SUBMIT------------------>
           <div class="form-group row justify-content-center">
-          <button type="submit" class="btn btn-primary myBtn">Save</button>
+          <button type="submit" [disabled]="!contactInfoForm.valid || !contactInfoForm.dirty" class="btn btn-primary myBtn">Save</button>
           </div>
       </form>
   </div>
 </div>
-
-
-
