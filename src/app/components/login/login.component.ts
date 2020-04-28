@@ -1,10 +1,10 @@
-import { Component, OnInit, NgModule, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 
 @Component({
@@ -209,20 +209,7 @@ export class LoginComponent implements OnInit {
 					  }
                  }
         );
-		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
-			.subscribe((user: User[]) => {
-				if (!user.length) {
-					this.loginFailed();
-				}
-				else if(this.chosenUser.active == false){
-					this.loginBanned();
-				}
-				else {
-					if (!this.authService.login(user[0], this.chosenUser.userName)) {
-						this.loginFailed();
-					}
-				}
-			});*/
+		
 	}
 
 
