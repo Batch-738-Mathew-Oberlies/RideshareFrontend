@@ -133,15 +133,16 @@ displayDriversList(origin, drivers) {
     this.availableDrivers = [];
 
     drivers.forEach(element => {
-      // TODO: Change availableSeats to get info from trips.service
       var availableSeats: number;
       var totalSeats: number;
 
-      this.carService.getCarByUserId2(element.id).subscribe(
-        (result) => {
-          console.log(result);
-          availableSeats = result.availableSeats;
-          totalSeats = result.seats;
+      this.carService.getCarTripByUserId(element.id).subscribe(
+        (carTrip) => {
+          console.log(carTrip);
+          // @ts-ignore
+          availableSeats = carTrip.currentTrip.availableSeats;
+          // @ts-ignore
+          totalSeats = carTrip.car.seats;
         }
       );
       let service = new google.maps.DistanceMatrixService;
@@ -172,7 +173,6 @@ displayDriversList(origin, drivers) {
               email: element.email,
               phone: element.phone
             },
-            // TODO: Change availableSeats to get info from trips.service
             availableSeats: availableSeats,
             totalSeats: totalSeats
           })

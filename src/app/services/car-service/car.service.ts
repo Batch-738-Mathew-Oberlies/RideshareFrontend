@@ -56,6 +56,14 @@ export class CarService {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
 
+	/**
+	 * Returns a car and current trip by user ID.
+	 * @param userId 
+	 */
+	getCarTripByUserId(userId: number) {
+		return this.http.get(`${this.url}trips/user/${userId}`)
+	}
+
 
 	updateCarInfo(car: Car) {
 		//console.log(user);
