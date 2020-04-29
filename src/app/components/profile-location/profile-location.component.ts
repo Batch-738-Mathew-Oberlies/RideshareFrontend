@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { Address } from 'src/app/models/address';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
   selector: 'app-profile-location',
@@ -9,7 +12,12 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileLocationComponent implements OnInit {
 
-  zipcode: number;
+  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
+            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
+            'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
+            'WI','WY'];
+
+  zipcode: string;
   city:string;
   address:string;
   address2:string;
@@ -17,7 +25,9 @@ export class ProfileLocationComponent implements OnInit {
   currentUser: User;
   success :string;
 
-  constructor(private userService: UserService) { }
+  updatedAddress: Address;
+  transientAddress: Address;
+  constructor(private userService: UserService, private validationService: ValidationService) { }
 
   /**
    * Sets the user location information of this component to match that of the currently
@@ -26,27 +36,39 @@ export class ProfileLocationComponent implements OnInit {
   ngOnInit() {
    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
       this.currentUser = response;
-      this.zipcode = +response.haddress.zip;
-      this.city = response.haddress.city;
-      this.address = response.haddress.street;
-      this.address2 = response.waddress.street;
-      this.hState = response.haddress.state;
+      this.zipcode = response.hAddress.zip;
+      this.city = response.hAddress.city;
+      this.address = response.hAddress.apt;
+      this.address2 = response.hAddress.street;
+      this.hState = response.hAddress.state;
 
     });
   }
 
-  /**
-   * Updates the location information of the current user to match that found in this component,
-   * and persists those changes to the database.
-   */
-  updatesContactInfo(){
-    this.currentUser.haddress.zip = this.zipcode.toString();
-    this.currentUser.haddress.city = this.city;
-    this.currentUser.haddress.street = this.address;
-    this.currentUser.waddress.street = this.address2;
-    this.currentUser.haddress.state = this.hState;
-    //console.log(this.currentUser);
-    this.userService.updateUserInfo(this.currentUser);
-    this.success = "Updated Successfully!";
+  addressChange = new FormGroup({
+    address1: new FormControl(`${this.currentUser.hAddress.apt}`, Validators.pattern('[a-z A-Z0-9]*')),
+    address2: new FormControl(`${this.currentUser.hAddress.street}`, [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
+    city: new FormControl(`${this.currentUser.hAddress.city}`, [Validators.required, Validators.pattern('[a-z A-Z]*')]),
+    state: new FormControl(`${this.currentUser.hAddress.state}`, Validators.required),
+    zip: new FormControl(`${this.currentUser.hAddress.zip}`, [Validators.required, Validators.pattern('[0-9]{5}')]),
+  })
+
+  async updatesContactInfo(){
+
+    console.log(this.addressChange.value);
+
+    this.updatedAddress = this.addressChange.value;
+
+    await this.validationService.validateAddress(this.updatedAddress).then( data => {
+      this.transientAddress = data;
+    })
+
+    if(this.transientAddress == null){
+      return;
+    }else {
+      this.currentUser.hAddress = this.transientAddress;
+      console.log(this.currentUser);
+      this.userService.updateUserInfo(this.currentUser);
+    }
   }
 }
