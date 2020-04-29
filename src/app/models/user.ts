@@ -58,10 +58,10 @@ export class User {
     /**
      * Home Address
      */
-    haddress: Address;
+    hAddress: Address;
     
     /**
      * Work Address
      */
-    waddress: Address;
+    wAddress: Address;
 }

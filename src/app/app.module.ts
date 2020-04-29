@@ -35,9 +35,15 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
 import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+
 
 @NgModule({
   declarations: [
@@ -77,7 +83,8 @@ import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.c
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UserService,

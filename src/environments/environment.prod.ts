@@ -25,6 +25,7 @@ export const environment = {
   adminUri: `${baseUri}/admins/`,
   tripUri: `${baseUri}/trips/`,
   googleMapKey: `${googleKey}`,
+
 };
 
 /*
