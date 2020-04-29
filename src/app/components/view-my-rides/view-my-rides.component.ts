@@ -39,10 +39,12 @@ export class ViewMyRidesComponent implements OnInit {
        );
     }
   }
+
   removeTrip(t: Trip)
   {
     this.serv.removeTrips(t, this.id).subscribe();
   }
+  
   refresh()
   {
     window.location.reload();

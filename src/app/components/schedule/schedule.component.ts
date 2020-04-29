@@ -20,6 +20,7 @@ export class ScheduleComponent implements OnInit
   constructor(private serv: ScheduleService, private auth: AuthService) 
   { 
   }
+
   ngOnInit() 
   {
     this.serv.getTrips().subscribe(
@@ -29,22 +30,28 @@ export class ScheduleComponent implements OnInit
        this.id=+sessionStorage.getItem("userid");
 
        this.serv.getRiderTrips(this.id).subscribe(
-        data =>{ this.riderTrips=data
-      }
-      );
+        data => {this.riderTrips=data;
+          if(this.riderTrips === null){
+            this.riderTrips = [];
+          }
+        });
   }
+
   addTrip(t: Trip)
   {
     this.serv.addTrips(t,this.id).subscribe(()=>this.onTrip(t));
   }
+
   removeTrip(t: Trip)
   {
     this.serv.removeTrips(t,this.id).subscribe();
   }
+  
   refresh()
   {
     window.location.reload();
   }
+  
   onTrip(t: Trip): boolean
   {
     let isTrip: boolean = false;
