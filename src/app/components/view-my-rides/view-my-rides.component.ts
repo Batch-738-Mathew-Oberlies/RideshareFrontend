@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-view-my-rides',
-  templateUrl: './view-my-rides.component.html',
+  templateUrl: '../trips.component.html',
   styleUrls: ['./view-my-rides.component.css']
 })
 export class ViewMyRidesComponent implements OnInit {
@@ -46,6 +46,19 @@ export class ViewMyRidesComponent implements OnInit {
   refresh()
   {
     window.location.reload();
+  }
+  onTrip(t: Trip): boolean
+  {
+    let isTrip: boolean = false;
+
+    this.trips.forEach(trip => {
+      if(t.tripId === trip.tripId)
+      {
+        isTrip=true;
+      }
+    });
+
+    return isTrip;
   }
 }
 

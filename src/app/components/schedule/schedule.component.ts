@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-schedule',
-  templateUrl: './schedule.component.html',
+  templateUrl: '../trips.component.html',
   styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit 
@@ -22,16 +22,22 @@ export class ScheduleComponent implements OnInit
   }
   ngOnInit() 
   {
-    this.serv.getTrips().subscribe(
-      data => this.trips=data
-       );
-
        this.id=+sessionStorage.getItem("userid");
 
-       this.serv.getRiderTrips(this.id).subscribe(
-        data =>{ this.riderTrips=data
+       if(!this.id)
+       {
+         console.log("No userId associated with login.")
+       }
+       else
+       {
+        this.serv.getRiderTrips(this.id).subscribe(
+          data => this.riderTrips=data
+          );
+
+        this.serv.getTrips().subscribe(
+        data => this.trips=data
+        );
       }
-      );
   }
   addTrip(t: Trip)
   {
