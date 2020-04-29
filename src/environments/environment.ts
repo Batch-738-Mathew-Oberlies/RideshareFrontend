@@ -29,6 +29,7 @@ export const environment = {
   adminUri: `${baseUri}:${port}/rideshare/admins/`,
   tripUri: `${baseUri}:${port}/rideshare/trips/`,
   googleMapKey: `${googleKey}`,
+  
 };
 
 /*

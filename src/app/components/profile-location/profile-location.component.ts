@@ -29,10 +29,14 @@ export class ProfileLocationComponent implements OnInit {
   // address2 = new FormControl('', Validators.required);
   // hState = new FormControl('', Validators.required);
 
-  errorExists: boolean;
-  errorMessage: string;
-  success: string;
+  // errorExists: boolean;
+  // errorMessage: string;
+  // success: string;
+  statusExists: boolean;
+  statusMessage: string;
   currentUser: User;
+  success :boolean;
+  errorExists: boolean;
 
   /**
    * Sets the user location information of this component to match that of the currently
@@ -86,11 +90,13 @@ export class ProfileLocationComponent implements OnInit {
 
     //console.log(this.currentUser);
     this.userService.updateUserInfo(this.currentUser).subscribe(
-      (input) => { this.success = 'Updated Successfully!'; },
+      (input) => { 
+        this.success = true;
+        this.statusMessage = 'Updated Successfully!'; },
       (errorObj) => {
-        this.errorExists = true;
+        this.errorExists= true;
         if (errorObj.error.message == 'Invalid Address') {
-            this.errorMessage = '' + errorObj.error.haddress + ' doesn\'t exist.';
+            this.statusMessage = '' + errorObj.error.haddress + ' doesn\'t exist.';
         }
       }
     );

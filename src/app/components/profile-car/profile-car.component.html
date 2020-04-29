@@ -1,5 +1,24 @@
 <div class="container mainContainer">
         <i class="fa fa-car" style="font-family:'FontAwesome';"></i>
+
+        <div *ngIf="success==true">
+            <div class="row justify-content-center">
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ statusMessage }}
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="errorExists==true">
+            <div class="row justify-content-center">
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    An error exists on the form.
+                </div>
+            </div>
+        </div>
+
         <h4>Car Information:</h4>
         <form (ngSubmit)="updatesCarInfo()"[formGroup]="carForm">
         
@@ -67,5 +86,5 @@
         <button type="submit" [disabled]="!carForm.valid" class="btn btn-primary myBtn">Save</button>
         <!-- <button type="submit" [disabled]="!carForm.valid || (nrSeats.value < availableSeats.value)" class="btn btn-primary myBtn">Save</button> -->
         </form>
-        <p *ngIf="success != ''" class="success">{{success}}</p>
+
       </div>
