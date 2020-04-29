@@ -73,7 +73,6 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     ModalModule.forRoot(),
     NgbModule,
     ReactiveFormsModule

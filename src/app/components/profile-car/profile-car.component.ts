@@ -16,7 +16,11 @@ export class ProfileCarComponent implements OnInit {
   // nrSeats:number;
   currentCar: Car;
   // availableSeats:number;
-  success :string;
+  success :boolean;
+  errorExists: boolean;
+  // errorMessage: string;
+  statusExists: boolean;
+  statusMessage: string;
 
   carForm: FormGroup;
   make = new FormControl('', Validators.required);
@@ -68,8 +72,17 @@ export class ProfileCarComponent implements OnInit {
     this.currentCar.seats = this.carForm.value.nrSeats;
     // this.currentCar.availableSeats = this.carForm.value.availableSeats;
     //console.log(this.currentUser);
-    this.carService.updateCarInfo(this.currentCar);
-    this.success = "Updated Successfully!";
+    this.carService.updateCarInfo2(this.currentCar).subscribe(
+      () => {
+        this.success = true;
+        this.statusMessage = "Updated Successfully!";
+      },
+      (errorObj) => {
+        this.errorExists = true;
+        this.statusMessage = errorObj.error.message;
+      }
+    )
+    
   }
 
 

@@ -13,7 +13,7 @@ const port = '8081';
 /**
  * google map api key 
  */
-const googleKey = '';
+const googleKey = 'AIzaSyAGYQ7Id-uGqXnOsV9j7Jx9TAbqpPtAMnU';
  /**
    * This is the environment config.
    */
@@ -29,6 +29,7 @@ export const environment = {
   adminUri: `${baseUri}:${port}/rideshare/admins/`,
   tripUri: `${baseUri}:${port}/rideshare/trips/`,
   googleMapKey: `${googleKey}`,
+  
 };
 
 /*

@@ -1,11 +1,24 @@
 <div class="container mainContainer">
   <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
 
-  <div *ngIf="errorExists == true">
+  <div *ngIf="success==true">
     <div class="row justify-content-center">
-      <div class="alert alert-danger col-5">{{ errorMessage }}</div>
+      <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ statusMessage }}
+      </div>
+      </div>
     </div>
-  </div>
+    
+    <div *ngIf="errorExists==true">
+      <div class="row justify-content-center">
+        <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          An error exists on the form.
+        </div>
+        </div>
+      </div>
+
   <div class="row">
     <form [formGroup]="locationInfoForm" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
         <h4>Location Information:</h4>
@@ -112,7 +125,6 @@
                 <span class="text-danger" *ngIf="(homeZipcode.dirty || homeZipcode.touched) && homeZipcode.invalid && homeZipcode.errors.required">
                   Zip Code is required.
                 </span>
-                <p *ngIf="success != ''" class="success">{{success}}</p>
             </div>
           </div>
 
@@ -217,7 +229,6 @@
                   <span class="text-danger" *ngIf="(workZipcode.dirty || workZipcode.touched) && workZipcode.invalid && workZipcode.errors.required">
                     Zip Code is required.
                   </span>
-                  <p *ngIf="success != ''" class="success">{{success}}</p>
               </div>
             </div>
 

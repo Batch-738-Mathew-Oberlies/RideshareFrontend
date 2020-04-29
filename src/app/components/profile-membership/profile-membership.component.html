@@ -1,9 +1,21 @@
 <div class="container mainContainer">
     <i class="fa fa-users" style="font-family:'FontAwesome';"></i>
     
-    <div *ngIf="errorExists == true">
+    <div *ngIf="success==true">
         <div class="row justify-content-center">
-            <div class="alert alert-danger col-5">{{ errorMessage }}</div>
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ statusMessage }}
+            </div>
+        </div>
+    </div>
+        
+    <div *ngIf="errorExists==true">
+        <div class="row justify-content-center">
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                An error exists on the form.
+            </div>
         </div>
     </div>
 
@@ -40,7 +52,17 @@
                 </select>
             </div>
         </div>
-        <p *ngIf="success" class="success">{{success}}</p>
+
+        <!------------------ACCEPTING RIDES STATUS------------------>
+        <div *ngIf="isDriver==true || isDriver=='true'" class="row">
+            <div class="col-sm-7">
+                <h6>Accepting Rides:</h6>
+                <div class="btn-group" (change)="disableButton()">
+                    <button type="button" class="btn btn-secondary" [ngClass]="isAcceptingRides?'btn btn-primary active':'btn btn-secondary'" (click)="changeIsAcceptingRides(true); disableButton();">Yes</button>
+                    <button type="button" class="btn btn-secondary" [ngClass]="isAcceptingRides?'btn btn-secondary':'btn btn-primary active'" (click)="changeIsAcceptingRides(false); disableButton()">No</button>
+                </div>
+            </div>
+        </div>
 
         <!------------------SUBMIT------------------>
         <div class="form-group row justify-content-center">

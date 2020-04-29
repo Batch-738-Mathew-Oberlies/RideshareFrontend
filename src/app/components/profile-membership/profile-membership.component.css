@@ -51,6 +51,11 @@ h5{
    
 }
 
+.form-control, .btn-group {
+    width: 230px;
+   
+}
+
 .myBtn {
     margin-top:30px;
     background-color: #F26925;

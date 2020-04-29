@@ -21,9 +21,12 @@ export class ProfileContactComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   phone = new FormControl('', Validators.required);
 
+  //'^[A-Za-z0-9._%+-]+@[a-z0-9\.-]+\.[a-z]{2,4}$')
   errorExists: boolean;
-  errorMessage: string;
-  success: string;
+  // errorMessage: string;
+  success: boolean;
+  statusExists: boolean;
+  statusMessage: string;
 
   constructor(private router: Router, private userService: UserService, private formBuilder: FormBuilder) {
 
@@ -67,11 +70,16 @@ export class ProfileContactComponent implements OnInit {
     console.log(this.profileObject);
 
     this.userService.updateUserInfo(this.profileObject).subscribe(
-      (input) => { this.success = 'Updated Successfully!'; },
+      (input) => { 
+        this.statusExists = true;
+        this.success = true;
+        this.statusMessage = 'Updated Successfully!'; 
+      },
       (errorObj) => {
+        this.statusExists = true;
         this.errorExists = true;
         if (errorObj.error.message == 'Email Taken') {
-            this.errorMessage = '' + errorObj.error.userEmail + ' already exists.';
+            this.statusMessage = '' + errorObj.error.userEmail + ' already exists.';
         }
       }
     );
