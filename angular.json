@@ -97,6 +97,9 @@
             "browserTarget": "rideshare-frontend:build"
           },
           "configurations": {
+            "dev": {
+              "browserTarget": "rideshare-frontend:build:dev"
+            },
             "production": {
               "browserTarget": "rideshare-frontend:build:production"
             },

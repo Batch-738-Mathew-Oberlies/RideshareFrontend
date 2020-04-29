@@ -1,12 +1,6 @@
 <div class="container mainContainer">
   <i class="fa fa-user" style="font-family:'FontAwesome';"></i>
 
-  <!-- <div *ngIf="errorExists==true">
-    <div class="row justify-content-center">
-      <ngb-alert [type]="danger"
-      <div [ngClass]="{ 'alert alert-success col-7': success, 'alert alert-danger col-7': errorExists }">{{ statusMessage }}</div>
-  </div> -->
-
 <div *ngIf="success==true">
 <div class="row justify-content-center">
   <div class="alert alert-success alert-dismissible">
@@ -24,7 +18,6 @@
     </div>
     </div>
   </div>
-
 
   <div class="row">
     <form [formGroup]="contactInfoForm" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">

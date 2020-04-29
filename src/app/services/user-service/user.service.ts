@@ -73,7 +73,6 @@ export class UserService {
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
 
-
 	}
 
 	/**
@@ -186,7 +185,7 @@ export class UserService {
 
 	updateUserInfo(user: User) {
     console.log(user);
-		return this.http.put(this.url + "/" + user.userId, user);
+		return this.http.put(this.url + user.userId, user);
 	}
 	/**
 	 * A GET method that retrieves a driver by Id

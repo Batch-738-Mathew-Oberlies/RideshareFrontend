@@ -14,10 +14,10 @@ const port = '8081';
  * google map api key 
  */
 const googleKey = '';
- /**
-   * This is the environment config.
-   */
-
+ 
+/**
+ * This is the environment config.
+ */
 export const environment = {
  
   production: false,

@@ -20,221 +20,113 @@
       </div>
 
   <div class="row">
-    <form [formGroup]="locationInfoForm" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
+    <form [formGroup]="addressChange" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
         <h4>Location Information:</h4>
-
-            <!------------------HOME ADDRESS INFO------------------>
-    <br>
+        <br>
             <h5>Home Address:</h5>
 
-            <!------------------HOME STREET------------------>
             <div class="form-group row">
                 <div class="col-sm-1"></div>
                     <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="homeStreet" value="{{ currentUser?.haddress.street }}" required>
-                        <span class="text-danger" *ngIf="(homeStreet.dirty || homeStreet.touched) && homeStreet.invalid && homeStreet.errors.required">
-                          Home address is required.
-                        </span>
+                        <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="homeAddress" required>
+                        <p *ngIf="addressChange.controls.homeAddress.hasError('required') && addressChange.controls.homeAddress.touched" class="error">Street Address required please enter one.</p>
+                        <p *ngIf="addressChange.controls.homeAddress.hasError('pattern')" class="error">Street Address format is incorrect</p>
                     </div>
             </div>
 
-            <!------------------HOME CITY------------------>
+            <div class="form-group row">
+              <div class="col-sm-1"></div>
+              <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
+              <div class="col-sm-4">
+                <input type="text" formControlName="homeAddressApt" class="form-control" id="address2">
+              </div>
+            </div>
+
             <div class="form-group row">
               <div class="col-sm-1"></div>
               <label for="homeCity" class="col-sm-4 col-form-label">City:</label>
               <div class="col-sm-4">
-                  <input type="city" class="form-control" id="homeCity" formControlName="homeCity" value="{{ currentUser?.haddress.city }}" required>
-                  <span class="text-danger" *ngIf="(homeCity.dirty || homeCity.touched) && homeCity.invalid && homeCity.errors.required">
-                    City is required.
-                  </span>
+                  <input type="city" class="form-control" id="homeCity" formControlName="homeCity" required>
+                  <p *ngIf="addressChange.controls.homeCity.hasError('required') && addressChange.controls.homeCity.touched" class="error">A city is required please enter one.</p>
+                  <p *ngIf="addressChange.controls.homeCity.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
               </div>
           </div>
 
-          <!------------------HOME STATE------------------>
           <div class="form-group row">
               <div class="col-sm-1"></div>
               <label for="homeState" class="col-sm-4 col-form-label">State:</label>
               <div class="col-sm-4">
-                  <select class="form-control" name="homeState" id="homeState" formControlName="homeState" value="{{ currentUser?.haddress.state }}" required>
-                      <option value="" selected disabled>Select a state</option>
-                      <option value="AL">Alabama</option>
-                      <option value="AK">Alaska</option>
-                      <option value="AZ">Arizona</option>
-                      <option value="AR">Arkansas</option>
-                      <option value="CA">California</option>
-                      <option value="CO">Colorado</option>
-                      <option value="CT">Connecticut</option>
-                      <option value="DE">Delaware</option>
-                      <option value="DC">District Of Columbia</option>
-                      <option value="FL">Florida</option>
-                      <option value="GA">Georgia</option>
-                      <option value="HI">Hawaii</option>
-                      <option value="ID">Idaho</option>
-                      <option value="IL">Illinois</option>
-                      <option value="IN">Indiana</option>
-                      <option value="IA">Iowa</option>
-                      <option value="KS">Kansas</option>
-                      <option value="KY">Kentucky</option>
-                      <option value="LA">Louisiana</option>
-                      <option value="ME">Maine</option>
-                      <option value="MD">Maryland</option>
-                      <option value="MA">Massachusetts</option>
-                      <option value="MI">Michigan</option>
-                      <option value="MN">Minnesota</option>
-                      <option value="MS">Mississippi</option>
-                      <option value="MO">Missouri</option>
-                      <option value="MT">Montana</option>
-                      <option value="NE">Nebraska</option>
-                      <option value="NV">Nevada</option>
-                      <option value="NH">New Hampshire</option>
-                      <option value="NJ">New Jersey</option>
-                      <option value="NM">New Mexico</option>
-                      <option value="NY">New York</option>
-                      <option value="NC">North Carolina</option>
-                      <option value="ND">North Dakota</option>
-                      <option value="OH">Ohio</option>
-                      <option value="OK">Oklahoma</option>
-                      <option value="OR">Oregon</option>
-                      <option value="PA">Pennsylvania</option>
-                      <option value="RI">Rhode Island</option>
-                      <option value="SC">South Carolina</option>
-                      <option value="SD">South Dakota</option>
-                      <option value="TN">Tennessee</option>
-                      <option value="TX">Texas</option>
-                      <option value="UT">Utah</option>
-                      <option value="VT">Vermont</option>
-                      <option value="VA">Virginia</option>
-                      <option value="WA">Washington</option>
-                      <option value="WV">West Virginia</option>
-                      <option value="WI">Wisconsin</option>
-                      <option value="WY">Wyoming</option>
+                  <select class="form-control" name="homeState" id="homeState" formControlName="homeState" required>
+                    <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
                   </select>
-                  <span class="text-danger" *ngIf="(homeState.dirty || homeState.touched) && homeState.invalid && homeState.errors.required">
-                    State is required.
-                  </span>
+                  <p *ngIf="addressChange.controls.homeState.hasError('required')" class="error">State is required please choose one</p>
               </div>
           </div>
 
-          <!------------------HOME ZIPCODE------------------>
           <div class="form-group row">
             <div class="col-sm-1"></div>
             <label for="homeZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="homeZipcode" formControlName="homeZipcode" value="{{ currentUser?.haddress.zip }}" required>
-                <span class="text-danger" *ngIf="(homeZipcode.dirty || homeZipcode.touched) && homeZipcode.invalid && homeZipcode.errors.required">
-                  Zip Code is required.
-                </span>
+                <input type="text" class="form-control" id="homeZipcode" formControlName="homeZip" required>
+                <p *ngIf="addressChange.controls.homeZip.hasError('required') && addressChange.controls.homeZip.touched" class="error">Zip code required please enter one.</p>
+                <p *ngIf="addressChange.controls.homeZip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
             </div>
           </div>
 
-            <!------------------WORK ADDRESS INFO------------------>
-            <h5>Work Address:</h5>
+          <h5>Work Address:</h5>
 
-            <!------------------WORK STREET------------------>
             <div class="form-group row">
                 <div class="col-sm-1"></div>
-                <label for="workStreet" class="col-sm-4 col-form-label">Street Name:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="workStreet" name="workStreet" formControlName="workStreet" value="{{ currentUser?.waddress.street }}">
-                    <span class="text-danger" *ngIf="(workStreet.dirty || workStreet.touched) && workStreet.invalid && workStreet.errors.required">
-                      Last Name is required.
-                    </span>
-               </div>
+                    <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="workAddress" required>
+                        <p *ngIf="addressChange.controls.workAddress.hasError('required') && addressChange.controls.workAddress.touched" class="error">Street Address required please enter one.</p>
+                        <p *ngIf="addressChange.controls.workAddress.hasError('pattern')" class="error">Street Address format is incorrect</p>
+                    </div>
             </div>
 
-            <!------------------WORK CITY------------------>
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <label for="workCity" class="col-sm-4 col-form-label">City:</label>
-                <div class="col-sm-4">
-                    <input type="city" class="form-control" id="workCity" formControlName="workCity" value="{{ currentUser?.waddress.city }}" required>
-                    <span class="text-danger" *ngIf="(workCity.dirty || workCity.touched) && workCity.invalid && workCity.errors.required">
-                      City is required.
-                    </span>
-                </div>
-            </div>
-
-            <!------------------WORK STATE------------------>
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <label for="workState" class="col-sm-4 col-form-label">State:</label>
-                <div class="col-sm-4">
-                    <select class="form-control" name="workState" id="workState" formControlName="workState" value="{{ currentUser?.waddress.state }}" required>
-                        <option value="" selected disabled>Select a state</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="DC">District Of Columbia</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NY">New York</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="TX">Texas</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
-                    <span class="text-danger" *ngIf="(workState.dirty || workState.touched) && workState.invalid && workState.errors.required">
-                      State is required.
-                    </span>
-                </div>
-            </div>
-
-            <!------------------WORK ZIPCODE------------------>
             <div class="form-group row">
               <div class="col-sm-1"></div>
-              <label for="workZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
+              <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
               <div class="col-sm-4">
-                  <input type="text" class="form-control" id="workZipcode" formControlName="workZipcode" value="{{ currentUser?.waddress.zip }}" required>
-                  <span class="text-danger" *ngIf="(workZipcode.dirty || workZipcode.touched) && workZipcode.invalid && workZipcode.errors.required">
-                    Zip Code is required.
-                  </span>
+                <input type="text" formControlName="workAddressApt" class="form-control" id="address2">
               </div>
             </div>
 
-            <!------------------SUBMIT------------------>
+            <div class="form-group row">
+              <div class="col-sm-1"></div>
+              <label for="homeCity" class="col-sm-4 col-form-label">City:</label>
+              <div class="col-sm-4">
+                  <input type="city" class="form-control" id="homeCity" formControlName="workCity" required>
+                  <p *ngIf="addressChange.controls.workCity.hasError('required') && addressChange.controls.workCity.touched" class="error">A city is required please enter one.</p>
+                  <p *ngIf="addressChange.controls.workCity.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
+              </div>
+          </div>
+
+          <div class="form-group row">
+              <div class="col-sm-1"></div>
+              <label for="homeState" class="col-sm-4 col-form-label">State:</label>
+              <div class="col-sm-4">
+                  <select class="form-control" name="homeState" id="homeState" formControlName="workState" required>
+                    <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+                  </select>
+                  <p *ngIf="addressChange.controls.workState.hasError('required')" class="error">State is required please choose one</p>
+              </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <label for="homeZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="homeZipcode" formControlName="workZip" required>
+                <p *ngIf="addressChange.controls.workZip.hasError('required') && addressChange.controls.workZip.touched" class="error">Zip code required please enter one.</p>
+                <p *ngIf="addressChange.controls.workZip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
+            </div>
+          </div>
+
             <div class="form-group row justify-content-center">
-              <button type="submit" [disabled]="(!locationInfoForm.valid || !locationInfoForm.dirty)" class="btn btn-primary myBtn">Save</button>
+              <button type="submit" [disabled]="(!addressChange.valid || !addressChange.dirty)" class="btn btn-primary myBtn">Save</button>
             </div>
     </form>
 

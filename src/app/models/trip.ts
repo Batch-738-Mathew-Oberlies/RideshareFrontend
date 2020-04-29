@@ -3,7 +3,7 @@ import { Address } from './address'
 
 export class Trip{
     /**
-     * Set Trip model
+     * Sets Trip model
      */
     tripId: number
     /**

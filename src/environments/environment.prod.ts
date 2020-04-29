@@ -16,7 +16,6 @@ const googleKey = '';
   /**
  * These are the constants for the production config
  */
-
 export const environment = {
 
   production: true,
