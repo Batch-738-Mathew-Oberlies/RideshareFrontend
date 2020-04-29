@@ -37,11 +37,11 @@ describe('Sign Up tests', function(){
     it('Sign up link on login page opens Sign up modal', function() {
         browser.get('http://localhost:4200');
         browser.waitForAngular();
-        elSignUpLink.click();
-        expect(elRegisterHeader.getText()).toBe('Sign Up');
-    });
+        element(by.xpath('/html/body/app-root/app-home-page/div[1]/div/div/button[2]'))
+                .click();
+    })
 
-    it ('After submit routes to landing page', function() {
+    it('After submit routes to landing page', function() {
         firstNameInput.sendKeys('bob');
         lastNameInput.sendKeys('ross');
         usernameInput.sendKeys('bobross');
