@@ -17,7 +17,7 @@ exports.config = {
   ],
 
   suites: {
-    signup: './test/register.spec.js'
+    signup: './test/signupmodaltest.ts'
   },
   capabilities: {
     browserName: 'chrome'
