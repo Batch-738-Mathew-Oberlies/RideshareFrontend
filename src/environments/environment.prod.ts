@@ -1,36 +1,24 @@
 /**
- * This file can be replaced during build by using the `fileReplacements` array.
- * The list of file replacements can be found in `angular.json`.
- * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+ * This is the base URI
  */
+const baseUri = ``;
 
-const baseUri = `https://back.rideshare.revatureprojects.com/rideshare`;
- 
 /**
- * Set the port to 8080
+ * Set the port var
  */
 const port = '8080';
 
 /**
- * This is the environment config.
+ * These are the constants for the production config
  */
 export const environment = {
 
-  production: false,
-  environmentName: 'Default Environment',
-  userUri: `${baseUri}/users/`,
-  loginUri: `${baseUri}/login/`,
-  batchesUri: `${baseUri}/batches/`,
-  carUri: `${baseUri}/cars/`,
-  adminUri: `${baseUri}/admins/`,
-  tripUri: `${baseUri}/trips/`,
-};
+  production: true,
+  environmentName: 'Production Environment',
+  userUri: `${baseUri}:${port}/users/`,
+  loginUri: `${baseUri}:${port}/login/`,
+  batchesUri: `${baseUri}:${port}/batches/`,
+  carUri: `${baseUri}:${port}/cars/`,
+  adminUri: `${baseUri}:${port}/admins/`,
 
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+};
