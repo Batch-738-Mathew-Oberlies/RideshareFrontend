@@ -22,8 +22,7 @@ export class ScheduleComponent implements OnInit {
 
        if(!this.id) {
          console.log("No userId associated with login.")
-       }
-       else {
+       } else {
         this.serv.getTrips().subscribe(
         data => this.trips=data
         );
