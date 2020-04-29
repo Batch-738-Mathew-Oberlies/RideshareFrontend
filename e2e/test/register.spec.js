@@ -1,23 +1,20 @@
 import { By } from "protractor";
 
 describe('Sign Up tests', function(){
-    let elSignUpLink = element(by.xpath('/html/body/app-root/app-home-page/div/div/div/button[2]/signupmodal/a'));
-    let elRegisterHeader = element(by.xpath('/html/body/modal-container/div/div/div[1]/h4'));
+    let elSignUpLink = element(by.xpath('//*[@class="btn-group"]/button[2]/*/a'));
+    let elRegisterHeader = element(by.xpath('//*[@class="modal-title"]'));
     let firstNameInput = element(by.xpath('//*[@id="firstname"]'));
     let lastNameInput = element(by.xpath('//*[@id="lastname"]'));
     let usernameInput = element(by.xpath('//*[@id="userName"]'));
     let emailInput = element(by.xpath('//*[@id="email"]'));
     let phoneInput = element(by.xpath('//*[@id="phoneNumber"]'));
     let addressInput = element(by.xpath('//*[@id="hAddress"]'));
-    let cityInput = element(by.xpath('/html/body/modal-container/div/div/div[2]/input[7]'));
+    let cityInput = element(by.xpath('//*[@id="hCity"]/following-sibling::input[1]'));
     let stateInput = element(by.xpath('//*[@id="hState"]'));
-    let zipCodeInput = element(by.xpath('/html/body/modal-container/div/div/div[2]/input[8]'));
-    let driverRadio = element(by.xpath('//*[@id="driver"]'));
-    let submitButton = element('/html/body/modal-container/div/div/div[2]/div[2]/button');
-    let alert = browser.switchTo().alert();
-    let error = 'Insert error text to expect here';
-    let batch = element(By.id('batch'))
-    let state = element(By.id('state'))
+    let zipCodeInput = element(by.xpath('//*[@id="hZip"]/following-sibling::input[1]'));
+    let rideDriveSelect = element(by.xpath('//*[@for="drive"]/following-sibling::select[1]'));
+    let submitButton = element('//*[@type="submit"]');
+
     
     // Below tests are not working as the login page does not have a sign up link at all, and the way forms works has been
     // completely changed tests need to be reworked for that functionality in mind.
