@@ -4,6 +4,7 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
+
 const baseUri = `https://back.rideshare.revatureprojects.com/rideshare`;
 //const baseUri = `http://localhost:8081/rideshare`;
 /**
@@ -12,6 +13,7 @@ const baseUri = `https://back.rideshare.revatureprojects.com/rideshare`;
 const googleKey = '';
  /**
    * This is the environment config.
+
    */
 
 export const environment = {

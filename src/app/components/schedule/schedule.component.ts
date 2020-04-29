@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/app/models/trip';
 import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
-import {Observable} from 'rxjs';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -20,6 +18,7 @@ export class ScheduleComponent implements OnInit
   constructor(private serv: ScheduleService, private auth: AuthService) 
   { 
   }
+
   ngOnInit() 
   {
        this.id=+sessionStorage.getItem("userid");
@@ -30,27 +29,34 @@ export class ScheduleComponent implements OnInit
        }
        else
        {
-        this.serv.getRiderTrips(this.id).subscribe(
-          data => this.riderTrips=data
-          );
-
         this.serv.getTrips().subscribe(
         data => this.trips=data
         );
-      }
+
+       this.serv.getRiderTrips(this.id).subscribe(
+        data => {this.riderTrips=data;
+          if(this.riderTrips === null){
+            this.riderTrips = [];
+          }
+        });
+       }
   }
+
   addTrip(t: Trip)
   {
     this.serv.addTrips(t,this.id).subscribe(()=>this.onTrip(t));
   }
+
   removeTrip(t: Trip)
   {
     this.serv.removeTrips(t,this.id).subscribe();
   }
+  
   refresh()
   {
     window.location.reload();
   }
+  
   onTrip(t: Trip): boolean
   {
     let isTrip: boolean = false;

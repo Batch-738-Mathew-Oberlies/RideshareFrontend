@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
 	users: User[] = [];
 	allUsers: User[] = [];
+	
 
 	chosenUser: User;
 	chosenUserFullName: string = '';
@@ -153,6 +154,7 @@ export class LoginComponent implements OnInit {
 	 */
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
+		
 	}
 
 	/**
@@ -167,7 +169,6 @@ export class LoginComponent implements OnInit {
         this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
-                     //console.log(response);
                       if(response["userName"] != undefined){
                          this.usernameError=  response["userName"][0];
                       }
@@ -179,7 +180,6 @@ export class LoginComponent implements OnInit {
 						sessionStorage.setItem("userid", response["userid"]);
 						
 						//call landing page
-						//this.router.navigate(['landingPage']);
 						location.replace('landingPage');
 					  }
 					  if(response["userNotFound"] != undefined){

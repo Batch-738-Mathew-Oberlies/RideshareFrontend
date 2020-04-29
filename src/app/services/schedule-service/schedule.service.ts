@@ -16,18 +16,22 @@ export class ScheduleService
   constructor(private http: HttpClient) 
   { 
   }
+
   getTrips(): Observable<Trip[]>
   { 
     return this.http.get<Trip[]>(this.url);
   }
+
   getRiderTrips(id: number): Observable<Trip[]>
   {
     return this.http.get<Trip[]>(this.url+`rider/?riderId=${id}`);
   }
+
   addTrips(t: Trip, id: number)
   {
     return this.http.post<Trip>(this.url+`rider/?tripId=${t.tripId}&riderId=${id}`, t);
   }
+  
   removeTrips(t: Trip, id: number)
   {
     return this.http.delete<Trip>(this.url+`rider/?tripId=${t.tripId}&riderId=${id}`);
