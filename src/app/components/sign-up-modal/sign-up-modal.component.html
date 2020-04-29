@@ -40,8 +40,8 @@
       <p *ngIf="signup.controls.username.hasError('pattern')" class="error">Please enter a valid username. A username can only contain letters and numbers.</p>
 
 
-      <label>Batch</label>
-      <select class="form-control" formControlName="batch" for="batch">
+      <label for="batch">Batch</label>
+      <select class="form-control" id="batch" formControlName="batch">
             <option value="none" disabled>Please Select One...  
             </option>
             <option *ngFor="let batch of batches" >{{batch.batchNumber}} {{batch.batchLocation}}</option>
