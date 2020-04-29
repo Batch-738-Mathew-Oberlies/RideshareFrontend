@@ -17,6 +17,9 @@
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/drivers"><span class="borderbottom">Drivers</span></a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/schedule"><span class="borderbottom">Schedule</span></a>
+                </li>
                 <li class="nav-item active dropdown">
                   <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    <span class="borderbottom nameplaceholder">{{currentUser}}</span><!--{{name placeholder}}-->
@@ -26,6 +29,8 @@
                   
                        <div class="dropdown-menu myDropDown" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" routerLink="/profile">Profile</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" routerLink="/myrides">My Rides</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>
                         </div>
