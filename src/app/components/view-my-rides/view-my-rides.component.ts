@@ -6,10 +6,10 @@ import {AuthService} from 'src/app/services/auth-service/auth.service';
 @Component({
   selector: 'app-view-my-rides',
   templateUrl: '../trips.component.html',
-  styleUrls: ['./view-my-rides.component.css']
 })
 export class ViewMyRidesComponent implements OnInit {
-
+  
+  public caption='My Rides';
   trips: Trip[];
   id: number;
 

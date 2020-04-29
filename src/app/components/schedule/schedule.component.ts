@@ -7,10 +7,10 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 @Component({
   selector: 'app-schedule',
   templateUrl: '../trips.component.html',
-  styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit 
 {
+  public caption='Trip Schedule';
   public trips: Trip[];
   public riderTrips: Trip[]=[];
   public id: number;
