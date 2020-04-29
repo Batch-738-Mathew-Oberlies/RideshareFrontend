@@ -61,7 +61,7 @@ export class CarService {
 	 * @param userId 
 	 */
 	getCarTripByUserId(userId: number) {
-		return this.http.get(`${this.url}trips/user/${userId}`)
+		return this.http.get(`${this.url}trips/driver/${userId}`)
 	}
 
 
