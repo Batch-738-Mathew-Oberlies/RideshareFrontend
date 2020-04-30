@@ -1,4 +1,4 @@
-import { By } from "protractor";
+
 
 describe('Sign Up tests', function(){
     let elSignUpLink = element(by.xpath('//*[@class="btn-group"]/button[2]/*/a'));

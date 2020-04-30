@@ -69,7 +69,7 @@
       <p *ngIf="signup.controls.state.hasError('required') && signup.controls.state.touched" class="error">State is required please choose one</p>
 
       <label>Zip Code</label>
-      <input (keydown)="hZipError = ''" type="number" formControlName="zip" class="form-control" id="hZip"/>
+      <input type="text" (keydown)="hZipError = ''" formControlName="zip" class="form-control" id="hZip"/>
       <p *ngIf="signup.controls.zip.hasError('required') && signup.controls.zip.touched" class="error">Zip code required please enter one.</p>
       <p *ngIf="signup.controls.zip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
          
