@@ -24,8 +24,7 @@ export class DriverListComponent implements OnInit {
   drivers : Array<any> = [];
   availableDrivers;
   currentUserID: number; // sessionStorage 'userid' value
-
-
+  
   @ViewChild('map', null) mapElement: any;
   map: google.maps.Map;
 
@@ -176,5 +175,4 @@ displayDriversList(origin, drivers) {
    });
    console.log(this.availableDrivers);
   }
-
 }

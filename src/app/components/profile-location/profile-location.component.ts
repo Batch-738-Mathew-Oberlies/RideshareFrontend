@@ -12,20 +12,22 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
 })
 export class ProfileLocationComponent implements OnInit {
 
+  currentUser;
+  
   states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
             'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
             'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
             'WI','WY'];
-
-  statusExists: boolean;
-  statusMessage: string;
-  currentUser: User = new User();
-  success :boolean;
-  errorExists: boolean;
+  
   updatedAddress: Address;
   transientHomeAddress: Address;
   transientWorkAddress: Address;
-
+  
+  statusExists: boolean;
+  statusMessage: string;
+  success :boolean;
+  errorExists: boolean;
+  
   addressChange = new FormGroup({
     homeAddressApt: new FormControl('', Validators.pattern('[a-z A-Z0-9]*')),
     homeAddress: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
@@ -40,111 +42,78 @@ export class ProfileLocationComponent implements OnInit {
     workZip: new FormControl('', [Validators.required, Validators.pattern('[0-9]{5}')]),
   })
 
-constructor(private userService: UserService, private validationService: ValidationService) {}
+  constructor(private userService: UserService, private validationService: ValidationService) {}
   
-  ngOnInit() {
-    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
-      this.currentUser = response;
-      console.log(response);
-      // this.currentUser.haddress.id = 0;
-      // this.currentUser.waddress.id = 0;
-      //@ts-ignore
-      this.addressChange.controls.homeAddressApt.setValue(this.currentUser.haddress.apt == null ? '' : this.currentUser.haddress.apt);
-      //@ts-ignore
-      this.addressChange.controls.homeAddress.setValue(this.currentUser.haddress.street);
-      //@ts-ignore
-      this.addressChange.controls.homeCity.setValue(this.currentUser.haddress.city);
-      //@ts-ignore
-      this.addressChange.controls.homeState.setValue(this.currentUser.haddress.state);
-      //@ts-ignore
-      this.addressChange.controls.homeZip.setValue(this.currentUser.haddress.zip);
-
-      //@ts-ignore
-      this.addressChange.controls.workAddressApt.setValue(this.currentUser.waddress.apt == null ? '' : this.currentUser.waddress.apt );
-      //@ts-ignore
-      this.addressChange.controls.workAddress.setValue(this.currentUser.waddress.street);
-      //@ts-ignore
-      this.addressChange.controls.workCity.setValue(this.currentUser.waddress.city);
-      //@ts-ignore
-      this.addressChange.controls.workState.setValue(this.currentUser.waddress.state);
-      //@ts-ignore
-      this.addressChange.controls.workZip.setValue(this.currentUser.waddress.zip);
-    });
-  }
-
   /**
    * Sets the user location information of this component to match that of the currently
    * logged in user as it appears in the database.
    */
-  // constructor(private userService: UserService, private validationService: ValidationService) {
-  //  }
+  ngOnInit() {
+    this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
+      (response)=>{
+        this.currentUser = response;
 
-  // ngOnInit() {
-  //   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
-  //     console.log(response);
-  //     this.currentUser = response;
-  //     console.log(this.currentUser);
-  //   });
-  // }
+        this.addressChange.controls.homeAddressApt.setValue(this.currentUser.haddress.apt == null ? '' : this.currentUser.haddress.apt);
+        this.addressChange.controls.homeAddress.setValue(this.currentUser.haddress.street);
+        this.addressChange.controls.homeCity.setValue(this.currentUser.haddress.city);
+        this.addressChange.controls.homeState.setValue(this.currentUser.haddress.state);
+        this.addressChange.controls.homeZip.setValue(this.currentUser.haddress.zip);
+
+        this.addressChange.controls.workAddressApt.setValue(this.currentUser.waddress.apt == null ? '' : this.currentUser.waddress.apt );
+        this.addressChange.controls.workAddress.setValue(this.currentUser.waddress.street);
+        this.addressChange.controls.workCity.setValue(this.currentUser.waddress.city);
+        this.addressChange.controls.workState.setValue(this.currentUser.waddress.state);
+        this.addressChange.controls.workZip.setValue(this.currentUser.waddress.zip);
+      }
+    );
+  }
 
   /**
    * Updates the location information of the current user to match that found in this component,
    * and persists those changes to the database.
    */
   async updatesContactInfo(){
-    //@ts-ignore
+    
     this.currentUser.haddress.street = this.addressChange.controls.homeAddress.value;
-    //@ts-ignore
     this.currentUser.haddress.apt = this.addressChange.controls.homeAddressApt.value;
-    //@ts-ignore
     this.currentUser.haddress.city = this.addressChange.controls.homeCity.value;
-    //@ts-ignore
     this.currentUser.haddress.state = this.addressChange.controls.homeState.value;
-    //@ts-ignore
     this.currentUser.haddress.zip = this.addressChange.controls.homeZip.value;
-    //@ts-ignore
+    
     this.currentUser.waddress.street = this.addressChange.controls.workAddress.value;
-    //@ts-ignore
     this.currentUser.waddress.apt = this.addressChange.controls.workAddressApt.value;
-    //@ts-ignore
     this.currentUser.waddress.city = this.addressChange.controls.workCity.value;
-    //@ts-ignore
     this.currentUser.waddress.state = this.addressChange.controls.workState.value;
-    //@ts-ignore
     this.currentUser.waddress.zip = this.addressChange.controls.workZip.value;
 
-    //@ts-ignore
+    
     await this.validationService.validateAddress(this.currentUser.haddress).then( data => {
       this.transientHomeAddress = data;
-      //@ts-ignore
       this.transientHomeAddress.id = this.currentUser.haddress.id;
     })
-
-    //@ts-ignore
+    
     await this.validationService.validateAddress(this.currentUser.waddress).then( data => {
       this.transientWorkAddress = data;
-      //@ts-ignore
       this.transientWorkAddress.id = this.currentUser.waddress.id;
     })
-
+    
+    /**
+     * Determines if the inputed work and home addresses are valid.
+     * Triggers the relevant alert depending on if the addresses were updated successfully.
+     */
     if(this.transientWorkAddress == null || this.transientHomeAddress == null){
       return;
+
     }else {
-      //@ts-ignore
       this.currentUser.haddress = this.transientHomeAddress;
-      //@ts-ignore
       this.currentUser.waddress = this.transientWorkAddress;
-      console.log(this.currentUser);
+
       this.userService.updateUserInfo(this.currentUser).subscribe(
         (input) => { 
           this.success = true;
           this.statusMessage = 'Updated Successfully!'; },
-        (errorObj) => {
+        (error) => {
           this.errorExists= true;
-          console.log(errorObj);
-          if (errorObj.error.message == 'Invalid Address') {
-              this.statusMessage = '' + errorObj.error.haddress + ' doesn\'t exist.';
-          }
         }
       );
     }

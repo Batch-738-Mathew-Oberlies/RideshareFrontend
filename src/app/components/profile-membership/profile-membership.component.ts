@@ -13,15 +13,12 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
  */
 export class ProfileMembershipComponent implements OnInit {
   profileObject = new User();
-  currentUser: any = '';
+  currentUser: any;
 
   isDriver: boolean;
   isActive: boolean;
   isAcceptingRides: boolean;
 
-  // errorExists: boolean;
-  // errorMessage: string;
-  // success: string;
   button: boolean;
   statusExists: boolean;
   statusMessage: string;
@@ -32,6 +29,10 @@ export class ProfileMembershipComponent implements OnInit {
    * Sets this component's currentUser, isDriver, and isActive fields to match the currently logged in user.
    */
   constructor(private userService: UserService) {
+    this.disableButton();
+   }
+
+  ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
       (response) => {
         this.profileObject = response;
@@ -44,11 +45,7 @@ export class ProfileMembershipComponent implements OnInit {
         this.isAcceptingRides = this.profileObject.acceptingRides;
       }
     );
-
-    this.disableButton();
-   }
-
-  ngOnInit() {
+    this.button = true;
   }
 
   /**
@@ -56,7 +53,9 @@ export class ProfileMembershipComponent implements OnInit {
    * this component, and persists those changes to the database.
    */
   updatesMembershipInfo(){
-
+    if(this.getBoolean(this.isDriver) == false){
+      this.isAcceptingRides = false;
+    }
     // @ts-ignore
     this.profileObject.driver = this.isDriver;
     this.profileObject.active = this.isActive;
@@ -75,14 +74,27 @@ export class ProfileMembershipComponent implements OnInit {
     );
   }
 
+  /**
+   * Converts values into their boolean value.
+   * Used to mitigate issues arising from the type change due to the "select"
+   * components in the form.
+   */
+  getBoolean(value) : boolean{
+    switch(value){
+         case true:
+         case "true":
+             return true;
+         default: 
+             return false;
+     }
+ }
 
   /**
    * Disables submit button if the form fields have not been changed from their original value.
    */
   disableButton(){
-    console.log(this.isDriver);
     // @ts-ignore
-    if(this.isDriver != this.profileObject.driver || this.isActive != this.profileObject.active || this.isAcceptingRides != this.profileObject.acceptingRides ){
+    if(this.getBoolean(this.isDriver) != this.profileObject.driver || this.getBoolean(this.isActive) != this.profileObject.active || this.getBoolean(this.isAcceptingRides) != this.profileObject.acceptingRides ){
       this.button = false;
     } else {
       this.button = true;

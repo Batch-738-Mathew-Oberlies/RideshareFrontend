@@ -12,34 +12,30 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class ProfileContactComponent implements OnInit {
 
   profileObject: User;
-  currentUser: any = '';
 
   contactInfoForm: FormGroup;
 
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
   email = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
-  phone = new FormControl('', Validators.required);
+  phone = new FormControl('', [Validators.required,Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')]);
 
-  //'^[A-Za-z0-9._%+-]+@[a-z0-9\.-]+\.[a-z]{2,4}$')
   errorExists: boolean;
-  // errorMessage: string;
   success: boolean;
   statusExists: boolean;
   statusMessage: string;
 
   constructor(private router: Router, private userService: UserService, private formBuilder: FormBuilder) {
 
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe((response) => {
-      this.profileObject = response;
-      // console.log(this.profileObject.haddress);
-      // console.log(this.profileObject.waddress);
-      this.firstName.setValue(this.profileObject.firstName);
-      this.lastName.setValue(this.profileObject.lastName);
-      this.email.setValue(this.profileObject.email);
-      this.phone.setValue(this.profileObject.phoneNumber);
-
-    });
+    this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe(
+      (response) => {
+        this.profileObject = response;
+        this.firstName.setValue(this.profileObject.firstName);
+        this.lastName.setValue(this.profileObject.lastName);
+        this.email.setValue(this.profileObject.email);
+        this.phone.setValue(this.profileObject.phoneNumber);
+      }
+    );
 
     this.contactInfoForm = this.formBuilder.group({
       firstName: this.firstName,
@@ -67,23 +63,17 @@ export class ProfileContactComponent implements OnInit {
     this.profileObject.email = this.email.value;
     this.profileObject.phoneNumber = this.phone.value;
 
-    console.log(this.profileObject);
-
     this.userService.updateUserInfo(this.profileObject).subscribe(
-      (input) => { 
+      (response) => { 
         this.statusExists = true;
         this.success = true;
         this.statusMessage = 'Updated Successfully!'; 
       },
-      (errorObj) => {
+      (error) => {
         this.statusExists = true;
         this.errorExists = true;
-        if (errorObj.error.message == 'Email Taken') {
-            this.statusMessage = '' + errorObj.error.userEmail + ' already exists.';
-        }
       }
     );
   }
-
 
 }
