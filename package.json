@@ -2,15 +2,16 @@
   "name": "rideshare-frontend",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme vagrant",
+    "build": "ng build --prod",
     "e2e": "ng e2e",
-    "sonar": "sonarcloud/scan",
-    "pipeline": "ng build && ng test && ng e3e && npm run sonar",
-    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme vagrant"
+    "ng": "ng",
+    "pipeline": "npm run test-headless && npm run e2e && ng build --configuration=dev && npm run sonar",
+    "sonar": "sonar-scanner",
+    "start": "ng serve",
+    "test": "ng test --code-coverage",
+    "test-headless": "ng test --browsers ChromeHeadless --code-coverage",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {

@@ -47,49 +47,49 @@ describe('UserService', () => {
     expect(userService).toBeTruthy();
   });
 
-  //Adding test for getAllUsers() method
-  describe('getAllUsers', () => {
-    it('should return a collection of users', () => {
-      const userResponse = [
-        {
-          userId: 1,
-          userName: 'carsryan',
-          batch: {
-            batchNumber: 1,
-            batchLocation: '123'
-          },
-          firstName: 'Ryan',
-          lastName: 'Carstons',
-          email: 'ryan@gmail.com',
-          phoneNumber: '1231231231',
-          driver: true,
-          active: true,
-          acceptingRides: true
-        },
-        {
-          userId: 2,
-          userName: 'pwin',
-          batch: {
-            batchNumber: 2,
-            batchLocation: '456'
-          },
-          firstName: 'Peter',
-          lastName: 'Nguyen',
-          email: 'pete@gmail.com',
-          phoneNumber: '3213213213',
-          driver: true,
-          active: true,
-          acceptingRides: true
-        }
-      ];
-      let response;
-      spyOn(userService, 'getAllUsers').and.returnValue(of(userResponse));
+  // //Adding test for getAllUsers() method
+  // describe('getAllUsers', () => {
+  //   it('should return a collection of users', () => {
+  //     const userResponse = [
+  //       {
+  //         userId: 1,
+  //         userName: 'carsryan',
+  //         batch: {
+  //           batchNumber: 1,
+  //           batchLocation: '123'
+  //         },
+  //         firstName: 'Ryan',
+  //         lastName: 'Carstons',
+  //         email: 'ryan@gmail.com',
+  //         phoneNumber: '1231231231',
+  //         driver: true,
+  //         active: true,
+  //         acceptingRides: true
+  //       },
+  //       {
+  //         userId: 2,
+  //         userName: 'pwin',
+  //         batch: {
+  //           batchNumber: 2,
+  //           batchLocation: '456'
+  //         },
+  //         firstName: 'Peter',
+  //         lastName: 'Nguyen',
+  //         email: 'pete@gmail.com',
+  //         phoneNumber: '3213213213',
+  //         driver: true,
+  //         active: true,
+  //         acceptingRides: true
+  //       }
+  //     ];
+  //     let response;
+  //     spyOn(userService, 'getAllUsers').and.returnValue(of(userResponse));
 
-      userService.getAllUsers().subscribe(res => {
-        response = res;
-      });
+  //     userService.getAllUsers().subscribe(res => {
+  //       response = res;
+  //     });
 
-      expect(response).toEqual(userResponse);
-    });
-  });
+  //     expect(response).toEqual(userResponse);
+  //   });
+  // });
 });
