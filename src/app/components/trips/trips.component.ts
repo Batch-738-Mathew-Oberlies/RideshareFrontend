@@ -155,7 +155,7 @@ export class CreateTripComponent {
       time: ['']
     });
 
-    this.trip.destination = new Address();
+    this.trip.destination = new Address("", "", "", "", "");
   }
 
   //Submit button for creating a new trip
@@ -176,7 +176,6 @@ export class CreateTripComponent {
     this.trip.tripId = 0;
     this.trip.name = this.tripModalForm.value.name;
 
-    this.trip.destination.id = 0;
     this.trip.destination.street = this.tripModalForm.value.street;
     this.trip.destination.city = this.tripModalForm.value.city;
     this.trip.destination.state = this.tripModalForm.value.state;
@@ -189,9 +188,9 @@ export class CreateTripComponent {
     this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime)
 
     if (this.depAddress === "Home") {
-      this.trip.departure = this.user.haddress;
+      this.trip.departure = this.user.hAddress;
     } else {
-      this.trip.departure = this.user.waddress;
+      this.trip.departure = this.user.wAddress;
     }
 
     this.tripService.addTrip(this.trip).subscribe(trip => {

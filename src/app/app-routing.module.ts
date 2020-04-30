@@ -23,15 +23,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TripsComponent } from './components/trips/trips.component';
 import {ScheduleComponent} from './components/schedule/schedule.component';
 import {ViewMyRidesComponent} from './components/view-my-rides/view-my-rides.component'
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
-=======
->>>>>>> dev
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 
-=======
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 
 const routes: Routes = [
   {path: 'home/drivers', component: DriverInfoComponent},
@@ -48,25 +40,17 @@ const routes: Routes = [
   {path: 'signup', component: SignupModalComponent},
   {path: 'landingPage', component: LandingPageComponent},
   {path: 'drivers', component: DriverListComponent},
-{path: 'profile/contact', component: ProfileContactComponent},
-{path: 'profile/car', component: ProfileCarComponent},
-{path: 'profile/membership', component: ProfileMembershipComponent},
-{path: 'profile/location', component: ProfileLocationComponent},
-{path: 'driver', component: DriverContactModalComponent},
-{path: 'navbar', component: NavbarComponent},
-{ path: 'trips', component: TripsComponent},
-{path: 'schedule', component: ScheduleComponent},
-{path: 'myrides', component: ViewMyRidesComponent},
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
-=======
->>>>>>> dev
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
-{path: '', component: HomePageComponent},
-{path: '**', pathMatch: 'full', redirectTo: ''}];
+  {path: 'profile/contact', component: ProfileContactComponent},
+  {path: 'profile/car', component: ProfileCarComponent},
+  {path: 'profile/membership', component: ProfileMembershipComponent},
+  {path: 'profile/location', component: ProfileLocationComponent},
+  {path: 'driver', component: DriverContactModalComponent},
+  {path: 'navbar', component: NavbarComponent},
+  { path: 'trips', component: TripsComponent},
+  {path: 'schedule', component: ScheduleComponent},
+  {path: 'myrides', component: ViewMyRidesComponent},
+  {path: '', component: HomePageComponent},
+  {path: '**', pathMatch: 'full', redirectTo: ''}];
 
 
 @NgModule({

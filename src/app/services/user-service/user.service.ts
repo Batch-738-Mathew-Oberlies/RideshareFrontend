@@ -52,93 +52,33 @@ export class UserService {
 	}
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * A GET method for one user
-	 * @param idParam
-=======
-<<<<<<< HEAD
-	 * A GET method for one user
-	 * @param idParam
-=======
 	 * A GET method to retrieve one user from the database with the given id. Return a promise.
 	 * @param idParam 
->>>>>>> dev
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
-	 * A GET method to retrieve one user from the database with the given id. Return a promise.
-	 * @param idParam 
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 	 */
 	getUserById(idParam: number) {
+
 		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
+
+
 	}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  getUserById3(idParam: number): Observable<User> {
-
-    // console.log(this.url)
-    return this.http.get<User>(this.url+idParam) //.toPromise();
-
-
-  }
-
-
-	getUserById2(idParam2: string): Observable<User>{
-
-=======
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
-	getUserById3(idParam: number): Observable<User> {
-		// console.log(this.url)
-		return this.http.get<User>(this.url+idParam) //.toPromise();
-	}
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 	
 	/**
 	 * Identical to the above, except that it does not give a promise.
 	 * @param idParam2 
 	 */
-<<<<<<< HEAD
 	getUserById2(idParam2: string): Observable<User>{
-		
-<<<<<<< HEAD
-=======
->>>>>>> dev
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
-	getUserById2(idParam2: string): Observable<User>{	
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
+
+
 	}
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
 	 * A POST method that turns the given user into a driver
 	 * @param user 
 	 * @param role 
-=======
-<<<<<<< HEAD
-	 * A POST method that switch an Rider to a Driver
-	 * @param user
-	 * @param role
-=======
-	 * A POST method that turns the given user into a driver
-	 * @param user 
-	 * @param role 
->>>>>>> dev
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
-	 * A POST method that turns the given user into a driver
-	 * @param user 
-	 * @param role 
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
+
 	 */
 	createDriver(user: User, role) {
 
@@ -182,28 +122,11 @@ export class UserService {
 	}
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-	 * A PUT method that updates the user information
-	 * @param isDriver
-	 * @param userId
-=======
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 	 * A PUT method that retrieves the given user from the database, updates their isDriver field,
 	 * and persists the updated user in the database.
 	 * @param isDriver 
 	 * @param userId 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dev
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
+
 	 */
 
 	updateIsDriver(isDriver, userId) {
@@ -257,20 +180,13 @@ export class UserService {
 	}
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 	 * A PUT method that updates user's information
 	 * @param user
-=======
-=======
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
+
 	 * A PUT method that persists the given user to the database and returns a promise.
 	 * @param user 
 	 */
 
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	updateUserInfo(user: User) {
 		//console.log(user);
 	}
@@ -322,28 +238,12 @@ export class UserService {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 	
 	/**
 	 * Retrieves drivers by location using the getTioFiveDrivers method on the User controller.
 	 * Apparently, it returns a distance matrix.
 	 * @param location 
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dev
->>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
-=======
->>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
 	}

@@ -52,7 +52,6 @@ export class LandingPageComponent implements OnInit {
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 /**
  * Inserts the google maps api script into the document head. This seems to be duplicated code.
  * Duplicate code.
@@ -73,32 +72,7 @@ sleep(ms) {
          }
      );
  }
-
  /**
-  * Searches for drivers, collects the google maps services, and calls the display route method.
-  * VERY similar to the showDriversOnMap method found in driver-contact-modal and driver-list.
-  */
- searchDriver(){
-  //call service search algorithm ()
-  //console.log(this.location_s);
-  this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-  this.userService.getRidersForLocation1(this.location_s)
-  .subscribe(
-            (response) => {
-              response.forEach(element => {
-                   var directionsService = new google.maps.DirectionsService;
-                   var directionsRenderer = new google.maps.DirectionsRenderer({
-                         draggable: true,
-                         map: this.map
-                    });
-                    console.log(element.Distance);
-                    this.displayRoute(this.location_s, element.hCity+","+element.hState, directionsService, directionsRenderer);
-         });
-  });
- }
-
-/**
- * Uses the given service of type google.maps.DirectionsService and display of type
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
  * 
  * Duplicated code.
