@@ -55,25 +55,29 @@ export class UserService {
 	 * A GET method to retrieve one user from the database with the given id. Return a promise.
 	 * @param idParam 
 	 */
-	getUserById(idParam: number){
+	getUserById(idParam: number) 
+	{
 		
 		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
+	}
+	
 
-
+	getUserById3(idParam: number) 
+	{
+		
+		console.log(this.url)
+		return this.http.get<User>(this.url+idParam);
 	}
 
-	
 	/**
 	 * Identical to the above, except that it does not give a promise.
 	 * @param idParam2 
 	 */
-	getUserById2(idParam2: string): Observable<User>{
+	getUserById2(idParam2: string): Observable<User> {
 		
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
-
-
 	}
 
 	/**
