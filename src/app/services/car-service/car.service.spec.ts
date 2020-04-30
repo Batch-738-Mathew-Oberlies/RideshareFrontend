@@ -15,6 +15,7 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { Car } from 'src/app/models/car'
 
 describe('CarService', () => {
   beforeEach(() => 
@@ -50,7 +51,7 @@ describe('CarService', () => {
     //Adding test for getAllCars() method
     describe('getAllCars', () => {
       it('should return a collection of cars', () => {
-        const carsResponse = [
+        const carsResponse: Car[] = [
           {
             carId: 1,
             color: 'black',
@@ -69,9 +70,23 @@ describe('CarService', () => {
             lastName: 'Carstons',
             email: 'ryan@gmail.com',
             phoneNumber: '1231231231',
-            driver: true,
+            isDriver: true,
             active: true,
-            acceptingRides: true
+            isAcceptingRides: true,
+            hAddress: {
+              street: "123 Fake St.",
+              apt: "123",
+              city: "Tulsa",
+              state: "Oklahoma",
+              zip: "12345"
+            },
+            wAddress: {
+              street: "123 Fake St.",
+              apt: "123",
+              city: "Tulsa",
+              state: "Oklahoma",
+              zip: "12345"
+            }
             }
           },    
           {
@@ -92,9 +107,23 @@ describe('CarService', () => {
             lastName: 'Nguyen',
             email: 'pete@gmail.com',
             phoneNumber: '3213213213',
-            driver: true,
+            isDriver: true,
             active: true,
-            acceptingRides: true
+            isAcceptingRides: true,
+            hAddress: {
+              street: "123 Fake St.",
+              apt: "123",
+              city: "Tulsa",
+              state: "Oklahoma",
+              zip: "12345"
+            },
+            wAddress: {
+              street: "123 Fake St.",
+              apt: "123",
+              city: "Tulsa",
+              state: "Oklahoma",
+              zip: "12345"
+            }
                   }
             }  
         ];

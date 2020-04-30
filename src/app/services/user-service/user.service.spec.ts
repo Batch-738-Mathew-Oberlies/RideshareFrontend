@@ -14,6 +14,7 @@ import { MyCarComponent } from 'src/app/components/my-car/my-car.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { PreferenceComponent } from 'src/app/components/preference/preference.component';
 import { ProfileComponent } from 'src/app/components/profile/profile.component';
+import { User } from 'src/app/models/user';
 import { RegisterComponent } from 'src/app/components/register/register.component';
 
 describe('UserService', () => {
@@ -50,7 +51,7 @@ describe('UserService', () => {
   //Adding test for getAllUsers() method
   describe('getAllUsers', () => {
     it('should return a collection of users', () => {
-      const userResponse = [
+      const userResponse: User[] = [
         {
           userId: 1,
           userName: 'carsryan',
@@ -62,9 +63,23 @@ describe('UserService', () => {
           lastName: 'Carstons',
           email: 'ryan@gmail.com',
           phoneNumber: '1231231231',
-          driver: true,
+          isDriver: true,
           active: true,
-          acceptingRides: true
+          isAcceptingRides: true,
+          hAddress: {
+            street: "123 Fake St.",
+            apt: "123",
+            city: "Tulsa",
+            state: "Oklahoma",
+            zip: "12345"
+          },
+          wAddress: {
+            street: "123 Fake St.",
+            apt: "123",
+            city: "Tulsa",
+            state: "Oklahoma",
+            zip: "12345"
+          }
         },
         {
           userId: 2,
@@ -77,9 +92,23 @@ describe('UserService', () => {
           lastName: 'Nguyen',
           email: 'pete@gmail.com',
           phoneNumber: '3213213213',
-          driver: true,
+          isDriver: true,
           active: true,
-          acceptingRides: true
+          isAcceptingRides: true,
+          hAddress: {
+            street: "123 Fake St.",
+            apt: "123",
+            city: "Tulsa",
+            state: "Oklahoma",
+            zip: "12345"
+          },
+          wAddress: {
+            street: "123 Fake St.",
+            apt: "123",
+            city: "Tulsa",
+            state: "Oklahoma",
+            zip: "12345"
+          }
         }
       ];
       let response;

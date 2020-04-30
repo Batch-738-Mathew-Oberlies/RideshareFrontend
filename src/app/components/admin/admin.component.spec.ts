@@ -1,9 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminComponent } from './admin.component';
 import { CarRegisterComponent } from '../car-register/car-register.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
-import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -17,6 +15,7 @@ import { ProfileComponent } from '../profile/profile.component';
 describe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
+  
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,9 +36,9 @@ describe('AdminComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('logout()', () => {
-    component.router.navigate(['']);
-    component.logout();
-    expect(component.router.navigate).toHaveBeenCalled;
-  });
+  // it('logout()', () => {
+  //   component.router.navigate(['']);
+  //   component.logout();
+  //   expect(component.router.navigate).toHaveBeenCalled;
+  // });
 });

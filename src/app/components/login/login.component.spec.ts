@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { APP_BASE_HREF } from '@angular/common';
@@ -49,8 +49,22 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      driver: true,
-      acceptingRides: true}]
+      isDriver: true,
+      isAcceptingRides: true,
+      hAddress: {
+        street: "123 Fake St.",
+        apt: "123",
+        city: "Tulsa",
+        state: "Oklahoma",
+        zip: "12345"
+      },
+      wAddress: {
+        street: "123 Fake St.",
+        apt: "123",
+        city: "Tulsa",
+        state: "Oklahoma",
+        zip: "12345"
+      }}]
     // fixture.detectChanges();
   });
 
@@ -72,8 +86,22 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      driver: true,
-      acceptingRides: true}];
+      isDriver: true,
+      isAcceptingRides: true,
+      hAddress: {
+        street: "123 Fake St.",
+        apt: "123",
+        city: "Tulsa",
+        state: "Oklahoma",
+        zip: "12345"
+      },
+      wAddress: {
+        street: "123 Fake St.",
+        apt: "123",
+        city: "Tulsa",
+        state: "Oklahoma",
+        zip: "12345"
+      }}];
       // act
       component.changeUser(user);
       // assert
