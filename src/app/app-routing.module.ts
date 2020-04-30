@@ -20,13 +20,9 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-<<<<<<< HEAD
 import { TripsComponent } from './components/trips/trips.component';
-=======
 import {ScheduleComponent} from './components/schedule/schedule.component';
 import {ViewMyRidesComponent} from './components/view-my-rides/view-my-rides.component'
->>>>>>> dev
-
 
 const routes: Routes = [
   {path: 'home/drivers', component: DriverInfoComponent},
@@ -49,12 +45,9 @@ const routes: Routes = [
 {path: 'profile/location', component: ProfileLocationComponent},
 {path: 'driver', component: DriverContactModalComponent},
 {path: 'navbar', component: NavbarComponent},
-<<<<<<< HEAD
 { path: 'trips', component: TripsComponent},
-=======
 {path: 'schedule', component: ScheduleComponent},
 {path: 'myrides', component: ViewMyRidesComponent},
->>>>>>> dev
 {path: '', component: HomePageComponent},
 {path: '**', pathMatch: 'full', redirectTo: ''}];
 
