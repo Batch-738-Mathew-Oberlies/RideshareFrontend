@@ -15,13 +15,14 @@ describe('Sign Up tests', function(){
     let rideDriveSelect = element(by.xpath('//*[@for="drive"]/following-sibling::select[1]'));
     let submitButton = element('//*[@type="submit"]');
 
+    // Completed tests:
+    // open sign-up modal from landing page: Done
+
     
     // Below tests are not working as the login page does not have a sign up link at all, and the way forms works has been
     // completely changed tests need to be reworked for that functionality in mind.
 
     // list of tests to develop:
-
-    // open sign-up modal from landing page: Done
 
     // sign up with a fake address and get a popup
 
