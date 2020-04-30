@@ -11,7 +11,7 @@ describe('signup modal', () => {
         expect(signupModal.modal.isDisplayed()).toBeTruthy();
         signupModal.closeModal();
         browser.waitForAngular();
-        expect(signupModal.modal.isDisplayed()).toBeFalsy();
+        expect(signupModal.modal.getLocation()).toBeFalsy();
     })
 
     it('all input fields should accept input from user', () => {
@@ -35,8 +35,6 @@ describe('signup modal', () => {
         'VA', '20190', 'Rider');
 
         signupModal.submit.click();
-
         expect(signupModal.modal.isDisplayed()).toBeFalsy();
-
     })
 })

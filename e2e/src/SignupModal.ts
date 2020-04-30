@@ -2,7 +2,10 @@ import { browser, element, by } from "protractor"
 
 export class SignupModal {
     email       = element(by.id('email'));
-    modal       = element(by.id('signup'));
+
+    //[formGroup]
+    modal       = element(by.id('signup-form'));
+
     state       = element(by.id('hState'));
     batch       = element(by.id('batch'));
     preference  = element(by.id('preference'));
@@ -82,7 +85,7 @@ export class SignupModal {
     }
 
     setCity = (city) => {
-        element(by.id('city')).sendKeys(city);
+        element(by.id('hCity')).sendKeys(city);
     }
 
     setPreference = (pref) => {

@@ -1,7 +1,7 @@
-<a (click)="openModal(template)">Sign up</a>
+<a (click)="openModal(template)" id='signup'>Sign up</a>
   
-<ng-template #template>
-  <form [formGroup]="signup">
+<ng-template #template id='modal'>
+  <form [formGroup]="signup-form" id="signup-form">
     <p *ngIf="success != ''" class="success">{{success}}</p>
     <div class="modal-header">
       <h4 class="modal-title">Sign Up</h4>
