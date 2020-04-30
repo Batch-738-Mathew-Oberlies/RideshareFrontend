@@ -1,15 +1,23 @@
 import { browser, element, by } from "protractor"
 
 export class SignupModal {
+    firstname   = element(by.id('firstname'))
+    lastname    = element(by.id('lastname'));
     email       = element(by.id('email'));
-
-    //[formGroup]
-    modal       = element(by.id('signup-form'));
-
-    state       = element(by.id('hState'));
+    phone       = element(by.id('phonenumber'))
+    username    = element(by.id('username'))
     batch       = element(by.id('batch'));
+    address     = element(by.id('hAddress'));
+    apt         = element(by.id('hAddress2'))
+    city        = element(by.id('hCity'))
+    state       = element(by.id('hState'));
+    zip         = element(by.id('hZip'))
     preference  = element(by.id('preference'));
+
     submit      = element(by.id('submit'));
+    modal       = element(by.id('signup-form'));
+    
+
 
     populateForm = (firstname, lastname, email,
                     phone, username, batch,
@@ -55,11 +63,11 @@ export class SignupModal {
     }
 
     setPhoneNumber = (phone) => {
-        element(by.id('phoneNumber')).sendKeys(phone)
+        element(by.id('phonenumber')).sendKeys(phone)
     }
 
     setUsername = (name) => {
-        element(by.id('userName')).sendKeys(name)
+        element(by.id('username')).sendKeys(name)
     }
 
     //"1 Morgantown", "2 Virginia"
@@ -72,7 +80,7 @@ export class SignupModal {
     }
 
     setApt = (apt) => {
-        element(by.id('Address2')).sendKeys(apt);
+        element(by.id('hAddress2')).sendKeys(apt);
     }
     
     setState = (state) => {
@@ -81,7 +89,7 @@ export class SignupModal {
     }
 
     setZip = (zip) => {
-        element(by.id('zip')).sendKeys(zip);
+        element(by.id('hZip')).sendKeys(zip);
     }
 
     setCity = (city) => {
