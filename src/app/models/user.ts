@@ -1,6 +1,9 @@
 import { Batch } from './batch';
 import { Address } from './address';
 
+/**
+ * A model representing the User class.
+ */
 export class User {
     /**
      * Set User model

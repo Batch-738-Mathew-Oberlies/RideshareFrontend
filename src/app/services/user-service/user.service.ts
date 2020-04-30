@@ -13,11 +13,12 @@ import { environment } from '../../../environments/environment';
   	providedIn: 'root'
 })
 
+/**
+ * The user service
+ */
 export class UserService {
 
-	/**
-	 * This is an user service
-	 */
+
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
 
 	// http headers
@@ -43,7 +44,7 @@ export class UserService {
 	constructor(private http: HttpClient, private router: Router, private log: LogService, private authService: AuthService) { }
 
 	/**
-	 * A GET method for all users
+	 * A GET method to retrieve all users from the database
 	 */
 
 	getAllUsers() {
@@ -51,8 +52,13 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * A GET method for one user
 	 * @param idParam
+=======
+	 * A GET method to retrieve one user from the database with the given id. Return a promise.
+	 * @param idParam 
+>>>>>>> dev
 	 */
 	getUserById(idParam: number) {
 
@@ -62,6 +68,7 @@ export class UserService {
 
 	}
 
+<<<<<<< HEAD
   getUserById3(idParam: number): Observable<User> {
 
     // console.log(this.url)
@@ -73,6 +80,15 @@ export class UserService {
 
 	getUserById2(idParam2: string): Observable<User>{
 
+=======
+	
+	/**
+	 * Identical to the above, except that it does not give a promise.
+	 * @param idParam2 
+	 */
+	getUserById2(idParam2: string): Observable<User>{
+		
+>>>>>>> dev
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
 
@@ -80,9 +96,15 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * A POST method that switch an Rider to a Driver
 	 * @param user
 	 * @param role
+=======
+	 * A POST method that turns the given user into a driver
+	 * @param user 
+	 * @param role 
+>>>>>>> dev
 	 */
 	createDriver(user: User, role) {
 
@@ -109,7 +131,10 @@ export class UserService {
 
 	}
 
-	// add user method
+	/**
+	 * Stores the given user in the database.
+	 * @param user 
+	 */
 	addUser(user :User) :Observable<User> {
 		return this.http.post<User>(this.url, user, {headers: this.headers});
 	}
@@ -123,9 +148,16 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * A PUT method that updates the user information
 	 * @param isDriver
 	 * @param userId
+=======
+	 * A PUT method that retrieves the given user from the database, updates their isDriver field,
+	 * and persists the updated user in the database.
+	 * @param isDriver 
+	 * @param userId 
+>>>>>>> dev
 	 */
 
 	updateIsDriver(isDriver, userId) {
@@ -179,8 +211,13 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * A PUT method that updates user's information
 	 * @param user
+=======
+	 * A PUT method that persists the given user to the database and returns a promise.
+	 * @param user 
+>>>>>>> dev
 	 */
 
 	updateUserInfo(user: User) {
@@ -211,7 +248,7 @@ export class UserService {
 		return this.http.get(this.url + '?is-driver=false&location='+ location)
 	  }
     /**
-     * A GET method that shows all users
+     * A GET method that retrieves all users from the database.
      */
 		showAllUser(): Observable<any>{
 		  return this.http.get(this.url);
@@ -222,19 +259,29 @@ export class UserService {
      */
       private body: string;
 
+
       private httpOptions = {
         headers: new HttpHeaders({"Content-Type": "application/json"}),
         observe: "response" as "body"
       }
 
     /**
-     * A function that bans users.
+     * bans the given user.
      */
     banUser(user: User){
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
+<<<<<<< HEAD
 
+=======
+	
+	/**
+	 * Retrieves drivers by location using the getTioFiveDrivers method on the User controller.
+	 * Apparently, it returns a distance matrix.
+	 * @param location 
+	 */
+>>>>>>> dev
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
 	}

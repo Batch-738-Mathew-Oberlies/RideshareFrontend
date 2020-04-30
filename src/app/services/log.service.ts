@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * A log service that only logs to the console.
+ */
 export class LogService {
   /**
    * A function that logs a debug message
