@@ -11,15 +11,17 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     // './src/**/*.e2e-spec.ts'
-    './test/landingpage.spec.js',
-    './test/register.spec.js',
-    './test/usernav.spec.js'
+    // './test/landingpage.spec.js',
+    // './test/register.spec.js',
+    // './test/usernav.spec.js',
+    './test/tripcomponent.spec.js'
   ],
   capabilities: {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://http://54.174.82.153:4200/',
+  // baseUrl: 'http://http://54.174.82.153:4200/',
+  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

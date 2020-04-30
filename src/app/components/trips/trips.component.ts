@@ -194,6 +194,7 @@ export class CreateTripComponent {
       this.trip.departure = this.user.waddress;
     }
 
+    console.log(this.trip);
     this.tripService.addTrip(this.trip).subscribe(trip => {
       if (trip !== null) {
         this.activeModal.close();
