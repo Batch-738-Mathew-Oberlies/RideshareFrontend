@@ -1,11 +1,11 @@
-<a (click)="openModal(template)">Sign up</a >
+<a (click)="openModal(template)">Sign up</a>
   
-<ng-template #template >
+<ng-template #template>
   <form [formGroup]="signup">
     <p *ngIf="success != ''" class="success">{{success}}</p>
     <div class="modal-header">
       <h4 class="modal-title">Sign Up</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" id='close-modal'>
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -74,16 +74,16 @@
       <p *ngIf="signup.controls.zip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
          
         <label>Ride? Drive? Both?</label>
-        <select class="form-control" formControlName="driver" for="drive">
+        <select class="form-control" formControlName="driver" id="preference">
           <option value="none" disabled>Please Select One...  
           </option>
-          <option value="rider" selected>Rider</option>
+          <option value="rider">Rider</option>
           <option value="driver">Driver</option>
           <option value="both">Both</option>
         </select>      
       
       <div class="btn-container">
-        <button type="submit" class="btn btn-primary register" [disabled]="!signup.valid" (click)="submitUser()">Submit</button>
+        <button type="submit" class="btn btn-primary register" [disabled]="!signup.valid" (click)="submitUser()" id="submit">Submit</button>
       </div>
     </div>
   </form>
