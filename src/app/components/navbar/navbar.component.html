@@ -18,7 +18,11 @@
                   <a class="nav-link" routerLink="/drivers"><span class="borderbottom">Drivers</span></a>
                 </li>
                 <li class="nav-item">
+<<<<<<< HEAD
                   <a class="nav-link" routerLink="/trips"><span class="borderbottom">Trips</span></a>
+=======
+                  <a class="nav-link" routerLink="/schedule"><span class="borderbottom">Schedule</span></a>
+>>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
                 </li>
                 <li class="nav-item active dropdown">
                   <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,6 +33,8 @@
                   
                        <div class="dropdown-menu myDropDown" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" routerLink="/profile">Profile</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" routerLink="/myrides">My Rides</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" (click)="logout()" id="logout-btn">Log Out</a>
                         </div>

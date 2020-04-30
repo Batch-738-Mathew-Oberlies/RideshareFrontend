@@ -60,6 +60,7 @@ export class User {
     /**
      * Home Address
      */
+<<<<<<< HEAD
     haddress: Address;
 
     /**
@@ -67,3 +68,12 @@ export class User {
      */
     waddress: Address;
 }
+=======
+    hAddress: Address;
+    
+    /**
+     * Work Address
+     */
+    wAddress: Address;
+}
+>>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2

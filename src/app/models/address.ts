@@ -1,19 +1,20 @@
+
 /**
  * Address model
  */
 
 export class Address {
-    id: number;
-    
-    // Street Address
+    constructor(apt, street, city, state, zip) {
+        this.apt = apt;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+    }
+
     street: string;
-    
-    // City
+    apt: string;
     city: string;
-
-    // State
     state: string;
-
-    // Zip
     zip: string;
 }
