@@ -35,16 +35,14 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-<<<<<<< HEAD
 import { TripsComponent, CreateTripComponent } from './components/trips/trips.component';
-=======
-
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
 import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 >>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
@@ -53,6 +51,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 >>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 
 
+=======
+>>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,18 +80,18 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserRegisterComponent,
     HomePageComponent,
     BsNavbarComponent,
-<<<<<<< HEAD
     TripsComponent,
-    CreateTripComponent
-    
-=======
+    CreateTripComponent,
     ScheduleComponent,
     ViewMyRidesComponent,
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
 =======
 >>>>>>> dev
 >>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
+=======
+>>>>>>> 96eb5c55dbd7bdd9e6c266e4ad2df21b9250897a
   ],
   imports: [
     BrowserModule,
