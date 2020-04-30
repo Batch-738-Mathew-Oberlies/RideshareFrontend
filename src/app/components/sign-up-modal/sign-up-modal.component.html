@@ -1,7 +1,7 @@
-<a (click)="openModal(template)" id='signup'>Sign up</a>
+<a (click)="openModal(template)" id='signup-button'>Sign up</a>
   
-<ng-template #template id='modal'>
-  <form [formGroup]="signup-form" id="signup-form">
+<ng-template #template>
+  <form [formGroup]="signup" id="signup-form">
     <p *ngIf="success != ''" class="success">{{success}}</p>
     <div class="modal-header">
       <h4 class="modal-title">Sign Up</h4>
@@ -28,12 +28,12 @@
       <p *ngIf="signup.controls.email.hasError('pattern')" class="error">Must enter a valid email address.</p>
 
       <label for="phoneNumber">Phone Number</label>
-      <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" formControlName="pNumber" class="form-control" />
+      <input (keydown)="phoneNumberError = ''" id="phonenumber" type="text" formControlName="pNumber" class="form-control" />
       <p *ngIf="signup.controls.pNumber.hasError('required') && signup.controls.pNumber.touched" class="error">Phone number is required please enter one.</p>
       <p *ngIf="signup.controls.pNumber.hasError('pattern')" class="error">Phone number must be in format xxx-xxx-xxxx</p>
 
       <label for="userName">User Name</label>
-      <input (keydown)="userNameError = ''" id="userName" type="text" formControlName="username" class="form-control" />
+      <input (keydown)="userNameError = ''" id="username" type="text" formControlName="username" class="form-control" />
       <p *ngIf="signup.controls.username.hasError('required') && signup.controls.username.touched" class="error">Username required please enter one.</p>
       <p *ngIf="signup.controls.username.hasError('minlength')" class="error">Username must be at least 3 characters long.</p>
       <p *ngIf="signup.controls.username.hasError('maxlength')" class="error">Username must be at most 12 characters long.</p>
@@ -42,7 +42,7 @@
 
       <label for="batch">Batch</label>
       <select class="form-control" id="batch" formControlName="batch">
-            <option value="none" disabled>Please Select One...  
+            <option value="" disabled>Please Select One...  
             </option>
             <option *ngFor="let batch of batches" >{{batch.batchNumber}} {{batch.batchLocation}}</option>
       </select>
@@ -54,33 +54,34 @@
       <p *ngIf="signup.controls.streetAddress2.hasError('pattern')" class="error">Street Address format is incorrect</p>
 
       <label for="Address2">Apt/Suite Number</label>
-      <input (keydown)="hAddressError = ''" id="Address2" type="text" formControlName="streetAddress" class="form-control" />      
+      <input (keydown)="hAddressError = ''" id="hAddress2" type="text" formControlName="streetAddress" class="form-control" />      
 
-      <label id="hCity">City</label>
-      <input (keydown)="hCityError = ''" type="text" formControlName="city" class="form-control" />
+      <label>City</label>
+      <input (keydown)="hCityError = ''" type="text" formControlName="city" class="form-control" id="hCity"/>
       <p *ngIf="signup.controls.city.hasError('required') && signup.controls.city.touched" class="error">A city is required please enter one.</p>
       <p *ngIf="signup.controls.city.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
 
-      <label for="hState">State</label>
+      <label>State</label>
       <select (keydown)="hStateError = ''" class="form-control" formControlName="state" id="hState" >
-        <option value="none" disabled>Please Select One...  </option>
+        <option value="" disabled>Please Select One...  </option>
         <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
       </select>
-      <p *ngIf="signup.controls.state.hasError('required')" class="error">State is required please choose one</p>
+      <p *ngIf="signup.controls.state.hasError('required') && signup.controls.state.touched" class="error">State is required please choose one</p>
 
-      <label id="hZip">Zip Code</label>
-      <input (keydown)="hZipError = ''" type="number" formControlName="zip" class="form-control" id="zip"/>
+      <label>Zip Code</label>
+      <input (keydown)="hZipError = ''" type="number" formControlName="zip" class="form-control" id="hZip"/>
       <p *ngIf="signup.controls.zip.hasError('required') && signup.controls.zip.touched" class="error">Zip code required please enter one.</p>
       <p *ngIf="signup.controls.zip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
          
         <label>Ride? Drive? Both?</label>
         <select class="form-control" formControlName="driver" id="preference">
-          <option value="none" disabled>Please Select One...  
+          <option value="" disabled>Please Select One...  
           </option>
           <option value="rider">Rider</option>
           <option value="driver">Driver</option>
           <option value="both">Both</option>
-        </select>      
+        </select>
+        <p *ngIf="signup.controls.driver.hasError('required') && signup.controls.driver.touched" class="error">A selection is required.</p>      
       
       <div class="btn-container">
         <button type="submit" class="btn btn-primary register" [disabled]="!signup.valid" (click)="submitUser()" id="submit">Submit</button>
