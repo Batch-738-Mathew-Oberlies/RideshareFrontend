@@ -24,14 +24,14 @@ import { CarService } from 'src/app/services/car-service/car.service';
       <form [formGroup]="tripModalForm">
         <div class="form-group">
           <label for="name">Name</label><br>
-          <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }"/>
+          <input type="text" formControlName="name" id="createTripName" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }"/>
           <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
               <div *ngIf="this.tripModalForm.controls.name.errors?.required">Name is required</div>
           </div>
         </div>
         <div class="form-group">
           <label for="availableSeats">Available Seats</label><br>
-          <select formControlName="availableSeats" [ngClass]="{ 'is-invalid': submitted && controls.availableSeats.errors }">
+          <select formControlName="availableSeats" id="createTripSeats" [ngClass]="{ 'is-invalid': submitted && controls.availableSeats.errors }">
             <option value="">Choose number of available seats</option>
             <option *ngFor="let num of this.numberArray" [value]="num">{{num}}</option>
           </select>
@@ -155,7 +155,7 @@ export class CreateTripComponent {
       time: ['']
     });
 
-    this.trip.destination = new Address();
+    this.trip.destination = new Address("", "", "", "", "");
   }
 
   //Submit button for creating a new trip
@@ -176,7 +176,6 @@ export class CreateTripComponent {
     this.trip.tripId = 0;
     this.trip.name = this.tripModalForm.value.name;
 
-    this.trip.destination.id = 0;
     this.trip.destination.street = this.tripModalForm.value.street;
     this.trip.destination.city = this.tripModalForm.value.city;
     this.trip.destination.state = this.tripModalForm.value.state;
@@ -189,9 +188,9 @@ export class CreateTripComponent {
     this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime)
 
     if (this.depAddress === "Home") {
-      this.trip.departure = this.user.haddress;
+      this.trip.departure = this.user.hAddress;
     } else {
-      this.trip.departure = this.user.waddress;
+      this.trip.departure = this.user.wAddress;
     }
 
     console.log(this.trip);

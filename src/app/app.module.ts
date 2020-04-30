@@ -36,6 +36,11 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { TripsComponent, CreateTripComponent } from './components/trips/trips.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
+import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
+
+
 
 
 @NgModule({
@@ -66,8 +71,9 @@ import { TripsComponent, CreateTripComponent } from './components/trips/trips.co
     HomePageComponent,
     BsNavbarComponent,
     TripsComponent,
-    CreateTripComponent
-    
+    CreateTripComponent,
+    ScheduleComponent,
+    ViewMyRidesComponent,    
   ],
   imports: [
     BrowserModule,
@@ -86,10 +92,14 @@ import { TripsComponent, CreateTripComponent } from './components/trips/trips.co
     BatchService,
     AuthService,
     ValidationService,
-    BsModalService
+    BsModalService,
+    ScheduleService
   ],
   bootstrap: [AppComponent],
   entryComponents:[CreateTripComponent]
 })
-export class AppModule { }
+export class AppModule 
+{ 
+
+}
 

@@ -7,6 +7,9 @@ import { environment } from '../../../environments/environment'
   templateUrl: './driver-contact-modal.component.html',
   styleUrls: ['./driver-contact-modal.component.css']
 })
+/**
+ * The DriverContactModalComponent component.
+ */
 export class DriverContactModalComponent implements OnInit {
 
   origin : string = 'Morgantown, WV';
@@ -17,6 +20,9 @@ export class DriverContactModalComponent implements OnInit {
   map: google.maps.Map;
   constructor(private http: HttpClient) { }
 
+  /**
+   * Initializes the component by calling its methods.
+   */
   ngOnInit() {
 
     this.getGoogleApi();
@@ -24,43 +30,61 @@ export class DriverContactModalComponent implements OnInit {
     this.sleep(2000).then(() => {
      //show drivers on map
      this.showDriversOnMap(sessionStorage.getItem("origin"), sessionStorage.getItem("destination"));
-     
+
     });
   }
-
+  /**
+   * Sends a promise after the given number of milliseconds.
+   * @param ms 
+   */
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
-getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
-                         new Promise((resolve) => {
-                           let script: HTMLScriptElement = document.createElement('script');
-                           script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
-                     }); 
-               }    
-           }
-       );
-   }
+
+// getGoogleApi()  {
+//     this.http.get(`${environment.loginUri}getGoogleApi`)
+//        .subscribe(
+//                  (response) => {
+//                      //console.log(response);
+//                      if(response["googleMapAPIKey"] != undefined){
+//                          new Promise((resolve) => {
+//                            let script: HTMLScriptElement = document.createElement('script');
+//                            script.addEventListener('load', r => resolve());
+//                            script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+//                            document.head.appendChild(script);
+//                      });
+//                }
+//            }
+//        );
+//    }
+
+getGoogleApi() {
+  if (environment.googleMapKey !== undefined) {
+    const script: HTMLScriptElement = document.createElement('script');
+    script.src = `http://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
+    document.head.appendChild(script);
+  }
+}
 
   showDriversOnMap(origin, destination){
-     
+
       var directionsService = new google.maps.DirectionsService;
       var directionsRenderer = new google.maps.DirectionsRenderer({
          draggable: true,
          map: this.map
        });
        this.displayRoute(origin, destination, directionsService, directionsRenderer);
-  
+
   }
 
-
+/**
+ * Uses the given service of type google.maps.DirectionsService and display of type
+ * google.maps.DirectionsRenderer to compute the route and display it on the map.
+ * @param origin 
+ * @param destination 
+ * @param service 
+ * @param display 
+ */
 displayRoute(origin, destination, service, display) {
     service.route({
       origin: origin,

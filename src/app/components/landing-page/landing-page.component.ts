@@ -11,23 +11,27 @@ import { environment } from '../../../environments/environment';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
+/**
+ * The landing-page component.
+ */
 export class LandingPageComponent implements OnInit {
 
   location_s : string =''; //sample: Morgantown, WV
- 
+
 
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
-  
+
   mapProperties :{};
 
   constructor(private http: HttpClient,private userService: UserService) {
     //load google map api
   }
 
+
   ngOnInit(): void {
      //load google map  api
-    
+
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -41,10 +45,17 @@ export class LandingPageComponent implements OnInit {
 
  }
 
+/**
+ * Resolves a promise after the given number of milliseconds.
+ * @param ms 
+ */
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+/**
+ * Inserts the google maps api script into the document head. This seems to be duplicated code.
+ * Duplicate code.
+ */
  getGoogleApi()  {
   this.http.get(`${environment.loginUri}getGoogleApi`)
      .subscribe(
@@ -61,27 +72,15 @@ sleep(ms) {
          }
      );
  }
-
- searchDriver(){
-  //call service search algorithm ()
-  //console.log(this.location_s);
-  this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-  this.userService.getRidersForLocation1(this.location_s)
-  .subscribe(
-            (response) => {
-              response.forEach(element => {
-                   var directionsService = new google.maps.DirectionsService;
-                   var directionsRenderer = new google.maps.DirectionsRenderer({
-                         draggable: true,
-                         map: this.map
-                    });
-                    console.log(element.Distance);
-                    this.displayRoute(this.location_s, element.hCity+","+element.hState, directionsService, directionsRenderer);
-         });
-  });
- }
-
- 
+ /**
+ * google.maps.DirectionsRenderer to compute the route and display it on the map.
+ * 
+ * Duplicated code.
+ * @param origin 
+ * @param destination 
+ * @param service 
+ * @param display 
+ */
 displayRoute(origin, destination, service, display) {
   service.route({
     origin: origin,

@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
+/**
+ * The LandingComponent component, which contains no methods or fields.
+ */
 export class LandingComponent implements OnInit {
 
   constructor() { }

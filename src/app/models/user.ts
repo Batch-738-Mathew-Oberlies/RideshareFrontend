@@ -1,6 +1,9 @@
 import { Batch } from './batch';
 import { Address } from './address';
 
+/**
+ * A model representing the User class.
+ */
 export class User {
     /**
      * Set User model
@@ -57,10 +60,10 @@ export class User {
     /**
      * Home Address
      */
-    haddress: Address;
-
+    hAddress: Address;
+    
     /**
      * Work Address
      */
-    waddress: Address;
+    wAddress: Address;
 }

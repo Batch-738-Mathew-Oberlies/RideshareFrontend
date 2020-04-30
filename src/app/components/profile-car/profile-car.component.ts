@@ -17,6 +17,9 @@ export class ProfileCarComponent implements OnInit {
 
   constructor(private carService: CarService) { }
 
+  /**
+   * Calls in and initializes the car posessed by the currently logged in user.
+   */
   ngOnInit() {
 
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
@@ -28,6 +31,9 @@ export class ProfileCarComponent implements OnInit {
     });
   }
 
+  /**
+   * Alters the fields of the car intialized in ngOnInit() to match those given by this component.
+   */
   updatesCarInfo(){
     this.currentCar.make = this.make;
     this.currentCar.model= this.model;

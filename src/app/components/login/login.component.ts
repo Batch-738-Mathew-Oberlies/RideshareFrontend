@@ -1,10 +1,10 @@
-import { Component, OnInit, NgModule, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 
 @Component({
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
 	users: User[] = [];
 	allUsers: User[] = [];
+	
 
 	chosenUser: User;
 	chosenUserFullName: string = '';
@@ -105,7 +106,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A toggle function
+	 * Toggles whether the dropdown is displayed.
 	 */
 
 	toggleDropDown() {
@@ -113,7 +114,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * Set next page
+	 * Increments the current page of user search results.
 	 */
 	nextPage() {
 		this.curPage++;
@@ -121,7 +122,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * Set prev page
+	 * Decrements the current page of user search results.
 	 */
 
 	prevPage() {
@@ -130,7 +131,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A function that indicate a fail to login
+	 * A function to handle failed logins.
 	 */
 
 
@@ -139,17 +140,26 @@ export class LoginComponent implements OnInit {
 		this.failed = true;
 	}
 
+	/**
+	 * Handles attempts by banned users to log in.
+	 */
 	loginBanned(){
 		this.userName = '';
 		this.banned = true;
 	}
 
+	/**
+	 * Opens the given modal template.
+	 * @param template 
+	 */
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
+		
 	}
 
 	/**
-	 * A login function
+	 * A login function which directly sends a get request to the login uri containing username and
+	 * password, and attempts to log in as that user.
 	 */
 
 	login() {
@@ -159,7 +169,6 @@ export class LoginComponent implements OnInit {
         this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
-                     //console.log(response);
                       if(response["userName"] != undefined){
                          this.usernameError=  response["userName"][0];
                       }
@@ -173,8 +182,8 @@ export class LoginComponent implements OnInit {
 						//This was added to get an user from the back end and store it in the session storage.
 						//You can retrieve the user from the session storage by using the method retrieveUser
 						//	from the user-service.
-						const userId: number = parseInt(sessionStorage.getItem('userid'), 10);
-						this.userService.getUserById3(userId).subscribe((user: User) => {
+						const userId: string = sessionStorage.getItem('userid');
+						this.userService.getUserById2(userId).subscribe((user: User) => {
 							if (user !== null) {
 								this.userService.storeUser(user);
 							}
@@ -183,26 +192,15 @@ export class LoginComponent implements OnInit {
 						//call landing page
 						//this.router.navigate(['landingPage']);
 						//location.replace('landingPage');
+						location.replace('landingPage');
+
 					  }
 					  if(response["userNotFound"] != undefined){
 						this.userNotFound = response["userNotFound"][0];
 					  }
                  }
         );
-		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
-			.subscribe((user: User[]) => {
-				if (!user.length) {
-					this.loginFailed();
-				}
-				else if(this.chosenUser.active == false){
-					this.loginBanned();
-				}
-				else {
-					if (!this.authService.login(user[0], this.chosenUser.userName)) {
-						this.loginFailed();
-					}
-				}
-			});*/
+		
 	}
 
 
