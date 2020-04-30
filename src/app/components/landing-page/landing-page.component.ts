@@ -14,11 +14,11 @@ import { environment } from '../../../environments/environment';
 export class LandingPageComponent implements OnInit {
 
   location_s : string =''; //sample: Morgantown, WV
- 
+
 
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
-  
+
   mapProperties :{};
 
   constructor(private http: HttpClient,private userService: UserService) {
@@ -27,7 +27,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
      //load google map  api
-    
+
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -45,22 +45,30 @@ sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
- getGoogleApi()  {
-  this.http.get(`${environment.loginUri}getGoogleApi`)
-     .subscribe(
-               (response) => {
-                   //console.log(response);
-                   if(response["googleMapAPIKey"] != undefined){
-                       new Promise((resolve) => {
-                         let script: HTMLScriptElement = document.createElement('script');
-                         script.addEventListener('load', r => resolve());
-                         script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                         document.head.appendChild(script);      
-                   }); 
-             }    
-         }
-     );
- }
+ // getGoogleApi()  {
+ //  this.http.get(`${environment.loginUri}getGoogleApi`)
+ //     .subscribe(
+ //               (response) => {
+ //                   //console.log(response);
+ //                   if(response["googleMapAPIKey"] != undefined){
+ //                       new Promise((resolve) => {
+ //                         let script: HTMLScriptElement = document.createElement('script');
+ //                         script.addEventListener('load', r => resolve());
+ //                         script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+ //                         document.head.appendChild(script);
+ //                   });
+ //             }
+ //         }
+ //     );
+ // }
+
+getGoogleApi() {
+  if (environment.googleMapKey !== undefined) {
+    const script: HTMLScriptElement = document.createElement('script');
+    script.src = `http://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
+    document.head.appendChild(script);
+  }
+}
 
  searchDriver(){
   //call service search algorithm ()
@@ -81,7 +89,7 @@ sleep(ms) {
   });
  }
 
- 
+
 displayRoute(origin, destination, service, display) {
   service.route({
     origin: origin,
