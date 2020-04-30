@@ -21,7 +21,7 @@ export class SignupModalComponent implements OnInit {
   address = new Address("", "", "", "", "");
   isDriver: boolean;
   isRider: boolean;
-  user :User = new User();
+  user: User = new User();
   batch: Batch = new Batch();
   batches: Batch[];
 
