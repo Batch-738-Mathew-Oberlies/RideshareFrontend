@@ -1,12 +1,42 @@
 import { browser, element, by } from "protractor"
 
 export class SignupModal {
-    get = () => {
+    email       = element(by.id('email'));
+    modal       = element(by.id('signup'));
+    state       = element(by.id('hState'));
+    batch       = element(by.id('batch'));
+    preference  = element(by.id('preference'));
+    submit      = element(by.id('submit'));
+
+    populateForm = (firstname, lastname, email,
+                    phone, username, batch,
+                    street, apt, city,
+                    state, zip, pref) => {
+        this.setFirstName(firstname);
+        this.setLastName(lastname);
+        this.setEmail(email);
+        this.setPhoneNumber(phone);
+        this.setUsername(username);
+        this.setBatch(batch);
+        this.setStreet(street);
+        this.setApt(apt);
+        this.setCity(city);
+        this.setState(state);
+        this.setZip(zip);
+        this.setPreference(pref);
+    }
+
+
+    openPage = () => {
         browser.get('http://localhost:4200');
     }
 
     openModal = () => {
         element(by.id('signup')).click();
+    }
+
+    closeModal = () => {
+        element(by.id('close-modal')).click();
     }
 
     setFirstName = (name) => {
@@ -17,7 +47,7 @@ export class SignupModal {
         element(by.id('lastname')).sendKeys(name)
     }
 
-    tsetEmail = (email) => {
+    setEmail = (email) => {
         element(by.id('email')).sendKeys(email)
     }
 
@@ -31,7 +61,7 @@ export class SignupModal {
 
     //"1 Morgantown", "2 Virginia"
     setBatch = (batch) => {
-        element.all(by.options('drive'))
+        element(by.cssContainingText('option', batch)).click();
     }
 
     setStreet = (street) => {
@@ -43,14 +73,19 @@ export class SignupModal {
     }
     
     setState = (state) => {
-        element(by.id('hState')).sendKeys(state);
+        //element(by.id('hState')).sendKeys(state);
+        element(by.cssContainingText('option', state)).click();
     }
 
     setZip = (zip) => {
         element(by.id('zip')).sendKeys(zip);
     }
 
+    setCity = (city) => {
+        element(by.id('city')).sendKeys(city);
+    }
+
     setPreference = (pref) => {
-        element(by.id('drive'))
+        element(by.cssContainingText('option', pref)).click();
     }
 }
