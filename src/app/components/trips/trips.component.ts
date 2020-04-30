@@ -24,14 +24,14 @@ import { CarService } from 'src/app/services/car-service/car.service';
       <form [formGroup]="tripModalForm">
         <div class="form-group">
           <label for="name">Name</label><br>
-          <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }"/>
+          <input type="text" formControlName="name" id="createTripName" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }"/>
           <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
               <div *ngIf="this.tripModalForm.controls.name.errors?.required">Name is required</div>
           </div>
         </div>
         <div class="form-group">
           <label for="availableSeats">Available Seats</label><br>
-          <select formControlName="availableSeats" [ngClass]="{ 'is-invalid': submitted && controls.availableSeats.errors }">
+          <select formControlName="availableSeats" id="createTripSeats" [ngClass]="{ 'is-invalid': submitted && controls.availableSeats.errors }">
             <option value="">Choose number of available seats</option>
             <option *ngFor="let num of this.numberArray" [value]="num">{{num}}</option>
           </select>
