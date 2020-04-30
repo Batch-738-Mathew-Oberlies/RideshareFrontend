@@ -191,11 +191,15 @@ export class LoginComponent implements OnInit {
 						  });
 						//call landing page
 <<<<<<< HEAD
+<<<<<<< HEAD
 						//this.router.navigate(['landingPage']);
 						//location.replace('landingPage');
 =======
 						location.replace('landingPage');
 >>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
+=======
+						location.replace('landingPage');
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 					  }
 					  if(response["userNotFound"] != undefined){
 						this.userNotFound = response["userNotFound"][0];

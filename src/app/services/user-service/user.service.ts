@@ -52,8 +52,18 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * A GET method for one user
 	 * @param idParam
+=======
+<<<<<<< HEAD
+	 * A GET method for one user
+	 * @param idParam
+=======
+	 * A GET method to retrieve one user from the database with the given id. Return a promise.
+	 * @param idParam 
+>>>>>>> dev
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	 */
 	getUserById(idParam: number) {
 
@@ -63,6 +73,22 @@ export class UserService {
 
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  getUserById3(idParam: number): Observable<User> {
+
+    // console.log(this.url)
+    return this.http.get<User>(this.url+idParam) //.toPromise();
+
+
+  }
+
+
+	getUserById2(idParam2: string): Observable<User>{
+
+=======
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	
 	/**
 	 * Identical to the above, except that it does not give a promise.
@@ -70,6 +96,10 @@ export class UserService {
 	 */
 	getUserById2(idParam2: string): Observable<User>{
 		
+<<<<<<< HEAD
+=======
+>>>>>>> dev
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
 
@@ -77,9 +107,21 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * A POST method that turns the given user into a driver
 	 * @param user 
 	 * @param role 
+=======
+<<<<<<< HEAD
+	 * A POST method that switch an Rider to a Driver
+	 * @param user
+	 * @param role
+=======
+	 * A POST method that turns the given user into a driver
+	 * @param user 
+	 * @param role 
+>>>>>>> dev
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	 */
 	createDriver(user: User, role) {
 
@@ -123,10 +165,22 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	 * A PUT method that updates the user information
+	 * @param isDriver
+	 * @param userId
+=======
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	 * A PUT method that retrieves the given user from the database, updates their isDriver field,
 	 * and persists the updated user in the database.
 	 * @param isDriver 
 	 * @param userId 
+<<<<<<< HEAD
+=======
+>>>>>>> dev
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	 */
 
 	updateIsDriver(isDriver, userId) {
@@ -180,6 +234,18 @@ export class UserService {
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	 * A PUT method that updates user's information
+	 * @param user
+=======
+	 * A PUT method that persists the given user to the database and returns a promise.
+	 * @param user 
+>>>>>>> dev
+	 */
+
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	updateUserInfo(user: User) {
 		//console.log(user);
 	}
@@ -231,12 +297,22 @@ export class UserService {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	
 	/**
 	 * Retrieves drivers by location using the getTioFiveDrivers method on the User controller.
 	 * Apparently, it returns a distance matrix.
 	 * @param location 
 	 */
+<<<<<<< HEAD
+=======
+>>>>>>> dev
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
 	}

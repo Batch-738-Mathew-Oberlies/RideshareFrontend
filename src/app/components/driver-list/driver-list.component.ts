@@ -38,8 +38,8 @@ export class DriverListComponent implements OnInit {
               this.drivers.push({
                    'id': element.userId,
                  'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
-                'email': element.email, 
+               'origin':element.hCity+","+element.hState,
+                'email': element.email,
                 'phone':element.phoneNumber
               });
           });
@@ -54,7 +54,7 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes 
+      //get all routes
       this.displayDriversList(this.location, this.drivers);
       //show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
@@ -174,8 +174,8 @@ displayDriversList(origin, drivers) {
                                               </div>
                                               <div class="modal-body">
                                                   <h1>${name}</h1>
-                                                  <h3>Email: ${element.email}</h3>         
-                                                  <h3>Phone: ${element.phone}</h3>                 
+                                                  <h3>Email: ${element.email}</h3>
+                                                  <h3>Phone: ${element.phone}</h3>
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -190,7 +190,7 @@ displayDriversList(origin, drivers) {
                                 </td></tr>`;
       }
     });
-    
+
    });
 }
 

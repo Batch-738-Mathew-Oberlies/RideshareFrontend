@@ -25,7 +25,11 @@ import { TripsComponent } from './components/trips/trips.component';
 =======
 import {ScheduleComponent} from './components/schedule/schedule.component';
 import {ViewMyRidesComponent} from './components/view-my-rides/view-my-rides.component'
+<<<<<<< HEAD
 >>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
+=======
+>>>>>>> dev
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 
 
 const routes: Routes = [
@@ -54,7 +58,11 @@ const routes: Routes = [
 =======
 {path: 'schedule', component: ScheduleComponent},
 {path: 'myrides', component: ViewMyRidesComponent},
+<<<<<<< HEAD
 >>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
+=======
+>>>>>>> dev
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 {path: '', component: HomePageComponent},
 {path: '**', pathMatch: 'full', redirectTo: ''}];
 

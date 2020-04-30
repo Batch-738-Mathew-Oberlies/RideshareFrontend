@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90
 import { User } from './user'
 import { Address } from './address'
 
@@ -35,6 +38,7 @@ export class Trip{
      * Set date and time as String from Date object
      */
     tripDate: Date
+<<<<<<< HEAD
 =======
 import { User } from './user';
 import {Address} from './address';
@@ -51,3 +55,6 @@ export class Trip
     tripDate: string;
 >>>>>>> c7a6f49f4f6e687e23ec49bbc7afee77c673c9d2
 }
+=======
+}
+>>>>>>> 6efa67e170aecc4f080f4b051018d87bee36ee90

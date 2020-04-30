@@ -17,11 +17,11 @@ import { environment } from '../../../environments/environment';
 export class LandingPageComponent implements OnInit {
 
   location_s : string =''; //sample: Morgantown, WV
- 
+
 
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
-  
+
   mapProperties :{};
 
   constructor(private http: HttpClient,private userService: UserService) {
@@ -31,7 +31,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
      //load google map  api
-    
+
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
