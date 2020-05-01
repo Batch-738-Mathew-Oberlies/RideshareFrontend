@@ -49,8 +49,23 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      driver: true,
-      acceptingRides: true}]
+      isDriver: true,
+      isAcceptingRides: true,
+      hAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
+      },
+      wAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
+      }
+    }]
     // fixture.detectChanges();
   });
 
@@ -72,8 +87,23 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      driver: true,
-      acceptingRides: true}];
+      isDriver: true,
+      isAcceptingRides: true,
+      hAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
+      },
+      wAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
+      }
+    }];
       // act
       component.changeUser(user);
       // assert
