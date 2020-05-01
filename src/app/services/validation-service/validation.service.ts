@@ -91,7 +91,7 @@ export class ValidationService {
 		}
 
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
-		//probably need to hide this API userID--->____________
+		
 		let xml = 
 		`<AddressValidateRequest USERID="605REVAT4789">`	+
 			`<Revision>1</Revision>` 					 	+
