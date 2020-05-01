@@ -187,12 +187,12 @@ export class LoginComponent implements OnInit {
 							if (user !== null) {
 								this.userService.storeUser(user);
 							}
+							console.log(user);
 							location.replace('landingPage');
 						  });
 						//call landing page
 						//this.router.navigate(['landingPage']);
-						//location.replace('landingPage');
-						location.replace('landingPage');
+						// location.replace('landingPage');
 
 					  }
 					  if(response["userNotFound"] != undefined){

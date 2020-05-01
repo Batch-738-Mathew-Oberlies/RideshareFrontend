@@ -10,6 +10,7 @@ import {TripService} from '../../services/trip-service/trip.service';
 import {UserService} from '../../services/user-service/user.service';
 import {BehaviorSubject} from 'rxjs';
 import { CarService } from 'src/app/services/car-service/car.service';
+import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
 @Component({
   selector: 'app-create-trip-modal',
@@ -129,11 +130,13 @@ export class CreateTripComponent {
   // TODO: Validate address
   depAddress: string;
   departureOptions: string[] = [];
+  address = new Address("", "", "", "", "");
 
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private tripService: TripService,
+    private validationService: ValidationService,
   ) { }
 
   ngOnInit(): void {
@@ -159,7 +162,7 @@ export class CreateTripComponent {
   }
 
   //Submit button for creating a new trip
-  submit() {
+  async submit() {
     this.submitted = true;
 
     if(this.tripModalForm.invalid) {
@@ -176,10 +179,11 @@ export class CreateTripComponent {
     this.trip.tripId = 0;
     this.trip.name = this.tripModalForm.value.name;
 
-    this.trip.destination.street = this.tripModalForm.value.street;
-    this.trip.destination.city = this.tripModalForm.value.city;
-    this.trip.destination.state = this.tripModalForm.value.state;
-    this.trip.destination.zip = this.tripModalForm.value.zip;
+    this.address.apt = null;
+    this.address.street = this.tripModalForm.value.street;
+    this.address.city = this.tripModalForm.value.city;
+    this.address.state = this.tripModalForm.value.state;
+    this.address.zip = this.tripModalForm.value.zip;
 
     this.trip.availableSeats = this.tripModalForm.value.availableSeats;
 
@@ -188,9 +192,22 @@ export class CreateTripComponent {
     this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime)
 
     if (this.depAddress === "Home") {
-      this.trip.departure = this.user.hAddress;
+      this.trip.departure = this.user.homeAddress;
     } else {
-      this.trip.departure = this.user.wAddress;
+      this.trip.departure = this.user.workAddress;
+    }
+
+    let finalAddress;
+    console.log(this.user);
+    console.log(this.trip);
+    await this.validationService.validateAddress(this.address).then((result) => {
+      finalAddress = result;
+    });
+
+    if (finalAddress == null) {
+      return;
+    } else {
+      this.trip.destination = finalAddress;
     }
 
     this.tripService.addTrip(this.trip).subscribe(trip => {

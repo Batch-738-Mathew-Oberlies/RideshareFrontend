@@ -60,10 +60,10 @@ export class User {
     /**
      * Home Address
      */
-    hAddress: Address;
+    homeAddress: Address;
     
     /**
      * Work Address
      */
-    wAddress: Address;
+    workAddress: Address;
 }
