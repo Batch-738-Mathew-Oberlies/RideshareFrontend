@@ -55,6 +55,7 @@ export class SignupModalComponent implements OnInit {
     this.batchService.getAllBatchesByLocation1().subscribe(
         res => {
           this.batches = res;
+          console.log(this.batches);
             },
         );  
   }
@@ -77,7 +78,8 @@ export class SignupModalComponent implements OnInit {
       this.user.lastName = this.signup.controls.lName.value;
       this.user.email = this.signup.controls.email.value;
       this.user.phoneNumber = this.signup.controls.pNumber.value;
-      this.user.batch = this.signup.controls.batch.value;
+      this.user.batch.batchNumber = this.signup.controls.batch.value.split(' ')[0];
+      this.user.batch.batchLocation = this.signup.controls.batch.value.split(' ')[1];
 
       // Pulls the information from the forms into our address object
       //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
