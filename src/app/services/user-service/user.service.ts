@@ -83,8 +83,8 @@ export class UserService {
 	createDriver(user: User, role) {
 
 		user.active = true;
-		user.isDriver = false;
-		user.isAcceptingRides = false;
+		user.driver = false;
+		user.acceptingRides = false;
 		console.log(user);
 
 		this.http.post(this.url, user, {observe: 'response'}).subscribe(
@@ -134,8 +134,8 @@ export class UserService {
 		this.getUserById(userId)
 			.then((response) => {
 				this.user = response;
-				this.user.isDriver = isDriver;
-				this.user.isAcceptingRides = (this.user.active && isDriver);
+				this.user.driver = isDriver;
+				this.user.acceptingRides = (this.user.active && isDriver);
 
 				this.http.put(this.url+userId, this.user).subscribe(
 					(response) => {
@@ -164,7 +164,7 @@ export class UserService {
 				this.user = response;
 				this.user[property] = bool;
 				if (property === 'active' && bool === false) {
-					this.user.isAcceptingRides = false;
+					this.user.acceptingRides = false;
 				}
 
 				this.http.put(this.url+userId, this.user).subscribe(
