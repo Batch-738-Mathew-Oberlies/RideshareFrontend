@@ -2,7 +2,6 @@
   
 <ng-template #template>
   <form [formGroup]="signup" id="signup-form">
-    <p *ngIf="success != ''" class="success">{{success}}</p>
     <div class="modal-header">
       <h4 class="modal-title">Sign Up</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" id='close-modal'>
@@ -11,29 +10,29 @@
     </div>
     <div class="modal-body">
       <label for="firstname">First Name</label>
-      <input (keydown)="firstNameError = ''" id="firstname" type="text" formControlName="fName" class="form-control" />
+      <input id="firstname" type="text" formControlName="fName" class="form-control" />
       <p *ngIf="signup.controls.fName.hasError('required') && signup.controls.fName.touched" class="error">First name required please enter one.</p>
       <p *ngIf="signup.controls.fName.hasError('maxlength')" class="error">Name can not be more than 30 characters long.</p>
       <p *ngIf="signup.controls.fName.hasError('pattern')" class="error">Please enter a valid name. Numbers and special characters not allowed and the first letter must be capitalized.</p>
       
       <label for="lastname">Last Name</label>
-      <input (keydown)="lastNameError = ''" id="lastname" type="text" formControlName="lName" class="form-control" />
+      <input id="lastname" type="text" formControlName="lName" class="form-control" />
       <p *ngIf="signup.controls.lName.hasError('required') && signup.controls.lName.touched" class="error">Last name required please enter one.</p>
       <p *ngIf="signup.controls.lName.hasError('maxlength')" class="error">Name can not be more than 30 characters long.</p>
       <p *ngIf="signup.controls.lName.hasError('pattern')" class="error">Please enter a valid name. Numbers and special characters not allowed and the first letter must be capitalized.</p>
     
       <label for="email">Email</label>
-      <input (keydown)="emailError = ''" id="email" type="email" formControlName="email" class="form-control"/>
+      <input id="email" type="email" formControlName="email" class="form-control"/>
       <p *ngIf="signup.controls.email.hasError('required') && signup.controls.email.touched" class="error">Email required please enter one.</p>
       <p *ngIf="signup.controls.email.hasError('pattern')" class="error">Must enter a valid email address.</p>
 
       <label for="phoneNumber">Phone Number</label>
-      <input (keydown)="phoneNumberError = ''" id="phonenumber" type="text" formControlName="pNumber" class="form-control" />
+      <input id="phonenumber" type="text" formControlName="pNumber" class="form-control" />
       <p *ngIf="signup.controls.pNumber.hasError('required') && signup.controls.pNumber.touched" class="error">Phone number is required please enter one.</p>
       <p *ngIf="signup.controls.pNumber.hasError('pattern')" class="error">Phone number must be in format xxx-xxx-xxxx</p>
 
       <label for="userName">User Name</label>
-      <input (keydown)="userNameError = ''" id="username" type="text" formControlName="username" class="form-control" />
+      <input id="username" type="text" formControlName="username" class="form-control" />
       <p *ngIf="signup.controls.username.hasError('required') && signup.controls.username.touched" class="error">Username required please enter one.</p>
       <p *ngIf="signup.controls.username.hasError('minlength')" class="error">Username must be at least 3 characters long.</p>
       <p *ngIf="signup.controls.username.hasError('maxlength')" class="error">Username must be at most 12 characters long.</p>
@@ -49,31 +48,27 @@
       <p *ngIf="signup.controls.batch.hasError('required') && signup.controls.batch.touched" class="error">Batch required please select one.</p>
 
       <label for="hAddress">Address</label>
-      <input (keydown)="hAddressError = ''" id="hAddress" type="text" formControlName="streetAddress2" class="form-control" />
+      <input  id="hAddress" type="text" formControlName="streetAddress2" class="form-control" />
       <p *ngIf="signup.controls.streetAddress2.hasError('required') && signup.controls.streetAddress2.touched" class="error">Street Address required please enter one.</p>
       <p *ngIf="signup.controls.streetAddress2.hasError('pattern')" class="error">Street Address format is incorrect</p>
 
       <label for="Address2">Apt/Suite Number</label>
-      <input (keydown)="hAddressError = ''" id="hAddress2" type="text" formControlName="streetAddress" class="form-control" />      
+      <input id="hAddress2" type="text" formControlName="streetAddress" class="form-control" />      
 
       <label>City</label>
-      <input (keydown)="hCityError = ''" type="text" formControlName="city" class="form-control" id="hCity"/>
+      <input  type="text" formControlName="city" class="form-control" id="hCity"/>
       <p *ngIf="signup.controls.city.hasError('required') && signup.controls.city.touched" class="error">A city is required please enter one.</p>
       <p *ngIf="signup.controls.city.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
 
       <label>State</label>
-      <select (keydown)="hStateError = ''" class="form-control" formControlName="state" id="hState" >
+      <select class="form-control" formControlName="state" id="hState" >
         <option value="" disabled>Please Select One...  </option>
         <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
       </select>
       <p *ngIf="signup.controls.state.hasError('required') && signup.controls.state.touched" class="error">State is required please choose one</p>
 
       <label>Zip Code</label>
-<<<<<<< HEAD
-      <input type="text" (keydown)="hZipError = ''" formControlName="zip" class="form-control" id="hZip"/>
-=======
-      <input (keydown)="hZipError = ''" type="text" formControlName="zip" class="form-control" id="hZip"/>
->>>>>>> 14a9b6299118aea7aba63c38518f2341ad6e0e67
+      <input type="text" formControlName="zip" class="form-control" id="hZip"/>
       <p *ngIf="signup.controls.zip.hasError('required') && signup.controls.zip.touched" class="error">Zip code required please enter one.</p>
       <p *ngIf="signup.controls.zip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
          
