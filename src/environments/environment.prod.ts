@@ -8,10 +8,9 @@ const baseUri = ``;
  */
 const port = '8080';
 
-  /**
+/**
  * These are the constants for the production config
  */
-
 export const environment = {
 
   production: true,

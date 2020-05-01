@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/dist-prod
 /tmp
 /out-tsc
 /documentation
@@ -45,3 +46,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Testing Files
+.scannerwork

@@ -14,10 +14,10 @@ const port = '8080';
  * google map api key 
  */
 const googleKey = '';
- /**
-   * This is the environment config.
-   */
-
+ 
+/**
+ * This is the environment config.
+ */
 export const environment = {
  
   production: false,
@@ -27,6 +27,7 @@ export const environment = {
   batchesUri: `${baseUri}/batches/`,
   carUri: `${baseUri}/cars/`,
   adminUri: `${baseUri}/admins/`,
+  tripUri: `${baseUri}/trips/`,
   googleMapKey: `${googleKey}`,
 };
 
