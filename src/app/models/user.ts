@@ -48,20 +48,20 @@ export class User {
     /**
      * Set driver as a boolean
      */
-    isDriver: boolean;
+    driver: boolean;
     
     /**
      * Set accepting ride as a boolean
      */
-    isAcceptingRides: boolean;
+    acceptingRides: boolean;
     
     /**
      * Home Address
      */
-    hAddress: Address;
+    haddress: Address;
     
     /**
      * Work Address
      */
-    wAddress: Address;
+    waddress: Address;
 }

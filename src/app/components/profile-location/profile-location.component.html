@@ -31,8 +31,8 @@
         <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="homeAddress" required>
-          <p *ngIf="addressChange.controls.homeAddress.hasError('required') && addressChange.controls.homeAddress.touched" class="error">Street Address required please enter one.</p>
-          <p *ngIf="addressChange.controls.homeAddress.hasError('pattern')" class="error">Street Address format is incorrect</p>
+          <p *ngIf="addressChange.controls.homeAddress.hasError('required') && addressChange.controls.homeAddress.touched" class="error">Street Address is required.</p>
+          <p *ngIf="addressChange.controls.homeAddress.hasError('pattern')" class="error">Invalid Street Address.</p>
         </div>
       </div>
 
@@ -49,8 +49,8 @@
         <label for="homeCity" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
             <input type="city" class="form-control" id="homeCity" formControlName="homeCity" required>
-            <p *ngIf="addressChange.controls.homeCity.hasError('required') && addressChange.controls.homeCity.touched" class="error">A city is required please enter one.</p>
-            <p *ngIf="addressChange.controls.homeCity.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
+            <p *ngIf="addressChange.controls.homeCity.hasError('required') && addressChange.controls.homeCity.touched" class="error">City is required.</p>
+            <p *ngIf="addressChange.controls.homeCity.hasError('pattern')" class="error">Invalid City.</p>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
               <select class="form-control" name="homeState" id="homeState" formControlName="homeState" required>
                 <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
               </select>
-              <p *ngIf="addressChange.controls.homeState.hasError('required')" class="error">State is required please choose one</p>
+              <p *ngIf="addressChange.controls.homeState.hasError('required')" class="error">State is required.</p>
           </div>
       </div>
 
@@ -70,8 +70,8 @@
         <label for="homeZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" id="homeZipcode" formControlName="homeZip" required>
-            <p *ngIf="addressChange.controls.homeZip.hasError('required') && addressChange.controls.homeZip.touched" class="error">Zip code required please enter one.</p>
-            <p *ngIf="addressChange.controls.homeZip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
+            <p *ngIf="addressChange.controls.homeZip.hasError('required') && addressChange.controls.homeZip.touched" class="error">Zipcode is required.</p>
+            <p *ngIf="addressChange.controls.homeZip.hasError('pattern')" class="error">Invalid Zipcode.</p>
         </div>
       </div>
 
@@ -82,8 +82,8 @@
         <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="workAddress" required>
-          <p *ngIf="addressChange.controls.workAddress.hasError('required') && addressChange.controls.workAddress.touched" class="error">Street Address required please enter one.</p>
-          <p *ngIf="addressChange.controls.workAddress.hasError('pattern')" class="error">Street Address format is incorrect</p>
+          <p *ngIf="addressChange.controls.workAddress.hasError('required') && addressChange.controls.workAddress.touched" class="error">Street Address is required.</p>
+          <p *ngIf="addressChange.controls.workAddress.hasError('pattern')" class="error">Invalid Street Address.</p>
         </div>
       </div>
 
@@ -100,8 +100,8 @@
         <label for="homeCity" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
           <input type="city" class="form-control" id="homeCity" formControlName="workCity" required>
-          <p *ngIf="addressChange.controls.workCity.hasError('required') && addressChange.controls.workCity.touched" class="error">A city is required please enter one.</p>
-          <p *ngIf="addressChange.controls.workCity.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
+          <p *ngIf="addressChange.controls.workCity.hasError('required') && addressChange.controls.workCity.touched" class="error">City is required.</p>
+          <p *ngIf="addressChange.controls.workCity.hasError('pattern')" class="error">Invalid City.</p>
         </div>
       </div>
 
@@ -112,7 +112,7 @@
           <select class="form-control" name="homeState" id="homeState" formControlName="workState" required>
             <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
           </select>
-          <p *ngIf="addressChange.controls.workState.hasError('required')" class="error">State is required please choose one</p>
+          <p *ngIf="addressChange.controls.workState.hasError('required')" class="error">State is required.</p>
         </div>
       </div>
 
@@ -121,8 +121,8 @@
         <label for="homeZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="homeZipcode" formControlName="workZip" required>
-          <p *ngIf="addressChange.controls.workZip.hasError('required') && addressChange.controls.workZip.touched" class="error">Zip code required please enter one.</p>
-          <p *ngIf="addressChange.controls.workZip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
+          <p *ngIf="addressChange.controls.workZip.hasError('required') && addressChange.controls.workZip.touched" class="error">Zipcode is required.</p>
+          <p *ngIf="addressChange.controls.workZip.hasError('pattern')" class="error">Invalid Zipcode.</p>
         </div>
       </div>
 

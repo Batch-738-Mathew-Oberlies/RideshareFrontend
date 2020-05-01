@@ -38,10 +38,9 @@ export class ProfileMembershipComponent implements OnInit {
         this.profileObject = response;
         console.log(this.profileObject);
 
-        // @ts-ignore
+        
         this.isDriver = this.profileObject.driver;
         this.isActive = this.profileObject.active;
-        // @ts-ignore
         this.isAcceptingRides = this.profileObject.acceptingRides;
       }
     );
@@ -56,10 +55,10 @@ export class ProfileMembershipComponent implements OnInit {
     if(this.getBoolean(this.isDriver) == false){
       this.isAcceptingRides = false;
     }
-    // @ts-ignore
+    
     this.profileObject.driver = this.isDriver;
     this.profileObject.active = this.isActive;
-    // @ts-ignore
+    
     this.profileObject.acceptingRides = this.isAcceptingRides;
 
     this.userService.updateUserInfo(this.profileObject).subscribe(
@@ -93,7 +92,7 @@ export class ProfileMembershipComponent implements OnInit {
    * Disables submit button if the form fields have not been changed from their original value.
    */
   disableButton(){
-    // @ts-ignore
+    
     if(this.getBoolean(this.isDriver) != this.profileObject.driver || this.getBoolean(this.isActive) != this.profileObject.active || this.getBoolean(this.isAcceptingRides) != this.profileObject.acceptingRides ){
       this.button = false;
     } else {

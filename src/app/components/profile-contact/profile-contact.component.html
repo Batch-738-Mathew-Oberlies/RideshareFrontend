@@ -28,10 +28,16 @@
             <div class="col-sm-1"></div>
                 <label for="firstName" class="col-sm-4 col-form-label">First Name:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" value="{{ profileObject?.firstName }}" required>
-                    <span class="text-danger" *ngIf="(firstName.dirty || firstName.touched) && firstName.invalid && firstName.errors.required">
+                    <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" maxlength=30 value="{{ profileObject?.firstName }}">
+                    <p class="error" *ngIf="(firstName.dirty || firstName.touched) && firstName.errors?.required">
                       First name is required.
-                    </span>
+                    </p>
+                    <p class="error" *ngIf="firstName.errors?.pattern">
+                      Invalid first name.
+                    </p>
+                    <p class="error" *ngIf="firstName.errors?.max">
+                      First name must not exceed 30 characters.
+                    </p>
                 </div>
 
         </div>
@@ -40,10 +46,16 @@
             <div class="col-sm-1"></div>
             <label for="lastName" class="col-sm-4 col-form-label">Last Name:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" value="{{ profileObject?.lastName }}">
-                <span class="text-danger" *ngIf="(lastName.dirty || lastName.touched) && lastName.invalid && lastName.errors.required">
+                <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" maxlength=30 value="{{ profileObject?.lastName }}">
+                <p class="error" *ngIf="(lastName.dirty || lastName.touched) && lastName.errors?.required">
                   Last name is required.
-                </span>
+                </p>
+                <p class="error" *ngIf="lastName.errors?.pattern">
+                  Invalid last name.
+                </p>
+                <p class="error" *ngIf="lastName.errors?.max">
+                  Last name must not exceed 30 characters.
+                </p>
            </div>
         </div>
 
@@ -52,12 +64,12 @@
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
             <div class="col-sm-4">
                 <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" formControlName="email" value="{{ profileObject?.email }}" required>
-                <span class="text-danger" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
+                <p class="error" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
                   Email is required.
-                </span>
-                <span class="text-danger" *ngIf="email.errors?.pattern">
+                </p>
+                <p class="error" *ngIf="email.errors?.pattern">
                   Invalid email.
-                </span>
+                </p>
             </div>
         </div>
 
@@ -66,12 +78,12 @@
             <label for="phone" class="col-sm-4 col-form-label">Phone:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="phone" formControlName="phone" required>
-                <span class="text-danger" *ngIf="(phone.dirty || phone.touched) && phone.invalid && phone.errors.required">
+                <p class="error" *ngIf="(phone.dirty || phone.touched) && phone.invalid && phone.errors.required">
                   Phone number is required.
-                </span>
-                <span class="text-danger" *ngIf="phone.errors?.pattern">
+                </p>
+                <p class="error" *ngIf="phone.errors?.pattern">
                   Invalid phone number format.
-                </span>
+                </p>
             </div>
           </div>
 

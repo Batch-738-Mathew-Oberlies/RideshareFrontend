@@ -15,8 +15,8 @@ export class ProfileContactComponent implements OnInit {
 
   contactInfoForm: FormGroup;
 
-  firstName = new FormControl('', Validators.required);
-  lastName = new FormControl('', Validators.required);
+  firstName = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z\\u00C0-\\u017F]+[- ]?[a-zA-Z\\u00C0-\\u017F]+$'), Validators.maxLength(30)]);
+  lastName = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z\\u00C0-\\u017F]+[- ]?[a-zA-Z\\u00C0-\\u017F]+$'), Validators.maxLength(30)]);
   email = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   phone = new FormControl('', [Validators.required,Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')]);
 

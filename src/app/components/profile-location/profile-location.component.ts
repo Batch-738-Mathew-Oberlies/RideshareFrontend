@@ -89,12 +89,20 @@ export class ProfileLocationComponent implements OnInit {
     
     await this.validationService.validateAddress(this.currentUser.haddress).then( data => {
       this.transientHomeAddress = data;
-      this.transientHomeAddress.id = this.currentUser.haddress.id;
+      if(this.transientHomeAddress == null){
+        return;
+      }else {
+        this.transientHomeAddress.id = this.currentUser.haddress.id;
+      }
     })
     
     await this.validationService.validateAddress(this.currentUser.waddress).then( data => {
       this.transientWorkAddress = data;
-      this.transientWorkAddress.id = this.currentUser.waddress.id;
+      if(this.transientWorkAddress == null){
+        return;
+      }else {
+        this.transientWorkAddress.id = this.currentUser.waddress.id;
+      }
     })
     
     /**
@@ -103,9 +111,9 @@ export class ProfileLocationComponent implements OnInit {
      */
     if(this.transientWorkAddress == null || this.transientHomeAddress == null){
       return;
-
     }else {
       this.currentUser.haddress = this.transientHomeAddress;
+      console.log(this.currentUser.haddress);
       this.currentUser.waddress = this.transientWorkAddress;
 
       this.userService.updateUserInfo(this.currentUser).subscribe(

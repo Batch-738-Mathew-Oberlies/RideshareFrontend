@@ -86,6 +86,7 @@ export class ValidationService {
 	}
 
 	validateAddress(address: Address) {
+		console.log(address);
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
     	//probably need to hide this API userID--->____________
 		let xml = 
@@ -179,7 +180,7 @@ export class ValidationService {
 		
 		//Could be broken into another function confirmAddress(address:Address): Address{}
 		if (returnedAddress.state != address.state || returnedAddress.zip != address.zip || returnedAddress.city != address.city.toLocaleUpperCase() || returnedAddress.apt != address.apt.toLocaleUpperCase()) {
-			if (confirm(`We found this address for you. Continue or make a change?` + `\n\n${returnedAddress.street}, ${returnedAddress.apt}\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
+			if (confirm(`We found this address for you. Continue or make a change?` + `\n\n${returnedAddress.street},\n${returnedAddress.apt}\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
 				console.log("returnedAddress: ", returnedAddress)
 				return returnedAddress;
 
@@ -203,6 +204,7 @@ export class ValidationService {
 
 		if (confirm(`We weren't able to find your Apt/Suite number. Would you like to continue with this address or make a change?` + `\n\n${returnedAddress.street},\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
 			console.log("returnedAddress: ", returnedAddress)
+			console.log(xmlDoc);
 			return returnedAddress;
 
 		} else {

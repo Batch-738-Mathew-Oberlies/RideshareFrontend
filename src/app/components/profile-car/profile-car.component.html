@@ -28,9 +28,9 @@
       <div class="col-sm-4">
         <input type="text" class="form-control" id="make" name="make" formControlName="make"
           value="{{ currentCar?.make }}">
-        <span class="text-danger" *ngIf="(make.dirty || make.touched) && make.invalid && make.errors.required">
+        <p class="error" *ngIf="(make.dirty || make.touched) && make.invalid && make.errors.required">
           Make is required.
-        </span>
+        </p>
       </div>
     </div>
 
@@ -40,9 +40,9 @@
       <div class="col-sm-4">
         <input type="text" class="form-control" id="model" name="model" formControlName="model"
           value="{{ currentCar?.model }}" required>
-        <span class="text-danger" *ngIf="(model.dirty || model.touched) && model.invalid && model.errors.required">
+        <p class="error" *ngIf="(model.dirty || model.touched) && model.invalid && model.errors.required">
           Model is required.
-        </span>
+        </p>
       </div>
     </div>
 
@@ -52,15 +52,15 @@
       <div class="col-sm-4">
         <input type="number" class="form-control" id="nrSeats" name="nrSeats" formControlName="nrSeats"
           value="{{ currentCar?.nrSeats }}" min=1 max=6 required>
-        <span class="text-danger" *ngIf="nrSeats.dirty && nrSeats.invalid && nrSeats.errors?.required">
+        <p class="error" *ngIf="nrSeats.dirty && nrSeats.invalid && nrSeats.errors?.required">
           Total seats is required.
-        </span>
-        <span class="text-danger" *ngIf="nrSeats.errors?.max">
+        </p>
+        <p class="error" *ngIf="nrSeats.errors?.max">
           Total seats must not exceed 6.
-        </span>
-        <span class="text-danger" *ngIf="nrSeats.errors?.min">
+        </p>
+        <p class="error" *ngIf="nrSeats.errors?.min">
           Total seats must be at least 1.
-        </span>
+        </p>
       </div>
     </div>
 

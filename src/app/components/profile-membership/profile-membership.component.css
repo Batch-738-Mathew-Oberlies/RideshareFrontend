@@ -24,6 +24,16 @@ h5{
     margin-top:40px;
     
 }
+
+
+/* error */
+.error {
+    margin-left:-8px;
+    border-radius: 5px;
+    color: red;
+    font-size: 16px;
+}
+
 /**success*/
 .success {
     border-radius: 5px;

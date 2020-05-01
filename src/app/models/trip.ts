@@ -34,4 +34,6 @@ export class Trip{
      * Set date and time as String from Date object
      */
     tripDate: Date
+
+    tripStatus: Number
 }
