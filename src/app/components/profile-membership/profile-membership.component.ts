@@ -12,7 +12,7 @@ import { User } from 'src/app/models/user';
 export class ProfileMembershipComponent implements OnInit {
   profileObject = new User();
   currentUser: any = '';
-  isDriver: boolean;
+  driver: boolean;
   active: boolean;
   success: string;
   constructor(private userService: UserService) { }
@@ -30,7 +30,7 @@ export class ProfileMembershipComponent implements OnInit {
    * this component, and persists those changes to the database.
    */
   updatesMembershipInfo(){
-    this.profileObject.isDriver = this.isDriver;
+    this.profileObject.driver = this.driver;
     this.profileObject.active = this.active;
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";

@@ -9,7 +9,7 @@ export class User {
      * Set User model
      */
     userId: number;
-    
+
     /**
      * Set username as a string
      */
@@ -17,49 +17,49 @@ export class User {
     /**
      * Attached a batch object
      */
-    
-     batch: Batch = new Batch();
-    
+
+    batch: Batch = new Batch();
+
     /**
      * Set first name as a string
      */
-     firstName: string;
-    
+    firstName: string;
+
      /**
      * Set last name as a string
      */
-     lastName: string;
-    
+    lastName: string;
+
      /**
      * Set email as a string
      */
     email: string;
-    
+
     /**
      * Set phone number as a string
      */
     phoneNumber: string;
-    
+
     /**
      * Set active as a boolean
      */
     active: boolean;
-    
+
     /**
      * Set driver as a boolean
      */
-    isDriver: boolean;
-    
+    driver: boolean;
+
     /**
      * Set accepting ride as a boolean
      */
-    isAcceptingRides: boolean;
-    
+    acceptingRides: boolean;
+
     /**
      * Home Address
      */
     hAddress: Address;
-    
+
     /**
      * Work Address
      */
