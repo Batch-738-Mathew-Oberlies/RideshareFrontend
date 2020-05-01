@@ -1,6 +1,5 @@
 import { SignupModal } from '../src/SignupModal';
 import { browser } from 'protractor';
-import { DriverProvider } from 'protractor/built/driverProviders';
 import { protractor } from 'protractor/built/ptor';
 
 var signupModal = new SignupModal();
