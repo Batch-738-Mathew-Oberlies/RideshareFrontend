@@ -24,7 +24,7 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
     <div class="modal-body">
       <form [formGroup]="tripModalForm">
         <div class="form-group">
-          <label for="name">Name</label><br>
+          <label for="name">Trip Name</label><br>
           <input type="text" formControlName="name" id="createTripName" [ngClass]="{ 'is-invalid': submitted && controls.name.errors }"/>
           <div *ngIf="submitted && controls.name.errors" class="invalid-feedback">
               <div *ngIf="this.tripModalForm.controls.name.errors?.required">Name is required</div>
@@ -52,11 +52,15 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
         </div>
         <label> Enter a Destination Address</label>
         <div class="form-group">
-          <label for="street">Street</label><br>
+          <label for="street">Address Line 1</label><br>
           <input type="text" formControlName="street" [ngClass]="{ 'is-invalid': submitted && controls.street.errors }"/>
           <div *ngIf="submitted && controls.street.errors" class="invalid-feedback">
               <div *ngIf="controls.street.errors?.required">Street field is required</div>
           </div>
+        </div>
+        <div class="form-group">
+          <label for="apartment">Address Line 2</label><br>
+          <input type="text" formControlName="apartment"/>
         </div>
         <div class="form-group">
           <label for="city">City</label><br>
@@ -149,6 +153,7 @@ export class CreateTripComponent {
     this.tripModalForm = this.formBuilder.group({
       name: ['', Validators.required],
       date: [''],
+      apartment: [''],
       departure: ['', Validators.required],
       street: ['', Validators.required],
       city: ['', Validators.required],
@@ -179,7 +184,7 @@ export class CreateTripComponent {
     this.trip.tripId = 0;
     this.trip.name = this.tripModalForm.value.name;
 
-    this.address.apt = null;
+    this.address.apt = this.tripModalForm.value.apartment;
     this.address.street = this.tripModalForm.value.street;
     this.address.city = this.tripModalForm.value.city;
     this.address.state = this.tripModalForm.value.state;
