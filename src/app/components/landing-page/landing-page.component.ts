@@ -17,11 +17,11 @@ import { environment } from '../../../environments/environment';
 export class LandingPageComponent implements OnInit {
 
   location_s : string =''; //sample: Morgantown, WV
-
+ 
 
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
-
+  
   mapProperties :{};
 
   constructor(private http: HttpClient,private userService: UserService) {
@@ -31,7 +31,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
      //load google map  api
-
+    
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -52,6 +52,7 @@ export class LandingPageComponent implements OnInit {
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
 /**
  * Inserts the google maps api script into the document head. This seems to be duplicated code.
  * Duplicate code.
@@ -72,6 +73,7 @@ sleep(ms) {
          }
      );
  }
+
  /**
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
  * 
@@ -81,7 +83,26 @@ sleep(ms) {
  * @param service 
  * @param display 
  */
-displayRoute(origin, destination, service, display) {
+ searchDriver(){
+  //call service search algorithm ()
+  //console.log(this.location_s);
+  this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+  this.userService.getRidersForLocation1(this.location_s)
+  .subscribe(
+            (response) => {
+              response.forEach(element => {
+                   var directionsService = new google.maps.DirectionsService;
+                   var directionsRenderer = new google.maps.DirectionsRenderer({
+                         draggable: true,
+                         map: this.map
+                    });
+                    console.log(element.Distance);
+                    this.displayRoute(this.location_s, element.hCity+","+element.hState, directionsService, directionsRenderer);
+         });
+  });
+ }
+
+ displayRoute(origin, destination, service, display) {
   service.route({
     origin: origin,
     destination: destination,
