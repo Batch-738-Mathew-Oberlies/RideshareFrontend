@@ -31,60 +31,54 @@ import { HomePageComponent } from 'src/app/components/home-page/home-page.compon
 import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { ViewMyRidesComponent } from 'src/app/components/view-my-rides/view-my-rides.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('CarService', () => {
-  beforeEach(() => 
-    TestBed.configureTestingModule({
-     declarations: [
-      RegisterComponent,
-      DriverComponent,
-      AdminComponent,
-      LoginComponent,
-      CarRegisterComponent,
-      LoginComponent,
-      NavbarComponent,
-      MyCarComponent,
-      ProfileComponent,
-      PreferenceComponent,
-      AdminLoginComponent,
-      DriverInfoComponent,
-      LandingComponent,
-      SignupModalComponent,
-      LandingPageComponent,
-      ProfileContactComponent,
-      ProfileCarComponent,
-      ProfileLocationComponent,
-      ProfileMembershipComponent,
-      DriverContactModalComponent,
-      DriverListComponent,
-      UserRegisterComponent,
-      HomePageComponent,
-      BsNavbarComponent,
-      ScheduleComponent,
-      ViewMyRidesComponent,
-    ],
-     imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
-  }));
 
-  it('should be created', () => {
-    const service: CarService = TestBed.get(CarService);
-    expect(service).toBeTruthy();
-  });
-});
 
   describe('CarService', () => {
     let carService: CarService;
     
     beforeEach(() => {
       TestBed.configureTestingModule({
-      declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule],
+        declarations: [
+          RegisterComponent,
+          DriverComponent,
+          AdminComponent,
+          LoginComponent,
+          CarRegisterComponent,
+          LoginComponent,
+          NavbarComponent,
+          MyCarComponent,
+          ProfileComponent,
+          PreferenceComponent,
+          AdminLoginComponent,
+          DriverInfoComponent,
+          LandingComponent,
+          SignupModalComponent,
+          LandingPageComponent,
+          ProfileContactComponent,
+          ProfileCarComponent,
+          ProfileLocationComponent,
+          ProfileMembershipComponent,
+          DriverContactModalComponent,
+          DriverListComponent,
+          UserRegisterComponent,
+          HomePageComponent,
+          BsNavbarComponent,
+          ScheduleComponent,
+          ViewMyRidesComponent,
+        ],
+         imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
 
     carService = TestBed.get(CarService);
   })
+
+  it('should be created', () => {
+    const service: CarService = TestBed.get(CarService);
+    expect(service).toBeTruthy();
+  });
 
   it('should register a car', () => {
     expect(carService).toBeTruthy();

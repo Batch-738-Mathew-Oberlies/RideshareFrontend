@@ -34,8 +34,13 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { Router } from '@angular/router';
 
+
 describe('UserService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
+  let userService: UserService;
+
+  // Adding injection here instead of it() method to reduce redundancy
+  beforeEach(() => { 
+   TestBed.configureTestingModule({
     declarations: [
       RegisterComponent,
       DriverComponent,
@@ -64,27 +69,16 @@ describe('UserService', () => {
       ScheduleComponent,
       ViewMyRidesComponent,
     ],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule]
-  }));
-
-  it('should be created', () => {
-    const service: UserService = TestBed.get(UserService);
-    expect(service).toBeTruthy();
-  });
-});
-
-describe('UserService', () => {
-  let userService: UserService;
-
-  // Adding injection here instead of it() method to reduce redundancy
-  beforeEach(() => { 
-   TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
+    imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
    }); 
     
     userService = TestBed.get(UserService);
+  });
+
+  it('should be created', () => {
+    const service: UserService = TestBed.get(UserService);
+    expect(service).toBeTruthy();
   });
 
   it('should create a user', () => {

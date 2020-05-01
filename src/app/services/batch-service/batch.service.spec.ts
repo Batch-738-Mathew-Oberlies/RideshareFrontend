@@ -33,60 +33,51 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { ViewMyRidesComponent } from 'src/app/components/view-my-rides/view-my-rides.component';
 
-describe('BatchService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    declarations: [
-      RegisterComponent,
-      DriverComponent,
-      AdminComponent,
-      LoginComponent,
-      CarRegisterComponent,
-      LoginComponent,
-      NavbarComponent,
-      MyCarComponent,
-      ProfileComponent,
-      PreferenceComponent,
-      AdminLoginComponent,
-      DriverInfoComponent,
-      LandingComponent,
-      SignupModalComponent,
-      LandingPageComponent,
-      ProfileContactComponent,
-      ProfileCarComponent,
-      ProfileLocationComponent,
-      ProfileMembershipComponent,
-      DriverContactModalComponent,
-      DriverListComponent,
-      UserRegisterComponent,
-      HomePageComponent,
-      BsNavbarComponent,
-      ScheduleComponent,
-      ViewMyRidesComponent,
-    ],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-    providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
-  }));
-
-  it('should be created', () => {
-    const service: BatchService = TestBed.get(BatchService);
-    expect(service).toBeTruthy();
-  });
-});
-
-
 
 describe('BatchService', () => {
   let batchService: BatchService;
   
   beforeEach(() => {
     TestBed.configureTestingModule({
-    declarations: [AdminComponent, CarRegisterComponent, UserRegisterComponent, LoginComponent, MyCarComponent, NavbarComponent, PreferenceComponent, ProfileComponent],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule],
+      declarations: [
+        RegisterComponent,
+        DriverComponent,
+        AdminComponent,
+        LoginComponent,
+        CarRegisterComponent,
+        LoginComponent,
+        NavbarComponent,
+        MyCarComponent,
+        ProfileComponent,
+        PreferenceComponent,
+        AdminLoginComponent,
+        DriverInfoComponent,
+        LandingComponent,
+        SignupModalComponent,
+        LandingPageComponent,
+        ProfileContactComponent,
+        ProfileCarComponent,
+        ProfileLocationComponent,
+        ProfileMembershipComponent,
+        DriverContactModalComponent,
+        DriverListComponent,
+        UserRegisterComponent,
+        HomePageComponent,
+        BsNavbarComponent,
+        ScheduleComponent,
+        ViewMyRidesComponent,
+      ],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
   })
 
   batchService = TestBed.get(BatchService);
 })
+
+it('should be created', () => {
+  const service: BatchService = TestBed.get(BatchService);
+  expect(service).toBeTruthy();
+});
 
 it('should register a batch', () => {
   expect(batchService).toBeTruthy();
@@ -95,7 +86,7 @@ it('should register a batch', () => {
  //Adding test for getAllBatches() method
  describe('getAllBatches', () => {
   it('should return a list of batches', () => {
-    const batchResponse = [
+    const batchResponse: Batch[] = [
       {
         batchNumber: 1,
         batchLocation: 'NYC'
@@ -108,9 +99,7 @@ it('should register a batch', () => {
     let response: Batch[];
     spyOn(batchService, 'getAllBatches').and.returnValue(batchResponse);
 
-    // batchService.getAllBatches().subscribe(res => {
-    //   response = res;
-    // });
+    response = batchService.getAllBatches();
 
     expect(response).toEqual(batchResponse);
   });

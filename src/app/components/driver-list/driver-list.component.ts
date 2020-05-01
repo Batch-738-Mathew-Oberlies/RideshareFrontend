@@ -82,7 +82,7 @@ getGoogleApi()  {
                            let script: HTMLScriptElement = document.createElement('script');
                            script.addEventListener('load', r => resolve());
                            script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
+                           //document.head.appendChild(script);      
                      }); 
                }    
            }

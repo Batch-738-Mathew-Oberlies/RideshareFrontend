@@ -58,7 +58,7 @@ sleep(ms) {
  * Duplicate code.
  */
  getGoogleApi()  {
-  this.http.get(`${environment.loginUri}getGoogleApi`)
+  this.http.get(`${environment.loginUri} getGoogleApi`)
      .subscribe(
                (response) => {
                    //console.log(response);
