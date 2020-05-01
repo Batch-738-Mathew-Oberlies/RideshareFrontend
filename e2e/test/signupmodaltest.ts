@@ -91,11 +91,11 @@ describe('signup modal', () => {
     })
 
     it('Test 8: When modal is closed and then opened again fields should be blank', () => {
-        signupModal.openModal;
+        signupModal.openModal();
         signupModal.populateForm('test', 'test', 'test@test.com', '111-111-1111',
         'username','1 Morgantown', '11730 Plaza America Dr', 'STE 205', 'Reston', 
         'VA', '20190', 'Rider');
-        
+
         signupModal.closeModal();
         signupModal.openModal();
         expect(signupModal.firstname.getAttribute('value')).toBe('');
