@@ -190,6 +190,7 @@ export class CreateTripComponent {
     this.time = this.tripModalForm.value.time;
 
     this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime)
+    this.trip.tripStatus = TripStatus.FUTURE;
 
     if (this.depAddress === "Home") {
       this.trip.departure = this.user.homeAddress;
@@ -236,6 +237,7 @@ export class CreateTripComponent {
   styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
+  isDriver: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   user: User = new User();
   car: Car = new Car();
   //constructor(private tripserv: TripService) { }

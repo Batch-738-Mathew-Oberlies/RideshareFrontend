@@ -11,4 +11,5 @@ export class Trip
     departure: Address;
     destination: Address;
     tripDate: Date;
+    tripStatus: TripStatus;
 }
