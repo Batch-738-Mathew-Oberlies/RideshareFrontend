@@ -6,16 +6,14 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 @Component({
   selector: 'app-trips-table',
   templateUrl: './trips-table.component.html',
-  template: `
-    Trips: {{trips}}
-    Caption: {{caption}}
-  `
+  styleUrls: ['./trips-table.component.css'],
 })
 export class TripsTableComponent implements OnInit {
 
   constructor(private serv: ScheduleService, private auth: AuthService) { }
 
-  @Input('trips') riderTrips: Trip[];
+  @Input('trips') trips: Trip[];
+  @Input('rider-trips') riderTrips: Trip[];
   @Input('caption') caption: String;
   public id: number;
 
@@ -41,7 +39,7 @@ export class TripsTableComponent implements OnInit {
     this.riderTrips.forEach(trip => {
       if(t.tripId === trip.tripId) {
         isTrip=true;
-      }
+      };
     });
 
     return isTrip;

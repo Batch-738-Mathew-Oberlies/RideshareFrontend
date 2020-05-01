@@ -1,54 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/app/models/trip';
 import { ScheduleService } from 'src/app/services/schedule-service/schedule.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-my-rides',
-  templateUrl: '../trips.component.html',
+  templateUrl: './view-my-rides.component.html',
 })
 export class ViewMyRidesComponent implements OnInit {
   
+  constructor(private serv: ScheduleService) { }
+
   public caption='My Rides';
-  trips: Trip[];
-  id: number;
+  public id: number = +sessionStorage.getItem("userid");
+  public trips$: Observable<Trip[]> = this.serv.getRiderTrips(this.id);
+  public riderTrips$: Observable<Trip[]> = this.trips$;
 
-  /**
-   * This is a constructor
-   * @param authService An authorization service
-   */
-  constructor(private serv: ScheduleService, private auth: AuthService) { }
-
-  ngOnInit() {
-    this.id=+sessionStorage.getItem("userid");
-    
-    if(!this.id) {
-      console.log("No userId associated with login.")
-    } else {
-    this.serv.getRiderTrips(this.id).subscribe(
-      data => this.trips=data
-       );
-    }
-  }
-
-  removeTrip(t: Trip) {
-    this.serv.removeTrips(t, this.id).subscribe();
-  }
-  
-  refresh() {
-    window.location.reload();
-  }
-
-  onTrip(t: Trip): boolean {
-    let isTrip: boolean = false;
-
-    this.trips.forEach(trip => {
-      if(t.tripId === trip.tripId) {
-        isTrip=true;
-      }
-    });
-
-    return isTrip;
-  }
+  ngOnInit() {}
 }
-
