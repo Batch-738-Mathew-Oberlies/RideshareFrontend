@@ -37,9 +37,9 @@ describe('AdminComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('logout()', () => {
-    component.router.navigate(['']);
-    component.logout();
-    expect(component.router.navigate).toHaveBeenCalled;
-  });
+  // it('logout()', () => {
+  //   component.router.navigate(['']);
+  //   component.logout();
+  //   expect(component.router.navigate).toHaveBeenCalled;
+  // });
 });
