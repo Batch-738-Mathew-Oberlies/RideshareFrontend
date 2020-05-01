@@ -1,17 +1,17 @@
 import { browser, element, by } from "protractor"
 
 export class SignupModal {
-    firstname   = element(by.id('firstname'))
+    firstname   = element(by.id('firstname'));
     lastname    = element(by.id('lastname'));
     email       = element(by.id('email'));
-    phone       = element(by.id('phonenumber'))
-    username    = element(by.id('username'))
+    phone       = element(by.id('phonenumber'));
+    username    = element(by.id('username'));
     batch       = element(by.id('batch'));
     address     = element(by.id('hAddress'));
-    apt         = element(by.id('hAddress2'))
-    city        = element(by.id('hCity'))
+    apt         = element(by.id('hAddress2'));
+    city        = element(by.id('hCity'));
     state       = element(by.id('hState'));
-    zip         = element(by.id('hZip'))
+    zip         = element(by.id('hZip'));
     preference  = element(by.id('preference'));
 
     submit      = element(by.id('submit'));
@@ -42,12 +42,12 @@ export class SignupModal {
         browser.get('http://localhost:4200');
     }
 
-    openModal = () => {
-        element(by.id('signup')).click();
+    openModal = async () => {
+        await element(by.id('signup')).click();
     }
 
-    closeModal = () => {
-        element(by.id('close-modal')).click();
+    closeModal = async () => {
+        await element(by.id('close-modal')).click();
     }
 
     setFirstName = (name) => {
