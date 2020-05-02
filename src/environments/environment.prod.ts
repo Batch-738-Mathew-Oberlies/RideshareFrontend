@@ -1,7 +1,7 @@
 /**
  * This is the base URI
  */
-const baseUri = ``;
+const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
 
 /**
  * Set the port var
@@ -13,18 +13,19 @@ const port = '8080';
  */
 const googleKey = '';
 
-  /**
+/**
  * These are the constants for the production config
  */
 export const environment = {
 
   production: true,
   environmentName: 'Production Environment',
-  userUri: `${baseUri}:${port}/users/`,
-  loginUri: `${baseUri}:${port}/login/`,
-  batchesUri: `${baseUri}:${port}/batches/`,
-  carUri: `${baseUri}:${port}/cars/`,
-  tripUri: `${baseUri}:${port}/trips/`,
-  adminUri: `${baseUri}:${port}/admins/`,
+  userUri: `${baseUri}/users/`,
+  loginUri: `${baseUri}/login/`,
+  batchesUri: `${baseUri}/batches/`,
+  carUri: `${baseUri}/cars/`,
+  adminUri: `${baseUri}/admins/`,
+  tripUri: `${baseUri}/trips/`,
   googleMapKey: `${googleKey}`,
+
 };
