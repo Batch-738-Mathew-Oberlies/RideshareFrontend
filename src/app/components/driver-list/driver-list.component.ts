@@ -33,6 +33,17 @@ export class DriverListComponent implements OnInit {
   ngOnInit() {
     this.drivers = [];
     this.currentUserID = +sessionStorage.getItem('userid');
+
+    // // sets the location to the driver's home address
+    // this.location = '';
+    // this.userService.getDriverById(this.currentUserID).subscribe(
+    //   (currentUser) => {
+    //     console.log(currentUser);
+    //     let currentAddress = currentUser.haddress;
+    //     this.location = currentAddress.street + ", " + currentAddress.city + ", " + currentAddress.state;
+    //   }
+    // )
+
     this.getGoogleApi();
 
     this.userService.getRidersForLocation1(this.location).subscribe(
@@ -41,14 +52,15 @@ export class DriverListComponent implements OnInit {
           // check to see that the currentUserID is not equal to the element userId
           if (element.userId != this.currentUserID) {
             // If not, then add it to the drivers list.
-          this.drivers.push({
-            'id': element.userId,
-            'name': element.firstName+" "+element.lastName,
-            'origin':element.haddress.city+","+element.haddress.state,
-            'email': element.email,
-            'phone':element.phoneNumber,
-          });
-        }});
+            this.drivers.push({
+              'id': element.userId,
+              'name': element.firstName+" "+element.lastName,
+              'origin':element.haddress.city+","+element.haddress.state,
+              'email': element.email,
+              'phone':element.phoneNumber,
+            });
+          }
+        });
 
         this.mapProperties = {
           center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
@@ -61,7 +73,8 @@ export class DriverListComponent implements OnInit {
         this.displayDriversList(this.location, this.drivers);
         //show drivers on map
         this.showDriversOnMap(this.location, this.drivers);
-        });
+      }
+    );
   }
 
   /**
@@ -122,7 +135,6 @@ displayRoute(origin, destination, service, display) {
  */
 displayDriversList(origin, drivers) {
     let  origins = [];
-    //set origin
     origins.push(origin)
     this.availableDrivers = [];
 
@@ -132,13 +144,13 @@ displayDriversList(origin, drivers) {
 
       this.carService.getCarTripByUserId(element.id).subscribe(
         (carTrip) => {
-          console.log(carTrip);
           // @ts-ignore
           availableSeats = carTrip.currentTrip.availableSeats;
           // @ts-ignore
           totalSeats = carTrip.car.seats;
         }
       );
+      
       let service = new google.maps.DistanceMatrixService;
       service.getDistanceMatrix({
         origins,
@@ -173,6 +185,5 @@ displayDriversList(origin, drivers) {
         }
       });
    });
-   console.log(this.availableDrivers);
   }
 }
