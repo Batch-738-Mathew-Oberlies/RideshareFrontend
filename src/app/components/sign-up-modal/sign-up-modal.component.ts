@@ -92,16 +92,16 @@ export class SignupModalComponent implements OnInit {
       //Switch Statement to set the user to either a rider, driver, or both
       switch(this.signup.controls.driver.value){
         case "driver":{
-          this.user.isDriver = true;
+          this.user.driver = true;
           break;
         }
         case "rider":{
-          this.user.isAcceptingRides = true;
+          this.user.acceptingRides = true;
           break;
         }
         case "both":{
-          this.user.isAcceptingRides = true;
-          this.user.isDriver = true;
+          this.user.acceptingRides = true;
+          this.user.driver = true;
           break;
         }
       }
@@ -117,7 +117,7 @@ export class SignupModalComponent implements OnInit {
         return;
       } else {
         this.modalRef.hide();
-        this.user.hAddress = finalAddress;
+        this.user.haddress = finalAddress;
         this.userService.addUser(this.user);
         return;
       }
