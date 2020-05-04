@@ -23,6 +23,7 @@ h5{
     border-radius: 5px;
     color: red;
     font-size: 16px;
+    text-align: left;
 }
 
 /**success*/
