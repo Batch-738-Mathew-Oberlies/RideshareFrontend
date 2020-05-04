@@ -29,10 +29,6 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     //load google map  api
     this.getGoogleApi();
-
-    this.sleep(3000).then(() => {
-      this.loadMap();
-    });
  }
 
 /**
@@ -68,7 +64,10 @@ loadMap(){
             script.addEventListener('load', r => resolve());
             script.src = `https://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
             document.head.appendChild(script);      
-          }); 
+          }) 
+          .then(() => {
+            this.loadMap();
+          });
         }    
       }
     );
