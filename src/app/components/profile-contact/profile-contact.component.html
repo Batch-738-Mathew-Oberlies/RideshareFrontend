@@ -10,15 +10,6 @@
   </div>
 </div>
 
-<div *ngIf="errorExists==true">
-  <div class="row justify-content-center">
-    <div class="alert alert-danger alert-dismissible">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      An error exists on the form.
-    </div>
-    </div>
-  </div>
-
   <div class="row">
     <form [formGroup]="contactInfoForm" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
     
@@ -38,6 +29,9 @@
                     <p class="error" *ngIf="firstName.errors?.max">
                       First name must not exceed 30 characters.
                     </p>
+                    <div *ngFor="let error of errorArray">
+                      <p class="error" *ngIf="error.includes('number of characters')">{{ error }}</p>
+                    </div>
                 </div>
 
         </div>
@@ -56,6 +50,9 @@
                 <p class="error" *ngIf="lastName.errors?.max">
                   Last name must not exceed 30 characters.
                 </p>
+                <div *ngFor="let error of errorArray">
+                  <p class="error" *ngIf="error.includes('number of characters')">{{ error }}</p>
+                </div>
            </div>
         </div>
 
@@ -70,6 +67,9 @@
                 <p class="error" *ngIf="email.errors?.pattern">
                   Invalid email.
                 </p>
+                <div *ngFor="let error of errorArray">
+                  <p class="error" *ngIf="error.includes('Email')">{{ error }}</p>
+                </div>
             </div>
         </div>
 
@@ -84,6 +84,9 @@
                 <p class="error" *ngIf="phone.errors?.pattern">
                   Invalid phone number format.
                 </p>
+                <div *ngFor="let error of errorArray">
+                  <p class="error" *ngIf="error.includes('Phone')">{{ error }}</p>
+                </div>
             </div>
           </div>
 

@@ -21,6 +21,7 @@ export class ProfileContactComponent implements OnInit {
   phone = new FormControl('', [Validators.required,Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')]);
 
   errorExists: boolean;
+  errorArray: any;
   success: boolean;
   statusExists: boolean;
   statusMessage: string;
@@ -58,6 +59,7 @@ export class ProfileContactComponent implements OnInit {
    * those changes to the database.
    */
   updatesContactInfo() {
+    this.errorArray = [];
     this.profileObject.firstName = this.firstName.value;
     this.profileObject.lastName = this.lastName.value;
     this.profileObject.email = this.email.value;
@@ -69,9 +71,10 @@ export class ProfileContactComponent implements OnInit {
         this.success = true;
         this.statusMessage = 'Updated Successfully!'; 
       },
-      (error) => {
+      (errorObj) => {
         this.statusExists = true;
         this.errorExists = true;
+        this.errorArray = errorObj.error.errors;
       }
     );
   }
