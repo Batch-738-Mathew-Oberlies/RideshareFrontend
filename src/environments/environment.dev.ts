@@ -3,25 +3,19 @@
  */
 const baseUri = `http://localhost`;
 
-const port = '8081';
+const port = '8080';
 
 /**
- * google map api key 
+ * These are the dev environment variables
  */
-const googleKey = '';
-
-  /**
-   * These are the dev environment variables
-   */
 export const environment = {
 
   production: false,
   environmentName: 'Default Dev Environment',
-  userUri: `${baseUri}:${port}/rideshare/users/`,
-  loginUri: `${baseUri}:${port}/rideshare/login/`,
-  batchesUri: `${baseUri}:${port}/rideshare/batches/`,
-  carUri: `${baseUri}:${port}/rideshare/cars/`,
-  tripUri: `${baseUri}:${port}/rideshare/trips/`,
-  adminUri: `${baseUri}:${port}/rideshare/admins/`,
-  googleMapKey: `${googleKey}`,
+  userUri: `${baseUri}:${port}/users/`,
+  loginUri: `${baseUri}:${port}/login/`,
+  batchesUri: `${baseUri}:${port}/batches/`,
+  carUri: `${baseUri}:${port}/cars/`,
+  adminUri: `${baseUri}:${port}/admins/`,
+  tripUri: `${baseUri}/trips/`,
 };

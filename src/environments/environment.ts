@@ -4,11 +4,11 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
-const baseUri = `http://localhost`;
+const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
 /**
  * Set the port to 8080
  */
-const port = '8081';
+const port = '8080';
 
 /**
  * google map api key 
@@ -22,14 +22,13 @@ export const environment = {
  
   production: false,
   environmentName: 'Default Environment',
-  userUri: `${baseUri}:${port}/rideshare/users/`,
-  loginUri: `${baseUri}:${port}/rideshare/login/`,
-  batchesUri: `${baseUri}:${port}/rideshare/batches/`,
-  carUri: `${baseUri}:${port}/rideshare/cars/`,
-  adminUri: `${baseUri}:${port}/rideshare/admins/`,
-  tripUri: `${baseUri}:${port}/rideshare/trips/`,
+  userUri: `${baseUri}/users/`,
+  loginUri: `${baseUri}/login/`,
+  batchesUri: `${baseUri}/batches/`,
+  carUri: `${baseUri}/cars/`,
+  adminUri: `${baseUri}/admins/`,
+  tripUri: `${baseUri}/trips/`,
   googleMapKey: `${googleKey}`,
-  
 };
 
 /*
