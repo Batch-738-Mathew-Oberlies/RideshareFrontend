@@ -11,6 +11,7 @@ import {UserService} from '../../services/user-service/user.service';
 import {BehaviorSubject} from 'rxjs';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
+import { TripStatus } from 'src/app/models/trip-status';
 
 @Component({
   selector: 'app-create-trip-modal',
@@ -131,7 +132,6 @@ export class CreateTripComponent {
   meridian = true;
   depDate: string;
   depTime: string;
-  // TODO: Validate address
   depAddress: string;
   departureOptions: string[] = [];
   address = new Address("", "", "", "", "");
