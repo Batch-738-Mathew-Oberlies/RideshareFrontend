@@ -5,3 +5,12 @@ button.calendar, button.calendar:active {
     background-size: 23px;
     background-position: center;
 }
+
+.btn-center {
+    background-color: #ff7428;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 36%;
+    width: 25% !important;
+}
