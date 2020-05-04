@@ -46,7 +46,6 @@ const routes: Routes = [
   {path: 'profile/location', component: ProfileLocationComponent},
   {path: 'driver', component: DriverContactModalComponent},
   {path: 'navbar', component: NavbarComponent},
-  { path: 'trips', component: TripsComponent},
   {path: 'schedule', component: ScheduleComponent},
   {path: 'myrides', component: ViewMyRidesComponent},
   {path: '', component: HomePageComponent},
