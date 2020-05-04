@@ -8,10 +8,10 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col" style="width: 4px;"></th>
-            <th scope="col">Name</th>
+            <th scope="col" class="col username">Name</th>
             <th scope="col">Distance</th>
-            <th scope="col">Time</th>
-            <th scope="col">Available Seats</th>
+            <th scope="col" class="col duration">Time</th>
+            <th scope="col" class="col seats">Open Seats</th>
           </tr>
         </thead>
         <tbody id="output">
@@ -52,9 +52,9 @@
                   </div>
                 </div>
             </td>
-            <td class="col userName">{{ driver.user.name }}</td>
+            <td class="col">{{ driver.user.name }}</td>
             <td class="col">{{ driver.results[0].distance.text }}</td>
-            <td class="col duration">{{ driver.results[0].duration.text }}</td>
+            <td class="col">{{ driver.results[0].duration.text }}</td>
             <td class="col">{{ driver.seats }}</td>
           </tr>
         </tbody>

@@ -1,20 +1,9 @@
 #gmap { 
     height: 369px; 
 }
-.googleapi {
- 
-}
-#map{
-}
 .col{
     margin-right: 3%;
     width:max-content;
-}
-.col .userName {
-    width:150px;
-}
-.col .duration {
-    width: 150px;
 }
 .btn-outline-secondary{
     font-size:14px;
