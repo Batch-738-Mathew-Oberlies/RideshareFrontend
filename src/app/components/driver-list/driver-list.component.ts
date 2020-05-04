@@ -18,7 +18,7 @@ import { CarService } from 'src/app/services/car-service/car.service';
  */
 export class DriverListComponent implements OnInit {
 
-  location : string = 'Morgantown, WV';
+  location : string = '';
   mapProperties :{};
   availableCars : Array<any> = [];
   drivers : Array<any> = [];
@@ -34,47 +34,46 @@ export class DriverListComponent implements OnInit {
     this.drivers = [];
     this.currentUserID = +sessionStorage.getItem('userid');
 
-    // // sets the location to the driver's home address
-    // this.location = '';
-    // this.userService.getDriverById(this.currentUserID).subscribe(
-    //   (currentUser) => {
-    //     console.log(currentUser);
-    //     let currentAddress = currentUser.haddress;
-    //     this.location = currentAddress.street + ", " + currentAddress.city + ", " + currentAddress.state;
-    //   }
-    // )
+    // sets the location to the driver's home address
+    this.userService.getDriverById(this.currentUserID).subscribe(
+      (currentUser) => {
+        console.log(currentUser);
+        let currentAddress = currentUser.haddress;
+        this.location = currentAddress.street + ", " + currentAddress.city + ", " + currentAddress.state;
 
-    this.getGoogleApi();
+        this.getGoogleApi();
 
-    this.userService.getRidersForLocation1(this.location).subscribe(
-      (res) => {
-        res.forEach(element => {
-          // check to see that the currentUserID is not equal to the element userId
-          if (element.userId != this.currentUserID) {
-            // If not, then add it to the drivers list.
-            this.drivers.push({
-              'id': element.userId,
-              'name': element.firstName+" "+element.lastName,
-              'origin':element.haddress.city+","+element.haddress.state,
-              'email': element.email,
-              'phone':element.phoneNumber,
+        this.userService.getRidersForLocation1(this.location).subscribe(
+          (res) => {
+            res.forEach(element => {
+              // check to see that the currentUserID is not equal to the element userId
+              if (element.userId != this.currentUserID) {
+                // If not, then add it to the drivers list.
+                this.drivers.push({
+                  'id': element.userId,
+                  'name': element.firstName+" "+element.lastName,
+                  'origin':element.haddress.city+","+element.haddress.state,
+                  'email': element.email,
+                  'phone':element.phoneNumber,
+                });
+              }
             });
+
+            this.mapProperties = {
+              center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+              zoom: 15,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+
+            //get all routes
+            this.displayDriversList(this.location, this.drivers);
+            //show drivers on map
+            this.showDriversOnMap(this.location, this.drivers);
           }
-        });
-
-        this.mapProperties = {
-          center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-
-        //get all routes
-        this.displayDriversList(this.location, this.drivers);
-        //show drivers on map
-        this.showDriversOnMap(this.location, this.drivers);
+        );
       }
-    );
+    )
   }
 
   /**
