@@ -177,7 +177,6 @@ export class ValidationService {
 
 		//USPS doesn't send back an Address1 tag if our request didn't contain an Address1, so we need to check for it in the request
 		if (address.apt !== "") {
-			console.log(address.apt);
 			returnedAddress.apt = xmlDoc.getElementsByTagName("Address1").item(0).textContent;
 		}
 		
@@ -207,7 +206,6 @@ export class ValidationService {
 
 		if (confirm(`We weren't able to find your Apt/Suite number. Would you like to continue with this address or make a change?` + `\n\n${returnedAddress.street},\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
 			console.log("returnedAddress: ", returnedAddress)
-			console.log(xmlDoc);
 			return returnedAddress;
 
 		} else {
