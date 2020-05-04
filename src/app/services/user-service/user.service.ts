@@ -188,8 +188,9 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-		//console.log(user);
-		return this.http.put(`${this.url}${user.userId}`, user).toPromise();
+		this.http.put(`${this.url}${user.userId}`, user).toPromise().then((response: User) => {
+		  if (response != null) { this.storeUser(response); }
+		});
 	}
 
 	/**
