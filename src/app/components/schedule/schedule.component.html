@@ -1,0 +1,5 @@
+<div *ngIf="tripsObs | async as trips">
+    <div *ngIf="riderTripsObs | async as riderTrips">
+        <app-trips-table [trips]="trips" [rider-trips]="riderTrips" [caption]="caption"></app-trips-table>
+    </div>
+</div>
