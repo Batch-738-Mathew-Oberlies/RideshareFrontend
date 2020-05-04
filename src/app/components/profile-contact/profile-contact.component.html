@@ -24,7 +24,7 @@
                       First name is required.
                     </p>
                     <p class="error" *ngIf="firstName.errors?.pattern">
-                      Invalid first name.
+                      First name cannot contain numbers or symbols.
                     </p>
                     <p class="error" *ngIf="firstName.errors?.max">
                       First name must not exceed 30 characters.
@@ -45,7 +45,7 @@
                   Last name is required.
                 </p>
                 <p class="error" *ngIf="lastName.errors?.pattern">
-                  Invalid last name.
+                  Last name cannot contain numbers or symbols.
                 </p>
                 <p class="error" *ngIf="lastName.errors?.max">
                   Last name must not exceed 30 characters.
@@ -65,7 +65,7 @@
                   Email is required.
                 </p>
                 <p class="error" *ngIf="email.errors?.pattern">
-                  Invalid email.
+                  Invalid email format.
                 </p>
                 <div *ngFor="let error of errorArray">
                   <p class="error" *ngIf="error.includes('Email')">{{ error }}</p>
@@ -82,7 +82,7 @@
                   Phone number is required.
                 </p>
                 <p class="error" *ngIf="phone.errors?.pattern">
-                  Invalid phone number format.
+                  Phone number must be in format xxx-xxx-xxxx.
                 </p>
                 <div *ngFor="let error of errorArray">
                   <p class="error" *ngIf="error.includes('Phone')">{{ error }}</p>
