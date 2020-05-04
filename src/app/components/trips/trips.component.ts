@@ -11,7 +11,6 @@ import {UserService} from '../../services/user-service/user.service';
 import {BehaviorSubject} from 'rxjs';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
-import { TripStatus } from 'src/app/models/trip-status';
 
 @Component({
   selector: 'app-create-trip-modal',
@@ -204,8 +203,6 @@ export class CreateTripComponent {
     }
 
     let finalAddress;
-    console.log(this.user);
-    console.log(this.trip);
     await this.validationService.validateAddress(this.address).then((result) => {
       finalAddress = result;
     });
@@ -216,12 +213,9 @@ export class CreateTripComponent {
       this.trip.destination = finalAddress;
     }
 
-    console.log(this.trip);
     this.tripService.addTrip(this.trip).subscribe(trip => {
       if (trip !== null) {
         this.activeModal.close();
-      } else {
-        console.log('Did not submit successfully');
       }
     });
   }
@@ -253,7 +247,6 @@ export class TripsComponent implements OnInit {
   ) {
     // TODO: Since we aren't implementing robust login, fetch userId from session storage
     this.user = this.userService.retrieveUser();
-    console.log(this.user);
   }
 
   ngOnInit(): void {
@@ -269,7 +262,6 @@ export class TripsComponent implements OnInit {
     const modalRef = this.modalService.open(CreateTripComponent);
     modalRef.componentInstance.user = user;
     modalRef.componentInstance.trip.driver = user;
-    // TODO: Dynamically get driver's car
     modalRef.componentInstance.trip.availableSeats = this.car.seats;
   };
 }
