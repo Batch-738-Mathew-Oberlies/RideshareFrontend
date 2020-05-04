@@ -22,9 +22,12 @@
         <p class="error" *ngIf="(make.dirty || make.touched) && make.invalid && make.errors.required">
           Make is required.
         </p>
-        <div *ngFor="let error of errorArray">
-          <p *ngIf="error.includes('make')" class="error">{{ error }}</p>
-        </div>
+        <p class="error" *ngIf="(make.errors?.pattern)">
+          Make can only contain numbers and letters.
+        </p>
+      </div>
+      <div *ngFor="let error of errorArray" class="error">
+        <p *ngIf="error.includes('make')">{{ error }}</p>
       </div>
     </div>
 
@@ -36,6 +39,9 @@
           value="{{ currentCar?.model }}" required>
         <p class="error" *ngIf="(model.dirty || model.touched) && model.invalid && model.errors.required">
           Model is required.
+        </p>
+        <p class="error" *ngIf="model.errors?.pattern">
+          Model can only contain numbers, letters, and hyphens.
         </p>
         <div *ngFor="let error of errorArray">
           <p *ngIf="error.includes('model')" class="error">{{ error }}</p>

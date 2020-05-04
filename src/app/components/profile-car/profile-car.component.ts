@@ -18,8 +18,8 @@ export class ProfileCarComponent implements OnInit {
   statusMessage: string;
 
   carForm: FormGroup;
-  make = new FormControl('', Validators.required);
-  model = new FormControl('', Validators.required);
+  make = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 -]+')]);
+  model = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 -]+')]);
   nrSeats = new FormControl('', [Validators.required, Validators.min(1), Validators.max(6)]);
 
   constructor(private carService: CarService, private formBuilder: FormBuilder) {
