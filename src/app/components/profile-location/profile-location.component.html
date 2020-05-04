@@ -61,7 +61,7 @@
               <select class="form-control" name="homeState" id="homeState" formControlName="homeState" required>
                 <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
               </select>
-              <p *ngIf="addressChange.controls.homeState.hasError('required')" class="error">State is required.</p>
+              <p *ngIf="addressChange.controls.homeState.hasError('required') && addressChange.controls.homeState.touched" class="error">State is required.</p>
           </div>
       </div>
 
