@@ -1,0 +1,6 @@
+table caption{
+    border-top: 1px solid grey;
+    caption-side: bottom;
+    text-align: right;
+    padding-right: 1rem;
+}
