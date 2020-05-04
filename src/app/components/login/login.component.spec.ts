@@ -49,16 +49,16 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      isDriver: true,
-      isAcceptingRides: true,
-      hAddress:{
+      driver: true,
+      acceptingRides: true,
+      homeAddress:{
         street:"123",
         apt:"",
         city:"Washington",
         state:"VI",
         zip:"12450",
       },
-      wAddress:{
+      workAddress:{
         street:"123",
         apt:"",
         city:"Washington",
@@ -87,16 +87,16 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      isDriver: true,
-      isAcceptingRides: true,
-      hAddress:{
+      driver: true,
+      acceptingRides: true,
+      homeAddress:{
         street:"123",
         apt:"",
         city:"Washington",
         state:"VI",
         zip:"12450",
       },
-      wAddress:{
+      workAddress:{
         street:"123",
         apt:"",
         city:"Washington",

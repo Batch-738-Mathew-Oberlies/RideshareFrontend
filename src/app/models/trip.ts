@@ -1,7 +1,7 @@
 import { User } from './user';
 import {Address} from './address';
 
-export class Trip 
+export class Trip
 {
     tripId: number;
     name: string;
@@ -10,5 +10,6 @@ export class Trip
     availableSeats: number;
     departure: Address;
     destination: Address;
-    tripDate: string;
+    tripDate: Date;
+    tripStatus: TripStatus;
 }
