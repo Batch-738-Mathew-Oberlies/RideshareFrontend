@@ -54,7 +54,6 @@ export class ProfileCarComponent implements OnInit {
       },
       (errorObj) => {
         this.errorExists = true;
-        this.statusMessage = errorObj.error.message;
       }
     ) 
   }
