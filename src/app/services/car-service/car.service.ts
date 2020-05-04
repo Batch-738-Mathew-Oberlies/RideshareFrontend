@@ -41,7 +41,7 @@ export class CarService {
 
 	/**
 	 * Returns a car by user ID.
-	 * @param userId 
+	 * @param userId
 	 */
 
 	getCarByUserId(userId: number) {
@@ -50,7 +50,7 @@ export class CarService {
 
 	/**
 	 * Identical to the above method except that it returns an observable.
-	 * @param userId 
+	 * @param userId
 	 */
 	getCarByUserId2(userId: string): Observable<Car> {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
@@ -84,8 +84,8 @@ export class CarService {
 
 	/**
 	 * Creates a car, assigns it to the given user, and makes that user a driver.
-	 * @param car 
-	 * @param userId 
+	 * @param car
+	 * @param userId
 	 */
 
 	createCar(car, userId) {
@@ -108,7 +108,7 @@ export class CarService {
 
 	/**
 	 * Deletes the car with the given id from the database.
-	 * @param carId 
+	 * @param carId
 	 */
 
 	removeCar(carId: number) {
