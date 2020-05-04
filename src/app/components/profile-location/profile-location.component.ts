@@ -27,6 +27,7 @@ export class ProfileLocationComponent implements OnInit {
   statusMessage: string;
   success :boolean;
   errorExists: boolean;
+  errorArray: any;
   
   addressChange = new FormGroup({
     homeAddressApt: new FormControl('', Validators.pattern('[a-z A-Z0-9]*')),
@@ -73,6 +74,7 @@ export class ProfileLocationComponent implements OnInit {
    * and persists those changes to the database.
    */
   async updatesContactInfo(){
+    this.errorArray = [];
     
     this.currentUser.homeAddress.street = this.addressChange.controls.homeAddress.value;
     this.currentUser.homeAddress.apt = this.addressChange.controls.homeAddressApt.value;
@@ -113,15 +115,15 @@ export class ProfileLocationComponent implements OnInit {
       return;
     }else {
       this.currentUser.homeAddress = this.transientHomeAddress;
-      console.log(this.currentUser.homeAddress);
       this.currentUser.workAddress = this.transientWorkAddress;
 
       this.userService.updateUserInfo(this.currentUser).subscribe(
         (input) => { 
           this.success = true;
           this.statusMessage = 'Updated Successfully!'; },
-        (error) => {
+        (errorObj) => {
           this.errorExists= true;
+          this.errorArray = errorObj.error.errors;
         }
       );
     }
