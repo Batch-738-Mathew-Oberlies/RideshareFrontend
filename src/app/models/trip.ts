@@ -1,7 +1,7 @@
 import { User } from './user';
-import {Address} from './address';
+import { Address } from './address';
 
-export class Trip 
+export class Trip
 {
     tripId: number;
     name: string;

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
 	users: User[] = [];
 	allUsers: User[] = [];
-	
+
 
 	chosenUser: User;
 	chosenUserFullName: string = '';
@@ -150,11 +150,11 @@ export class LoginComponent implements OnInit {
 
 	/**
 	 * Opens the given modal template.
-	 * @param template 
+	 * @param template
 	 */
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
-		
+
 	}
 
 	/**
@@ -165,7 +165,7 @@ export class LoginComponent implements OnInit {
 	login() {
 		this.pwdError ='';
 		this.usernameError= '';
-		
+
         this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
@@ -178,7 +178,7 @@ export class LoginComponent implements OnInit {
 					  if((response["name"] != undefined) && (response["userid"] != undefined)){
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
-						
+
 						//This was added to get an user from the back end and store it in the session storage.
 						//You can retrieve the user from the session storage by using the method retrieveUser
 						//	from the user-service.
@@ -189,7 +189,8 @@ export class LoginComponent implements OnInit {
 							}
 							console.log(user);
 							location.replace('landingPage');
-						  });
+						});
+
 						//call landing page
 						//this.router.navigate(['landingPage']);
 						// location.replace('landingPage');
@@ -200,7 +201,7 @@ export class LoginComponent implements OnInit {
 					  }
                  }
         );
-		
+
 	}
 
 

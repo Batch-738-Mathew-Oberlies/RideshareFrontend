@@ -53,7 +53,7 @@ export class UserService {
 
 	/**
 	 * A GET method to retrieve one user from the database with the given id. Return a promise.
-	 * @param idParam 
+	 * @param idParam
 	 */
 	getUserById(idParam: number) {
 
@@ -62,10 +62,10 @@ export class UserService {
 
 
 	}
-	
+
 	/**
 	 * Identical to the above, except that it does not give a promise.
-	 * @param idParam2 
+	 * @param idParam2
 	 */
 	getUserById2(idParam2: string): Observable<User>{
 		//console.log(this.url)
@@ -76,8 +76,8 @@ export class UserService {
 
 	/**
 	 * A POST method that turns the given user into a driver
-	 * @param user 
-	 * @param role 
+	 * @param user
+	 * @param role
 
 	 */
 	createDriver(user: User, role) {
@@ -107,7 +107,7 @@ export class UserService {
 
 	/**
 	 * Stores the given user in the database.
-	 * @param user 
+	 * @param user
 	 */
 	addUser(user :User) :Observable<User> {
 		return this.http.post<User>(this.url, user, {headers: this.headers});
@@ -124,8 +124,8 @@ export class UserService {
 	/**
 	 * A PUT method that retrieves the given user from the database, updates their isDriver field,
 	 * and persists the updated user in the database.
-	 * @param isDriver 
-	 * @param userId 
+	 * @param isDriver
+	 * @param userId
 
 	 */
 
@@ -184,12 +184,14 @@ export class UserService {
 	 * @param user
 
 	 * A PUT method that persists the given user to the database and returns a promise.
-	 * @param user 
+	 * @param user
 	 */
 
 	updateUserInfo(user: User) {
 		//console.log(user);
+		return this.http.put(`${this.url}${user.userId}`, user).toPromise();
 	}
+
 	/**
 	 * A GET method that retrieves a driver by Id
 	 * @param id
@@ -238,11 +240,11 @@ export class UserService {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
-	
+
 	/**
 	 * Retrieves drivers by location using the getTioFiveDrivers method on the User controller.
 	 * Apparently, it returns a distance matrix.
-	 * @param location 
+	 * @param location
 	 */
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
@@ -250,12 +252,12 @@ export class UserService {
 
 	/**
 	 * This method will store an entire user object in session storage.
-	 * @param user 
+	 * @param user
 	 */
 	storeUser(user: User) {
 		sessionStorage.setItem('user', JSON.stringify(user));
 	}
-	
+
 	/**
 	 * This method will retrive the user object stored in the session storage.
 	 */

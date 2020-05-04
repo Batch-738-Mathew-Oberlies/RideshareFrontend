@@ -14,10 +14,10 @@ export class User {
      * Set username as a string
      */
     userName: string;
-    /**
-     * Attached a batch object
-     */
 
+    /**
+     * Batch a User belongs to
+     */
     batch: Batch = new Batch();
 
     /**
@@ -25,12 +25,12 @@ export class User {
      */
     firstName: string;
 
-     /**
+    /**
      * Set last name as a string
      */
     lastName: string;
 
-     /**
+    /**
      * Set email as a string
      */
     email: string;
@@ -59,7 +59,7 @@ export class User {
      * Home Address
      */
     homeAddress: Address;
-    
+
     /**
      * Work Address
      */
