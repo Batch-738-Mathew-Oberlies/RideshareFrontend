@@ -13,6 +13,7 @@ export class ProfileCarComponent implements OnInit {
   currentCar: Car;
   success :boolean;
   errorExists: boolean;
+  errorArray: any;
   statusExists: boolean;
   statusMessage: string;
 
@@ -43,6 +44,7 @@ export class ProfileCarComponent implements OnInit {
    * Alters the fields of the car intialized in ngOnInit() to match those given by this component.
    */
   updatesCarInfo(){
+    this.errorArray = [];
     this.currentCar.make = this.carForm.value.make;
     this.currentCar.model= this.carForm.value.model;
     this.currentCar.seats = this.carForm.value.nrSeats;
@@ -54,6 +56,7 @@ export class ProfileCarComponent implements OnInit {
       },
       (errorObj) => {
         this.errorExists = true;
+        this.errorArray = errorObj.error.errors;
       }
     ) 
   }

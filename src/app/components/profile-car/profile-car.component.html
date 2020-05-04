@@ -10,15 +10,6 @@
     </div>
   </div>
 
-  <div *ngIf="errorExists==true">
-    <div class="row justify-content-center">
-      <div class="alert alert-danger alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        An error exists on the form.
-      </div>
-    </div>
-  </div>
-
   <h4>Car Information:</h4>
   <form (ngSubmit)="updatesCarInfo()" [formGroup]="carForm">
 
@@ -31,6 +22,9 @@
         <p class="error" *ngIf="(make.dirty || make.touched) && make.invalid && make.errors.required">
           Make is required.
         </p>
+        <div *ngFor="let error of errorArray">
+          <p *ngIf="error.includes('make')" class="error">{{ error }}</p>
+        </div>
       </div>
     </div>
 
@@ -43,6 +37,9 @@
         <p class="error" *ngIf="(model.dirty || model.touched) && model.invalid && model.errors.required">
           Model is required.
         </p>
+        <div *ngFor="let error of errorArray">
+          <p *ngIf="error.includes('model')" class="error">{{ error }}</p>
+        </div>
       </div>
     </div>
 
