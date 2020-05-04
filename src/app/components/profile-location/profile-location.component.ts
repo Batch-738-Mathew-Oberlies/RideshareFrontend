@@ -53,17 +53,17 @@ export class ProfileLocationComponent implements OnInit {
       (response)=>{
         this.currentUser = response;
 
-        this.addressChange.controls.homeAddressApt.setValue(this.currentUser.haddress.apt == null ? '' : this.currentUser.haddress.apt);
-        this.addressChange.controls.homeAddress.setValue(this.currentUser.haddress.street);
-        this.addressChange.controls.homeCity.setValue(this.currentUser.haddress.city);
-        this.addressChange.controls.homeState.setValue(this.currentUser.haddress.state);
-        this.addressChange.controls.homeZip.setValue(this.currentUser.haddress.zip);
+        this.addressChange.controls.homeAddressApt.setValue(this.currentUser.homeAddress.apt == null ? '' : this.currentUser.homeAddress.apt);
+        this.addressChange.controls.homeAddress.setValue(this.currentUser.homeAddress.street);
+        this.addressChange.controls.homeCity.setValue(this.currentUser.homeAddress.city);
+        this.addressChange.controls.homeState.setValue(this.currentUser.homeAddress.state);
+        this.addressChange.controls.homeZip.setValue(this.currentUser.homeAddress.zip);
 
-        this.addressChange.controls.workAddressApt.setValue(this.currentUser.waddress.apt == null ? '' : this.currentUser.waddress.apt );
-        this.addressChange.controls.workAddress.setValue(this.currentUser.waddress.street);
-        this.addressChange.controls.workCity.setValue(this.currentUser.waddress.city);
-        this.addressChange.controls.workState.setValue(this.currentUser.waddress.state);
-        this.addressChange.controls.workZip.setValue(this.currentUser.waddress.zip);
+        this.addressChange.controls.workAddressApt.setValue(this.currentUser.workAddress.apt == null ? '' : this.currentUser.workAddress.apt );
+        this.addressChange.controls.workAddress.setValue(this.currentUser.workAddress.street);
+        this.addressChange.controls.workCity.setValue(this.currentUser.workAddress.city);
+        this.addressChange.controls.workState.setValue(this.currentUser.workAddress.state);
+        this.addressChange.controls.workZip.setValue(this.currentUser.workAddress.zip);
       }
     );
   }
@@ -74,34 +74,34 @@ export class ProfileLocationComponent implements OnInit {
    */
   async updatesContactInfo(){
     
-    this.currentUser.haddress.street = this.addressChange.controls.homeAddress.value;
-    this.currentUser.haddress.apt = this.addressChange.controls.homeAddressApt.value;
-    this.currentUser.haddress.city = this.addressChange.controls.homeCity.value;
-    this.currentUser.haddress.state = this.addressChange.controls.homeState.value;
-    this.currentUser.haddress.zip = this.addressChange.controls.homeZip.value;
+    this.currentUser.homeAddress.street = this.addressChange.controls.homeAddress.value;
+    this.currentUser.homeAddress.apt = this.addressChange.controls.homeAddressApt.value;
+    this.currentUser.homeAddress.city = this.addressChange.controls.homeCity.value;
+    this.currentUser.homeAddress.state = this.addressChange.controls.homeState.value;
+    this.currentUser.homeAddress.zip = this.addressChange.controls.homeZip.value;
     
-    this.currentUser.waddress.street = this.addressChange.controls.workAddress.value;
-    this.currentUser.waddress.apt = this.addressChange.controls.workAddressApt.value;
-    this.currentUser.waddress.city = this.addressChange.controls.workCity.value;
-    this.currentUser.waddress.state = this.addressChange.controls.workState.value;
-    this.currentUser.waddress.zip = this.addressChange.controls.workZip.value;
+    this.currentUser.workAddress.street = this.addressChange.controls.workAddress.value;
+    this.currentUser.workAddress.apt = this.addressChange.controls.workAddressApt.value;
+    this.currentUser.workAddress.city = this.addressChange.controls.workCity.value;
+    this.currentUser.workAddress.state = this.addressChange.controls.workState.value;
+    this.currentUser.workAddress.zip = this.addressChange.controls.workZip.value;
 
     
-    await this.validationService.validateAddress(this.currentUser.haddress).then( data => {
+    await this.validationService.validateAddress(this.currentUser.homeAddress).then( data => {
       this.transientHomeAddress = data;
       if(this.transientHomeAddress == null){
         return;
       }else {
-        this.transientHomeAddress.id = this.currentUser.haddress.id;
+        this.transientHomeAddress.id = this.currentUser.homeAddress.id;
       }
     })
     
-    await this.validationService.validateAddress(this.currentUser.waddress).then( data => {
+    await this.validationService.validateAddress(this.currentUser.workAddress).then( data => {
       this.transientWorkAddress = data;
       if(this.transientWorkAddress == null){
         return;
       }else {
-        this.transientWorkAddress.id = this.currentUser.waddress.id;
+        this.transientWorkAddress.id = this.currentUser.workAddress.id;
       }
     })
     
@@ -112,9 +112,9 @@ export class ProfileLocationComponent implements OnInit {
     if(this.transientWorkAddress == null || this.transientHomeAddress == null){
       return;
     }else {
-      this.currentUser.haddress = this.transientHomeAddress;
-      console.log(this.currentUser.haddress);
-      this.currentUser.waddress = this.transientWorkAddress;
+      this.currentUser.homeAddress = this.transientHomeAddress;
+      console.log(this.currentUser.homeAddress);
+      this.currentUser.workAddress = this.transientWorkAddress;
 
       this.userService.updateUserInfo(this.currentUser).subscribe(
         (input) => { 

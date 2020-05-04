@@ -117,7 +117,7 @@ export class SignupModalComponent implements OnInit {
         return;
       } else {
         this.modalRef.hide();
-        this.user.haddress = finalAddress;
+        this.user.homeAddress = finalAddress;
         this.userService.addUser(this.user);
         return;
       }

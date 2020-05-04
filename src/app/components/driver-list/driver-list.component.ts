@@ -37,8 +37,8 @@ export class DriverListComponent implements OnInit {
     // sets the location to the driver's home address
     this.userService.getDriverById(this.currentUserID).subscribe(
       (currentUser) => {
-        console.log(currentUser);
-        let currentAddress = currentUser.haddress;
+
+        let currentAddress = currentUser.homeAddress;
         this.location = currentAddress.street + ", " + currentAddress.city + ", " + currentAddress.state;
 
         this.getGoogleApi();
@@ -52,7 +52,7 @@ export class DriverListComponent implements OnInit {
                 this.drivers.push({
                   'id': element.userId,
                   'name': element.firstName+" "+element.lastName,
-                  'origin':element.haddress.city+","+element.haddress.state,
+                  'origin':element.homeAddress.city+","+element.homeAddress.state,
                   'email': element.email,
                   'phone':element.phoneNumber,
                 });
@@ -77,7 +77,7 @@ export class DriverListComponent implements OnInit {
   }
 
   /**
-  * Inserts the google maps api script into the document head. This seems to be duplicated code.
+  * Inserts the google maps api script into the document head. 
   */  
   getGoogleApi() {
     if (environment.googleMapKey !== undefined) {
@@ -165,7 +165,6 @@ displayDriversList(origin, drivers) {
           const originList = response.originAddresses;
           const destinationList = response.destinationAddresses;
           const results = response.rows[0].elements;
-          console.log(results[0].distance.text);
 
           this.availableDrivers.push({
             label: `exampleModalCentered${element.id}`,

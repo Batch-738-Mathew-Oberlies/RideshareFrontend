@@ -86,7 +86,10 @@ export class ValidationService {
 	}
 
 	validateAddress(address: Address) {
-		console.log(address);
+		if(address.apt == null) {
+            address.apt = '';
+		}
+		
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
     	//probably need to hide this API userID--->____________
 		let xml = 
