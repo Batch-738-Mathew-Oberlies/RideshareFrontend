@@ -30,6 +30,7 @@ import { ScheduleComponent } from '../components/schedule/schedule.component';
 import { ViewMyRidesComponent } from '../components/view-my-rides/view-my-rides.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
+import { TripsTableComponent } from '../components/trips-table/trips-table.component';
 
 
 describe('BsNavbarComponent', () => {
@@ -65,6 +66,7 @@ describe('BsNavbarComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
       imports: [RouterModule, FormsModule, AppRoutingModule, RouterTestingModule, HttpClientModule, ReactiveFormsModule, ModalModule.forRoot()],
       providers: []

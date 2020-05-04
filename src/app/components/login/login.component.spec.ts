@@ -33,6 +33,7 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 
 
@@ -69,6 +70,7 @@ describe('LoginComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
        imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule, ModalModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA],

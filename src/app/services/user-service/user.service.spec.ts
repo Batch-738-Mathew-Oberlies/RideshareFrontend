@@ -33,6 +33,7 @@ import { HomePageComponent } from 'src/app/components/home-page/home-page.compon
 import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { Router } from '@angular/router';
+import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.component';
 
 
 describe('UserService', () => {
@@ -68,6 +69,7 @@ describe('UserService', () => {
       BsNavbarComponent,
       ScheduleComponent,
       ViewMyRidesComponent,
+      TripsTableComponent
     ],
     imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]

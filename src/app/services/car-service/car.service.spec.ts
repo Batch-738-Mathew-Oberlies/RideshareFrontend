@@ -32,6 +32,7 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { ViewMyRidesComponent } from 'src/app/components/view-my-rides/view-my-rides.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.component';
 
 
 
@@ -67,6 +68,7 @@ import { RouterTestingModule } from '@angular/router/testing';
           BsNavbarComponent,
           ScheduleComponent,
           ViewMyRidesComponent,
+          TripsTableComponent
         ],
          imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]

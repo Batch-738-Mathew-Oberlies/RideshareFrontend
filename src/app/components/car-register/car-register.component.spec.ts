@@ -30,6 +30,7 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 describe('CarRegisterComponent', () => {
   let component: CarRegisterComponent;
@@ -64,6 +65,7 @@ describe('CarRegisterComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]

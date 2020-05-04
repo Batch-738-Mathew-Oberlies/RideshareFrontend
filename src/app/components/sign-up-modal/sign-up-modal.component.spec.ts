@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 describe('SignupModalComponent', () => {
   let component: SignupModalComponent;
@@ -63,6 +64,7 @@ describe('SignupModalComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, ModalModule.forRoot()]
     })

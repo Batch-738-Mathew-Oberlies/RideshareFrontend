@@ -28,6 +28,7 @@ import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 describe('DriverListComponent', () => {
   let component: DriverListComponent;
@@ -62,6 +63,7 @@ describe('DriverListComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
        imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
     })

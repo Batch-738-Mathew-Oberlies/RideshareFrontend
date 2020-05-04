@@ -30,6 +30,7 @@ import { HomePageComponent } from '../home-page/home-page.component';
 import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -64,6 +65,7 @@ describe('NavbarComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]

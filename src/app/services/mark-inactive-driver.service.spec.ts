@@ -29,6 +29,7 @@ import { ViewMyRidesComponent } from '../components/view-my-rides/view-my-rides.
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TripsTableComponent } from '../components/trips-table/trips-table.component';
 
 describe('MarkInactiveDriverService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -59,6 +60,7 @@ describe('MarkInactiveDriverService', () => {
       BsNavbarComponent,
       ScheduleComponent,
       ViewMyRidesComponent,
+      TripsTableComponent
     ],
      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   }));

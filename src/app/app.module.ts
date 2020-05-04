@@ -96,7 +96,8 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     AuthService,
     ValidationService,
     BsModalService,
-    ScheduleService
+    ScheduleService,
+    TripsTableComponent
   ],
   bootstrap: [AppComponent]
 })

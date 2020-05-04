@@ -31,6 +31,7 @@ import { UserRegisterComponent } from '../user-register/user-register.component'
 import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -65,6 +66,7 @@ describe('HomePageComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
       imports: [FormsModule, ReactiveFormsModule, HttpClientModule, AppRoutingModule, RouterTestingModule],
       providers: [BsModalService, ComponentLoaderFactory, PositioningService],

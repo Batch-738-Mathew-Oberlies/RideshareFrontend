@@ -32,6 +32,7 @@ import { HomePageComponent } from 'src/app/components/home-page/home-page.compon
 import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { ViewMyRidesComponent } from 'src/app/components/view-my-rides/view-my-rides.component';
+import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.component';
 
 
 describe('BatchService', () => {
@@ -66,6 +67,7 @@ describe('BatchService', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]

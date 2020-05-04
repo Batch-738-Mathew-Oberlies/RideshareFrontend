@@ -30,6 +30,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ModalModule } from 'ngx-bootstrap';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -64,6 +65,7 @@ describe('LandingComponent', () => {
         BsNavbarComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
+        TripsTableComponent
       ],
       imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule, ModalModule.forRoot()],
     })
