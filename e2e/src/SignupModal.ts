@@ -47,12 +47,12 @@ export class SignupModal {
         browser.get('http://localhost:4200');
     }
 
-    openModal = async () => {
-        await element(by.id('signup')).click();
+    openModal = () => {
+         element(by.id('signup')).click();
     }
 
-    closeModal = async () => {
-        await element(by.id('close-modal')).click();
+    closeModal = () => {
+        element(by.id('close-modal')).click();
     }
 
     setFirstName = (name) => {
