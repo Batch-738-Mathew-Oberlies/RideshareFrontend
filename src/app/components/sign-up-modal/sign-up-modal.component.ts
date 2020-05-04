@@ -13,9 +13,7 @@ import { Address } from 'src/app/models/address';
   templateUrl: './sign-up-modal.component.html',
   styleUrls: ['./sign-up-modal.component.css']
 })
-/**
- * The sign up modal component.
- */
+
 export class SignupModalComponent implements OnInit {
 
   address = new Address("", "", "", "", "");
@@ -25,9 +23,12 @@ export class SignupModalComponent implements OnInit {
   batch: Batch = new Batch();
   batches: Batch[];
 
+  httpSuccess: boolean;
+  httpError: boolean;
+
   //Store the retrieved template from the 'openModal' method for future use cases.
   modalRef :BsModalRef;
-  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS',
+  states = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS',
             'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
             'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
             'WI','WY'];
@@ -60,8 +61,9 @@ export class SignupModalComponent implements OnInit {
         );  
   }
 
-  //Opens 'sign up' modal that takes in a template of type 'ng-template'.
-  openModal(template :TemplateRef<any>){
+  openModal(template: TemplateRef<any>){
+    this.httpSuccess = false;
+    this.httpError = false;
     this.signup.reset();
     this.signup.controls.state.reset('')
     this.signup.controls.batch.reset('')
@@ -71,56 +73,62 @@ export class SignupModalComponent implements OnInit {
 
   async submitUser() {
 
-      //Pulls the information from forms into the user object
+    //Pulls the information from forms into the user object
+    this.user.userName = this.signup.controls.username.value;
+    this.user.firstName = this.signup.controls.fName.value;
+    this.user.lastName = this.signup.controls.lName.value;
+    this.user.email = this.signup.controls.email.value;
+    this.user.phoneNumber = this.signup.controls.pNumber.value;
+    this.user.batch.batchNumber = this.signup.controls.batch.value.split(' ')[0];
+    this.user.batch.batchLocation = this.signup.controls.batch.value.split(' ')[1];
+    this.user.wAddress = new Address(null, null, null, null, null);
 
-      this.user.userName = this.signup.controls.username.value;
-      this.user.firstName = this.signup.controls.fName.value;
-      this.user.lastName = this.signup.controls.lName.value;
-      this.user.email = this.signup.controls.email.value;
-      this.user.phoneNumber = this.signup.controls.pNumber.value;
-      this.user.batch.batchNumber = this.signup.controls.batch.value.split(' ')[0];
-      this.user.batch.batchLocation = this.signup.controls.batch.value.split(' ')[1];
+    // Pulls the information from the forms into our address object
+    //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
+    this.address.apt = this.signup.controls.streetAddress.value;
+    this.address.street = this.signup.controls.streetAddress2.value;
+    this.address.city = this.signup.controls.city.value;
+    this.address.state = this.signup.controls.state.value;
+    this.address.zip = this.signup.controls.zip.value;
+    
 
-      // Pulls the information from the forms into our address object
-      //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
-      this.address.apt = this.signup.controls.streetAddress.value;
-      this.address.street = this.signup.controls.streetAddress2.value;
-      this.address.city = this.signup.controls.city.value;
-      this.address.state = this.signup.controls.state.value;
-      this.address.zip = this.signup.controls.zip.value;
-
-      console.log(this.address);
-
-      //Switch Statement to set the user to either a rider, driver, or both
-      switch(this.signup.controls.driver.value){
-        case "driver":{
-          this.user.isDriver = true;
-          break;
-        }
-        case "rider":{
-          this.user.isAcceptingRides = true;
-          break;
-        }
-        case "both":{
-          this.user.isAcceptingRides = true;
-          this.user.isDriver = true;
-          break;
-        }
+    //Switch Statement to set the user to either a rider, driver, or both
+    switch(this.signup.controls.driver.value){
+      case "driver":{
+        this.user.isDriver = true;
+        break;
       }
-
-      //Sets the final confirmed address and then attaches it to user model to be sent.
-      let finalAddress;
-      await this.validationService.validateAddress(this.address).then((result) => {
-        finalAddress = result;
-      })
-
-      if (finalAddress == null) {
-        return;
-      } else {
-        this.modalRef.hide();
-        this.user.hAddress = finalAddress;
-        this.userService.addUser(this.user);
-        return;
+      case "rider":{
+        this.user.isAcceptingRides = true;
+        break;
+      }
+      case "both":{
+        this.user.isAcceptingRides = true;
+        this.user.isDriver = true;
+        break;
       }
     }
+
+    //Sets the final confirmed address and then attaches it to user model to be sent.
+    let finalAddress;
+    await this.validationService.validateAddress(this.address).then((result) => {
+      finalAddress = result;
+    })
+
+    if (finalAddress == null) {
+      return;
+    } else {
+      this.user.hAddress = finalAddress;
+      console.log("user we're sending: ", this.user);
+      await this.userService.addUser(this.user).subscribe(
+        () => {
+          this.httpSuccess = true;
+      },
+        (error) => {
+          this.httpError = true;
+          console.log(error);
+      });
+      return;
+    }
+  }
 }

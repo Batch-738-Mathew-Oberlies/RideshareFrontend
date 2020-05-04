@@ -83,8 +83,26 @@
         <p *ngIf="signup.controls.driver.hasError('required') && signup.controls.driver.touched" class="error">A selection is required.</p>      
       
       <div class="btn-container">
+        <div *ngIf="httpSuccess==true">
+          <div class="row justify-content-center">
+            <div class="alert alert-success alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close" id="response-success">&times;</a>
+              Signup was successful!
+            </div>
+          </div>
+        </div>
+          
+        <div *ngIf="httpError==true">
+          <div class="row justify-content-center">
+            <div class="alert alert-danger alert-dismissible">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close" id="response-error">&times;</a>
+              There was a problem with our service. Please try again later.
+            </div>
+          </div>
+        </div>      
         <button type="submit" class="btn btn-primary register" [disabled]="!signup.valid" (click)="submitUser()" id="submit">Submit</button>
       </div>
+
     </div>
   </form>
 </ng-template> 
