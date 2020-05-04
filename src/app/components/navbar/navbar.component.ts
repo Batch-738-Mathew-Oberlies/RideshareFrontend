@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   modal :SignupModalComponent;
   name: string = '';
   admin: string = '';
-
+  link: string = '/';
   currentUser: string = '';
 
   /**
@@ -42,9 +42,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     if(sessionStorage.getItem("userid") != null){
-      this.currentUser =sessionStorage.getItem("name");
+      this.currentUser = sessionStorage.getItem("name");
+      this.link = '/landingPage';
     }else{
-      this.currentUser ='';
+      this.currentUser = '';
+      this.link = '/';
     }
     if (this.authService.user.userId) {
       this.userService.getUserById(this.authService.user.userId).then((response)=>{
@@ -79,6 +81,7 @@ export class NavbarComponent implements OnInit {
     //clear all session
     this.name = '';
     this.admin = '';
+    this.link = '/';
     this.currentUser = '';
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("userid");
