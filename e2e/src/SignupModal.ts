@@ -1,4 +1,4 @@
-import { browser, element, by } from "protractor"
+import { browser, element, by, $$ } from "protractor"
 
 export class SignupModal {
     firstname   = element(by.id('firstname'));
@@ -14,8 +14,13 @@ export class SignupModal {
     zip         = element(by.id('hZip'));
     preference  = element(by.id('preference'));
 
+    inputFields = $$('.modal-body').$$('.form-control');
+
     submit      = element(by.id('submit'));
     modal       = element(by.id('signup-form'));
+    
+    httpSuccess = element(by.id('response-success'));
+    httpError   = element(by.id('response-error'));
     
 
 
@@ -70,7 +75,6 @@ export class SignupModal {
         element(by.id('username')).sendKeys(name)
     }
 
-    //"1 Morgantown", "2 Virginia"
     setBatch = (batch) => {
         element(by.cssContainingText('option', batch)).click();
     }
@@ -84,7 +88,6 @@ export class SignupModal {
     }
     
     setState = (state) => {
-        //element(by.id('hState')).sendKeys(state);
         element(by.cssContainingText('option', state)).click();
     }
 
