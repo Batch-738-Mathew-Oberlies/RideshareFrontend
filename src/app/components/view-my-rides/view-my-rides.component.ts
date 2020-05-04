@@ -13,8 +13,8 @@ export class ViewMyRidesComponent implements OnInit {
 
   public caption='My Rides';
   public id: number = +sessionStorage.getItem("userid");
-  public trips$: Observable<Trip[]> = this.serv.getRiderTrips(this.id);
-  public riderTrips$: Observable<Trip[]> = this.trips$;
+  public tripsObs: Observable<Trip[]> = this.serv.getRiderTrips(this.id);
+  public riderTripsObs: Observable<Trip[]> = this.tripsObs;
 
   ngOnInit() {}
 }

@@ -12,9 +12,9 @@ export class ScheduleComponent implements OnInit {
   constructor(private serv: ScheduleService) { }
   
   public caption='Trip Schedule';
-  public trips$: Observable<Trip[]> = this.serv.getTrips();
+  public tripsObs: Observable<Trip[]> = this.serv.getTrips();
   public id: number = +sessionStorage.getItem("userid");
-  public riderTrips$: Observable<Trip[]> = this.serv.getRiderTrips(this.id);
+  public riderTripsObs: Observable<Trip[]> = this.serv.getRiderTrips(this.id);
 
   ngOnInit() {}
 }

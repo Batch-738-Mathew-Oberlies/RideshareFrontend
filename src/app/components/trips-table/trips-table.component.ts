@@ -22,7 +22,7 @@ export class TripsTableComponent implements OnInit {
   }
 
   addTrip(t: Trip) {
-    this.serv.addTrips(t,this.id).subscribe(()=>this.onTrip(t));
+    this.serv.addTrips(t,this.id).subscribe();
   }
 
   removeTrip(t: Trip) {
