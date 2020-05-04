@@ -13,10 +13,14 @@ exports.config = {
     // './src/**/*.e2e-spec.ts'
     './test/landingpage.spec.js',
     './test/register.spec.js',
-    './test/usernav.spec.js'
+    './test/usernav.spec.js',
+    './test/profile-tests.ts',
   ],
+  suites: {
+    profile: './test/profile-tests.ts',
+  },
   capabilities: {
-    browserName: 'chrome'
+    browserName: 'firefox'
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',

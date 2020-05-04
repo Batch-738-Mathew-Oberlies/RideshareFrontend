@@ -43,7 +43,7 @@
         <div class="col-sm-1"></div>
         <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
         <div class="col-sm-4">
-          <input type="text" formControlName="homeAddressApt" class="form-control" id="address2">
+          <input type="text" formControlName="homeAddressApt" class="form-control" id="homeAddressApt">
           <div *ngFor="let error of errorArray">
             <p *ngIf="error.includes('Apts')" class="error"> {{ error }}</p>
           </div>
@@ -96,7 +96,7 @@
         <div class="col-sm-1"></div>
         <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="workAddress" required>
+          <input type="text" class="form-control" id="workStreet" name="homeStreet" formControlName="workAddress" required>
           <p *ngIf="addressChange.controls.workAddress.hasError('required') && addressChange.controls.workAddress.touched" class="error">Street Address is required.</p>
           <p *ngIf="addressChange.controls.workAddress.hasError('pattern')" class="error">Invalid Street Address.</p>
           <div *ngFor="let error of errorArray">
@@ -109,7 +109,7 @@
         <div class="col-sm-1"></div>
         <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
         <div class="col-sm-4">
-          <input type="text" formControlName="workAddressApt" class="form-control" id="address2">
+          <input type="text" formControlName="workAddressApt" class="form-control" id="workAddressApt">
           <div *ngFor="let error of errorArray">
             <p *ngIf="error.includes('Apts')" class="error"> {{ error }}</p>
           </div>
