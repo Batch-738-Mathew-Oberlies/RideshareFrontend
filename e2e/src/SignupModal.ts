@@ -1,4 +1,4 @@
-import { browser, element, by, $$ } from "protractor"
+import { element, by, $$ } from "protractor"
 
 export class SignupModal {
     firstname   = element(by.id('firstname'));
@@ -42,16 +42,11 @@ export class SignupModal {
         this.setPreference(pref);
     }
 
-
-    openPage = () => {
-        browser.get('http://localhost:4200');
-    }
-
-    openModal = () => {
+    open = () => {
          element(by.id('signup')).click();
     }
 
-    closeModal = () => {
+    close = () => {
         element(by.id('close-modal')).click();
     }
 
