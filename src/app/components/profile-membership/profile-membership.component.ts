@@ -36,8 +36,6 @@ export class ProfileMembershipComponent implements OnInit {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
       (response) => {
         this.profileObject = response;
-        console.log(this.profileObject);
-
         
         this.isDriver = this.profileObject.driver;
         this.isActive = this.profileObject.active;
@@ -104,8 +102,6 @@ export class ProfileMembershipComponent implements OnInit {
    * Changes the isAcceptingRides boolean to match clicked button.
    */
   changeIsAcceptingRides(bool: boolean) {
-    console.log("Before: " + this.isAcceptingRides);
     this.isAcceptingRides = bool;
-    console.log("After: " + this.isAcceptingRides);
   }
 }
