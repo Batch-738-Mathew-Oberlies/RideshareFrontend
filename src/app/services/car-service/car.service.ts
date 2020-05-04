@@ -86,7 +86,7 @@ export class CarService {
 	 * Creates a car, assigns it to the given user, and makes that user a driver.
 	 * @param car 
 	 * @param userId 
-	 */u
+	 */
 
 	createCar(car, userId) {
 
