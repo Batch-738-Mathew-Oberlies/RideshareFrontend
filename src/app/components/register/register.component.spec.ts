@@ -73,8 +73,6 @@ describe('RegisterComponent', () => {
     .compileComponents();
   }));
 
-  // imports: [RouterModule, RouterTestingModule, HttpClientModule],
-  // providers: [{provide: Router, useClass: RouterStub}]
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterComponent);
