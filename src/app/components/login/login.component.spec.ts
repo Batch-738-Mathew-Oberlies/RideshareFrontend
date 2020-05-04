@@ -95,22 +95,23 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      isDriver: true,
-      isAcceptingRides: true,
-      hAddress: {
-        street: "123 Fake St.",
-        apt: "123",
-        city: "Tulsa",
-        state: "Oklahoma",
-        zip: "12345"
+      driver: true,
+      acceptingRides: true,
+      homeAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
       },
-      wAddress: {
-        street: "123 Fake St.",
-        apt: "123",
-        city: "Tulsa",
-        state: "Oklahoma",
-        zip: "12345"
-      }}]
+      workAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
+      }
+    }]
     // fixture.detectChanges();
   });
 
@@ -132,22 +133,23 @@ describe('LoginComponent', () => {
       email: 'john.smith@gmail.com',
       phoneNumber: '9171234567',
       active: true,
-      isDriver: true,
-      isAcceptingRides: true,
-      hAddress: {
-        street: "123 Fake St.",
-        apt: "123",
-        city: "Tulsa",
-        state: "Oklahoma",
-        zip: "12345"
+      driver: true,
+      acceptingRides: true,
+      homeAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
       },
-      wAddress: {
-        street: "123 Fake St.",
-        apt: "123",
-        city: "Tulsa",
-        state: "Oklahoma",
-        zip: "12345"
-      }}];
+      workAddress:{
+        street:"123",
+        apt:"",
+        city:"Washington",
+        state:"VI",
+        zip:"12450",
+      }
+    }];
       // act
       component.changeUser(user);
       // assert

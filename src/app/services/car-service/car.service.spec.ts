@@ -106,17 +106,17 @@ import { RouterTestingModule } from '@angular/router/testing';
             lastName: 'Carstons',
             email: 'ryan@gmail.com',
             phoneNumber: '1231231231',
-            isDriver: true,
+            driver: true,
             active: true,
-            isAcceptingRides: true,
-            hAddress: {
+            acceptingRides: true,
+            homeAddress: {
               street: "123 Fake St.",
               apt: "123",
               city: "Tulsa",
               state: "Oklahoma",
               zip: "12345"
             },
-            wAddress: {
+            workAddress: {
               street: "123 Fake St.",
               apt: "123",
               city: "Tulsa",
@@ -143,17 +143,17 @@ import { RouterTestingModule } from '@angular/router/testing';
             lastName: 'Nguyen',
             email: 'pete@gmail.com',
             phoneNumber: '3213213213',
-            isDriver: true,
+            driver: true,
             active: true,
-            isAcceptingRides: true,
-            hAddress: {
+            acceptingRides: true,
+            homeAddress: {
               street: "123 Fake St.",
               apt: "123",
               city: "Tulsa",
               state: "Oklahoma",
               zip: "12345"
             },
-            wAddress: {
+            workAddress: {
               street: "123 Fake St.",
               apt: "123",
               city: "Tulsa",

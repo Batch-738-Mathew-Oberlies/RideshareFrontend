@@ -34,30 +34,24 @@ export class ProfileLocationComponent implements OnInit {
    * logged in user as it appears in the database.
    */
   ngOnInit() {
-    this.userService.getUserById3(+sessionStorage.getItem("userid")).subscribe((response: User)=>{
-        if(response !== undefined){
-          this.currentUser = response;
-          this.zipcode = response.hAddress.zip;
-          this.city = response.hAddress.city;
-          this.address = response.hAddress.apt;
-          this.address2 = response.hAddress.street;
-          this.hState = response.hAddress.state;
-        } else {
-          console.log("No user at that id.")
-        }
-        
+   this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response: User)=>{
+      this.currentUser = response;
+      this.zipcode = response.homeAddress.zip;
+      this.city = response.homeAddress.city;
+      this.address = response.homeAddress.apt;
+      this.address2 = response.homeAddress.street;
+      this.hState = response.homeAddress.state;
 
       });
       
   }
 
   addressChange = new FormGroup({
-    
-    address1: new FormControl(`${this.currentUser.hAddress.apt}`, Validators.pattern('[a-z A-Z0-9]*')),
-    address2: new FormControl(`${this.currentUser.hAddress.street}`, [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
-    city: new FormControl(`${this.currentUser.hAddress.city}`, [Validators.required, Validators.pattern('[a-z A-Z]*')]),
-    state: new FormControl(`${this.currentUser.hAddress.state}`, Validators.required),
-    zip: new FormControl(`${this.currentUser.hAddress.zip}`, [Validators.required, Validators.pattern('[0-9]{5}')]),
+    address1: new FormControl(`${this.currentUser.homeAddress.apt}`, Validators.pattern('[a-z A-Z0-9]*')),
+    address2: new FormControl(`${this.currentUser.homeAddress.street}`, [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
+    city: new FormControl(`${this.currentUser.homeAddress.city}`, [Validators.required, Validators.pattern('[a-z A-Z]*')]),
+    state: new FormControl(`${this.currentUser.homeAddress.state}`, Validators.required),
+    zip: new FormControl(`${this.currentUser.homeAddress.zip}`, [Validators.required, Validators.pattern('[0-9]{5}')]),
   })
 
   async updatesContactInfo(){
@@ -72,8 +66,8 @@ export class ProfileLocationComponent implements OnInit {
 
     if(this.transientAddress == null){
       return;
-    } else {
-      this.currentUser.hAddress = this.transientAddress;
+    }else {
+      this.currentUser.homeAddress = this.transientAddress;
       console.log(this.currentUser);
       this.userService.updateUserInfo(this.currentUser);
     }

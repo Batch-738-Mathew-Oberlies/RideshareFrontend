@@ -100,17 +100,17 @@ describe('UserService', () => {
           lastName: 'Carstons',
           email: 'ryan@gmail.com',
           phoneNumber: '1231231231',
-          isDriver: true,
+          driver: true,
           active: true,
-          isAcceptingRides: true,
-          hAddress: {
+          acceptingRides: true,
+          homeAddress: {
             street: "123 Fake St.",
             apt: "123",
             city: "Tulsa",
             state: "Oklahoma",
             zip: "12345"
           },
-          wAddress: {
+          workAddress: {
             street: "123 Fake St.",
             apt: "123",
             city: "Tulsa",
@@ -129,17 +129,17 @@ describe('UserService', () => {
           lastName: 'Nguyen',
           email: 'pete@gmail.com',
           phoneNumber: '3213213213',
-          isDriver: true,
+          driver: true,
           active: true,
-          isAcceptingRides: true,
-          hAddress: {
+          acceptingRides: true,
+          homeAddress: {
             street: "123 Fake St.",
             apt: "123",
             city: "Tulsa",
             state: "Oklahoma",
             zip: "12345"
           },
-          wAddress: {
+          workAddress: {
             street: "123 Fake St.",
             apt: "123",
             city: "Tulsa",
@@ -151,9 +151,9 @@ describe('UserService', () => {
       let response;
       spyOn(userService, 'getAllUsers').and.returnValue(of(userResponse));
 
-      userService.getAllUsers().subscribe(res => {
-        response = res;
-      });
+  //     userService.getAllUsers().subscribe(res => {
+  //       response = res;
+  //     });
 
       expect(response).toEqual(userResponse);
     });
