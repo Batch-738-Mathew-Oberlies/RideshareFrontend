@@ -172,14 +172,13 @@ displayDriversList(origin, drivers) {
             origin: originList,
             destinationList: destinationList,
             results: results,
+            seats: availableSeats + "/" + totalSeats,
             user: {
               id: element.id,
               name: element.name,
               email: element.email,
               phone: element.phone
             },
-            availableSeats: availableSeats,
-            totalSeats: totalSeats
           })
         }
       });
