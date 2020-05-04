@@ -57,22 +57,13 @@ sleep(ms) {
  * Inserts the google maps api script into the document head. This seems to be duplicated code.
  * Duplicate code.
  */
- getGoogleApi()  {
-  this.http.get(`${environment.loginUri}getGoogleApi`)
-     .subscribe(
-               (response) => {
-                   //console.log(response);
-                   if(response["googleMapAPIKey"] != undefined){
-                       new Promise((resolve) => {
-                         let script: HTMLScriptElement = document.createElement('script');
-                         script.addEventListener('load', r => resolve());
-                         script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                         document.head.appendChild(script);      
-                   }); 
-             }    
-         }
-     );
- }
+  getGoogleApi() {
+    if (environment.googleMapKey !== undefined) {
+      const script: HTMLScriptElement = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
+      document.head.appendChild(script);
+    }
+  }
 
  /**
   * Searches for drivers, collects the google maps services, and calls the display route method.

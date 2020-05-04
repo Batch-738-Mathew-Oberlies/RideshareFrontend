@@ -102,6 +102,9 @@
             },
             "production": {
               "browserTarget": "rideshare-frontend:build:production"
+            },
+            "dev": {
+              "browserTarget": "rideshare-frontend:build:dev"
             }
           }
         },

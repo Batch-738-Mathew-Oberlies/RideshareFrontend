@@ -56,13 +56,31 @@ export class CarService {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
 
-
-	updateCarInfo(car: Car) {
-		//console.log(user);
-		return this.http.put(this.url + '/' + car.carId, car).toPromise();
+	/**
+	 * Returns a car and current trip by user ID.
+	 * @param userId 
+	 */
+	getCarTripByUserId(userId: number) {
+		return this.http.get(`${this.url}trips/driver/${userId}`)
 	}
 
+	/**
+	 * Updates information on a car
+	 * @param car 
+	 */
+	updateCarInfo(car: Car) {
+		//console.log(user);
+		return this.http.put(`${this.url}${car.carId}`, car).toPromise();
+	}
 
+	/**
+	 * Identical to the above method except that it returns an observable.
+	 * @param userId 
+	 */
+	updateCarInfo2(car: Car): Observable<Car> {
+		//console.log(user);
+		return this.http.put<Car>(`${this.url}${car.carId}`, car);
+	}
 
 	/**
 	 * Creates a car, assigns it to the given user, and makes that user a driver.

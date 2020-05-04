@@ -182,7 +182,7 @@ export class ValidationService {
 		
 		//Could be broken into another function confirmAddress(address:Address): Address{}
 		if (returnedAddress.state != address.state || returnedAddress.zip != address.zip || returnedAddress.city != address.city.toLocaleUpperCase() || returnedAddress.apt != address.apt.toLocaleUpperCase()) {
-			if (confirm(`We found this address for you. Continue or make a change?` + `\n\n${returnedAddress.street}, ${returnedAddress.apt}\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
+			if (confirm(`We found this address for you. Continue or make a change?` + `\n\n${returnedAddress.street},\n${returnedAddress.apt}\n${returnedAddress.city}, ${returnedAddress.state} ${returnedAddress.zip}`).valueOf()) {
 				console.log("returnedAddress: ", returnedAddress)
 				return returnedAddress;
 
