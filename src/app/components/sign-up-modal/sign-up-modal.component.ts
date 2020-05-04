@@ -81,7 +81,7 @@ export class SignupModalComponent implements OnInit {
     this.user.phoneNumber = this.signup.controls.pNumber.value;
     this.user.batch.batchNumber = this.signup.controls.batch.value.split(' ')[0];
     this.user.batch.batchLocation = this.signup.controls.batch.value.split(' ')[1];
-    this.user.wAddress = new Address(null, null, null, null, null);
+    this.user.workAddress = new Address(null, null, null, null, null);
 
     // Pulls the information from the forms into our address object
     //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
@@ -92,22 +92,24 @@ export class SignupModalComponent implements OnInit {
     this.address.zip = this.signup.controls.zip.value;
     
 
-    //Switch Statement to set the user to either a rider, driver, or both
-    switch(this.signup.controls.driver.value){
-      case "driver":{
-        this.user.isDriver = true;
-        break;
+      //Switch Statement to set the user to either a rider, driver, or both
+      switch(this.signup.controls.driver.value){
+        case "driver":{
+          this.user.driver = true;
+          break;
+        }
+        case "rider":{
+          this.user.acceptingRides = true;
+          break;
+        }
+        case "both":{
+          this.user.acceptingRides = true;
+          this.user.driver = true;
+          break;
+        }
       }
-      case "rider":{
-        this.user.isAcceptingRides = true;
-        break;
-      }
-      case "both":{
-        this.user.isAcceptingRides = true;
-        this.user.isDriver = true;
-        break;
-      }
-    }
+      
+    
 
     //Sets the final confirmed address and then attaches it to user model to be sent.
     let finalAddress;
@@ -118,7 +120,7 @@ export class SignupModalComponent implements OnInit {
     if (finalAddress == null) {
       return;
     } else {
-      this.user.hAddress = finalAddress;
+      this.user.homeAddress = finalAddress;
       console.log("user we're sending: ", this.user);
       await this.userService.addUser(this.user).subscribe(
         () => {

@@ -87,9 +87,9 @@ export class ValidationService {
 
 	validateAddress(address: Address) {
 		if(address.apt == null) {
-			address.apt = '';
+            address.apt = '';
 		}
-
+		
 		let url = "https://secure.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
 		
 		let xml = 
