@@ -111,7 +111,7 @@ export class UserService {
 	 * @param user 
 	 */
 	addUser(user :User) :Observable<User> {
-		return this.http.post<User>(this.url, user, {headers: this.headers});
+		return this.http.post<User>(this.url + "addUser", user, {headers: this.headers});
 	}
 
 	/**
