@@ -96,10 +96,12 @@ export class SignupModalComponent implements OnInit {
       switch(this.signup.controls.driver.value){
         case "driver":{
           this.user.driver = true;
+          this.user.acceptingRides = false;
           break;
         }
         case "rider":{
           this.user.acceptingRides = true;
+          this.user.driver = false;
           break;
         }
         case "both":{
@@ -112,7 +114,7 @@ export class SignupModalComponent implements OnInit {
     
 
     //Sets the final confirmed address and then attaches it to user model to be sent.
-    let finalAddress;
+    let finalAddress: Address;
     await this.validationService.validateAddress(this.address).then((result) => {
       finalAddress = result;
     })
@@ -122,7 +124,7 @@ export class SignupModalComponent implements OnInit {
     } else {
       this.user.homeAddress = finalAddress;
       console.log("user we're sending: ", this.user);
-      await this.userService.addUser(this.user).subscribe(
+      this.userService.addUser(this.user).subscribe(
         () => {
           this.httpSuccess = true;
       },
