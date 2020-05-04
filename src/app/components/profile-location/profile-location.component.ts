@@ -25,6 +25,22 @@ export class ProfileLocationComponent implements OnInit {
   currentUser: User;
   success :string;
 
+  addressPrepopulate = {
+    street: "123 Fake St.",
+    apt: "123",
+    city: "Tulsa",
+    state: "Oklahoma",
+    zip: "12345"
+  }
+
+  addressChange = new FormGroup({
+    address1: new FormControl(`${this.addressPrepopulate}`),
+    address2: new FormControl(`${this.addressPrepopulate}`),
+    city: new FormControl(`Tulsa`),
+    state: new FormControl(`Oklahoma`),
+    zip: new FormControl(`12345`),
+  });
+
   updatedAddress: Address;
   transientAddress: Address;
   constructor(private userService: UserService, private validationService: ValidationService) { }
@@ -42,17 +58,19 @@ export class ProfileLocationComponent implements OnInit {
       this.address2 = response.homeAddress.street;
       this.hState = response.homeAddress.state;
 
+      this.addressChange = new FormGroup({
+        address1: new FormControl(`${this.currentUser.homeAddress.apt}`, Validators.pattern('[a-z A-Z0-9]*')),
+        address2: new FormControl(`${this.currentUser.homeAddress.street}`, [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
+        city: new FormControl(`${this.currentUser.homeAddress.city}`, [Validators.required, Validators.pattern('[a-z A-Z]*')]),
+        state: new FormControl(`${this.currentUser.homeAddress.state}`, Validators.required),
+        zip: new FormControl(`${this.currentUser.homeAddress.zip}`, [Validators.required, Validators.pattern('[0-9]{5}')]),
+      })
+
       });
       
   }
 
-  addressChange = new FormGroup({
-    address1: new FormControl(`${this.currentUser.homeAddress.apt}`, Validators.pattern('[a-z A-Z0-9]*')),
-    address2: new FormControl(`${this.currentUser.homeAddress.street}`, [Validators.required, Validators.pattern('[0-9]{1,6}[a-z A-Z0-9]*')]),
-    city: new FormControl(`${this.currentUser.homeAddress.city}`, [Validators.required, Validators.pattern('[a-z A-Z]*')]),
-    state: new FormControl(`${this.currentUser.homeAddress.state}`, Validators.required),
-    zip: new FormControl(`${this.currentUser.homeAddress.zip}`, [Validators.required, Validators.pattern('[0-9]{5}')]),
-  })
+  
 
   async updatesContactInfo(){
 

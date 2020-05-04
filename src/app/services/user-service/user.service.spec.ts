@@ -151,9 +151,9 @@ describe('UserService', () => {
       let response;
       spyOn(userService, 'getAllUsers').and.returnValue(of(userResponse));
 
-  //     userService.getAllUsers().subscribe(res => {
-  //       response = res;
-  //     });
+      userService.getAllUsers().subscribe(res => {
+        response = res;
+      });
 
       expect(response).toEqual(userResponse);
     });
