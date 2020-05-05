@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
 })
 /**
  * The DriverListComponent component.
- * 
+ *
  * Large portions of this component are duplicated from driver-contact-modal.
  */
 export class DriverListComponent implements OnInit {
@@ -38,13 +38,13 @@ export class DriverListComponent implements OnInit {
               this.drivers.push({
                    'id': element.userId,
                  'name': element.firstName+" "+element.lastName,
-               'origin':element.hCity+","+element.hState, 
-                'email': element.email, 
+               'origin':element.hCity+","+element.hState,
+                'email': element.email,
                 'phone':element.phoneNumber
               });
           });
       });
-    
+
     this.getGoogleApi();
 
     this.sleep(2000).then(() => {
@@ -54,7 +54,7 @@ export class DriverListComponent implements OnInit {
          mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
-      //get all routes 
+      //get all routes
       this.displayDriversList(this.location, this.drivers);
       //show drivers on map
       this.showDriversOnMap(this.location, this.drivers);
@@ -63,12 +63,15 @@ export class DriverListComponent implements OnInit {
 
   /**
    * Resolves a promise after the given number of milliseconds.
-   * @param ms 
+   * @param ms
    */
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
+
+  /**
+   * Inserts the google maps api script into the document head. This seems to be duplicated code.
+   */
 getGoogleApi()  {
     this.http.get(`${environment.loginUri}getGoogleApi`)
        .subscribe(
@@ -79,9 +82,9 @@ getGoogleApi()  {
                            let script: HTMLScriptElement = document.createElement('script');
                            script.addEventListener('load', r => resolve());
                            script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);      
-                     }); 
-               }    
+                           document.head.appendChild(script);
+                     });
+               }
            }
        );
    }
@@ -89,8 +92,8 @@ getGoogleApi()  {
   /**
    * Inititates services from the google maps api needed for displaying the route, and then
    * calls displayRoute()/
-   * @param origin 
-   * @param destination 
+   * @param origin
+   * @param destination
    */
   showDriversOnMap(origin, drivers){
      drivers.forEach(element => {
@@ -106,10 +109,10 @@ getGoogleApi()  {
 /**
  * Uses the given service of type google.maps.DirectionsService and display of type
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
- * @param origin 
- * @param destination 
- * @param service 
- * @param display 
+ * @param origin
+ * @param destination
+ * @param service
+ * @param display
  */
 displayRoute(origin, destination, service, display) {
     service.route({
@@ -128,8 +131,8 @@ displayRoute(origin, destination, service, display) {
 
 /**
  * Displays a list of drivers, appended directly to the DOM.
- * @param origin 
- * @param drivers 
+ * @param origin
+ * @param drivers
  */
 displayDriversList(origin, drivers) {
     let  origins = [];
@@ -171,8 +174,8 @@ displayDriversList(origin, drivers) {
                                               </div>
                                               <div class="modal-body">
                                                   <h1>${name}</h1>
-                                                  <h3>Email: ${element.email}</h3>         
-                                                  <h3>Phone: ${element.phone}</h3>                 
+                                                  <h3>Email: ${element.email}</h3>
+                                                  <h3>Phone: ${element.phone}</h3>
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -187,7 +190,7 @@ displayDriversList(origin, drivers) {
                                 </td></tr>`;
       }
     });
-    
+
    });
 }
 
