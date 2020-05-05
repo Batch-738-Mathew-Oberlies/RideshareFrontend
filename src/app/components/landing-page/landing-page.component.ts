@@ -20,7 +20,7 @@ export class LandingPageComponent implements OnInit {
  
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
-  
+
   mapProperties :{};
 
   constructor(private http: HttpClient,private userService: UserService) {
@@ -41,16 +41,21 @@ export class LandingPageComponent implements OnInit {
 
 /**
  * Resolves a promise after the given number of milliseconds.
- * @param ms 
+ * @param ms
  */
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
  /**
-  * Searches for drivers, collects the google maps services, and calls the display route method.
-  * VERY similar to the showDriversOnMap method found in driver-contact-modal and driver-list.
-  */
+ * google.maps.DirectionsRenderer to compute the route and display it on the map.
+ *
+ * Duplicated code.
+ * @param origin
+ * @param destination
+ * @param service
+ * @param display
+ */
  searchDriver(){
   //call service search algorithm ()
   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
@@ -68,16 +73,16 @@ sleep(ms) {
     });
  }
 
-/**
- * Uses the given service of type google.maps.DirectionsService and display of type
- * google.maps.DirectionsRenderer to compute the route and display it on the map.
- * 
- * Duplicated code.
- * @param origin 
- * @param destination 
- * @param service 
- * @param display 
- */
+  /**
+   * Uses the given service of type google.maps.DirectionsService and display of type
+   * google.maps.DirectionsRenderer to compute the route and display it on the map.
+   *
+   * Duplicated code.
+   * @param origin
+   * @param destination
+   * @param service
+   * @param display
+   */
   displayRoute(origin, destination, service, display) {
     service.route({
       origin: origin,
@@ -93,5 +98,4 @@ sleep(ms) {
       }
     });
   }
-
 }

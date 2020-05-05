@@ -20,6 +20,7 @@ import { DriverContactModalComponent } from './components/driver-contact-modal/d
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TripsComponent } from './components/trips/trips.component';
 import {ScheduleComponent} from './components/schedule/schedule.component';
 import {ViewMyRidesComponent} from './components/view-my-rides/view-my-rides.component'
 
@@ -39,16 +40,16 @@ const routes: Routes = [
   {path: 'signup', component: SignupModalComponent},
   {path: 'landingPage', component: LandingPageComponent},
   {path: 'drivers', component: DriverListComponent},
-{path: 'profile/contact', component: ProfileContactComponent},
-{path: 'profile/car', component: ProfileCarComponent},
-{path: 'profile/membership', component: ProfileMembershipComponent},
-{path: 'profile/location', component: ProfileLocationComponent},
-{path: 'driver', component: DriverContactModalComponent},
-{path: 'navbar', component: NavbarComponent},
-{path: 'schedule', component: ScheduleComponent},
-{path: 'myrides', component: ViewMyRidesComponent},
-{path: '', component: HomePageComponent},
-{path: '**', pathMatch: 'full', redirectTo: ''}];
+  {path: 'profile/contact', component: ProfileContactComponent},
+  {path: 'profile/car', component: ProfileCarComponent},
+  {path: 'profile/membership', component: ProfileMembershipComponent},
+  {path: 'profile/location', component: ProfileLocationComponent},
+  {path: 'driver', component: DriverContactModalComponent},
+  {path: 'navbar', component: NavbarComponent},
+  {path: 'schedule', component: ScheduleComponent},
+  {path: 'myrides', component: ViewMyRidesComponent},
+  {path: '', component: HomePageComponent},
+  {path: '**', pathMatch: 'full', redirectTo: ''}];
 
 
 @NgModule({
