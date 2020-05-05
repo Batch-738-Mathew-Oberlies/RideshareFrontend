@@ -45,12 +45,14 @@
           <td>
             {{trip.availableSeats}}
           </td>
-          
+
           <td>
-            <button *ngIf= "!onTrip(trip); else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
-            <ng-template #elseBlock>
-              <button type="button" (click)="removeTrip(trip)" class="btn btn-danger" data-toggle="modal" data-target="#removedModal">Remove</button>
-            </ng-template>
+            <div *ngIf="trip.driver.userId !== this.id">
+              <button *ngIf="!onTrip(trip); else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
+              <ng-template #elseBlock>
+                <button type="button" (click)="removeTrip(trip)" class="btn btn-danger" data-toggle="modal" data-target="#removedModal">Remove</button>
+              </ng-template>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -65,7 +67,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <h2>Seat Reservation Added!</h2>          
+            <h2>Seat Reservation Added!</h2>
           </div>
         </div>
       </div>
@@ -80,7 +82,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <h2>Seat Reservation Removed!</h2>          
+            <h2>Seat Reservation Removed!</h2>
           </div>
         </div>
       </div>

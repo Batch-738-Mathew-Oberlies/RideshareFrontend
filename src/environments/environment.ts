@@ -11,15 +11,15 @@ const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
 const port = '8080';
 
 /**
- * google map api key 
+ * google map api key
  */
 const googleKey = '';
- 
+
 /**
  * This is the environment config.
  */
 export const environment = {
- 
+
   production: false,
   environmentName: 'Default Environment',
   userUri: `${baseUri}/users/`,
