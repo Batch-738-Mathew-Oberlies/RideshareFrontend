@@ -16,7 +16,7 @@ import { CarTrip } from 'src/app/models/car-trip';
 })
 /**
  * The DriverListComponent component.
- * 
+ *
  * Large portions of this component are duplicated from driver-contact-modal.
  */
 export class DriverListComponent implements OnInit {
@@ -110,10 +110,10 @@ export class DriverListComponent implements OnInit {
 /**
  * Uses the given service of type google.maps.DirectionsService and display of type
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
- * @param origin 
- * @param destination 
- * @param service 
- * @param display 
+ * @param origin
+ * @param destination
+ * @param service
+ * @param display
  */
 displayRoute(origin, destination, service, display) {
     service.route({
@@ -132,8 +132,8 @@ displayRoute(origin, destination, service, display) {
 
 /**
  * Displays a list of drivers, appended directly to the DOM.
- * @param origin 
- * @param drivers 
+ * @param origin
+ * @param drivers
  */
 displayDriversList(origin, drivers) {
     let  origins = [];

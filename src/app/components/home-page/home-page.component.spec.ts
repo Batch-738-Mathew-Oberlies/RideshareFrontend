@@ -25,7 +25,7 @@ import { ProfileContactComponent } from '../profile-contact/profile-contact.comp
 import { ProfileCarComponent } from '../profile-car/profile-car.component';
 import { ProfileLocationComponent } from '../profile-location/profile-location.component';
 import { ProfileMembershipComponent } from '../profile-membership/profile-membership.component';
-import { DriverContactModalComponent } from '../driver-contact-modal/driver-contact-modal.component';
+//import { DriverContactModalComponent } from '../driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from '../driver-list/driver-list.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
@@ -59,7 +59,7 @@ describe('HomePageComponent', () => {
         ProfileCarComponent,
         ProfileLocationComponent,
         ProfileMembershipComponent,
-        DriverContactModalComponent,
+        //DriverContactModalComponent,
         DriverListComponent,
         UserRegisterComponent,
         HomePageComponent,

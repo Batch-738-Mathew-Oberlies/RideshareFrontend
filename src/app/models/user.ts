@@ -25,12 +25,12 @@ export class User {
      */
     firstName: string;
 
-     /**
+    /**
      * Set last name as a string
      */
     lastName: string;
 
-     /**
+    /**
      * Set email as a string
      */
     email: string;
