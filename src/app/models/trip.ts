@@ -7,6 +7,7 @@ export enum TripStatus {
   FUTURE
 }
 
+
 export class Trip
 {
     tripId: number;
@@ -18,4 +19,5 @@ export class Trip
     destination: Address;
     tripDate: Date;
     tripStatus: TripStatus;
+
 }

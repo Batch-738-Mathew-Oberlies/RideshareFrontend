@@ -25,8 +25,6 @@ export class DriverContactModalComponent implements OnInit {
    */
   ngOnInit() {
 
-    this.getGoogleApi();
-
     this.sleep(2000).then(() => {
      //show drivers on map
      this.showDriversOnMap(sessionStorage.getItem("origin"), sessionStorage.getItem("destination"));
