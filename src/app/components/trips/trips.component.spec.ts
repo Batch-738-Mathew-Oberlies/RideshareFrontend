@@ -27,10 +27,10 @@ describe('TripsComponent', () => {
       ]
     })
     .compileComponents().then(() => {fixture = TestBed.createComponent(TripsComponent);
-    
+
     comp = fixture.componentInstance //TripComponent test instance
-    create = createFixture.componentInstance //Trip Scheduler Modal 
-  
+    create = createFixture.componentInstance //Trip Scheduler Modal
+
     de = createFixture.debugElement.query(By.css('form'));
     el = de.nativeElement;
     });

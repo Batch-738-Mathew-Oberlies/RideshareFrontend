@@ -1,6 +1,12 @@
 import { User } from './user';
 import { Address } from './address';
 
+export enum TripStatus {
+  PAST,
+  CURRENT,
+  FUTURE
+}
+
 export class Trip
 {
     tripId: number;

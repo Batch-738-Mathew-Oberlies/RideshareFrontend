@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Trip } from 'src/app/models/trip';
+import { Trip, TripStatus } from 'src/app/models/trip';
 import { Car } from 'src/app/models/car';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address } from 'src/app/models/address';
-import {NgbDateStruct, NgbCalendar, NgbInputDatepicker} from '@ng-bootstrap/ng-bootstrap';
-import {TripService} from '../../services/trip-service/trip.service';
-import {UserService} from '../../services/user-service/user.service';
-import {BehaviorSubject} from 'rxjs';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { TripService } from '../../services/trip-service/trip.service';
+import { UserService } from '../../services/user-service/user.service';
+import { BehaviorSubject } from 'rxjs';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 
@@ -173,12 +173,11 @@ export class CreateTripComponent {
       return;
     }
 
-
     this.depDate = this.tripModalForm.value.date.year + ' ' + this.tripModalForm.value.date.month + ' ' + this.tripModalForm.value.date.day;
     this.depTime = this.tripModalForm.value.time.hour + ':' + this.tripModalForm.value.time.minute;
     this.depAddress = this.tripModalForm.value.departure;
 
-    
+
      // builds the trip object to be sent to the back end
     this.trip.tripId = 0;
     this.trip.name = this.tripModalForm.value.name;
