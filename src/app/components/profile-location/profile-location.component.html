@@ -9,8 +9,8 @@
                     <label for="address" class="col-sm-4 col-form-label" >Street Address:</label>
                     <div class="col-sm-4">
                         <input type="text" formControlName="address2" class="form-control" id="address">
-                        <p *ngIf="addressChange.controls.streetAddress2.hasError('required') && addressChange.controls.streetAddress2.touched" class="error">Street Address required please enter one.</p>
-                        <p *ngIf="addressChange.controls.streetAddress2.hasError('pattern')" class="error">Street Address format is incorrect</p>
+                        <p *ngIf="addressChange.controls.address2.hasError('required') && addressChange.controls.address2.touched" class="error">Street Address required please enter one.</p>
+                        <p *ngIf="addressChange.controls.address2.hasError('pattern')" class="error">Street Address format is incorrect</p>
                     </div>
             </div>
             

@@ -35,13 +35,14 @@ export class CarService {
 	 * Fetches all cars from the database.
 	 */
 
-	getAllCars() {
+	getAllCars(): Observable<Car[]> 
+	{
 		return this.http.get<Car[]>(this.url);
 	}
 
 	/**
 	 * Returns a car by user ID.
-	 * @param userId 
+	 * @param userId
 	 */
 
 	getCarByUserId(userId: number) {
@@ -50,7 +51,7 @@ export class CarService {
 
 	/**
 	 * Identical to the above method except that it returns an observable.
-	 * @param userId 
+	 * @param userId
 	 */
 	getCarByUserId2(userId: string): Observable<Car> {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
@@ -59,17 +60,17 @@ export class CarService {
 
 	updateCarInfo(car: Car) {
 		//console.log(user);
-		return this.http.put(this.url, car).toPromise();
+		return this.http.put(this.url + '/' + car.carId, car).toPromise();
 	}
 
 
 
 	/**
 	 * Creates a car, assigns it to the given user, and makes that user a driver.
-	 * @param car 
-	 * @param userId 
+	 * @param car
+	 * @param userId
 	 */
-	
+
 	createCar(car, userId) {
 
 		this.user.userId = userId;
@@ -90,7 +91,7 @@ export class CarService {
 
 	/**
 	 * Deletes the car with the given id from the database.
-	 * @param carId 
+	 * @param carId
 	 */
 
 	removeCar(carId: number) {

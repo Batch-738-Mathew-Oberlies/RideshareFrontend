@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DriverComponent} from './components/driver/driver.component';
@@ -41,6 +41,8 @@ import {ScheduleService} from 'src/app/services/schedule-service/schedule.servic
 import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { TripsTableComponent } from './components/trips-table/trips-table.component';
+
 
 
 
@@ -74,6 +76,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BsNavbarComponent,
     ScheduleComponent,
     ViewMyRidesComponent,
+    TripsTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthService,
     ValidationService,
     BsModalService,
-    ScheduleService
+    ScheduleService,
   ],
   bootstrap: [AppComponent]
 })

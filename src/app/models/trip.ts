@@ -1,5 +1,7 @@
 import { User } from './user';
-import {Address} from './address';
+import { Address } from './address';
+import { TripStatus } from './trip-status';
+
 
 export class Trip
 {
@@ -12,4 +14,5 @@ export class Trip
     destination: Address;
     tripDate: Date;
     tripStatus: TripStatus;
+
 }

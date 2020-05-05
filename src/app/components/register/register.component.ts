@@ -5,6 +5,7 @@ import { Batch } from 'src/app/models/batch';
 import { Router, RouterModule } from '@angular/router';
 import { ValidationService } from 'src/app/services/validation-service/validation.service';
 import { User } from 'src/app/models/user';
+import { DriverInfoComponent } from '../driver-info/driver-info.component';
 
 @Component({
 	selector: 'app-user-register',
@@ -15,7 +16,8 @@ import { User } from 'src/app/models/user';
 @NgModule({
     imports: [
        RouterModule
-	 ]
+	 ],
+	 declarations: [DriverInfoComponent]
 	})
 /**
  * This is the Driver Registration component.
