@@ -1,7 +1,7 @@
 import { browser, element, by } from "protractor";
 
 export class ProfileLocation {
-    
+
     homeStreet = element(by.id("homeStreet"));
     homeAddressApt = element(by.id("homeAddressApt"));
     homeCity = element(by.id("homeCity"));
@@ -14,10 +14,14 @@ export class ProfileLocation {
     workState = element(by.id("workState"));
     workZipcode = element(by.id("workZipcode"));
 
+    submit = element(by.id('submit'));
+    httpSuccess = element(by.id('response-success'));
+    httpError = element(by.id('response-error'));    
+
     constructor(){}
-    
+
     populateForm = (hstreet, haddressapt, hcity, hstate, hzipcode, wstreet, wapt, wcity, wstate, wzip) => {
-            
+
         this.setHomeStreet(hstreet);
         this.setHomeAddressApt(haddressapt);
         this.setHomeCity(hcity);
@@ -71,5 +75,5 @@ export class ProfileLocation {
     setWorkZipcode = (wzip: any) => {
         this.workZipcode.sendKeys(wzip);
     }
-    
+
 }
