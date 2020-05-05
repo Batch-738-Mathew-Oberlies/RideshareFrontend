@@ -14,6 +14,7 @@ export class ProfileLocation {
     workState = element(by.id("workState"));
     workZipcode = element(by.id("workZipcode"));
 
+    form = element(by.id('profileLocationForm'));
     submit = element(by.id('submit'));
     httpSuccess = element(by.id('response-success'));
     httpError = element(by.id('response-error'));    
