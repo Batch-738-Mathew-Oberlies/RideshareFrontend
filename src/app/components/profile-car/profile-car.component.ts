@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-car',
@@ -9,38 +10,54 @@ import { Car } from 'src/app/models/car';
 })
 export class ProfileCarComponent implements OnInit {
 
-  make: string;
-  model:string;
-  nrSeats:number;
   currentCar: Car;
-  success :string;
+  success :boolean;
+  errorExists: boolean;
+  errorArray: any;
+  statusExists: boolean;
+  statusMessage: string;
 
-  constructor(private carService: CarService) { }
+  carForm: FormGroup;
+  make = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 -]+')]);
+  model = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 -]+')]);
+  nrSeats = new FormControl('', [Validators.required, Validators.min(1), Validators.max(6)]);
 
-  /**
-   * Calls in and initializes the car posessed by the currently logged in user.
-   */
-  ngOnInit() {
-
+  constructor(private carService: CarService, private formBuilder: FormBuilder) {
     this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.currentCar = response;
-      this.make = response.make;
-      this.model = response.model;
-      this.nrSeats = response.seats;
-
+      console.log(this.currentCar);
+      this.make.setValue(this.currentCar.make);
+      this.model.setValue(this.currentCar.model);
+      this.nrSeats.setValue(this.currentCar.seats);
     });
+    this.carForm = this.formBuilder.group({
+      make: this.make,
+      model: this.model,
+      nrSeats: this.nrSeats,
+      currentCar: this.currentCar,
+    })
   }
+
+  ngOnInit() {}
 
   /**
    * Alters the fields of the car intialized in ngOnInit() to match those given by this component.
    */
   updatesCarInfo(){
-    this.currentCar.make = this.make;
-    this.currentCar.model= this.model;
-    this.currentCar.seats = this.nrSeats;
-    //console.log(this.currentUser);
-    this.carService.updateCarInfo(this.currentCar);
-    this.success = "Updated Successfully!";
-  }
+    this.errorArray = [];
+    this.currentCar.make = this.carForm.value.make;
+    this.currentCar.model= this.carForm.value.model;
+    this.currentCar.seats = this.carForm.value.nrSeats;
 
+    this.carService.updateCarInfo2(this.currentCar).subscribe(
+      () => {
+        this.success = true;
+        this.statusMessage = "Updated Successfully!";
+      },
+      (errorObj) => {
+        this.errorExists = true;
+        this.errorArray = errorObj.error.errors;
+      }
+    ) 
+  }
 }

@@ -27,7 +27,6 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.sleep(3000).then(() => {
       this.mapProperties = {
          center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),

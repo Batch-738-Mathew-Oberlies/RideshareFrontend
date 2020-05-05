@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Trip } from '../../models/trip';
 import { Router } from '@angular/router';
 import { LogService } from '../log.service';
 import {Observable} from 'rxjs';
+import { Trip } from 'src/app/models/trip';
 
 @Injectable({
   providedIn: 'root'

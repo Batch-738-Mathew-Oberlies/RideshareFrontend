@@ -24,8 +24,6 @@ export class UserService {
 	// http headers
 	private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-
-
 	/**
 	 * Set up the url string to the env var
 	 * Creates a new user object
@@ -55,15 +53,12 @@ export class UserService {
 	 * A GET method to retrieve one user from the database with the given id. Return a promise.
 	 * @param idParam
 	 */
-	getUserById(idParam: number) {
-		console.log(this.url)
+	getUserById(idParam: number){
 		return this.http.get<User>(this.url+idParam).toPromise();
 	}
 	
 
 	getUserById3(idParam: number) {
-		
-		console.log(this.url)
 		return this.http.get<User>(this.url+idParam);
 	}
 
@@ -71,8 +66,7 @@ export class UserService {
 	 * Identical to the above, except that it does not give a promise.
 	 * @param idParam2
 	 */
-	getUserById2(idParam2: string): Observable<User>{
-		//console.log(this.url)
+	getUserById2(idParam2: String): Observable<User>{
 		return this.http.get<User>(this.url+idParam2);
 	}
 
@@ -190,9 +184,7 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-		this.http.put(`${this.url}${user.userId}`, user).toPromise().then((response: User) => {
-		  if (response != null) { this.storeUser(response); }
-		});
+		return this.http.put(`${this.url}${user.userId}`, user);
 	}
 
 	/**
@@ -212,7 +204,6 @@ export class UserService {
 	changeDriverIsAccepting(data) {
 		let id=data.userId;
 		return this.http.put(this.url+id, data).toPromise()
-
 	  }
 
 	  getRidersForLocation(location: string): Observable <any>{

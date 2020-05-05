@@ -1,58 +1,165 @@
-
 <div class="container mainContainer">
-    <em class="fa fa-home" style="font-family:'FontAwesome', sans-serif;"></em>
-       
-        <h4>Location:</h4>
-        <form [formGroup]="addressChange">
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                    <label for="address" class="col-sm-4 col-form-label" >Street Address:</label>
-                    <div class="col-sm-4">
-                        <input type="text" formControlName="address2" class="form-control" id="address">
-                        <p *ngIf="addressChange.controls.address2.hasError('required') && addressChange.controls.address2.touched" class="error">Street Address required please enter one.</p>
-                        <p *ngIf="addressChange.controls.address2.hasError('pattern')" class="error">Street Address format is incorrect</p>
-                    </div>
-            </div>
-            
-            <div class="form-group row">
-                    <div class="col-sm-1"></div>
-                <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
-                <div class="col-sm-4">
-                    <input type="text" formControlName="address1" class="form-control" id="address2">
-                </div>
-            </div>
-        
-            <div class="form-group row">
-                    <div class="col-sm-1"></div>
-                        <label for="city" class="col-sm-4 col-form-label">City:</label>
-                        <div class="col-sm-4">
-                        <input type="text" formControlName="city" class="form-control" id="city">
-                        <p *ngIf="addressChange.controls.city.hasError('required') && addressChange.controls.city.touched" class="error">A city is required please enter one.</p>
-                        <p *ngIf="addressChange.controls.city.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
-                    </div>
-            </div>
-                
-                <div class="form-group row">
-                    <div class="col-sm-1"></div>
-                    <label for="state" class="col-sm-4 col-form-label">State:</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" formControlName="state" name="states" id="state">
-                            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
-                        </select>
-                        <p *ngIf="addressChange.controls.state.hasError('required')" class="error">State is required please choose one</p>
-                    </div>
-                </div>
+  <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
 
-                <div class="form-group row">
-                        <div class="col-sm-1"></div>
-                            <label for="zipcode" class="col-sm-4 col-form-label">Zipcode:</label>
-                            <div class="col-sm-4">
-                            <input type="text" formControlName="zip" class="form-control" id="zipcode">
-                            <p *ngIf="addressChange.controls.zip.hasError('required') && addressChange.controls.zip.touched" class="error">Zip code required please enter one.</p>
-                            <p *ngIf="addressChange.controls.zip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
-                        </div>
-                </div>
-            
-            <button type="submit" class="btn btn-primary myBtn" (click)="updatesContactInfo()">Save</button>
-        </form>
+  <div *ngIf="success==true">
+    <div class="row justify-content-center">
+      <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ statusMessage }}
+      </div>
     </div>
+  </div>
+    
+  <div *ngIf="errorExists==true">
+    <div class="row justify-content-center">
+      <div *ngFor="let error of errorArray" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ error }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <form [formGroup]="addressChange" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
+      <h4>Location Information:</h4>
+      <br>
+
+      <h5>Home Address:</h5>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="homeAddress" required>
+          <p *ngIf="addressChange.controls.homeAddress.hasError('required') && addressChange.controls.homeAddress.touched" class="error">Street Address is required.</p>
+          <p *ngIf="addressChange.controls.homeAddress.hasError('pattern')" class="error">Invalid Street Address.</p>
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('Addresses') || error.includes('Street')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
+        <div class="col-sm-4">
+          <input type="text" formControlName="homeAddressApt" class="form-control" id="address2">
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('Apts')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="homeCity" class="col-sm-4 col-form-label">City:</label>
+        <div class="col-sm-4">
+            <input type="city" class="form-control" id="homeCity" formControlName="homeCity" required>
+            <p *ngIf="addressChange.controls.homeCity.hasError('required') && addressChange.controls.homeCity.touched" class="error">City is required.</p>
+            <p *ngIf="addressChange.controls.homeCity.hasError('pattern')" class="error">Invalid City.</p>
+            <div *ngFor="let error of errorArray">
+              <p *ngIf="error.includes('Cities') || error.includes('City')" class="error"> {{ error }}</p>
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+          <div class="col-sm-1"></div>
+          <label for="homeState" class="col-sm-4 col-form-label">State:</label>
+          <div class="col-sm-4">
+            <select class="form-control" name="homeState" id="homeState" formControlName="homeState" required>
+              <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+            </select>
+            <p *ngIf="addressChange.controls.homeState.hasError('required') && addressChange.controls.homeState.touched" class="error">State is required.</p>
+            <div *ngFor="let error of errorArray">
+              <p *ngIf="error.includes('State')" class="error"> {{ error }}</p>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="homeZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="homeZipcode" formControlName="homeZip" required>
+          <p *ngIf="addressChange.controls.homeZip.hasError('required') && addressChange.controls.homeZip.touched" class="error">Zipcode is required.</p>
+          <p *ngIf="addressChange.controls.homeZip.hasError('pattern')" class="error">Invalid Zipcode.</p>
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('Zipcode')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <h5>Work Address:</h5>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="workAddress" required>
+          <p *ngIf="addressChange.controls.workAddress.hasError('required') && addressChange.controls.workAddress.touched" class="error">Street Address is required.</p>
+          <p *ngIf="addressChange.controls.workAddress.hasError('pattern')" class="error">Invalid Street Address.</p>
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('Addresses') || error.includes('Street')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
+        <div class="col-sm-4">
+          <input type="text" formControlName="workAddressApt" class="form-control" id="address2">
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('Apts')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="homeCity" class="col-sm-4 col-form-label">City:</label>
+        <div class="col-sm-4">
+          <input type="city" class="form-control" id="homeCity" formControlName="workCity" required>
+          <p *ngIf="addressChange.controls.workCity.hasError('required') && addressChange.controls.workCity.touched" class="error">City is required.</p>
+          <p *ngIf="addressChange.controls.workCity.hasError('pattern')" class="error">Invalid City.</p>
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('Cities') || error.includes('City')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="homeState" class="col-sm-4 col-form-label">State:</label>
+        <div class="col-sm-4">
+          <select class="form-control" name="homeState" id="homeState" formControlName="workState" required>
+            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+          </select>
+          <p *ngIf="addressChange.controls.workState.hasError('required')" class="error">State is required.</p>
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('State')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-1"></div>
+        <label for="homeZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="homeZipcode" formControlName="workZip" required>
+          <p *ngIf="addressChange.controls.workZip.hasError('required') && addressChange.controls.workZip.touched" class="error">Zipcode is required.</p>
+          <p *ngIf="addressChange.controls.workZip.hasError('pattern')" class="error">Invalid Zipcode.</p>
+          <div *ngFor="let error of errorArray">
+            <p *ngIf="error.includes('Zipcode')" class="error"> {{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row justify-content-center">
+        <button type="submit" [disabled]="(!addressChange.valid || !addressChange.dirty)" class="btn btn-primary myBtn">Save</button>
+      </div>
+    </form>
+
+  </div>
+</div>
