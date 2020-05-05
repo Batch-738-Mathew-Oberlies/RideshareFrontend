@@ -1,7 +1,7 @@
 /**
  * This is the base URI
  */
-const baseUri = `dev.5x5code.com/`;
+const baseUri = `https://dev.5x5code.com/`;
 
 /**
  * Set the port var
