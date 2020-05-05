@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Trip, TripStatus } from 'src/app/models/trip';
@@ -106,7 +106,7 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel click')">Cancel</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('Cancel Button')">Cancel</button>
           <button type="button" class="btn btn-danger" (click)="submit()">Submit</button>
         </div>
       </form>
@@ -118,6 +118,7 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
 export class CreateTripComponent implements OnInit {
   @Input() user: User;
   @Input() trip: Trip = new Trip();
+
   tripModalForm: FormGroup;
   numberArray: number[] = [];
   states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS',
@@ -132,6 +133,7 @@ export class CreateTripComponent implements OnInit {
   depAddress: string;
   departureOptions: string[] = [];
   address = new Address('', '', '', '', '');
+  success = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -211,7 +213,8 @@ export class CreateTripComponent implements OnInit {
 
     this.tripService.addTrip(this.trip).subscribe(trip => {
       if (trip !== null) {
-        this.activeModal.close();
+        this.success = true;
+        this.passBack();
       }
     });
   }
@@ -222,6 +225,10 @@ export class CreateTripComponent implements OnInit {
 
   get controls() {
     return this.tripModalForm.controls;
+  }
+
+  passBack() {
+    this.activeModal.close(this.success);
   }
 }
 
@@ -256,5 +263,30 @@ export class TripsComponent implements OnInit {
     modalRef.componentInstance.user = user;
     modalRef.componentInstance.trip.driver = user;
     modalRef.componentInstance.trip.availableSeats = this.car.seats;
+    modalRef.result.then((result) => {
+      if (result) {
+        this.modalService.open(SuccessModal);
+      }
+    }, () => {
+    });
   }
+}
+
+@Component ({
+  template:`
+      <div class="modal-header">
+        <button type="button" (click)="activeModal.dismiss()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2>Trip Created!</h2>
+      </div>
+  `,
+})
+export class SuccessModal {
+
+  constructor(
+    private activeModal: NgbActiveModal
+  ) { }
 }
