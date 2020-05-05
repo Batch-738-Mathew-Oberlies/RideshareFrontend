@@ -33,6 +33,7 @@ describe("Profile Location Components Tests", () => {
 
   it("Test 2: Profile location form is prefilled with information", () => {
     browser.waitForAngular();
+    browser.ignoreSynchronization=true;
     expect(pl.homeStreet.getAttribute("value")).toBeTruthy();
     expect(pl.homeCity.getAttribute("value")).toBeTruthy();
     expect(pl.homeState.getAttribute("value")).toBeTruthy();
@@ -54,56 +55,56 @@ describe("Profile Location Components Tests", () => {
     pl.setHomeStreet("8000 Home Street!!");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.homeStreet.clear();
-    pl.setHomeStreet("8000 Test Street");
+    pl.setHomeStreet("2200 Astoria Cir");
     expect(pl.submit.isEnabled()).toBe(true);
 
     pl.homeAddressApt.clear();
     pl.setHomeAddressApt("!@#$%!");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.homeAddressApt.clear();
-    pl.setHomeAddressApt("APT 111");
+    pl.setHomeAddressApt("APT 107");
     expect(pl.submit.isEnabled()).toBe(true);
 
     pl.homeCity.clear();
     pl.setHomeCity("%thisisnotacity");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.homeCity.clear();
-    pl.setHomeCity("Charlottesville");
+    pl.setHomeCity("Herndon");
     expect(pl.submit.isEnabled()).toBe(true);
 
     pl.homeZipcode.clear();
     pl.setHomeZipcode("fffff");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.homeZipcode.clear();
-    pl.setHomeZipcode("12345");
+    pl.setHomeZipcode("20170");
     expect(pl.submit.isEnabled()).toBe(true);
 
     pl.workStreet.clear();
     pl.setWorkStreet("8000 Work Street!!");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.workStreet.clear();
-    pl.setWorkStreet("8000 Work Test Street");
+    pl.setWorkStreet("2200 Astoria Cir");
     expect(pl.submit.isEnabled()).toBe(true);
 
     pl.workAddressApt.clear();
     pl.setWorkAddressApt("@@@");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.workAddressApt.clear();
-    pl.setWorkAddressApt("APT 222");
+    pl.setWorkAddressApt("APT 208");
     expect(pl.submit.isEnabled()).toBe(true);
 
     pl.workCity.clear();
     pl.setWorkCity("%thisisnotacity");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.workCity.clear();
-    pl.setWorkCity("Charlottesville");
+    pl.setWorkCity("Herndon");
     expect(pl.submit.isEnabled()).toBe(true);
 
     pl.workZipcode.clear();
     pl.setWorkZipcode("fffff");
     expect(pl.submit.isEnabled()).toBe(false);
     pl.workZipcode.clear();
-    pl.setWorkZipcode("12345");
+    pl.setWorkZipcode("20170");
     expect(pl.submit.isEnabled()).toBe(true);
 
   });
@@ -111,8 +112,6 @@ describe("Profile Location Components Tests", () => {
 
   it("Test 5: Should get a response from the USPS API which is then confirmed.", () => {
     // Enable the submit button
-    pl.homeAddressApt.clear();
-    pl.setHomeAddressApt("APT 208");
     expect(pl.submit.isEnabled()).toBe(true);
 
     //Submit the data to API
@@ -120,48 +119,12 @@ describe("Profile Location Components Tests", () => {
 
     //Check for the "confirm" modal box
     browser.wait(protractor.ExpectedConditions.alertIsPresent(), 5000);
-    browser.switchTo().alert().dismiss();
-
+    browser.switchTo().alert().accept();
   });
 
-  it("Test 6: Successful form data submission", ()=>{
-
-    pl.homeStreet.clear();
-    pl.homeAddressApt.clear();
-    pl.homeCity.clear();
-    pl.homeZipcode.clear();
-
-    pl.setHomeStreet("2200 Astoria Cir");
-    pl.setHomeAddressApt("APT 207");
-    pl.setHomeCity("Herndon");
-    pl.setHomeZipcode("20170");
-
-    pl.workStreet.clear();
-    pl.workAddressApt.clear();
-    pl.workCity.clear();
-    pl.workZipcode.clear();
-
-    pl.setWorkStreet("2200 Astoria Cir");
-    pl.setWorkAddressApt("APT 107");
-    pl.setWorkCity("Herndon");
-    pl.setWorkZipcode("20170");
-
-    expect(pl.submit.isEnabled()).toBe(true);
-
-    //submit the form data
-    pl.submit.click();
-
-    browser.wait(protractor.ExpectedConditions.alertIsPresent(), 5000);
-    browser.switchTo().alert().accept();
-
-    browser.wait(protractor.ExpectedConditions.alertIsPresent(), 5000);
-    browser.switchTo().alert().accept();
-
-    // response success message is displayed
+  it("Test 6: response success message is displayed upon successful submission", ()=>{
+    browser.wait(protractor.ExpectedConditions.visibilityOf(pl.httpSuccess), 15000);
     expect(pl.httpSuccess.isDisplayed()).toBe(true);
-
   })
-
-
 
 });
