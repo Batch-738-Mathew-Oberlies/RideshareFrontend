@@ -3,12 +3,10 @@ describe('User logged in trip component tests', function(){
      //beginning of elements for the login
      let elLoginButton = element(by.buttonText('Login'));
      let elLoginUsername = element(by.xpath('//*[@id="formGroupExampleInput"]'));
-     let elLoginPassword = element(by.xpath('//*[@id="formGroupExampleInput2"]'));
      let elLoginSubmit = element(by.xpath('//*[@id="sign-in-btn"]'));
      let elLoggedInHeader = element(by.xpath('//*[@id="navbarDropdown"]/span'));
      let elHamburger = element(by.css('[class="navbar-toggler-icon"]'));
-     let elTripo = element(by.css('[routerlink="/trips"]'));
-     let elTripTitle = element(by.id('tripList'));
+     let elSchedule = element(by.css('[routerlink="/schedule"]'));
      let elCreateTripButton = element(by.buttonText('Create a Trip'));
      let elModalName = element(by.css('[formcontrolname="name"]'));
      let elModalSeats = element(by.css('[formcontrolname="availableSeats"]'));
@@ -43,13 +41,15 @@ describe('User logged in trip component tests', function(){
           expect(elLoggedInHeader.getText()).toBe('Grady Pichmann');
       });
 
-     it('User Presses trip on navbar and is taken to the trip page', function(){
+     it('User Presses schedule on navbar and is taken to the schedule page', function(){
 
           browser.ignoreSynchronization=true;
    
-          elTripo.click();
+          elSchedule.click();
 
-          expect(elTripTitle.getText()).toBe('List of Trips');
+          browser.driver.sleep(3000);
+          
+          expect(elCreateTripButton.getText()).toBe('Create a Trip');
      });
 
      it('User clicks on Create a Trip and creates a trip', function(){
@@ -57,13 +57,13 @@ describe('User logged in trip component tests', function(){
           browser.ignoreSynchronization=true;
    
           elCreateTripButton.click();
-          elModalName.sendKeys('GameStop');
+          elModalName.sendKeys('Gilbert in Space 2');
           elModalSeats.sendKeys('2');
           elModalDepAddress.sendKeys('h');
-          elModalStreet.sendKeys("20505 S Dixie Hwy");
-          elModalCity.sendKeys('Miami');
-          elModalState.sendKeys('f');
-          elModalZip.sendKeys('33189');
+          elModalStreet.sendKeys("300 E ST SW");
+          elModalCity.sendKeys('Washington');
+          elModalState.sendKeys('d');
+          elModalZip.sendKeys('20546');
           elCalendar.click();
 
           elMonth.sendKeys('d');
@@ -76,7 +76,8 @@ describe('User logged in trip component tests', function(){
           elMeridies.click();
           elSubmit.click();
 
-          browser.pause();
-          expect(elTripTitle.getText()).toBe('List of Trips');
+          browser.driver.sleep(3000);
+
+          expect(elCreateTripButton.getText()).toBe('Create a Trip');
      });
 });

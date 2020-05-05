@@ -11,9 +11,9 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     // './src/**/*.e2e-spec.ts'
-    // './test/landingpage.spec.js',
-    // './test/register.spec.js',
-    // './test/usernav.spec.js',
+    './test/landingpage.spec.js',
+    './test/register.spec.js',
+    './test/usernav.spec.js',
     './test/tripcomponent.spec.js'
   ],
   capabilities: {
