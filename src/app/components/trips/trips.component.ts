@@ -115,16 +115,14 @@ import { ValidationService } from 'src/app/services/validation-service/validatio
   styleUrls: ['./trips.component.css']
 })
 
-export class CreateTripComponent {
+export class CreateTripComponent implements OnInit {
   @Input() user: User;
   @Input() trip: Trip = new Trip();
   tripModalForm: FormGroup;
   numberArray: number[] = [];
-  states = ['AL','AK','AZ','AR','CA','CO','CT','DC','DE','FL','GA','HI','ID','IL','IN','IA','KS',
-            'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
-            'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV',
-            'WI','WY'];
-
+  states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS',
+            'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
+            'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
   submitted = false;
   model: NgbDateStruct;
   time: string;
@@ -133,7 +131,7 @@ export class CreateTripComponent {
   depTime: string;
   depAddress: string;
   departureOptions: string[] = [];
-  address = new Address("", "", "", "", "");
+  address = new Address('', '', '', '', '');
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -146,8 +144,8 @@ export class CreateTripComponent {
     for (let i = 1; i <= this.trip.availableSeats; i++) {
       this.numberArray.push(i);
     }
-    this.departureOptions.push("Home");
-    this.departureOptions.push("Work");
+    this.departureOptions.push('Home');
+    this.departureOptions.push('Work');
 
     this.tripModalForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -162,14 +160,14 @@ export class CreateTripComponent {
       time: ['']
     });
 
-    this.trip.destination = new Address("", "", "", "", "");
+    this.trip.destination = new Address('', '', '', '', '');
   }
 
-  //Submit button for creating a new trip
+  // Submit button for creating a new trip
   async submit() {
     this.submitted = true;
 
-    if(this.tripModalForm.invalid) {
+    if (this.tripModalForm.invalid) {
       return;
     }
 
@@ -177,8 +175,7 @@ export class CreateTripComponent {
     this.depTime = this.tripModalForm.value.time.hour + ':' + this.tripModalForm.value.time.minute;
     this.depAddress = this.tripModalForm.value.departure;
 
-
-     // builds the trip object to be sent to the back end
+    // Builds the trip object to be sent to the back-end
     this.trip.tripId = 0;
     this.trip.name = this.tripModalForm.value.name;
 
@@ -192,16 +189,16 @@ export class CreateTripComponent {
 
     this.time = this.tripModalForm.value.time;
 
-    this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime)
+    this.trip.tripDate = new Date(this.depDate + ' ' + this.depTime);
     this.trip.tripStatus = TripStatus.FUTURE;
 
-    if (this.depAddress === "Home") {
+    if (this.depAddress === 'Home') {
       this.trip.departure = this.user.homeAddress;
     } else {
       this.trip.departure = this.user.workAddress;
     }
 
-    let finalAddress;
+    let finalAddress = null;
     await this.validationService.validateAddress(this.address).then((result) => {
       finalAddress = result;
     });
@@ -228,7 +225,6 @@ export class CreateTripComponent {
   }
 }
 
-
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.component.html',
@@ -238,18 +234,16 @@ export class TripsComponent implements OnInit {
   isDriver: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   user: User = new User();
   car: Car = new Car();
-  //constructor(private tripserv: TripService) { }
+
   constructor(
     private modalService: NgbModal,
     private userService: UserService,
     private carService: CarService,
   ) {
-    // TODO: Since we aren't implementing robust login, fetch userId from session storage
     this.user = this.userService.retrieveUser();
   }
 
   ngOnInit(): void {
-
     if (this.user.driver) {
       this.carService.getCarByUserId2(this.user.userId.toString()).subscribe((value: Car) => {
         this.car = value;
@@ -262,5 +256,5 @@ export class TripsComponent implements OnInit {
     modalRef.componentInstance.user = user;
     modalRef.componentInstance.trip.driver = user;
     modalRef.componentInstance.trip.availableSeats = this.car.seats;
-  };
+  }
 }
