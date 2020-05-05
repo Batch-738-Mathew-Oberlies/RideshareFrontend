@@ -30,9 +30,6 @@ export class LandingPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-     //load google map  api
-    
-    this.getGoogleApi();
 
     this.sleep(2000).then(() => {
       this.mapProperties = {

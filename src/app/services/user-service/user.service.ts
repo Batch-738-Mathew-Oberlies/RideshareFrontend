@@ -59,11 +59,15 @@ export class UserService {
 
 		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
+	}
+	
 
-
+	getUserById3(idParam: number) {
+		
+		console.log(this.url)
+		return this.http.get<User>(this.url+idParam);
 	}
 
-	
 	/**
 	 * Identical to the above, except that it does not give a promise.
 	 * @param idParam2 
@@ -230,7 +234,7 @@ export class UserService {
     /**
      * bans the given user.
      */
-    banUser(user: User){
+    banUser(user: User) {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
