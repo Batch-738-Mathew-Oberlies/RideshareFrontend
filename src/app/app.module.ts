@@ -1,11 +1,9 @@
-
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DriverComponent} from './components/driver/driver.component';
@@ -38,6 +36,15 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
+import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { TripsTableComponent } from './components/trips-table/trips-table.component';
+
+
+
 
 
 @NgModule({
@@ -66,8 +73,10 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     DriverListComponent,
     UserRegisterComponent,
     HomePageComponent,
-    BsNavbarComponent
-    
+    BsNavbarComponent,
+    ScheduleComponent,
+    ViewMyRidesComponent,
+    TripsTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +86,8 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     AppRoutingModule,
     FormsModule,
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UserService,
@@ -85,9 +95,13 @@ import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
     BatchService,
     AuthService,
     ValidationService,
-    BsModalService
+    BsModalService,
+    ScheduleService,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule 
+{ 
+
+}
 

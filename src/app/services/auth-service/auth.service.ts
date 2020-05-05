@@ -7,10 +7,10 @@ import { Admin } from 'src/app/models/admin';
 @Injectable({
   	providedIn: 'root'
 })
+/**
+ * The authorization service.
+ */
 export class AuthService {
-	/**
-	 * This is the Authorization Service
-	 */
 
 
 	@Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
@@ -18,19 +18,20 @@ export class AuthService {
 
 
 	/**
-	 * This is the constructor
-	 * @param router Creates a router instance
+	 * Constructor with an injected router instance
+	 * @param router 
 	 */
 	constructor(private router: Router) { }
 
 	/**
-	 * An user object is created
+	 * A user object is created
 	 */
 	public user: any = {};
 	public admin: Admin = new Admin();
 
 	/**
-	 * This function logs the user into the application
+	 * Logs the user into the application if their username matches, and then redirects them
+	 * based on whether they are a driver or a rider.
 	 * @param user 
 	 * @param chosenUserName 
 	 */

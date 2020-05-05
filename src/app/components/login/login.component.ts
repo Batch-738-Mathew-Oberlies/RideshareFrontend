@@ -1,10 +1,10 @@
-import { Component, OnInit, NgModule, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { BsModalService, BsModalRef} from 'ngx-bootstrap';
 
 @Component({
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
 	users: User[] = [];
 	allUsers: User[] = [];
+
 
 	chosenUser: User;
 	chosenUserFullName: string = '';
@@ -93,7 +94,7 @@ export class LoginComponent implements OnInit {
 					user.firstName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
 					user.lastName.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
 					`${user.firstName} ${user.lastName}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase()) ||
-					`${user.firstName} ${user.lastName}: ${user.isDriver ? 'Driver' : 'Rider'}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
+					`${user.firstName} ${user.lastName}: ${user.driver ? 'Driver' : 'Rider'}`.toLowerCase().startsWith(this.chosenUserFullName.toLowerCase())
 				);
 			});
 			this.totalPage = Math.ceil(this.users.length / 5);
@@ -105,7 +106,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A toggle function
+	 * Toggles whether the dropdown is displayed.
 	 */
 
 	toggleDropDown() {
@@ -113,7 +114,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * Set next page
+	 * Increments the current page of user search results.
 	 */
 	nextPage() {
 		this.curPage++;
@@ -121,7 +122,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * Set prev page
+	 * Decrements the current page of user search results.
 	 */
 
 	prevPage() {
@@ -130,7 +131,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	/**
-	 * A function that indicate a fail to login
+	 * A function to handle failed logins.
 	 */
 
 
@@ -139,27 +140,35 @@ export class LoginComponent implements OnInit {
 		this.failed = true;
 	}
 
+	/**
+	 * Handles attempts by banned users to log in.
+	 */
 	loginBanned(){
 		this.userName = '';
 		this.banned = true;
 	}
 
+	/**
+	 * Opens the given modal template.
+	 * @param template
+	 */
 	openModal(template :TemplateRef<any>){
 		this.modalRef = this.modalService.show(template);
+
 	}
 
 	/**
-	 * A login function
+	 * A login function which directly sends a get request to the login uri containing username and
+	 * password, and attempts to log in as that user.
 	 */
 
 	login() {
 		this.pwdError ='';
 		this.usernameError= '';
-		
+
         this.http.get(`${environment.loginUri}?userName=${this.userName}&passWord=${this.passWord}`)
 			.subscribe(
                   (response) => {
-                     //console.log(response);
                       if(response["userName"] != undefined){
                          this.usernameError=  response["userName"][0];
                       }
@@ -169,9 +178,8 @@ export class LoginComponent implements OnInit {
 					  if((response["name"] != undefined) && (response["userid"] != undefined)){
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
-						
+
 						//call landing page
-						//this.router.navigate(['landingPage']);
 						location.replace('landingPage');
 					  }
 					  if(response["userNotFound"] != undefined){
@@ -179,20 +187,7 @@ export class LoginComponent implements OnInit {
 					  }
                  }
         );
-		/*this.http.get<User[]>(`${environment.userUri}?username=${this.userName}`)
-			.subscribe((user: User[]) => {
-				if (!user.length) {
-					this.loginFailed();
-				}
-				else if(this.chosenUser.active == false){
-					this.loginBanned();
-				}
-				else {
-					if (!this.authService.login(user[0], this.chosenUser.userName)) {
-						this.loginFailed();
-					}
-				}
-			});*/
+
 	}
 
 

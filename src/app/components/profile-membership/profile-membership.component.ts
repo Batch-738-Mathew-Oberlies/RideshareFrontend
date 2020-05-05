@@ -6,20 +6,31 @@ import { User } from 'src/app/models/user';
   templateUrl: './profile-membership.component.html',
   styleUrls: ['./profile-membership.component.css']
 })
+/**
+ * The profile membership component.
+ */
 export class ProfileMembershipComponent implements OnInit {
-  profileObject : User;
+  profileObject = new User();
   currentUser: any = '';
-  isDriver: boolean;
+  driver: boolean;
   active: boolean;
   success: string;
   constructor(private userService: UserService) { }
+  /**
+   * Sets this component's currentUser field to match the currently logged in user.
+   */
   ngOnInit() {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
       this.profileObject = response;
     });
   }
+
+  /**
+   * Updates the membership parameters of the currentUser field to match those given by
+   * this component, and persists those changes to the database.
+   */
   updatesMembershipInfo(){
-    this.profileObject.isDriver = this.isDriver;
+    this.profileObject.driver = this.driver;
     this.profileObject.active = this.active;
     this.userService.updateUserInfo(this.profileObject);
     this.success = "Updated Successfully!";

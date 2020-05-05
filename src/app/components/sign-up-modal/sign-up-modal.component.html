@@ -1,77 +1,90 @@
 <a (click)="openModal(template)">Sign up</a >
   
 <ng-template #template >
-  <p *ngIf="success != ''" class="success">{{success}}</p>
-  <div class="modal-header">
-    <h4 class="modal-title">Sign Up</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <label for="firstname">First Name</label>
-    <input (keydown)="firstNameError = ''" id="firstname" type="text" [(ngModel)]="user.firstName" class="form-control" />
-    <p *ngIf="firstNameError != ''" class="error">{{firstNameError}}</p>
+  <form [formGroup]="signup">
+    <p *ngIf="success != ''" class="success">{{success}}</p>
+    <div class="modal-header">
+      <h4 class="modal-title">Sign Up</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <label for="firstname">First Name</label>
+      <input (keydown)="firstNameError = ''" id="firstname" type="text" formControlName="fName" class="form-control" />
+      <p *ngIf="signup.controls.fName.hasError('required') && signup.controls.fName.touched" class="error">First name required please enter one.</p>
+      <p *ngIf="signup.controls.fName.hasError('maxlength')" class="error">Name can not be more than 30 characters long.</p>
+      <p *ngIf="signup.controls.fName.hasError('pattern')" class="error">Please enter a valid name. Numbers and special characters not allowed and the first letter must be capitalized.</p>
+      
+      <label for="lastname">Last Name</label>
+      <input (keydown)="lastNameError = ''" id="lastname" type="text" formControlName="lName" class="form-control" />
+      <p *ngIf="signup.controls.lName.hasError('required') && signup.controls.lName.touched" class="error">Last name required please enter one.</p>
+      <p *ngIf="signup.controls.lName.hasError('maxlength')" class="error">Name can not be more than 30 characters long.</p>
+      <p *ngIf="signup.controls.lName.hasError('pattern')" class="error">Please enter a valid name. Numbers and special characters not allowed and the first letter must be capitalized.</p>
+    
+      <label for="email">Email</label>
+      <input (keydown)="emailError = ''" id="email" type="email" formControlName="email" class="form-control"/>
+      <p *ngIf="signup.controls.email.hasError('required') && signup.controls.email.touched" class="error">Email required please enter one.</p>
+      <p *ngIf="signup.controls.email.hasError('pattern')" class="error">Must enter a valid email address.</p>
 
-    <label for="lastname">Last Name</label>
-    <input (keydown)="lastNameError = ''" id="lastname" type="text" [(ngModel)]="user.lastName" class="form-control" />
-    <p *ngIf="lastNameError != ''" class="error">{{lastNameError}}</p>
+      <label for="phoneNumber">Phone Number</label>
+      <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" formControlName="pNumber" class="form-control" />
+      <p *ngIf="signup.controls.pNumber.hasError('required') && signup.controls.pNumber.touched" class="error">Phone number is required please enter one.</p>
+      <p *ngIf="signup.controls.pNumber.hasError('pattern')" class="error">Phone number must be in format xxx-xxx-xxxx</p>
 
-    <label for="email">Email</label>
-    <input (keydown)="emailError = ''" id="email" type="email" [(ngModel)]="user.email" class="form-control"/>
-    <p *ngIf="emailError != ''" class="error">{{emailError}}</p>
+      <label for="userName">User Name</label>
+      <input (keydown)="userNameError = ''" id="userName" type="text" formControlName="username" class="form-control" />
+      <p *ngIf="signup.controls.username.hasError('required') && signup.controls.username.touched" class="error">Username required please enter one.</p>
+      <p *ngIf="signup.controls.username.hasError('minlength')" class="error">Username must be at least 3 characters long.</p>
+      <p *ngIf="signup.controls.username.hasError('maxlength')" class="error">Username must be at most 12 characters long.</p>
+      <p *ngIf="signup.controls.username.hasError('pattern')" class="error">Please enter a valid username. A username can only contain letters and numbers.</p>
 
-    <label for="phoneNumber">Phone Number</label>
-    <input (keydown)="phoneNumberError = ''" id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" class="form-control" />
-    <p *ngIf="phoneNumberError != ''" class="error">{{phoneNumberError}}</p>
 
-    <label for="userName">User Name</label>
-    <input (keydown)="userNameError = ''" id="userName" type="text" [(ngModel)]="user.userName" class="form-control" />
-    <p *ngIf="userNameError != ''" class="error">{{userNameError}}</p>
-
-    <!--<label for="password">Password</label>
-    <input id="password" type="password" [(ngModel)]="password" class="form-control" />-->
-
-    <label id="state">Batch</label>
-    <select class="form-control" [(ngModel)]="user.batch">
-          <option value="none" >  
-          </option>
-          <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchNumber}} {{batch.batchLocation}}</option>
-    </select>
-
-    <label for="hAddress">Address</label>
-    <input (keydown)="hAddressError = ''" id="hAddress" type="text" [(ngModel)]="user.hAddress" class="form-control" />
-    <p *ngIf="hAddressError != ''" class="error">{{hAddressError}}</p>
-
-    <label id="hCity">City</label>
-    <input (keydown)="hCityError = ''" type="text" [(ngModel)]="user.hCity" class="form-control" />
-    <p *ngIf="hCityError != ''" class="error">{{hCityError}}</p>
-
-    <label id="hState">State</label>
-    <select (keydown)="hStateError = ''" class="form-control" [(ngModel)]="user.hState" id="hState" >
-            <option value="none" selected disabled hidden>  
+      <label id="state">Batch</label>
+      <select class="form-control" formControlName="batch">
+            <option value="none" disabled>Please Select One...  
             </option>
-            <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
-    </select>
-    <p *ngIf="hStateError != ''" class="error">{{hStateError}}</p>
+            <option *ngFor="let batch of batches" >{{batch.batchNumber}} {{batch.batchLocation}}</option>
+      </select>
+      <p *ngIf="signup.controls.batch.hasError('required') && signup.controls.batch.touched" class="error">Batch required please select one.</p>
 
-    <label id="hZip">Zip Code</label>
-    <input (keydown)="hZipError = ''" type="number" [(ngModel)]="user.hZip" class="form-control" />
-    <p *ngIf="hZipError != ''" class="error">{{hZipError}}</p>
+      <label for="hAddress">Address</label>
+      <input (keydown)="hAddressError = ''" id="hAddress" type="text" formControlName="streetAddress2" class="form-control" />
+      <p *ngIf="signup.controls.streetAddress2.hasError('required') && signup.controls.streetAddress2.touched" class="error">Street Address required please enter one.</p>
+      <p *ngIf="signup.controls.streetAddress2.hasError('pattern')" class="error">Street Address format is incorrect</p>
 
-    <div class="radiobody">
-    <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary">
-          <input type="checkbox"  id="driver" [(ngModel)]="isDriver" /> Driver
-        </label>
-        <br>
-        <label class="btn btn-primary">
-          <input type="checkbox"  id="rider" [(ngModel)]="isRider"/> Rider
-        </label>
-  </div>
+      <label for="Address2">Apt/Suite Number</label>
+      <input (keydown)="hAddressError = ''" id="Address2" type="text" formControlName="streetAddress" class="form-control" />      
+
+      <label id="hCity">City</label>
+      <input (keydown)="hCityError = ''" type="text" formControlName="city" class="form-control" />
+      <p *ngIf="signup.controls.city.hasError('required') && signup.controls.city.touched" class="error">A city is required please enter one.</p>
+      <p *ngIf="signup.controls.city.hasError('pattern')" class="error">A city can only contain spaces and letters.</p>
+
+      <label for="hState">State</label>
+      <select (keydown)="hStateError = ''" class="form-control" formControlName="state" id="hState" >
+        <option value="none" disabled>Please Select One...  </option>
+        <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+      </select>
+      <p *ngIf="signup.controls.state.hasError('required')" class="error">State is required please choose one</p>
+
+      <label id="hZip">Zip Code</label>
+      <input (keydown)="hZipError = ''" type="number" formControlName="zip" class="form-control" />
+      <p *ngIf="signup.controls.zip.hasError('required') && signup.controls.zip.touched" class="error">Zip code required please enter one.</p>
+      <p *ngIf="signup.controls.zip.hasError('pattern')" class="error">Zip code can only contain 5 numbers.</p>
+         
+        <label for="drive">Ride? Drive? Both?</label>
+        <select class="form-control" formControlName="driver" id="drive">
+          <option value="none" disabled>Please Select One...  
+          </option>
+          <option value="rider" selected>Rider</option>
+          <option value="driver">Driver</option>
+          <option value="both">Both</option>
+        </select>      
+      
+      <div class="btn-container">
+        <button type="submit" class="btn btn-primary register" [disabled]="!signup.valid" (click)="submitUser()">Submit</button>
+      </div>
     </div>
-    <div class="btn-container">
-      <button type="submit" class="btn btn-primary register" (click)="submitUser()">Submit</button>
-    </div>
-  </div>
+  </form>
 </ng-template> 

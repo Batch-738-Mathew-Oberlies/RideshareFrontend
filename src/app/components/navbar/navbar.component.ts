@@ -18,13 +18,9 @@ import {SignupModalComponent} from '../sign-up-modal/sign-up-modal.component';
 
 export class NavbarComponent implements OnInit {
   modal :SignupModalComponent;
-  /**
-   * This is a name string.
-   */
-
   name: string = '';
   admin: string = '';
-
+  link: string = '/';
   currentUser: string = '';
 
   /**
@@ -46,9 +42,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     if(sessionStorage.getItem("userid") != null){
-      this.currentUser =sessionStorage.getItem("name");
+      this.currentUser = sessionStorage.getItem("name");
+      this.link = '/landingPage';
     }else{
-      this.currentUser ='';
+      this.currentUser = '';
+      this.link = '/';
     }
     if (this.authService.user.userId) {
       this.userService.getUserById(this.authService.user.userId).then((response)=>{
@@ -71,7 +69,7 @@ export class NavbarComponent implements OnInit {
 
    /**
    * Function that takes no parameters. 
-   * It will clear the sesssion storage.
+   * It will clear the sesssion storage to log out the user.
    * @return {void} 
    * 
    */
@@ -83,6 +81,7 @@ export class NavbarComponent implements OnInit {
     //clear all session
     this.name = '';
     this.admin = '';
+    this.link = '/';
     this.currentUser = '';
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("userid");
@@ -90,6 +89,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  /**
+   * Redirects to the home page for either riders or drivers depending on which
+   * the current user is.
+   */
   redirectToHome() {
     this.authService.user.driver ? this.router.navigate(['home/riders']) : this.router.navigate(['home/drivers']);
   }

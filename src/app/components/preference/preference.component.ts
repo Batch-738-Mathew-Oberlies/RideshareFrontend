@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 /**
- * This is a navbar component.
+ * A navbar component.
  */
 
 @Component({
@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 export class PreferenceComponent implements OnInit {
 
   /**
-   * Once the component is initialzed, an user object is created.
+   * Once the component is initialzed, a user object is created.
    * 
    */
 
@@ -28,14 +28,14 @@ export class PreferenceComponent implements OnInit {
   /**
    * This is the constructor
    * @param router A router service is created
-   * @param userService An user service is created
+   * @param userService A user service is created
    * @param authService An auth service is created
    */
 
   constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.user.userId = this.authService.user.userId;;
+    this.user.userId = this.authService.user.userId;
     if (!this.user.userId) {
       this.router.navigate(['']);
     } else {
@@ -44,8 +44,8 @@ export class PreferenceComponent implements OnInit {
   }
 
   /**
-   * @function
-   * this function fetches an user from the database.
+   * 
+   * Fetches the user given by this component's user field from the database.
    */
 
   getPreference() {
@@ -60,8 +60,8 @@ export class PreferenceComponent implements OnInit {
   }
 
  /**
-   * @function
-   * this function changes the account from activate to inactive
+   * 
+   * Changes the account from active to inactive.
    */
 
 
@@ -70,7 +70,7 @@ export class PreferenceComponent implements OnInit {
       let text = prompt("Your Account Will Be Banned. Type 'Confirm' To Continued");
       if (text === 'Confirm') {
         this.user.active = !this.user.active;
-        this.user.isAcceptingRides = false;
+        this.user.acceptingRides = false;
         this.userService.updatePreference('active', this.user.active, this.user.userId);
       }
     } else {
@@ -80,12 +80,12 @@ export class PreferenceComponent implements OnInit {
     
   }
  /**
-   * @function
-   * this function changes the driver account from accepting rides to not accepting rides.
+   * 
+   * Changes the driver account from accepting rides to not accepting rides.
    */
 
   toggleAcceptRider() {
-    this.user.isAcceptingRides = !this.user.isAcceptingRides;
-    this.userService.updatePreference('acceptingRides', this.user.isAcceptingRides, this.user.userId);
+    this.user.acceptingRides = !this.user.acceptingRides;
+    this.userService.updatePreference('acceptingRides', this.user.acceptingRides, this.user.userId);
   }
 }
