@@ -1,28 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/models/user';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-profile-membership',
   templateUrl: './profile-membership.component.html',
   styleUrls: ['./profile-membership.component.css']
 })
+
 /**
  * The profile membership component.
  */
 export class ProfileMembershipComponent implements OnInit {
   profileObject = new User();
-  currentUser: any = '';
-  driver: boolean;
-  active: boolean;
-  success: string;
-  constructor(private userService: UserService) { }
+  currentUser: any;
+
+  isDriver: boolean;
+  isActive: boolean;
+  isAcceptingRides: boolean;
+
+  button: boolean;
+  statusExists: boolean;
+  statusMessage: string;
+  success :boolean;
+  errorExists: boolean;
+
   /**
-   * Sets this component's currentUser field to match the currently logged in user.
+   * Sets this component's currentUser, isDriver, and isActive fields to match the currently logged in user.
    */
+  constructor(private userService: UserService) {
+    this.disableButton();
+   }
+
   ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileObject = response;
-    });
+    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
+      (response) => {
+        this.profileObject = response;
+        
+        this.isDriver = this.profileObject.driver;
+        this.isActive = this.profileObject.active;
+        this.isAcceptingRides = this.profileObject.acceptingRides;
+      }
+    );
+    this.button = true;
   }
 
   /**
@@ -30,9 +50,58 @@ export class ProfileMembershipComponent implements OnInit {
    * this component, and persists those changes to the database.
    */
   updatesMembershipInfo(){
-    this.profileObject.driver = this.driver;
-    this.profileObject.active = this.active;
-    this.userService.updateUserInfo(this.profileObject);
-    this.success = "Updated Successfully!";
+    if(this.getBoolean(this.isDriver) == false){
+      this.isAcceptingRides = false;
+    }
+    
+    this.profileObject.driver = this.isDriver;
+    this.profileObject.active = this.isActive;
+    
+    this.profileObject.acceptingRides = this.isAcceptingRides;
+
+    this.userService.updateUserInfo(this.profileObject).subscribe(
+      () => { 
+        this.success = true;
+        this.statusMessage = "Updated Successfully!"
+      },
+      (errorObj) => {
+        this.errorExists = true;
+        this.statusMessage = errorObj.error.message;
+      }
+    );
+  }
+
+  /**
+   * Converts values into their boolean value.
+   * Used to mitigate issues arising from the type change due to the "select"
+   * components in the form.
+   */
+  getBoolean(value) : boolean{
+    switch(value){
+         case true:
+         case "true":
+             return true;
+         default: 
+             return false;
+     }
+ }
+
+  /**
+   * Disables submit button if the form fields have not been changed from their original value.
+   */
+  disableButton(){
+    
+    if(this.getBoolean(this.isDriver) != this.profileObject.driver || this.getBoolean(this.isActive) != this.profileObject.active || this.getBoolean(this.isAcceptingRides) != this.profileObject.acceptingRides ){
+      this.button = false;
+    } else {
+      this.button = true;
+    }
+  }
+
+  /**
+   * Changes the isAcceptingRides boolean to match clicked button.
+   */
+  changeIsAcceptingRides(bool: boolean) {
+    this.isAcceptingRides = bool;
   }
 }

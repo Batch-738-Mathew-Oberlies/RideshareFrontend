@@ -24,7 +24,7 @@ import { ProfileCarComponent } from '../profile-car/profile-car.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProfileMembershipComponent } from '../profile-membership/profile-membership.component';
 import { ProfileLocationComponent } from '../profile-location/profile-location.component';
-import { DriverContactModalComponent } from '../driver-contact-modal/driver-contact-modal.component';
+//import { DriverContactModalComponent } from '../driver-contact-modal/driver-contact-modal.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
@@ -63,7 +63,7 @@ describe('RegisterComponent', () => {
         ProfileCarComponent,
         ProfileLocationComponent,
         ProfileMembershipComponent,
-        DriverContactModalComponent,
+        //DriverContactModalComponent,
         DriverListComponent,
         UserRegisterComponent,
         HomePageComponent,

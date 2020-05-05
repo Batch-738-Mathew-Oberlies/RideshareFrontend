@@ -25,7 +25,7 @@ import { ProfileContactComponent } from 'src/app/components/profile-contact/prof
 import { ProfileCarComponent } from 'src/app/components/profile-car/profile-car.component';
 import { ProfileLocationComponent } from 'src/app/components/profile-location/profile-location.component';
 import { ProfileMembershipComponent } from 'src/app/components/profile-membership/profile-membership.component';
-import { DriverContactModalComponent } from 'src/app/components/driver-contact-modal/driver-contact-modal.component';
+//import { DriverContactModalComponent } from 'src/app/components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from 'src/app/components/driver-list/driver-list.component';
 import { HomePageComponent } from 'src/app/components/home-page/home-page.component';
 import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
@@ -65,7 +65,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
           ProfileCarComponent,
           ProfileLocationComponent,
           ProfileMembershipComponent,
-          DriverContactModalComponent,
+          //DriverContactModalComponent,
           DriverListComponent,
           UserRegisterComponent,
           HomePageComponent,

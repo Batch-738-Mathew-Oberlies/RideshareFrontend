@@ -9,6 +9,15 @@
     font-size: 16px;
 }
 
+/* error */
+.error {
+    margin-left:-8px;
+    border-radius: 5px;
+    color: red;
+    font-size: 16px;
+    text-align: left;
+}
+
 .mainContainer {
     margin: 3% auto;
     width: 61%;  
