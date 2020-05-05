@@ -40,26 +40,6 @@ export class DriverContactModalComponent implements OnInit {
   }
 
   /**
-   * Appends the google maps api script to the document head.
-   */
-getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
-                         new Promise((resolve) => {
-                           let script: HTMLScriptElement = document.createElement('script');
-                           script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);
-                     });
-               }
-           }
-       );
-   }
-
-  /**
    * Inititates services from the google maps api needed for displaying the route, and then
    * calls displayRoute()/
    * @param origin

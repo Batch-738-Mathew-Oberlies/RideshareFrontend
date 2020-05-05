@@ -45,8 +45,6 @@ export class DriverListComponent implements OnInit {
           });
       });
 
-    this.getGoogleApi();
-
     this.sleep(2000).then(() => {
       this.mapProperties = {
          center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
@@ -68,26 +66,6 @@ export class DriverListComponent implements OnInit {
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-  /**
-   * Inserts the google maps api script into the document head. This seems to be duplicated code.
-   */
-getGoogleApi()  {
-    this.http.get(`${environment.loginUri}getGoogleApi`)
-       .subscribe(
-                 (response) => {
-                     //console.log(response);
-                     if(response["googleMapAPIKey"] != undefined){
-                         new Promise((resolve) => {
-                           let script: HTMLScriptElement = document.createElement('script');
-                           script.addEventListener('load', r => resolve());
-                           script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
-                           document.head.appendChild(script);
-                     });
-               }
-           }
-       );
-   }
 
   /**
    * Inititates services from the google maps api needed for displaying the route, and then
