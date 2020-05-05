@@ -79,7 +79,7 @@ export class SignupModalComponent implements OnInit {
     this.user.phoneNumber = this.signup.controls.pNumber.value;
     this.user.batch.batchNumber = this.signup.controls.batch.value.split(' ')[0];
     this.user.batch.batchLocation = this.signup.controls.batch.value.split(' ')[1];
-    this.user.workAddress = new Address(null, null, null, null, null);
+    this.user.active = true;
 
     // Pulls the information from the forms into our address object
     //USPS requires apt number to go ahead of street address so to comply we assigned the variables accordingly
@@ -114,6 +114,7 @@ export class SignupModalComponent implements OnInit {
       return;
     } else {
       this.user.homeAddress = finalAddress;
+      this.user.workAddress = finalAddress;
       console.log("user we're sending: ", this.user);
       this.userService.addUser(this.user).subscribe(
         () => {
