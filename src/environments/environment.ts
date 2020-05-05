@@ -4,8 +4,8 @@
  * `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
  */
 
-const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
-
+//const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
+const baseUri = `https://dev.5x5code.com`;
 /**
  * Set the port to 8080
  */
@@ -14,7 +14,7 @@ const port = '8080';
 /**
  * google map api key 
  */
-const googleKey = '';
+const googleKey = 'AIzaSyAGYQ7Id-uGqXnOsV9j7Jx9TAbqpPtAMnU';
  
 /**
  * This is the environment config.
