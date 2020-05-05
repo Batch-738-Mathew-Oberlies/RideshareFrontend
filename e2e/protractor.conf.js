@@ -14,7 +14,8 @@ exports.config = {
     './test/landingpage.spec.js',
     './test/register.spec.js',
     './test/usernav.spec.js',
-    './test/signupmodaltest.ts'
+    './test/signupmodaltest.ts',
+    './test/tripcomponent.spec.js'
   ],
 
   suites: {

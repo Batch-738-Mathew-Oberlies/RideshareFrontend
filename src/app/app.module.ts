@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'node_modules/ngx-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,17 +35,11 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-
+import { TripsComponent, CreateTripComponent } from './components/trips/trips.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
-import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
+import { ScheduleService } from 'src/app/services/schedule-service/schedule.service';
 import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
-
-import { ReactiveFormsModule } from '@angular/forms';
 import { TripsTableComponent } from './components/trips-table/trips-table.component';
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -74,6 +68,8 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     UserRegisterComponent,
     HomePageComponent,
     BsNavbarComponent,
+    TripsComponent,
+    CreateTripComponent,
     ScheduleComponent,
     ViewMyRidesComponent,
     TripsTableComponent,
@@ -98,10 +94,7 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     BsModalService,
     ScheduleService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CreateTripComponent]
 })
-export class AppModule 
-{ 
-
-}
-
+export class AppModule { }

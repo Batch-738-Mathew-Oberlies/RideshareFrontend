@@ -1,6 +1,11 @@
 import { User } from './user';
 import { Address } from './address';
-import { TripStatus } from './trip-status';
+
+export enum TripStatus {
+  PAST,
+  CURRENT,
+  FUTURE
+}
 
 
 export class Trip
