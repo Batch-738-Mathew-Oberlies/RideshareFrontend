@@ -5,6 +5,9 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { CarService } from 'src/app/services/car-service/car.service';
+import { Car } from 'src/app/models/car';
+import { Trip } from 'src/app/models/trip';
+import { CarTrip } from 'src/app/models/car-trip';
 
 @Component({
   selector: 'app-driver-list',
@@ -13,7 +16,7 @@ import { CarService } from 'src/app/services/car-service/car.service';
 })
 /**
  * The DriverListComponent component.
- * 
+ *
  * Large portions of this component are duplicated from driver-contact-modal.
  */
 export class DriverListComponent implements OnInit {
@@ -44,8 +47,8 @@ export class DriverListComponent implements OnInit {
         this.getGoogleApi();
 
         this.userService.getRidersForLocation1(this.location).subscribe(
-          (res) => {
-            res.forEach(element => {
+          (allDrivers) => {
+            allDrivers.forEach(element => {
               // check to see that the currentUserID is not equal to the element userId
               if (element.userId != this.currentUserID) {
                 // If not, then add it to the drivers list.
@@ -107,17 +110,17 @@ export class DriverListComponent implements OnInit {
 /**
  * Uses the given service of type google.maps.DirectionsService and display of type
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
- * @param origin 
- * @param destination 
- * @param service 
- * @param display 
+ * @param origin
+ * @param destination
+ * @param service
+ * @param display
  */
 displayRoute(origin, destination, service, display) {
     service.route({
       origin,
       destination,
       travelMode: 'DRIVING',
-      //avoidTolls: true
+
     }, (response, status) => {
       if (status === 'OK') {
         display.setDirections(response);
@@ -129,8 +132,8 @@ displayRoute(origin, destination, service, display) {
 
 /**
  * Displays a list of drivers, appended directly to the DOM.
- * @param origin 
- * @param drivers 
+ * @param origin
+ * @param drivers
  */
 displayDriversList(origin, drivers) {
     let  origins = [];
@@ -143,9 +146,7 @@ displayDriversList(origin, drivers) {
 
       this.carService.getCarTripByUserId(element.id).subscribe(
         (carTrip) => {
-          // @ts-ignore
           availableSeats = carTrip.currentTrip.availableSeats;
-          // @ts-ignore
           totalSeats = carTrip.car.seats;
         }
       );

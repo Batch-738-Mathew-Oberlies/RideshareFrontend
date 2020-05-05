@@ -23,6 +23,8 @@ exports.config = {
     contact:  './test/profile-contact.ts',
     location:  './test/profile-location.ts',
     membership:  './test/profile-membership.ts',
+    signup: './test/signupmodaltest.ts',
+    trips: './test/tripcomponent.spec.js',
   },
   capabilities: {
     browserName: 'firefox'

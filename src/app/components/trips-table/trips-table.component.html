@@ -1,5 +1,10 @@
 <div class="container centerMe">
-  <div class="card mt-2">
+  
+  <div class="mt-2">
+    <button *ngIf="!showAll && isSchedule()" (click)="showTrips()" type="button" class="btn btn-secondary ml-auto d-block">Include Occupied Trips</button>
+    <button *ngIf="showAll && isSchedule()" (click)="showTrips()" type="button" class="btn btn-secondary ml-auto d-block">Only Show Available Trips</button>
+  </div>
+    <div class="card mt-2">
     <table class="table table-hover">
       <caption>{{caption}}</caption>
       <thead>
@@ -27,8 +32,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let trip of trips">
+        <ng-container *ngIf="filterByOpenSeats(trip) && checkDate(trip.tripDate)">
           <td>
-            {{trip.name}}
+            {{trip.name}} 
           </td>
           <td>
             {{trip.tripDate | date}}
@@ -45,14 +51,18 @@
           <td>
             {{trip.availableSeats}}
           </td>
-          
+
           <td>
-            <button *ngIf= "!onTrip(trip); else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
-            <ng-template #elseBlock>
-              <button type="button" (click)="removeTrip(trip)" class="btn btn-danger" data-toggle="modal" data-target="#removedModal">Remove</button>
-            </ng-template>
+            <div *ngIf="trip.driver.userId !== this.id">
+              <button *ngIf="!onTrip(trip) && trip.availableSeats > 0; else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
+              <ng-template #elseBlock>
+                <button type="button" *ngIf="onTrip(trip)" (click)="removeTrip(trip)" class="btn btn-danger" data-toggle="modal" data-target="#removedModal">Remove</button>
+              </ng-template>
+            </div>
           </td>
+        </ng-container>
         </tr>
+      
       </tbody>
     </table>
 
@@ -65,7 +75,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <h2>Seat Reservation Added!</h2>          
+            <h2>Seat Reservation Added!</h2>
           </div>
         </div>
       </div>
@@ -80,7 +90,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <h2>Seat Reservation Removed!</h2>          
+            <h2>Seat Reservation Removed!</h2>
           </div>
         </div>
       </div>

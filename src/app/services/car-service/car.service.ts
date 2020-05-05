@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../user-service/user.service';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { Trip } from 'src/app/models/trip';
+import { CarTrip } from 'src/app/models/car-trip';
 
 @Injectable({
     providedIn: 'root'
@@ -35,7 +37,8 @@ export class CarService {
 	 * Fetches all cars from the database.
 	 */
 
-	getAllCars() {
+	getAllCars(): Observable<Car[]> 
+	{
 		return this.http.get<Car[]>(this.url);
 	}
 
@@ -60,16 +63,25 @@ export class CarService {
 	 * Returns a car and current trip by user ID.
 	 * @param userId 
 	 */
-	getCarTripByUserId(userId: number) {
-		return this.http.get(`${this.url}trips/driver/${userId}`)
+	getCarTripByUserId(userId: any): Observable<CarTrip> {
+		return this.http.get<CarTrip>(`${this.url}trips/driver/${userId}`)
 	}
+  
+  /**
+   * Updates information on car and current trip by userId
+   * @param car 
+   * @param trip 
+   */
+  updateCarTrip(car: Car, trip: Trip) {
+    let carTrip : CarTrip = new CarTrip(car, trip);
+    return this.http.put(`${this.url}trips`, carTrip);
+  }
 
 	/**
 	 * Updates information on a car
 	 * @param car 
 	 */
 	updateCarInfo(car: Car) {
-		//console.log(user);
 		return this.http.put(`${this.url}${car.carId}`, car).toPromise();
 	}
 
@@ -78,7 +90,6 @@ export class CarService {
 	 * @param userId 
 	 */
 	updateCarInfo2(car: Car): Observable<Car> {
-		//console.log(user);
 		return this.http.put<Car>(`${this.url}${car.carId}`, car);
 	}
 

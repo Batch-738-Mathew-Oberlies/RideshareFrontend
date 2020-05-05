@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Trip } from 'src/app/models/trip';
 import { ScheduleService } from 'src/app/services/schedule-service/schedule.service';
-import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-trips-table',
@@ -9,39 +8,92 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
   styleUrls: ['./trips-table.component.css'],
 })
 export class TripsTableComponent implements OnInit {
+  constructor(private scheduleService: ScheduleService) { }
 
-  constructor(private serv: ScheduleService, private auth: AuthService) { }
-
-  @Input('trips') trips: Trip[];
-  @Input('rider-trips') riderTrips: Trip[];
-  @Input('caption') caption: String;
+  @Input() trips: Trip[];
+  @Input() riderTrips: Trip[];
+  @Input() caption: string;
   public id: number;
+  public currDate: Date;
+  public showAll: boolean;
 
   ngOnInit() {
-    this.id=+sessionStorage.getItem("userid");
+    this.id = parseInt(sessionStorage.getItem('userid'), 10);
+    this.currDate=new Date();
+
+    if(this.isSchedule())
+    {
+      this.showAll=false;
+    }
+    else
+    {
+      this.showAll=true;
+    }
   }
 
-  addTrip(t: Trip) {
-    this.serv.addTrips(t,this.id).subscribe();
+  addTrip(trip: Trip) {
+    this.scheduleService.addTrips(trip, this.id).subscribe();
   }
 
-  removeTrip(t: Trip) {
-    this.serv.removeTrips(t,this.id).subscribe();
+  removeTrip(trip: Trip) {
+    this.scheduleService.removeTrips(trip, this.id).subscribe();
   }
-  
+
   refresh() {
     window.location.reload();
   }
+
+  checkDate(d: Date)
+  {
+    let inFuture: boolean = false;
+
+    if(this.currDate <= new Date(d))
+    {
+        inFuture = true;
+    }
+    
+    return inFuture;
+  }
   
-  onTrip(t: Trip): boolean {
-    let isTrip: boolean = false;
+  showTrips()
+  {
+    this.showAll=!this.showAll;
+  }
 
-    this.riderTrips.forEach(trip => {
-      if(t.tripId === trip.tripId) {
-        isTrip=true;
-      };
-    });
+  filterByOpenSeats(t:Trip)
+  {
+    let show: boolean=true;
+    
+    if(this.showAll==false && t.availableSeats==0)
+    {
+        show=false;
+    }
 
-    return isTrip;
+    return show;
+  }
+
+  onTrip(trip: Trip): boolean {
+    let isOnTrip = false;
+
+    if (this.riderTrips !== null) {
+      this.riderTrips.forEach(riderTrip => {
+        if (trip.tripId === riderTrip.tripId) {
+          isOnTrip = true;
+        }
+      });
+    }
+
+    return isOnTrip;
+  }
+
+  isSchedule()
+  {
+    let sched: boolean = false;
+    if(this.caption == 'Trip Schedule')
+    {
+      sched=true;
+    }
+
+    return sched;
   }
 }

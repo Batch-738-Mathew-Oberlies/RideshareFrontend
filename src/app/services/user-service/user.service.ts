@@ -24,8 +24,6 @@ export class UserService {
 	// http headers
 	private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-
-
 	/**
 	 * Set up the url string to the env var
 	 * Creates a new user object
@@ -53,32 +51,30 @@ export class UserService {
 
 	/**
 	 * A GET method to retrieve one user from the database with the given id. Return a promise.
-	 * @param idParam 
+	 * @param idParam
 	 */
 	getUserById(idParam: number){
-
-		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
+	}
+	
 
-
+	getUserById3(idParam: number) {
+		return this.http.get<User>(this.url+idParam);
 	}
 
-	
 	/**
 	 * Identical to the above, except that it does not give a promise.
-	 * @param idParam2 
+	 * @param idParam2
 	 */
 	getUserById2(idParam2: String): Observable<User>{
-
-		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
-
 	}
 
 	/**
 	 * A POST method that turns the given user into a driver
-	 * @param user 
-	 * @param role 
+	 * @param user
+	 * @param role
+
 	 */
 	createDriver(user: User, role) {
 
@@ -107,10 +103,10 @@ export class UserService {
 
 	/**
 	 * Stores the given user in the database.
-	 * @param user 
+	 * @param user
 	 */
 	addUser(user :User) :Observable<User> {
-		return this.http.post<User>(this.url, user, {headers: this.headers});
+		return this.http.post<User>(this.url + "addUser", user, {headers: this.headers});
 	}
 
 	/**
@@ -124,8 +120,9 @@ export class UserService {
 	/**
 	 * A PUT method that retrieves the given user from the database, updates their isDriver field,
 	 * and persists the updated user in the database.
-	 * @param isDriver 
-	 * @param userId 
+	 * @param isDriver
+	 * @param userId
+
 	 */
 
 	updateIsDriver(isDriver, userId) {
@@ -179,14 +176,17 @@ export class UserService {
 	}
 
 	/**
+	 * A PUT method that updates user's information
+	 * @param user
+
 	 * A PUT method that persists the given user to the database and returns a promise.
-	 * @param user 
+	 * @param user
 	 */
 
 	updateUserInfo(user: User) {
-		//console.log(user);
 		return this.http.put(`${this.url}${user.userId}`, user);
 	}
+
 	/**
 	 * A GET method that retrieves a driver by Id
 	 * @param id
@@ -230,17 +230,32 @@ export class UserService {
     /**
      * bans the given user.
      */
-    banUser(user: User){
+    banUser(user: User) {
       this.body = JSON.stringify(user);
       this.http.put(`${this.url + user.userId}`,this.body,this.httpOptions).subscribe();
 	}
-	
+
 	/**
 	 * Retrieves drivers by location using the getTioFiveDrivers method on the User controller.
 	 * Apparently, it returns a distance matrix.
-	 * @param location 
+	 * @param location
 	 */
 	getRidersForLocation1(location: string): Observable <any>{
 		return this.http.get(this.url + 'driver/'+ location)
+	}
+
+	/**
+	 * This method will store an entire user object in session storage.
+	 * @param user
+	 */
+	storeUser(user: User) {
+		sessionStorage.setItem('user', JSON.stringify(user));
+	}
+
+	/**
+	 * This method will retrive the user object stored in the session storage.
+	 */
+	retrieveUser(): User {
+		return JSON.parse(sessionStorage.getItem('user'));
 	}
 }
