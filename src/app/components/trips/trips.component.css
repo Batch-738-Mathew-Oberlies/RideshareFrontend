@@ -5,3 +5,11 @@ button.calendar, button.calendar:active {
     background-size: 23px;
     background-position: center;
 }
+
+.button-orange {
+    background-color: #F26A25;
+}
+
+.button-orange:hover {
+    background-color: #e05606;
+}

@@ -1,7 +1,7 @@
 /**
  * This is the base URI
  */
-const baseUri = `https://back.rideshare.revatureprojects.com/rideshare/`;
+const baseUri = `https://dev.5x5code.com/`;
 
 /**
  * Set the port var
