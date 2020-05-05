@@ -17,11 +17,11 @@ import { environment } from '../../../environments/environment';
 export class LandingPageComponent implements OnInit {
 
   location_s : string =''; //sample: Morgantown, WV
- 
+
 
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
-  
+
   mapProperties :{};
 
   constructor(private http: HttpClient,private userService: UserService) {
@@ -44,7 +44,7 @@ export class LandingPageComponent implements OnInit {
 
 /**
  * Resolves a promise after the given number of milliseconds.
- * @param ms 
+ * @param ms
  */
 sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -54,12 +54,12 @@ sleep(ms) {
 
  /**
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
- * 
+ *
  * Duplicated code.
- * @param origin 
- * @param destination 
- * @param service 
- * @param display 
+ * @param origin
+ * @param destination
+ * @param service
+ * @param display
  */
  searchDriver(){
   //call service search algorithm ()
@@ -80,20 +80,29 @@ sleep(ms) {
   });
  }
 
- displayRoute(origin, destination, service, display) {
-  service.route({
-    origin: origin,
-    destination: destination,
-    //waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
-    travelMode: 'DRIVING',
-    //avoidTolls: true
-  }, function(response, status) {
-    if (status === 'OK') {
-      display.setDirections(response);
-    } else {
-      alert('Could not display directions due to: ' + status);
-    }
-  });
-}
-
+  /**
+   * Uses the given service of type google.maps.DirectionsService and display of type
+   * google.maps.DirectionsRenderer to compute the route and display it on the map.
+   *
+   * Duplicated code.
+   * @param origin
+   * @param destination
+   * @param service
+   * @param display
+   */
+  displayRoute(origin, destination, service, display) {
+    service.route({
+      origin: origin,
+      destination: destination,
+      //waypoints: [{location: 'Adelaide, SA'}, {location: 'Broken Hill, NSW'}],
+      travelMode: 'DRIVING',
+      //avoidTolls: true
+    }, function(response, status) {
+      if (status === 'OK') {
+        display.setDirections(response);
+      } else {
+        alert('Could not display directions due to: ' + status);
+      }
+    });
+  }
 }
