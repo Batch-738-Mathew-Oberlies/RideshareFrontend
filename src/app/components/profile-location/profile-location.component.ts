@@ -94,7 +94,7 @@ export class ProfileLocationComponent implements OnInit {
       if(this.transientHomeAddress == null){
         return;
       }else {
-        this.transientHomeAddress.id = this.currentUser.homeAddress.id;
+        this.transientHomeAddress = this.currentUser.homeAddress;
       }
     })
     
@@ -103,7 +103,7 @@ export class ProfileLocationComponent implements OnInit {
       if(this.transientWorkAddress == null){
         return;
       }else {
-        this.transientWorkAddress.id = this.currentUser.workAddress.id;
+        this.transientWorkAddress = this.currentUser.workAddress;
       }
     })
     

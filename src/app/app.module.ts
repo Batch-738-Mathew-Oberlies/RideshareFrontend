@@ -36,6 +36,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import {ScheduleService} from 'src/app/services/schedule-service/schedule.service';
+import { TripService } from 'src/app/services/trip-service/trip.service';
 import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TripsTableComponent } from './components/trips-table/trips-table.component';
@@ -92,6 +93,7 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     ValidationService,
     BsModalService,
     ScheduleService,
+    TripService,
   ],
   bootstrap: [AppComponent]
 })

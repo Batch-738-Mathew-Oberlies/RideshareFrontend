@@ -17,10 +17,6 @@ export class Car {
      */
     seats: number;
     /**
-     * Set availableSeats as a number
-     */
-    availableSeats: number;
-    /**
      * Set make as a string
      */
     make: string;
