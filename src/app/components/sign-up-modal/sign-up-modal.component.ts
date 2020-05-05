@@ -52,13 +52,11 @@ export class SignupModalComponent implements OnInit {
   });
   
   ngOnInit() {
-    
     this.batchService.getAllBatchesByLocation1().subscribe(
-        res => {
-          this.batches = res;
-          console.log(this.batches);
-            },
-        );  
+      res => {
+        this.batches = res;
+        console.log(this.batches);
+    });
   }
 
   openModal(template: TemplateRef<any>){
@@ -92,27 +90,20 @@ export class SignupModalComponent implements OnInit {
     this.address.zip = this.signup.controls.zip.value;
     
 
-      //Switch Statement to set the user to either a rider, driver, or both
-      switch(this.signup.controls.driver.value){
-        case "driver":{
-          this.user.driver = true;
-          this.user.acceptingRides = false;
-          break;
-        }
-        case "rider":{
-          this.user.acceptingRides = true;
-          this.user.driver = false;
-          break;
-        }
-        case "both":{
-          this.user.acceptingRides = true;
-          this.user.driver = true;
-          break;
-        }
+    //Switch Statement to set the user to either a rider, driver, or both
+    switch(this.signup.controls.driver.value){
+      case "driver":{
+        this.user.driver = true;
+        this.user.acceptingRides = false;
+        break;
       }
+      case "rider":{
+        this.user.acceptingRides = true;
+        this.user.driver = false;
+        break;
+      }
+    }
       
-    
-
     //Sets the final confirmed address and then attaches it to user model to be sent.
     let finalAddress: Address;
     await this.validationService.validateAddress(this.address).then((result) => {
