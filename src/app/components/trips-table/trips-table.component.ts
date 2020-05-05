@@ -13,7 +13,7 @@ export class TripsTableComponent implements OnInit {
   constructor(private serv: ScheduleService, private auth: AuthService) { }
 
   @Input('trips') trips: Trip[];
-  @Input('rider-trips') riderTrips: Trip[];
+  @Input('riderTrips') riderTrips: Trip[];
   @Input('caption') caption: String;
   public id: number;
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {} from 'googlemaps';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 
 /**
@@ -17,18 +19,34 @@ export class AppComponent {
   title = 'rideshare-frontend';
   googleMapAPIKey: string;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-   if (navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition(function(position) {
+    this.getGoogleApi();
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
         sessionStorage.setItem("lat", position.coords.latitude+"");
         sessionStorage.setItem("lng", position.coords.longitude+"");
-     })
+      })
   }
  } 
 
-
+ getGoogleApi()  {
+  this.http.get(`${environment.loginUri}getGoogleApi`)
+     .subscribe(
+               (response) => {
+                   //console.log(response);
+                   if(response["googleMapAPIKey"] != undefined){
+                       new Promise((resolve) => {
+                         let script: HTMLScriptElement = document.createElement('script');
+                         script.addEventListener('load', r => resolve());
+                         script.src = `http://maps.googleapis.com/maps/api/js?key=${response["googleMapAPIKey"][0]}`;
+                         document.head.appendChild(script);      
+                   }); 
+             }    
+         }
+     );
+ }
    
 
 
