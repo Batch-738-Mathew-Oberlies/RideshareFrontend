@@ -24,8 +24,6 @@ export class UserService {
 	// http headers
 	private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-
-
 	/**
 	 * Set up the url string to the env var
 	 * Creates a new user object
@@ -56,15 +54,11 @@ export class UserService {
 	 * @param idParam 
 	 */
 	getUserById(idParam: number){
-
-		console.log(this.url)
 		return this.http.get<User>(this.url+idParam).toPromise();
 	}
 	
 
 	getUserById3(idParam: number) {
-		
-		console.log(this.url)
 		return this.http.get<User>(this.url+idParam);
 	}
 
@@ -73,10 +67,7 @@ export class UserService {
 	 * @param idParam2 
 	 */
 	getUserById2(idParam2: String): Observable<User>{
-
-		//console.log(this.url)
 		return this.http.get<User>(this.url+idParam2);
-
 	}
 
 	/**
@@ -188,7 +179,6 @@ export class UserService {
 	 */
 
 	updateUserInfo(user: User) {
-		//console.log(user);
 		return this.http.put(`${this.url}${user.userId}`, user);
 	}
 	/**

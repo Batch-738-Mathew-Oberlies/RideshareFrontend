@@ -5,6 +5,9 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { CarService } from 'src/app/services/car-service/car.service';
+import { Car } from 'src/app/models/car';
+import { Trip } from 'src/app/models/trip';
+import { CarTrip } from 'src/app/models/car-trip';
 
 @Component({
   selector: 'app-driver-list',
@@ -117,7 +120,7 @@ displayRoute(origin, destination, service, display) {
       origin,
       destination,
       travelMode: 'DRIVING',
-      //avoidTolls: true
+
     }, (response, status) => {
       if (status === 'OK') {
         display.setDirections(response);
@@ -143,9 +146,7 @@ displayDriversList(origin, drivers) {
 
       this.carService.getCarTripByUserId(element.id).subscribe(
         (carTrip) => {
-          // @ts-ignore
           availableSeats = carTrip.currentTrip.availableSeats;
-          // @ts-ignore
           totalSeats = carTrip.car.seats;
         }
       );

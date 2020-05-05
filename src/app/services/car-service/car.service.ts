@@ -7,6 +7,7 @@ import { UserService } from '../user-service/user.service';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Trip } from 'src/app/models/trip';
+import { CarTrip } from 'src/app/models/car-trip';
 
 @Injectable({
     providedIn: 'root'
@@ -62,9 +63,9 @@ export class CarService {
 	 * Returns a car and current trip by user ID.
 	 * @param userId 
 	 */
-	getCarTripByUserId(userId) {
-		return this.http.get(`${this.url}trips/driver/${userId}`)
-  }
+	getCarTripByUserId(userId: number): Observable<CarTrip> {
+		return this.http.get<CarTrip>(`${this.url}trips/driver/${userId}`)
+	}
   
   /**
    * Updates information on car and current trip by userId
@@ -85,7 +86,6 @@ export class CarService {
 	 * @param car 
 	 */
 	updateCarInfo(car: Car) {
-		//console.log(user);
 		return this.http.put(`${this.url}${car.carId}`, car).toPromise();
 	}
 
@@ -94,7 +94,6 @@ export class CarService {
 	 * @param userId 
 	 */
 	updateCarInfo2(car: Car): Observable<Car> {
-		//console.log(user);
 		return this.http.put<Car>(`${this.url}${car.carId}`, car);
 	}
 
