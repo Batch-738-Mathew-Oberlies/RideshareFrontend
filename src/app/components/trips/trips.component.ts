@@ -287,6 +287,6 @@ export class TripsComponent implements OnInit {
 export class SuccessModal {
 
   constructor(
-    private activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal
   ) { }
 }
