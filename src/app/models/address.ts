@@ -12,7 +12,7 @@ export class Address {
         this.zip = zip;
     }
 
-    id: number;
+    //id: number;
     street: string;
     apt: string;
     city: string;

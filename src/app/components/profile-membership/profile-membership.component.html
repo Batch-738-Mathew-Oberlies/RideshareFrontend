@@ -1,34 +1,74 @@
 <div class="container mainContainer">
-        <em class="fa fa-users" style="font-family:'FontAwesome', sans-serif;"></em>
-            <h4 class="title">Membership:</h4>
-            <div class="innercontainer">
-            <div class="form-group row">
-            
-                    <div class="col-sm-12">
-                       <h5>Batch:</h5>
-                       <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
-                    </div>
-                </div>
-                
-                <div class="form-group row">
-                     <div class="col-sm-4 t">
-                    <h6>Status:</h6>
-                    <select class="form-control mySelect" name="rider" id="rider" [(ngModel)]=driver value="{{profileObject.driver}}">
-                        <option value="true">Driver</option>
-                        <option value="false">Rider</option>
-                    </select>
-                    <select class="form-control mySelect" name="active" id="active" [(ngModel)]=active value="{{profileObject.active}}">
-                        <option value="true">Active</option>
-                        <option value="false">Disabled</option>
-                    </select>
-                    
-            
-                <button type="submit" (click)="updatesMembershipInfo()" class="btn btn-primary myBtn">Save</button>
-                </div>
-            </div>
-        </div>
+  <i class="fa fa-users" style="font-family:'FontAwesome';"></i>
+
+  <div *ngIf="success==true">
+    <div class="row justify-content-center">
+      <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ statusMessage }}
+      </div>
     </div>
-            
-       
-                    
-    
+  </div>
+
+  <div *ngIf="errorExists==true">
+    <div class="row justify-content-center">
+      <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        An error exists on the form.
+      </div>
+    </div>
+  </div>
+
+  <h4 class="title">Membership:</h4>
+
+  <div class="innercontainer">
+
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <h5>Batch:</h5>
+        <span> {{profileObject.batch.batchNumber}} - {{profileObject.batch.batchLocation}}</span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <h6>Status:</h6>
+        <select class="form-control" [(ngModel)]="isActive" (change)="disableButton()">
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <h6>Role:</h6>
+        <select class="form-control" [(ngModel)]="isDriver" (change)="disableButton()">
+          <option value="true">Driver</option>
+          <option value="false">Rider</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="isDriver==true || isDriver=='true'" class="row">
+      <div class="col-sm-7">
+        <h6>Accepting Rides:</h6>
+        <div class="btn-group" (change)="disableButton()">
+          <button type="button" class="btn btn-secondary"
+            [ngClass]="isAcceptingRides?'btn btn-primary active':'btn btn-secondary'"
+            (click)="changeIsAcceptingRides(true); disableButton();">Yes</button>
+          <button type="button" class="btn btn-secondary"
+            [ngClass]="isAcceptingRides?'btn btn-secondary':'btn btn-primary active'"
+            (click)="changeIsAcceptingRides(false); disableButton()">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row justify-content-center">
+      <button type="submit" [disabled]="button" (click)="updatesMembershipInfo()"
+        class="btn btn-primary myBtn">Save</button>
+    </div>
+
+  </div>
+
+</div>

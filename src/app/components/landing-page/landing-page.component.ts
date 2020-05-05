@@ -50,7 +50,17 @@ sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
+/**
+ * Inserts the google maps api script into the document head. This seems to be duplicated code.
+ * Duplicate code.
+ */
+  getGoogleApi() {
+    if (environment.googleMapKey !== undefined) {
+      const script: HTMLScriptElement = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
+      document.head.appendChild(script);
+    }
+  }
 
  /**
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
