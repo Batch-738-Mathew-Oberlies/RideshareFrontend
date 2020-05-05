@@ -49,7 +49,6 @@ describe("Profile Contact Components Tests", () => {
     pc.firstName.clear();
     pc.setFirstName("Toby!");
     expect(pc.submit.isEnabled()).toBe(false);
-    element(by.className("error")).isPresent().then
     element(by.className("error")).getText().then(function(text) {
       expect(text.includes("First name cannot contain numbers or symbols"));
     })
