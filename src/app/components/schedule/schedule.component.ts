@@ -8,9 +8,8 @@ import { Observable } from 'rxjs';
   templateUrl: './schedule.component.html',
 })
 export class ScheduleComponent implements OnInit {
-  
   constructor(private serv: ScheduleService) { }
-  
+
   public caption='Trip Schedule';
   public tripsObs: Observable<Trip[]> = this.serv.getTrips();
   public id: number = +sessionStorage.getItem("userid");
