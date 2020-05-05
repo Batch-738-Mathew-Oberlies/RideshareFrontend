@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('AdminLoginComponent', () => {
   let component: AdminLoginComponent;
@@ -13,7 +14,7 @@ describe('AdminLoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminLoginComponent ],
-      imports: [RouterModule, ReactiveFormsModule, FormsModule, HttpClientModule, RouterTestingModule],
+      imports: [RouterModule, ReactiveFormsModule, FormsModule, HttpClientModule, RouterTestingModule, NgbModule],
     })
     .compileComponents();
   }));

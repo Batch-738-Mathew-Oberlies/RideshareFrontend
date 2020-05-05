@@ -31,11 +31,15 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { ViewMyRidesComponent } from 'src/app/components/view-my-rides/view-my-rides.component';
 import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from 'src/app/components/trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [
+      AppComponent,
       RegisterComponent,
       DriverComponent,
       AdminComponent,
@@ -60,11 +64,13 @@ describe('AuthService', () => {
       UserRegisterComponent,
       HomePageComponent,
       BsNavbarComponent,
+      TripsComponent,
+      CreateTripComponent,
       ScheduleComponent,
       ViewMyRidesComponent,
-      TripsTableComponent
+      TripsTableComponent,
     ],
-    imports: [AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+    imports: [AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, NgbModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
   }));
    let service: AuthService;

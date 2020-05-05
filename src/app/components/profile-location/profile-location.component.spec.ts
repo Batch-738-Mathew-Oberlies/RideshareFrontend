@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('ProfileLocationComponent', () => {
   let component: ProfileLocationComponent;
@@ -13,7 +14,7 @@ describe('ProfileLocationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ProfileLocationComponent ],
-      imports: [ReactiveFormsModule, HttpClientModule, RouterModule, RouterTestingModule ],
+      imports: [ReactiveFormsModule, HttpClientModule, RouterModule, RouterTestingModule, NgbModule],
       providers: [{provide: Router, useClass: RouterStub}]
     })
     .compileComponents();

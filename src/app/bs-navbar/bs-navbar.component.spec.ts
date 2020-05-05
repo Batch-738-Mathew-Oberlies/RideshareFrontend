@@ -31,6 +31,9 @@ import { ViewMyRidesComponent } from '../components/view-my-rides/view-my-rides.
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
 import { TripsTableComponent } from '../components/trips-table/trips-table.component';
+import { AppComponent } from '../app.component';
+import { TripsComponent, CreateTripComponent } from '../components/trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('BsNavbarComponent', () => {
@@ -40,6 +43,7 @@ describe('BsNavbarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AppComponent,
         RegisterComponent,
         DriverComponent,
         AdminComponent,
@@ -64,11 +68,13 @@ describe('BsNavbarComponent', () => {
         UserRegisterComponent,
         HomePageComponent,
         BsNavbarComponent,
+        TripsComponent,
+        CreateTripComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
-        TripsTableComponent
+        TripsTableComponent,
       ],
-      imports: [RouterModule, FormsModule, AppRoutingModule, RouterTestingModule, HttpClientModule, ReactiveFormsModule, ModalModule.forRoot()],
+      imports: [RouterModule, FormsModule, AppRoutingModule, RouterTestingModule, HttpClientModule, ReactiveFormsModule, ModalModule.forRoot(), NgbModule],
       providers: []
       
     })

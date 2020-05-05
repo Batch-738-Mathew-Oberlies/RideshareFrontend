@@ -34,6 +34,9 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from 'src/app/components/schedule/schedule.component';
 import { Router } from '@angular/router';
 import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from 'src/app/components/trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('UserService', () => {
@@ -43,6 +46,7 @@ describe('UserService', () => {
   beforeEach(() => { 
    TestBed.configureTestingModule({
     declarations: [
+      AppComponent,
       RegisterComponent,
       DriverComponent,
       AdminComponent,
@@ -67,11 +71,13 @@ describe('UserService', () => {
       UserRegisterComponent,
       HomePageComponent,
       BsNavbarComponent,
+      TripsComponent,
+      CreateTripComponent,
       ScheduleComponent,
       ViewMyRidesComponent,
-      TripsTableComponent
+      TripsTableComponent,
     ],
-    imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+    imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, NgbModule],
     providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
    }); 
     

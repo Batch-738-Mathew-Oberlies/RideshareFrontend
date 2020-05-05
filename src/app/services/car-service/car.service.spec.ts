@@ -33,6 +33,9 @@ import { ScheduleComponent } from 'src/app/components/schedule/schedule.componen
 import { ViewMyRidesComponent } from 'src/app/components/view-my-rides/view-my-rides.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from 'src/app/components/trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -42,6 +45,7 @@ import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [
+          AppComponent,
           RegisterComponent,
           DriverComponent,
           AdminComponent,
@@ -66,11 +70,13 @@ import { TripsTableComponent } from 'src/app/components/trips-table/trips-table.
           UserRegisterComponent,
           HomePageComponent,
           BsNavbarComponent,
+          TripsComponent,
+          CreateTripComponent,
           ScheduleComponent,
           ViewMyRidesComponent,
-          TripsTableComponent
+          TripsTableComponent,
         ],
-         imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule],
+         imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule, NgbModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
 

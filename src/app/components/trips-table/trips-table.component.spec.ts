@@ -23,7 +23,7 @@ import { DriverContactModalComponent } from '../driver-contact-modal/driver-cont
 import { DriverListComponent } from '../driver-list/driver-list.component';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { HomePageComponent } from '../home-page/home-page.component';
-import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
+
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { RouterModule } from '@angular/router';
@@ -32,6 +32,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppModule } from 'src/app/app.module';
+import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from '../trips/trips.component';
 
 describe('TripsTableComponent', () => {
   let component: TripsTableComponent;
@@ -40,6 +44,7 @@ describe('TripsTableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AppComponent,
         RegisterComponent,
         DriverComponent,
         AdminComponent,
@@ -64,11 +69,13 @@ describe('TripsTableComponent', () => {
         UserRegisterComponent,
         HomePageComponent,
         BsNavbarComponent,
+        TripsComponent,
+        CreateTripComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
-        TripsTableComponent
+        TripsTableComponent,
       ],
-      imports: [ RouterModule, RouterTestingModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule]
+      imports: [ RouterModule, RouterTestingModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, NgbModule]
     })
     .compileComponents();
   }));
