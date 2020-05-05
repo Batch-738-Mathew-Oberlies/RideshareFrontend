@@ -63,7 +63,7 @@ export class CarService {
 	 * Returns a car and current trip by user ID.
 	 * @param userId 
 	 */
-	getCarTripByUserId(userId: number): Observable<CarTrip> {
+	getCarTripByUserId(userId: any): Observable<CarTrip> {
 		return this.http.get<CarTrip>(`${this.url}trips/driver/${userId}`)
 	}
   
@@ -73,11 +73,7 @@ export class CarService {
    * @param trip 
    */
   updateCarTrip(car: Car, trip: Trip) {
-    let carTrip = {
-      car: car,
-      currentTrip: trip,
-    };
-    console.log(carTrip);
+    let carTrip : CarTrip = new CarTrip(car, trip);
     return this.http.put(`${this.url}trips`, carTrip);
   }
 

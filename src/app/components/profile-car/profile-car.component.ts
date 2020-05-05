@@ -28,12 +28,9 @@ export class ProfileCarComponent implements OnInit {
   constructor(private carService: CarService, private formBuilder: FormBuilder) {
 
     this.carService.getCarTripByUserId(sessionStorage.getItem("userid")).subscribe(
-      (response) => {
-        console.log(response);
-        // @ts-ignore
-        this.currentCar = response.car;
-        // @ts-ignore
-        this.currentTrip = response.currentTrip;
+      (carTrip) => {
+        this.currentCar = carTrip.car;
+        this.currentTrip = carTrip.currentTrip;
 
         this.make.setValue(this.currentCar.make);
         this.model.setValue(this.currentCar.model);
@@ -64,8 +61,7 @@ export class ProfileCarComponent implements OnInit {
     this.currentTrip.availableSeats = this.carForm.value.availableSeats;
 
     this.carService.updateCarTrip(this.currentCar, this.currentTrip).subscribe(
-      (response) => {
-        console.log(response);
+      () => {
         this.success = true;
         this.statusMessage = "Updated Successfully!";
       },
