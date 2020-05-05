@@ -33,6 +33,7 @@ describe("Profile Contact Components Tests", () => {
 
   it("Test 2: contact form should be pre-populated with user's current info", () => {
     browser.waitForAngular();
+    browser.sleep(2500);
     browser.ignoreSynchronization=true
     expect(pc.firstName.getAttribute("value")).toBeTruthy();
     expect(pc.lastName.getAttribute("value")).toBeTruthy();
@@ -44,48 +45,90 @@ describe("Profile Contact Components Tests", () => {
     expect(pc.submit.isEnabled()).toBe(false);
   });
 
-  it("Test 4: submit button is only enabled when info is changed and valid", () => {
+  it("Test 4: invalid info toggles error message and disables submit button", () => {
     pc.firstName.clear();
     pc.setFirstName("Toby!");
     expect(pc.submit.isEnabled()).toBe(false);
+    element(by.className("error")).isPresent().then
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("First name cannot contain numbers or symbols"));
+    })
+
     pc.firstName.clear();
     pc.setFirstName("Toby2");
     expect(pc.submit.isEnabled()).toBe(false);
-    pc.firstName.clear();
-    pc.setFirstName("Tobsy");
-    expect(pc.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("First name cannot contain numbers or symbols"));
+    })
 
     pc.lastName.clear();
     pc.setLastName("Curd!");
     expect(pc.submit.isEnabled()).toBe(false);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Last name cannot contain numbers or symbols"));
+    })
+
     pc.lastName.clear();
     pc.setLastName("Curd2");
     expect(pc.submit.isEnabled()).toBe(false);
-    pc.lastName.clear();
-    pc.setLastName("Curdsy");
-    expect(pc.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Last name cannot contain numbers or symbols"));
+    })
 
     pc.email.clear();
     pc.setEmail("tcurd9illinoisedu");
     expect(pc.submit.isEnabled()).toBe(false);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid email format"));
+    })
+
     pc.email.clear();
     pc.setEmail("tcurd9illinois.edu");
     expect(pc.submit.isEnabled()).toBe(false);
-    pc.email.clear();
-    pc.setEmail("tcurd10@illinois.edu");
-    expect(pc.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid email format"));
+    })
 
     pc.phone.clear();
     pc.setPhoneNumber("6469198957");
     expect(pc.submit.isEnabled()).toBe(false);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Phone number must be in format xxx-xxx-xxxx"));
+    })
+
     pc.phone.clear();
     pc.setPhoneNumber("646-919-89570");
     expect(pc.submit.isEnabled()).toBe(false);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Phone number must be in format xxx-xxx-xxxx"));
+    })
+
     pc.phone.clear();
     pc.setPhoneNumber("646-919");
     expect(pc.submit.isEnabled()).toBe(false);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Phone number must be in format xxx-xxx-xxxx"));
+    })
+  })
+
+  it("Test 5: submit button is only enabled when info is changed and valid", () => {
+    pc.firstName.clear();
+    pc.setFirstName("Tobsy");
+    pc.lastName.clear();
+    pc.setLastName("Curdsy");
+    pc.email.clear();
+    pc.setEmail("tcurd10@illinois.edu");
     pc.phone.clear();
     pc.setPhoneNumber("646-919-8958");
+
     expect(pc.submit.isEnabled()).toBe(true);
   })
+
+  it("Test 6: successfully submits form", () => {
+    browser.wait(protractor.ExpectedConditions.elementToBeClickable(pc.submit), 15000);
+    pc.submit.click();
+    browser.wait(protractor.ExpectedConditions.visibilityOf(pc.httpSuccess), 15000);
+    expect(pc.httpSuccess.isDisplayed()).toBe(true);
+  })
+
 })
