@@ -14,15 +14,20 @@ exports.config = {
     './test/landingpage.spec.js',
     './test/register.spec.js',
     './test/usernav.spec.js',
-    './test/signupmodaltest.ts',
-    './test/tripcomponent.spec.js'
+    './test/profile-tests.ts',
+    './test/profile-contact.ts',
+    './test/profile-location.ts',
+    './test/profile-membership.ts',
   ],
-
   suites: {
-    signup: './test/signupmodaltest.ts'
+    contact:  './test/profile-contact.ts',
+    location:  './test/profile-location.ts',
+    membership:  './test/profile-membership.ts',
+    signup: './test/signupmodaltest.ts',
+    trips: './test/tripcomponent.spec.js',
   },
   capabilities: {
-    browserName: 'chrome'
+    browserName: 'firefox'
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',

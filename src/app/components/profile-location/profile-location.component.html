@@ -3,7 +3,7 @@
 
   <div *ngIf="success==true">
     <div class="row justify-content-center">
-      <div class="alert alert-success alert-dismissible">
+      <div id="response-success" class="alert alert-success alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{ statusMessage }}
       </div>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="row">
-    <form [formGroup]="addressChange" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
+    <form [formGroup]="addressChange" id="profileLocationForm" (ngSubmit)="updatesContactInfo()" class="col-md-12 text-left">
       <h4>Location Information:</h4>
       <br>
 
@@ -43,7 +43,7 @@
         <div class="col-sm-1"></div>
         <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
         <div class="col-sm-4">
-          <input type="text" formControlName="homeAddressApt" class="form-control" id="address2">
+          <input type="text" formControlName="homeAddressApt" class="form-control" id="homeAddressApt">
           <div *ngFor="let error of errorArray">
             <p *ngIf="error.includes('Apts')" class="error"> {{ error }}</p>
           </div>
@@ -96,7 +96,7 @@
         <div class="col-sm-1"></div>
         <label for="homeStreet" class="col-sm-4 col-form-label">Street Name:</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="homeStreet" name="homeStreet" formControlName="workAddress" required>
+          <input type="text" class="form-control" id="workStreet" name="homeStreet" formControlName="workAddress" required>
           <p *ngIf="addressChange.controls.workAddress.hasError('required') && addressChange.controls.workAddress.touched" class="error">Street Address is required.</p>
           <p *ngIf="addressChange.controls.workAddress.hasError('pattern')" class="error">Invalid Street Address.</p>
           <div *ngFor="let error of errorArray">
@@ -109,7 +109,7 @@
         <div class="col-sm-1"></div>
         <label for="address2" class="col-sm-4 col-form-label" >Apt/Ste NO:</label>
         <div class="col-sm-4">
-          <input type="text" formControlName="workAddressApt" class="form-control" id="address2">
+          <input type="text" formControlName="workAddressApt" class="form-control" id="workAddressApt">
           <div *ngFor="let error of errorArray">
             <p *ngIf="error.includes('Apts')" class="error"> {{ error }}</p>
           </div>
@@ -120,7 +120,7 @@
         <div class="col-sm-1"></div>
         <label for="homeCity" class="col-sm-4 col-form-label">City:</label>
         <div class="col-sm-4">
-          <input type="city" class="form-control" id="homeCity" formControlName="workCity" required>
+          <input type="city" class="form-control" id="workCity" formControlName="workCity" required>
           <p *ngIf="addressChange.controls.workCity.hasError('required') && addressChange.controls.workCity.touched" class="error">City is required.</p>
           <p *ngIf="addressChange.controls.workCity.hasError('pattern')" class="error">Invalid City.</p>
           <div *ngFor="let error of errorArray">
@@ -133,7 +133,7 @@
         <div class="col-sm-1"></div>
         <label for="homeState" class="col-sm-4 col-form-label">State:</label>
         <div class="col-sm-4">
-          <select class="form-control" name="homeState" id="homeState" formControlName="workState" required>
+          <select class="form-control" name="homeState" id="workState" formControlName="workState" required>
             <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
           </select>
           <p *ngIf="addressChange.controls.workState.hasError('required')" class="error">State is required.</p>
@@ -147,7 +147,7 @@
         <div class="col-sm-1"></div>
         <label for="homeZipcode" class="col-sm-4 col-form-label">Zip Code:</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="homeZipcode" formControlName="workZip" required>
+          <input type="text" class="form-control" id="workZipcode" formControlName="workZip" required>
           <p *ngIf="addressChange.controls.workZip.hasError('required') && addressChange.controls.workZip.touched" class="error">Zipcode is required.</p>
           <p *ngIf="addressChange.controls.workZip.hasError('pattern')" class="error">Invalid Zipcode.</p>
           <div *ngFor="let error of errorArray">
@@ -157,7 +157,7 @@
       </div>
 
       <div class="form-group row justify-content-center">
-        <button type="submit" [disabled]="(!addressChange.valid || !addressChange.dirty)" class="btn btn-primary myBtn">Save</button>
+        <button id="submit" type="submit" [disabled]="(!addressChange.valid || !addressChange.dirty)" class="btn btn-primary myBtn">Save</button>
       </div>
     </form>
 
