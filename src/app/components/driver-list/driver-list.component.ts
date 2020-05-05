@@ -47,8 +47,8 @@ export class DriverListComponent implements OnInit {
         this.getGoogleApi();
 
         this.userService.getRidersForLocation1(this.location).subscribe(
-          (res) => {
-            res.forEach(element => {
+          (allDrivers) => {
+            allDrivers.forEach(element => {
               // check to see that the currentUserID is not equal to the element userId
               if (element.userId != this.currentUserID) {
                 // If not, then add it to the drivers list.
