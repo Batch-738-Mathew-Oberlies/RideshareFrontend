@@ -1,0 +1,134 @@
+From 9457c2945a08309c0e310ae830833913da829906 Mon Sep 17 00:00:00 2001
+From: cmochsner <cmochsner@gmail.com>
+Date: Tue, 5 May 2020 13:40:01 -0500
+Subject: [PATCH] WIP
+
+---
+ .../trips-table/trips-table.component.html    | 17 +++++--
+ .../trips-table/trips-table.component.ts      | 50 ++++++++++++++++++-
+ 2 files changed, 62 insertions(+), 5 deletions(-)
+
+diff --git a/src/app/components/trips-table/trips-table.component.html b/src/app/components/trips-table/trips-table.component.html
+index a0d05fc..ab12813 100644
+--- a/src/app/components/trips-table/trips-table.component.html
++++ b/src/app/components/trips-table/trips-table.component.html
+@@ -1,5 +1,10 @@
+ <div class="container centerMe">
+-  <div class="card mt-2">
++  
++  <div class="mt-2">
++    <button *ngIf="!showAll && isSchedule()" (click)="showTrips()" type="button" class="btn btn-secondary ml-auto d-block">Include Occupied Trips</button>
++    <button *ngIf="showAll && isSchedule()" (click)="showTrips()" type="button" class="btn btn-secondary ml-auto d-block">Only Show Available Trips</button>
++  </div>
++    <div class="card mt-2">
+     <table class="table table-hover">
+       <caption>{{caption}}</caption>
+       <thead>
+@@ -27,8 +32,10 @@
+       </thead>
+       <tbody>
+         <tr *ngFor="let trip of trips">
++        <!-- <ng-container *ngIf="filterByOpenSeats(trip)">    -->
++        <ng-container *ngIf="filterByOpenSeats(trip) && checkDate(trip.tripDate)">
+           <td>
+-            {{trip.name}}
++            {{trip.name}} 
+           </td>
+           <td>
+             {{trip.tripDate | date}}
+@@ -47,12 +54,14 @@
+           </td>
+           
+           <td>
+-            <button *ngIf= "!onTrip(trip); else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
++            <button *ngIf= "!onTrip(trip) && trip.availableSeats > 0; else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
+             <ng-template #elseBlock>
+-              <button type="button" (click)="removeTrip(trip)" class="btn btn-danger" data-toggle="modal" data-target="#removedModal">Remove</button>
++              <button type="button" *ngIf="onTrip(trip)" (click)="removeTrip(trip)" class="btn btn-danger" data-toggle="modal" data-target="#removedModal">Remove</button>
+             </ng-template>
+           </td>
++        </ng-container>
+         </tr>
++      
+       </tbody>
+     </table>
+ 
+diff --git a/src/app/components/trips-table/trips-table.component.ts b/src/app/components/trips-table/trips-table.component.ts
+index 109ac00..61753d9 100644
+--- a/src/app/components/trips-table/trips-table.component.ts
++++ b/src/app/components/trips-table/trips-table.component.ts
+@@ -16,9 +16,21 @@ export class TripsTableComponent implements OnInit {
+   @Input('riderTrips') riderTrips: Trip[];
+   @Input('caption') caption: String;
+   public id: number;
++  public currDate: Date;
++  public showAll: boolean;
+ 
+   ngOnInit() {
+     this.id=+sessionStorage.getItem("userid");
++    this.currDate=new Date();
++
++    if(this.isSchedule())
++    {
++      this.showAll=false;
++    }
++    else
++    {
++      this.showAll=true;
++    }
+   }
+ 
+   addTrip(t: Trip) {
+@@ -32,7 +44,33 @@ export class TripsTableComponent implements OnInit {
+   refresh() {
+     window.location.reload();
+   }
+-  
++
++  checkDate(d: Date)
++  {
++    let inFuture: boolean = false;
++
++    if(this.currDate <= new Date(d))
++    {
++        inFuture = true;
++    }
++    
++    return inFuture;
++  }
++  showTrips()
++  {
++    this.showAll=!this.showAll;
++  }
++  filterByOpenSeats(t:Trip)
++  {
++    let show: boolean=true;
++    
++    if(this.showAll==false && t.availableSeats==0)
++    {
++        show=false;
++    }
++
++    return show;
++  }
+   onTrip(t: Trip): boolean {
+     let isTrip: boolean = false;
+ 
+@@ -44,4 +82,14 @@ export class TripsTableComponent implements OnInit {
+ 
+     return isTrip;
+   }
++  isSchedule()
++  {
++    let sched: boolean = false;
++    if(this.caption == 'Trip Schedule')
++    {
++      sched=true;
++    }
++
++    return sched;
++  }
+ }
+-- 
+2.20.1 (Apple Git-117)
+

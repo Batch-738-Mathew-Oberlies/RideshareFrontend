@@ -16,10 +16,12 @@ export class TripsTableComponent implements OnInit {
   public id: number;
   public currDate: Date;
   public showAll: boolean;
+  public showPast: boolean;
 
   ngOnInit() {
     this.id = parseInt(sessionStorage.getItem('userid'), 10);
     this.currDate=new Date();
+    this.showPast=false;
 
     if(this.isSchedule())
     {
@@ -45,19 +47,28 @@ export class TripsTableComponent implements OnInit {
 
   checkDate(d: Date)
   {
-    let inFuture: boolean = false;
-
+    let dateCheck: boolean = false;
+ 
     if(this.currDate <= new Date(d))
     {
-        inFuture = true;
+        dateCheck = true;
     }
     
-    return inFuture;
+    if(this.showPast)
+    {
+        dateCheck=!dateCheck;
+    }
+    
+    return dateCheck;
   }
   
-  showTrips()
+  showAllTrips()
   {
     this.showAll=!this.showAll;
+  }
+  showPastTrips()
+  {
+    this.showPast=!this.showPast;
   }
 
   filterByOpenSeats(t:Trip)

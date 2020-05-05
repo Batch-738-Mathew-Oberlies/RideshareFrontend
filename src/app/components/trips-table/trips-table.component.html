@@ -1,8 +1,13 @@
 <div class="container centerMe">
   
-  <div class="mt-2">
-    <button *ngIf="!showAll && isSchedule()" (click)="showTrips()" type="button" class="btn btn-secondary ml-auto d-block">Include Occupied Trips</button>
-    <button *ngIf="showAll && isSchedule()" (click)="showTrips()" type="button" class="btn btn-secondary ml-auto d-block">Only Show Available Trips</button>
+  <div class="mt-2 d-flex">
+    <div class="flex-grow-1"></div>
+    
+    <button *ngIf="!showPast" (click)="showPastTrips()" type="button" class="btn btn-secondary ml-auto mx-1 d-block">Show Past Trips</button>
+    <button *ngIf="showPast" (click)="showPastTrips()" type="button" class="btn btn-secondary ml-auto mx-1 d-block">Show Future Trips</button>
+
+    <button *ngIf="!showAll && isSchedule()" (click)="showAllTrips()" type="button" class="btn btn-secondary ml-auto d-block">Include Occupied Trips</button>
+    <button *ngIf="showAll && isSchedule()" (click)="showAllTrips()" type="button" class="btn btn-secondary ml-auto d-block">Only Show Available Trips</button>
   </div>
     <div class="card mt-2">
     <table class="table table-hover">
