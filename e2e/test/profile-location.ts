@@ -33,7 +33,6 @@ describe("Profile Location Components Tests", () => {
 
   it("Test 2: Profile location form is prefilled with information", () => {
     browser.waitForAngular();
-    browser.ignoreSynchronization=true
     expect(pl.homeStreet.getAttribute("value")).toBeTruthy();
     expect(pl.homeCity.getAttribute("value")).toBeTruthy();
     expect(pl.homeState.getAttribute("value")).toBeTruthy();
@@ -121,36 +120,45 @@ describe("Profile Location Components Tests", () => {
 
     //Check for the "confirm" modal box
     browser.wait(protractor.ExpectedConditions.alertIsPresent(), 5000);
-    browser.switchTo().alert().accept();
+    browser.switchTo().alert().dismiss();
 
   });
 
   it("Test 6: Successful form data submission", ()=>{
 
     pl.homeStreet.clear();
-    pl.setHomeStreet("2200 Astoria Circle");
-
     pl.homeAddressApt.clear();
-    pl.setHomeAddressApt("APT 207");
-
     pl.homeCity.clear();
-    pl.setHomeCity("Herndon");
-
-    pl.homeState.clear();
-    pl.setHomeState("VA");
-
     pl.homeZipcode.clear();
+
+    pl.setHomeStreet("2200 Astoria Cir");
+    pl.setHomeAddressApt("APT 207");
+    pl.setHomeCity("Herndon");
     pl.setHomeZipcode("20170");
+
+    pl.workStreet.clear();
+    pl.workAddressApt.clear();
+    pl.workCity.clear();
+    pl.workZipcode.clear();
+
+    pl.setWorkStreet("2200 Astoria Cir");
+    pl.setWorkAddressApt("APT 107");
+    pl.setWorkCity("Herndon");
+    pl.setWorkZipcode("20170");
 
     expect(pl.submit.isEnabled()).toBe(true);
 
     //submit the form data
     pl.submit.click();
 
-    browser.waitForAngular(); //wait for the http request / response to complete
+    browser.wait(protractor.ExpectedConditions.alertIsPresent(), 5000);
+    browser.switchTo().alert().accept();
+
+    browser.wait(protractor.ExpectedConditions.alertIsPresent(), 5000);
+    browser.switchTo().alert().accept();
 
     // response success message is displayed
-    expect(element(by.id("response-success")).isDisplayed()).toBe(true);
+    expect(pl.httpSuccess.isDisplayed()).toBe(true);
 
   })
 
