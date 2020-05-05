@@ -19,7 +19,6 @@ import { ProfileContactComponent } from '../components/profile-contact/profile-c
 import { ProfileCarComponent } from '../components/profile-car/profile-car.component';
 import { ProfileLocationComponent } from '../components/profile-location/profile-location.component';
 import { ProfileMembershipComponent } from '../components/profile-membership/profile-membership.component';
-import { DriverContactModalComponent } from '../components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from '../components/driver-list/driver-list.component';
 import { UserRegisterComponent } from '../components/user-register/user-register.component';
 import { HomePageComponent } from '../components/home-page/home-page.component';
@@ -53,7 +52,6 @@ describe('MarkInactiveDriverService', () => {
       ProfileCarComponent,
       ProfileLocationComponent,
       ProfileMembershipComponent,
-      DriverContactModalComponent,
       DriverListComponent,
       UserRegisterComponent,
       HomePageComponent,

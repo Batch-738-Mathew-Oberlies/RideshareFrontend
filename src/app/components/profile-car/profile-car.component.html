@@ -1,44 +1,91 @@
 <div class="container mainContainer">
-    
-        <em class="fa fa-car" style="font-family:'FontAwesome', sans-serif;"></em>
-        
-    
-        <h4>Car Information:</h4>
-        
-        <div class="form-group row">
-            <div class="col-sm-1"></div>
-                <label for="make" class="col-sm-4 col-form-label">Make:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="make" [(ngModel)]=make>
-                </div>
-        </div>
-        
-        <div class="form-group row">
-                <div class="col-sm-1"></div>
-            <label for="model" class="col-sm-4 col-form-label">Model:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="model" [(ngModel)]=model>
-            </div>
-        </div>
+  <i class="fa fa-car" style="font-family:'FontAwesome';"></i>
 
-        <div class="form-group row">
-            <div class="col-sm-1"></div>
-                <label for="Nrseats" class="col-sm-4 col-form-label ">Number of seats:</label>
-                <div class="col-sm-4">
-                <select class="form-control" id="Nrseats" [(ngModel)]=nrSeats>
-                    <option>Choose the number of seats</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <p *ngIf="success != ''" class="success">{{success}}</p>
-            </div>
-        </div>
-        
-        <button type="submit" class="btn btn-primary myBtn" (click)="updatesCarInfo()">Save</button>
+  <div *ngIf="success==true">
+    <div class="row justify-content-center">
+      <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{ statusMessage }}
+      </div>
     </div>
-    
-        
-    
+  </div>
+
+  <h4>Car Information:</h4>
+  <form (ngSubmit)="updatesCarInfo()" [formGroup]="carForm">
+
+    <div class="form-group row">
+      <div class="col-sm-1"></div>
+      <label for="make" class="col-sm-4 col-form-label">Make:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="make" name="make" formControlName="make"
+          value="{{ currentCar?.make }}">
+        <p class="error" *ngIf="(make.dirty || make.touched) && make.invalid && make.errors.required">
+          Make is required.
+        </p>
+        <p class="error" *ngIf="(make.errors?.pattern)">
+          Make can only contain numbers and letters.
+        </p>
+      </div>
+      <div *ngFor="let error of errorArray" class="error">
+        <p *ngIf="error.includes('make')">{{ error }}</p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-1"></div>
+      <label for="model" class="col-sm-4 col-form-label">Model:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="model" name="model" formControlName="model"
+          value="{{ currentCar?.model }}" required>
+        <p class="error" *ngIf="(model.dirty || model.touched) && model.invalid && model.errors.required">
+          Model is required.
+        </p>
+        <p class="error" *ngIf="model.errors?.pattern">
+          Model can only contain numbers, letters, and hyphens.
+        </p>
+        <div *ngFor="let error of errorArray">
+          <p *ngIf="error.includes('model')" class="error">{{ error }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-1"></div>
+      <label for="Nrseats" class="col-sm-4 col-form-label ">Total seats:</label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" id="nrSeats" name="nrSeats" formControlName="nrSeats"
+          value="{{ currentCar?.nrSeats }}" min=1 max=6 required>
+        <p class="error" *ngIf="nrSeats.dirty && nrSeats.invalid && nrSeats.errors?.required">
+          Total seats is required.
+        </p>
+        <p class="error" *ngIf="nrSeats.errors?.max">
+          Total seats must not exceed 6.
+        </p>
+        <p class="error" *ngIf="nrSeats.errors?.min">
+          Total seats must be at least 1.
+        </p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-1"></div>
+      <label for="availableSeats" class="col-sm-4 col-form-label ">Available seats:</label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" id="availableSeats" name="availableSeats" formControlName="availableSeats"
+          value="{{ currentTrip?.availableSeats }}" min=0 [max]="nrSeats.value" required>
+        <p class="error" *ngIf="availableSeats.dirty && availableSeats.invalid && availableSeats.errors?.required">
+          Available seats is required.
+        </p>
+        <p class="error" *ngIf="availableSeats.errors?.max">
+          Available seats must not exceed total number of seats.
+        </p>
+        <p class="error" *ngIf="availableSeats.errors?.min">
+          Available seats must be at least 0.
+        </p>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!carForm.valid || !carForm.dirty" class="btn btn-primary myBtn">Save</button>
+  </form>
+
+</div>

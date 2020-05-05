@@ -29,13 +29,13 @@ import { ProfileContactComponent } from './components/profile-contact/profile-co
 import { ProfileCarComponent } from './components/profile-car/profile-car.component';
 import { ProfileLocationComponent } from './components/profile-location/profile-location.component';
 import { ProfileMembershipComponent } from './components/profile-membership/profile-membership.component';
-import { DriverContactModalComponent } from './components/driver-contact-modal/driver-contact-modal.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { TripsComponent, CreateTripComponent } from './components/trips/trips.component';
+import { TripService } from 'src/app/services/trip-service/trip.service';
+import { TripsComponent, CreateTripComponent, SuccessModal } from './components/trips/trips.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { ScheduleService } from 'src/app/services/schedule-service/schedule.service';
 import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
@@ -63,13 +63,13 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     ProfileCarComponent,
     ProfileLocationComponent,
     ProfileMembershipComponent,
-    DriverContactModalComponent,
     DriverListComponent,
     UserRegisterComponent,
     HomePageComponent,
     BsNavbarComponent,
     TripsComponent,
     CreateTripComponent,
+    SuccessModal,
     ScheduleComponent,
     ViewMyRidesComponent,
     TripsTableComponent,
@@ -80,7 +80,6 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     ModalModule.forRoot(),
     NgbModule,
     ReactiveFormsModule,
@@ -93,8 +92,9 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     ValidationService,
     BsModalService,
     ScheduleService,
+    TripService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateTripComponent]
+  entryComponents: [CreateTripComponent, SuccessModal]
 })
 export class AppModule { }

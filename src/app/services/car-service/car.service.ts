@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../user-service/user.service';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { Trip } from 'src/app/models/trip';
+import { CarTrip } from 'src/app/models/car-trip';
 
 @Injectable({
     providedIn: 'root'
@@ -57,13 +59,39 @@ export class CarService {
 		return this.http.get<Car>(`${this.url}users/${userId}`);
 	}
 
+	/**
+	 * Returns a car and current trip by user ID.
+	 * @param userId 
+	 */
+	getCarTripByUserId(userId: any): Observable<CarTrip> {
+		return this.http.get<CarTrip>(`${this.url}trips/driver/${userId}`)
+	}
+  
+  /**
+   * Updates information on car and current trip by userId
+   * @param car 
+   * @param trip 
+   */
+  updateCarTrip(car: Car, trip: Trip) {
+    let carTrip : CarTrip = new CarTrip(car, trip);
+    return this.http.put(`${this.url}trips`, carTrip);
+  }
 
+	/**
+	 * Updates information on a car
+	 * @param car 
+	 */
 	updateCarInfo(car: Car) {
-		//console.log(user);
-		return this.http.put(this.url + '/' + car.carId, car).toPromise();
+		return this.http.put(`${this.url}${car.carId}`, car).toPromise();
 	}
 
-
+	/**
+	 * Identical to the above method except that it returns an observable.
+	 * @param userId 
+	 */
+	updateCarInfo2(car: Car): Observable<Car> {
+		return this.http.put<Car>(`${this.url}${car.carId}`, car);
+	}
 
 	/**
 	 * Creates a car, assigns it to the given user, and makes that user a driver.

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-contact',
@@ -10,45 +11,72 @@ import { User } from 'src/app/models/user';
 })
 export class ProfileContactComponent implements OnInit {
 
-  profileObject : User;
-  currentUser: any = '';
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  success :string;
-  constructor(private router: Router, private userService: UserService) { }
+  profileObject: User;
+
+  contactInfoForm: FormGroup;
+
+  firstName = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z\\u00C0-\\u017F]+[- ]?[a-zA-Z\\u00C0-\\u017F]+$'), Validators.maxLength(30)]);
+  lastName = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z\\u00C0-\\u017F]+[- ]?[a-zA-Z\\u00C0-\\u017F]+$'), Validators.maxLength(30)]);
+  email = new FormControl('', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
+  phone = new FormControl('', [Validators.required,Validators.pattern('^\\d{3}-\\d{3}-\\d{4}$')]);
+
+  errorExists: boolean;
+  errorArray: any;
+  success: boolean;
+  statusExists: boolean;
+  statusMessage: string;
+
+  constructor(private router: Router, private userService: UserService, private formBuilder: FormBuilder) {
+
+    this.userService.getUserById2(sessionStorage.getItem('userid')).subscribe(
+      (response) => {
+        this.profileObject = response;
+        this.firstName.setValue(this.profileObject.firstName);
+        this.lastName.setValue(this.profileObject.lastName);
+        this.email.setValue(this.profileObject.email);
+        this.phone.setValue(this.profileObject.phoneNumber);
+      }
+    );
+
+    this.contactInfoForm = this.formBuilder.group({
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      phone: this.phone
+    });
+
+  }
 
   /**
    * Sets the user field of this component to match the currently logged in user as they appear
    * in the database.
    */
   ngOnInit() {
-    this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe((response)=>{
-      this.profileObject = response;
-
-      this.firstName = this.profileObject.firstName;
-      this.lastName = this.profileObject.lastName;
-      this.email = this.profileObject.email;
-      this.phone = this.profileObject.phoneNumber;
-
-    });
-    
   }
 
   /**
    * Updates the fields in the profile object to match those of this component, and persists
    * those changes to the database.
    */
-  updatesContactInfo(){
-    this.profileObject.firstName = this.firstName;
-    this.profileObject.lastName = this.lastName;
-    this.profileObject.email = this.email;
-    this.profileObject.phoneNumber = this.phone;
+  updatesContactInfo() {
+    this.errorArray = [];
+    this.profileObject.firstName = this.firstName.value;
+    this.profileObject.lastName = this.lastName.value;
+    this.profileObject.email = this.email.value;
+    this.profileObject.phoneNumber = this.phone.value;
 
-    this.userService.updateUserInfo(this.profileObject);
-    this.success = "Updated Successfully!";
+    this.userService.updateUserInfo(this.profileObject).subscribe(
+      (response) => { 
+        this.statusExists = true;
+        this.success = true;
+        this.statusMessage = 'Updated Successfully!'; 
+      },
+      (errorObj) => {
+        this.statusExists = true;
+        this.errorExists = true;
+        this.errorArray = errorObj.error.errors;
+      }
+    );
   }
-
 
 }

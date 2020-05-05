@@ -14,9 +14,23 @@ export class TripsTableComponent implements OnInit {
   @Input() riderTrips: Trip[];
   @Input() caption: string;
   public id: number;
+  public currDate: Date;
+  public showAll: boolean;
+  public showPast: boolean;
 
   ngOnInit() {
     this.id = parseInt(sessionStorage.getItem('userid'), 10);
+    this.currDate=new Date();
+    this.showPast=false;
+
+    if(this.isSchedule())
+    {
+      this.showAll=false;
+    }
+    else
+    {
+      this.showAll=true;
+    }
   }
 
   addTrip(trip: Trip) {
@@ -31,6 +45,44 @@ export class TripsTableComponent implements OnInit {
     window.location.reload();
   }
 
+  checkDate(d: Date)
+  {
+    let dateCheck: boolean = false;
+ 
+    if(this.currDate <= new Date(d))
+    {
+        dateCheck = true;
+    }
+    
+    if(this.showPast)
+    {
+        dateCheck=!dateCheck;
+    }
+    
+    return dateCheck;
+  }
+  
+  showAllTrips()
+  {
+    this.showAll=!this.showAll;
+  }
+  showPastTrips()
+  {
+    this.showPast=!this.showPast;
+  }
+
+  filterByOpenSeats(t:Trip)
+  {
+    let show: boolean=true;
+    
+    if(this.showAll==false && t.availableSeats==0)
+    {
+        show=false;
+    }
+
+    return show;
+  }
+
   onTrip(trip: Trip): boolean {
     let isOnTrip = false;
 
@@ -43,5 +95,16 @@ export class TripsTableComponent implements OnInit {
     }
 
     return isOnTrip;
+  }
+
+  isSchedule()
+  {
+    let sched: boolean = false;
+    if(this.caption == 'Trip Schedule')
+    {
+      sched=true;
+    }
+
+    return sched;
   }
 }
