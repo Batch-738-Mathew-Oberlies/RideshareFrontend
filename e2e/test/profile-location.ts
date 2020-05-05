@@ -31,8 +31,9 @@ describe("Profile Location Components Tests", () => {
     expect(pl.form.isPresent()).toBe(true);
   });
 
-  it("Test 2: Profile location form is prefilled with information", () => {
+  it("Test 2: Profile location form is pre-populate with information", () => {
     browser.waitForAngular();
+    browser.sleep(2500);
     browser.ignoreSynchronization=true;
     expect(pl.homeStreet.getAttribute("value")).toBeTruthy();
     expect(pl.homeCity.getAttribute("value")).toBeTruthy();
@@ -49,68 +50,88 @@ describe("Profile Location Components Tests", () => {
     expect(pl.submit.isEnabled()).toBe(false);
   });
 
-
-  it("Test 4: submit button is only enabled when info is changed and valid.", () => {
+  it("Test 4: invalid info toggles error message and disables submit button", () => {
     pl.homeStreet.clear();
     pl.setHomeStreet("8000 Home Street!!");
     expect(pl.submit.isEnabled()).toBe(false);
-    pl.homeStreet.clear();
-    pl.setHomeStreet("2200 Astoria Cir");
-    expect(pl.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid Street Address"));
+    })
 
     pl.homeAddressApt.clear();
     pl.setHomeAddressApt("!@#$%!");
     expect(pl.submit.isEnabled()).toBe(false);
-    pl.homeAddressApt.clear();
-    pl.setHomeAddressApt("APT 107");
-    expect(pl.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Apts may only contain letters, numbers, and spaces"));
+    })
 
     pl.homeCity.clear();
     pl.setHomeCity("%thisisnotacity");
     expect(pl.submit.isEnabled()).toBe(false);
-    pl.homeCity.clear();
-    pl.setHomeCity("Herndon");
-    expect(pl.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid City"));
+    })
 
     pl.homeZipcode.clear();
     pl.setHomeZipcode("fffff");
     expect(pl.submit.isEnabled()).toBe(false);
-    pl.homeZipcode.clear();
-    pl.setHomeZipcode("20170");
-    expect(pl.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid Zipcode"));
+    })
 
     pl.workStreet.clear();
     pl.setWorkStreet("8000 Work Street!!");
     expect(pl.submit.isEnabled()).toBe(false);
-    pl.workStreet.clear();
-    pl.setWorkStreet("2200 Astoria Cir");
-    expect(pl.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid Street Address"));
+    })
 
     pl.workAddressApt.clear();
     pl.setWorkAddressApt("@@@");
     expect(pl.submit.isEnabled()).toBe(false);
-    pl.workAddressApt.clear();
-    pl.setWorkAddressApt("APT 208");
-    expect(pl.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Apts may only contain letters, numbers, and spaces"));
+    })
 
     pl.workCity.clear();
     pl.setWorkCity("%thisisnotacity");
     expect(pl.submit.isEnabled()).toBe(false);
-    pl.workCity.clear();
-    pl.setWorkCity("Herndon");
-    expect(pl.submit.isEnabled()).toBe(true);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid City"));
+    })
 
     pl.workZipcode.clear();
     pl.setWorkZipcode("fffff");
     expect(pl.submit.isEnabled()).toBe(false);
+    element(by.className("error")).getText().then(function(text) {
+      expect(text.includes("Invalid Zipcode"));
+    })
+  });
+
+  it("Test 5: submit button is only enabled when info is changed and valid.", () => {
+    pl.homeStreet.clear();
+    pl.setHomeStreet("2200 Astoria Cir");
+    pl.homeAddressApt.clear();
+    pl.setHomeAddressApt("APT 107");
+    pl.homeCity.clear();
+    pl.setHomeCity("Herndon");
+    pl.homeZipcode.clear();
+    pl.setHomeZipcode("20170");
+
+    pl.workStreet.clear();
+    pl.setWorkStreet("2200 Astoria Cir");
+    pl.workAddressApt.clear();
+    pl.setWorkAddressApt("APT 208");
+    pl.workCity.clear();
+    pl.setWorkCity("Herndon");
     pl.workZipcode.clear();
     pl.setWorkZipcode("20170");
-    expect(pl.submit.isEnabled()).toBe(true);
 
+    expect(pl.submit.isEnabled()).toBe(true);
   });
 
 
-  it("Test 5: Should get a response from the USPS API which is then confirmed.", () => {
+  it("Test 6: Should get a response from the USPS API which is then confirmed.", () => {
     // Enable the submit button
     expect(pl.submit.isEnabled()).toBe(true);
 
@@ -122,7 +143,7 @@ describe("Profile Location Components Tests", () => {
     browser.switchTo().alert().accept();
   });
 
-  it("Test 6: response success message is displayed upon successful submission", ()=>{
+  it("Test 7: response success message is displayed upon successful submission", ()=>{
     browser.wait(protractor.ExpectedConditions.visibilityOf(pl.httpSuccess), 15000);
     expect(pl.httpSuccess.isDisplayed()).toBe(true);
   })
