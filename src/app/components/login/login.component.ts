@@ -179,23 +179,20 @@ export class LoginComponent implements OnInit {
 						sessionStorage.setItem("name", response["name"]);
 						sessionStorage.setItem("userid", response["userid"]);
 
-						//This was added to get an user from the back end and store it in the session storage.
-						//You can retrieve the user from the session storage by using the method retrieveUser
-						//	from the user-service.
+						/**
+						 * This was added to get an user from the back end and store it in the session storage.
+						 * You can retrieve the user from the session storage by using the method retrieveUser
+						 * from the user-service.
+						 */
 						const userId: string = sessionStorage.getItem('userid');
 						this.userService.getUserById2(userId).subscribe((user: User) => {
 							if (user !== null) {
 								this.userService.storeUser(user);
 							}
-							console.log(user);
 							location.replace('landingPage');
 						});
-
-						//call landing page
-						//this.router.navigate(['landingPage']);
-						// location.replace('landingPage');
-
 					  }
+
 					  if(response["userNotFound"] != undefined){
 						this.userNotFound = response["userNotFound"][0];
 					  }
