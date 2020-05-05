@@ -35,7 +35,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { TripsComponent, CreateTripComponent } from './components/trips/trips.component';
+import { TripsComponent, CreateTripComponent, SuccessModal } from './components/trips/trips.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { ScheduleService } from 'src/app/services/schedule-service/schedule.service';
 import { ViewMyRidesComponent } from './components/view-my-rides/view-my-rides.component';
@@ -70,6 +70,7 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     BsNavbarComponent,
     TripsComponent,
     CreateTripComponent,
+    SuccessModal,
     ScheduleComponent,
     ViewMyRidesComponent,
     TripsTableComponent,
@@ -95,6 +96,6 @@ import { TripsTableComponent } from './components/trips-table/trips-table.compon
     ScheduleService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateTripComponent]
+  entryComponents: [CreateTripComponent, SuccessModal]
 })
 export class AppModule { }
