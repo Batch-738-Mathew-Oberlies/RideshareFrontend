@@ -32,6 +32,7 @@ describe("Profile Membership Component Tests", () => {
 
   it("Test 1: Profile Membership form is prefilled with information", () => {
     browser.waitForAngular();
+    browser.sleep(2500);
     browser.ignoreSynchronization=true;
 
     expect(pm.driver.getAttribute("value")).toBeTruthy();
@@ -53,9 +54,8 @@ describe("Profile Membership Component Tests", () => {
     expect(pm.acceptingRides.isPresent()).toBe(true);
   })
 
-
   it("Test 4: Successful form data send", () => {
-    pm.active.getAttribute("value").then( function(value) {
+    pm.active.getAttribute("value").then(function(value) {
       if (value == "true") {
         pm.setActive("Inactive");
         expect(pm.active.getAttribute("value")).toBe("false");
@@ -64,21 +64,11 @@ describe("Profile Membership Component Tests", () => {
         expect(pm.active.getAttribute("value")).toBe("true");
       }
     })
-    // pm.setActive("Active");
-    // expect(pm.active.getAttribute("value")).toBe("true");
     pm.submit.click();
 
     browser.wait(protractor.ExpectedConditions.visibilityOf(pm.httpSuccess), 15000);
     expect(pm.httpSuccess.isDisplayed()).toBe(true);
   })
-
-  it("Test 5: Close success message alert", () => {
-    pm.httpSuccess.click();
-    browser.wait(protractor.ExpectedConditions.invisibilityOf(pm.httpSuccess), 15000);
-    expect(pm.httpSuccess.isDisplayed()).toBe(false);
-  })
-
-
 
 })
 
