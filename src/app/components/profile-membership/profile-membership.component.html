@@ -21,7 +21,7 @@
 
   <h4 class="title">Membership:</h4>
 
-  <div class="innercontainer">
+  <div id="membershipDiv" class="innercontainer">
 
     <div class="form-group row">
       <div class="col-sm-12">
@@ -53,7 +53,7 @@
     <div *ngIf="isDriver==true" class="row">
       <div class="col-sm-7">
         <h6>Accepting Rides:</h6>
-        <div class="btn-group" (change)="disableButton()">
+        <div id="acceptingRidesBtn" class="btn-group" (change)="disableButton()">
           <button id="yes" type="button" class="btn btn-secondary"
             [ngClass]="isAcceptingRides?'btn btn-primary active':'btn btn-secondary'"
             (click)="changeIsAcceptingRides(true); disableButton();">Yes</button>

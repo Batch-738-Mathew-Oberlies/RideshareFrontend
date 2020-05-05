@@ -3,6 +3,7 @@ import { browser, element, by } from "protractor"
 export class profileMembership {
   driver = element(by.id('isDriver'));
   active = element(by.id('isActive'));
+  acceptingRides = element(by.id('acceptingRidesBtn'));
   yes = element(by.id('yes'));
   no = element(by.id('no'));    
 
@@ -15,11 +16,11 @@ export class profileMembership {
     this.setActive(active);
   }    
   
-  setDriver = (bool) => {
-    element(by.id('isDriver')).sendKeys(bool);
+  setDriver = (string) => {
+    element(by.cssContainingText('option', string)).click();
   }    
   
-  setActive = (bool) => {
-    element(by.id('isActive')).sendKeys(bool);
-  }
+  setActive = (string) => {
+    element(by.cssContainingText('option', string)).click();
+  }    
 }
