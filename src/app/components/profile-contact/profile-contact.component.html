@@ -60,7 +60,7 @@
             <div class="col-sm-1"></div>
             <label for="user_email" class="col-sm-4 col-form-label">Email:</label>
             <div class="col-sm-4">
-                <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" formControlName="email" value="{{ profileObject?.email }}" required>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email" value="{{ profileObject?.email }}" required>
                 <p class="error" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
                   Email is required.
                 </p>

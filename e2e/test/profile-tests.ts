@@ -29,10 +29,43 @@ describe("profile component tests", () => {
   });
 
   it("Test 2: Profile Contact info form shows appropriate error messages", () => {
+    //firstName
+    element(by.id("firstName")).sendKeys("");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
     element(by.id("firstName")).sendKeys("Toby!");
     expect(element(by.css("error")).isPresent()).toBe(true);
 
     element(by.id("firstName")).sendKeys("Toby2");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    //lastName
+    element(by.id("lastName")).sendKeys("");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    element(by.id("lastName")).sendKeys("Curd!");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    element(by.id("lastName")).sendKeys("Curd2");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    //email
+    element(by.id("email")).sendKeys("");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    element(by.id("email")).sendKeys("email");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    //phone
+    element(by.id("phone")).sendKeys("");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    element(by.id("phone")).sendKeys("123");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
+    element(by.id("phone")).sendKeys("123ABC");
+    expect(element(by.css("error")).isPresent()).toBe(true);
+
   })
 
   it("Test #: Profile Location form is prefilled with information", () => {
@@ -50,12 +83,16 @@ describe("profile component tests", () => {
 
   });
 
+
+
   it("Test #: Profile Membership form is prefilled with information", () => {
     element(by.id("membershipButton")).click();
     expect(element(by.id("isDriver")).getAttribute("value")).toBeTruthy();
     expect(element(by.id("isActive")).getAttribute("value")).toBeTruthy();
 
   });
+
+
 
   it("Test #: Profile Car form is prefilled with information", () => {
     element(by.id("carInfoButton")).click();
