@@ -17,21 +17,17 @@ import { environment } from '../../../environments/environment';
 export class LandingPageComponent implements OnInit {
 
   location_s : string =''; //sample: Morgantown, WV
-
-
+ 
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
 
   mapProperties :{};
 
   constructor(private http: HttpClient,private userService: UserService) {
-    //load google map api
   }
 
-
   ngOnInit(): void {
-
-    this.sleep(2000).then(() => {
+    this.sleep(3000).then(() => {
       this.mapProperties = {
          center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
          zoom: 15,
@@ -50,18 +46,6 @@ sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-/**
- * Inserts the google maps api script into the document head. This seems to be duplicated code.
- * Duplicate code.
- */
-  getGoogleApi() {
-    if (environment.googleMapKey !== undefined) {
-      const script: HTMLScriptElement = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
-      document.head.appendChild(script);
-    }
-  }
-
  /**
  * google.maps.DirectionsRenderer to compute the route and display it on the map.
  *
@@ -73,21 +57,19 @@ sleep(ms) {
  */
  searchDriver(){
   //call service search algorithm ()
-  //console.log(this.location_s);
   this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
   this.userService.getRidersForLocation1(this.location_s)
-  .subscribe(
-            (response) => {
-              response.forEach(element => {
-                   var directionsService = new google.maps.DirectionsService;
-                   var directionsRenderer = new google.maps.DirectionsRenderer({
-                         draggable: true,
-                         map: this.map
-                    });
-                    console.log(element.Distance);
-                    this.displayRoute(this.location_s, element.hCity+","+element.hState, directionsService, directionsRenderer);
-         });
-  });
+    .subscribe(
+      (response) => {
+        response.forEach(driver => {
+          let directionsService = new google.maps.DirectionsService;
+          let directionsRenderer = new google.maps.DirectionsRenderer({
+            draggable: true,
+            map: this.map
+          });
+          this.displayRoute(this.location_s, driver.homeAddress.city+","+driver.homeAddress.state, directionsService, directionsRenderer);
+        });
+    });
  }
 
   /**
