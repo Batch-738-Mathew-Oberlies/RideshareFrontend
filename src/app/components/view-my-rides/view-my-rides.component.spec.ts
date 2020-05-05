@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewMyRidesComponent } from './view-my-rides.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { TripsTableComponent } from '../trips-table/trips-table.component';
 
 describe('ViewMyRidesComponent', () => {
   let component: ViewMyRidesComponent;
@@ -8,7 +11,9 @@ describe('ViewMyRidesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewMyRidesComponent ]
+      declarations: [ ViewMyRidesComponent, TripsTableComponent ],
+      imports: [HttpClientModule],
+      providers: [{provide: Router, useClass: RouterStub}]
     })
     .compileComponents();
   }));
@@ -22,4 +27,10 @@ describe('ViewMyRidesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  class RouterStub {
+    navigateByUrl(url: string) {
+      return url;
+    }
+  }
 });
