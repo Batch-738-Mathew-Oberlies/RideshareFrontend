@@ -35,7 +35,8 @@ export class CarService {
 	 * Fetches all cars from the database.
 	 */
 
-	getAllCars() {
+	getAllCars(): Observable<Car[]> 
+	{
 		return this.http.get<Car[]>(this.url);
 	}
 

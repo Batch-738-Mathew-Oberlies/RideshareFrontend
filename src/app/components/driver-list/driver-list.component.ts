@@ -32,6 +32,7 @@ export class DriverListComponent implements OnInit {
 
   ngOnInit() {
     this.drivers = [];
+<<<<<<< HEAD
     this.currentUserID = +sessionStorage.getItem('userid');
 
     // sets the location to the driver's home address
@@ -74,6 +75,37 @@ export class DriverListComponent implements OnInit {
         );
       }
     )
+=======
+
+    this.userService.getRidersForLocation1(this.location).subscribe(
+      res => {
+           //console.log(res);
+           res.forEach(element => {
+              this.drivers.push({
+                   'id': element.userId,
+                 'name': element.firstName+" "+element.lastName,
+               'origin':element.hCity+","+element.hState, 
+                'email': element.email, 
+                'phone':element.phoneNumber
+              });
+          });
+      });
+    
+
+
+    this.sleep(2000).then(() => {
+      this.mapProperties = {
+         center: new google.maps.LatLng(Number(sessionStorage.getItem("lat")), Number(sessionStorage.getItem("lng"))),
+         zoom: 15,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapProperties);
+      //get all routes 
+      this.displayDriversList(this.location, this.drivers);
+      //show drivers on map
+      this.showDriversOnMap(this.location, this.drivers);
+    });
+>>>>>>> 72cf0791ebe761ab8e693d8643cf13a8dab1544d
   }
 
   /**
@@ -87,6 +119,12 @@ export class DriverListComponent implements OnInit {
     }
   }
   
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 72cf0791ebe761ab8e693d8643cf13a8dab1544d
   /**
   * Inititates services from the google maps api needed for displaying the route, and then
   * calls displayRoute()/

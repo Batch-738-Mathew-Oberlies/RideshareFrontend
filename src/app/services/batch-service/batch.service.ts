@@ -30,7 +30,7 @@ export class BatchService {
 	/**
 	 * Fetches all the batches from the above array.
 	 */
-	getAllBatches() {
+	getAllBatches(): Batch[] {
 		return this.batches;
 	}
 

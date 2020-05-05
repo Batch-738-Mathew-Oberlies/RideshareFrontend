@@ -30,9 +30,6 @@ export class LandingPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-     //load google map  api
-    
-    this.getGoogleApi();
 
     this.sleep(2000).then(() => {
       this.mapProperties = {
@@ -53,17 +50,6 @@ sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-/**
- * Inserts the google maps api script into the document head. This seems to be duplicated code.
- * Duplicate code.
- */
-  getGoogleApi() {
-    if (environment.googleMapKey !== undefined) {
-      const script: HTMLScriptElement = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
-      document.head.appendChild(script);
-    }
-  }
 
  /**
   * Searches for drivers, collects the google maps services, and calls the display route method.
