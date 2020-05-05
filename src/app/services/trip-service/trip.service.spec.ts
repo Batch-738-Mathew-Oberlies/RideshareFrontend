@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TripService } from './trip.service';
+import { TripsComponent, CreateTripComponent } from 'src/app/components/trips/trips.component';
 
 
 describe('TripService', () => {
@@ -60,8 +61,10 @@ describe('TripService', () => {
       BsNavbarComponent,
       ScheduleComponent,
       ViewMyRidesComponent,
-      TripsTableComponent],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+      TripsTableComponent,
+      TripsComponent,
+      CreateTripComponent],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, NgbModule],
     providers: [TripService]
   }));
 
