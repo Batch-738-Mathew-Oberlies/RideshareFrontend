@@ -44,8 +44,6 @@ export class DriverListComponent implements OnInit {
         let currentAddress = currentUser.homeAddress;
         this.location = currentAddress.street + ", " + currentAddress.city + ", " + currentAddress.state;
 
-        this.getGoogleApi();
-
         this.userService.getRidersForLocation1(this.location).subscribe(
           (allDrivers) => {
             allDrivers.forEach(element => {
@@ -77,17 +75,6 @@ export class DriverListComponent implements OnInit {
         );
       }
     )
-  }
-
-  /**
-  * Inserts the google maps api script into the document head. 
-  */  
-  getGoogleApi() {
-    if (environment.googleMapKey !== undefined) {
-      const script: HTMLScriptElement = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapKey}`;
-      document.head.appendChild(script);
-    }
   }
   
   /**
