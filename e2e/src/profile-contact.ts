@@ -3,7 +3,7 @@ import { by, element } from 'protractor';
 export class profileContact {
   firstName = element(by.id("firstName"));
   lastName = element(by.id("lastName"));
-  email = element(by.id("user_email"));
+  email = element(by.id("email"));
   phone = element(by.id("phone"));
 
   submit = element(by.id('submit'));
@@ -11,10 +11,10 @@ export class profileContact {
   httpSuccess = element(by.id('response-success'));
   httpError   = element(by.id('response-error'));
 
-  populateForm = (firstname, lastname, user_email, phone) => {
+  populateForm = (firstname, lastname, email, phone) => {
     this.setFirstName(firstname);
     this.setLastName(lastname);
-    this.setEmail(user_email);
+    this.setEmail(email);
     this.setPhoneNumber(phone);
   };
 
