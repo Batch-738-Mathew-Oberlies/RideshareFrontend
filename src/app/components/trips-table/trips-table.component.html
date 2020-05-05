@@ -59,7 +59,7 @@
 
           <td>
             <div *ngIf="trip.driver.userId !== this.id">
-              <button *ngIf="!onTrip(trip) && trip.availableSeats > 0; else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
+              <button *ngIf="!onTrip(trip) && trip.availableSeats > 0 && !showPast; else elseBlock" type="button" (click)="addTrip(trip)" class="btn btn-success" data-toggle="modal" data-target="#addedModal">Register</button>
               <ng-template #elseBlock>
                 <button type="button" *ngIf="onTrip(trip)" (click)="removeTrip(trip)" class="btn btn-danger" data-toggle="modal" data-target="#removedModal">Remove</button>
               </ng-template>
