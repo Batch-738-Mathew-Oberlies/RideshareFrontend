@@ -16,24 +16,23 @@ export class profileCar {
         this.setMake(make);
         this.setModel(model);
         this.setNrSeats(nrSeats);
-        this.setAvailNumber(avail);
+        this.setAvail(avail);
       };
     
-      setMake = (name) => {
-        this.make.sendKeys(name);
+      setMake = (make: string) => {
+        this.make.sendKeys(make);
       };
     
-      setModel = (name) => {
-        this.model.sendKeys(name);
+      setModel = (model: string) => {
+        this.model.sendKeys(model);
       };
     
-      setNrSeats = (nrSeats) => {
+      setNrSeats = (nrSeats: number) => {
         this.nrSeats.sendKeys(nrSeats);
       };
     
-      setAvailNumber = (avail) => {
+      setAvail = (avail: number) => {
         this.avail.sendKeys(avail);
       };
     
-
 }

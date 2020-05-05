@@ -31,7 +31,7 @@ describe("Profile Contact Components Tests", () => {
     expect(pc.form.isPresent()).toBe(true);
   });
 
-  it("Test 2: contact form should be pre-populated with user's current info", () => {
+  it("Test 2: car form should be pre-populated with user's current info", () => {
     browser.waitForAngular();
     browser.ignoreSynchronization=true
     expect(pc.make.getAttribute("value")).toBeTruthy();
@@ -39,3 +39,47 @@ describe("Profile Contact Components Tests", () => {
     expect(pc.nrSeats.getAttribute("value")).toBeTruthy();
     expect(pc.avail.getAttribute("value")).toBeTruthy();
   });
+
+  it("Test 3: user cannot submit form without making any changes", () => {
+    expect(pc.submit.isEnabled()).toBe(false);
+  });
+
+  it("Test 4: available seats can never exceed total seats", () => {
+    pc.nrSeats.clear();
+    pc.setNrSeats(3);
+    pc.avail.clear();
+    pc.setAvail(5);
+    expect(pc.submit.isEnabled()).toBe(false);
+  });
+
+  it("Test 5: all form elements must be valid in order to submit "), () => {
+    pc.make.clear();
+    pc.setMake("Mercedes!");
+    expect(pc.submit.isEnabled()).toBe(false);
+    pc.make.clear();
+    pc.setMake("Mercedes-Benz");
+    expect(pc.submit.isEnabled()).toBe(true);
+
+    pc.model.clear();
+    pc.setModel("$300");
+    expect(pc.submit.isEnabled()).toBe(false);
+    pc.model.clear();
+    pc.setModel("300CE");
+    expect(pc.submit.isEnabled()).toBe(true);
+
+    pc.nrSeats.clear();
+    pc.setNrSeats(8);
+    expect(pc.submit.isEnabled()).toBe(false);
+    pc.nrSeats.clear();
+    pc.setNrSeats(5);
+    expect(pc.submit.isEnabled()).toBe(true);
+
+    pc.avail.clear();
+    pc.setAvail(8);
+    expect(pc.submit.isEnabled()).toBe(false);
+    pc.avail.clear();
+    pc.setAvail(5);
+    expect(pc.submit.isEnabled()).toBe(true);
+  }
+
+})

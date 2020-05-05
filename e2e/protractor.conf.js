@@ -18,8 +18,10 @@ exports.config = {
     './test/profile-contact.ts',
     './test/profile-location.ts',
     './test/profile-membership.ts',
+    './test/profile-car.ts',
   ],
   suites: {
+    car: './test/profile-car.ts',
     contact:  './test/profile-contact.ts',
     location:  './test/profile-location.ts',
     membership:  './test/profile-membership.ts',
