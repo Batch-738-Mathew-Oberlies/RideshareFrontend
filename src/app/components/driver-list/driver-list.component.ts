@@ -128,13 +128,19 @@ displayDriversList(origin, drivers) {
     this.availableDrivers = [];
 
     drivers.forEach(element => {
-      var availableSeats: number;
-      var totalSeats: number;
+      var availableSeats: number = 0;
+      var totalSeats: number = 0;
 
       this.carService.getCarTripByUserId(element.id).subscribe(
         (carTrip) => {
-          availableSeats = carTrip.currentTrip.availableSeats;
-          totalSeats = carTrip.car.seats;
+          if (availableSeats == undefined)
+            availableSeats = 0;
+          else
+            availableSeats = carTrip.currentTrip.availableSeats;
+          if (totalSeats == undefined)
+            totalSeats = 0;
+          else
+            totalSeats = carTrip.car.seats;
         }
       );
       
