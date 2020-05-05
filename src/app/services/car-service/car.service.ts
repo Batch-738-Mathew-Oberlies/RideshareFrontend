@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../user-service/user.service';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { Trip } from 'src/app/models/trip';
 
 @Injectable({
     providedIn: 'root'
@@ -61,9 +62,23 @@ export class CarService {
 	 * Returns a car and current trip by user ID.
 	 * @param userId 
 	 */
-	getCarTripByUserId(userId: number) {
+	getCarTripByUserId(userId) {
 		return this.http.get(`${this.url}trips/driver/${userId}`)
-	}
+  }
+  
+  /**
+   * Updates information on car and current trip by userId
+   * @param car 
+   * @param trip 
+   */
+  updateCarTrip(car: Car, trip: Trip) {
+    let carTrip = {
+      car: car,
+      currentTrip: trip,
+    };
+    console.log(carTrip);
+    return this.http.put(`${this.url}trips`, carTrip);
+  }
 
 	/**
 	 * Updates information on a car
