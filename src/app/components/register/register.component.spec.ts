@@ -32,6 +32,9 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { HomePageComponent } from '../home-page/home-page.component';
 import { LandingComponent } from '../landing/landing.component';
 import { TripsTableComponent } from '../trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from '../trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -40,6 +43,7 @@ describe('RegisterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AppComponent,
         RegisterComponent,
         DriverComponent,
         AdminComponent,
@@ -64,12 +68,14 @@ describe('RegisterComponent', () => {
         UserRegisterComponent,
         HomePageComponent,
         BsNavbarComponent,
+        TripsComponent,
+        CreateTripComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
-        TripsTableComponent
+        TripsTableComponent,
       ],
 
-      imports: [ RouterModule, RouterTestingModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+      imports: [ RouterModule, RouterTestingModule, HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, NgbModule],
       providers: [{provide: Router, useClass: RouterStub}]
         })
     .compileComponents();

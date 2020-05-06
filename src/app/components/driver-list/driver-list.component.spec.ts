@@ -29,6 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TripsTableComponent } from '../trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from '../trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('DriverListComponent', () => {
   let component: DriverListComponent;
@@ -37,6 +40,7 @@ describe('DriverListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AppComponent,
         RegisterComponent,
         DriverComponent,
         AdminComponent,
@@ -61,11 +65,13 @@ describe('DriverListComponent', () => {
         UserRegisterComponent,
         HomePageComponent,
         BsNavbarComponent,
+        TripsComponent,
+        CreateTripComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
-        TripsTableComponent
+        TripsTableComponent,
       ],
-       imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+       imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, NgbModule],
     })
     .compileComponents();
   }));

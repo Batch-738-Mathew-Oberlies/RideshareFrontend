@@ -33,6 +33,9 @@ import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TripsTableComponent } from '../trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from '../trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('MyCarComponent', () => {
   let component: MyCarComponent;
@@ -41,6 +44,7 @@ describe('MyCarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AppComponent,
         RegisterComponent,
         DriverComponent,
         AdminComponent,
@@ -65,11 +69,13 @@ describe('MyCarComponent', () => {
         UserRegisterComponent,
         HomePageComponent,
         BsNavbarComponent,
+        TripsComponent,
+        CreateTripComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
-        TripsTableComponent
+        TripsTableComponent,
       ],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule],
+      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, RouterTestingModule, NgbModule],
       providers: [{provide: APP_BASE_HREF, useValue: '/my/app'}]
     })
     .compileComponents();

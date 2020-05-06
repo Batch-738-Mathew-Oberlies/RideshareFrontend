@@ -29,10 +29,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TripsTableComponent } from '../components/trips-table/trips-table.component';
+import { CreateTripComponent, TripsComponent } from '../components/trips/trips.component';
+import { AppComponent } from '../app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('MarkInactiveDriverService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [
+      AppComponent,
       RegisterComponent,
       DriverComponent,
       AdminComponent,
@@ -56,11 +60,13 @@ describe('MarkInactiveDriverService', () => {
       UserRegisterComponent,
       HomePageComponent,
       BsNavbarComponent,
+      TripsComponent,
+      CreateTripComponent,
       ScheduleComponent,
       ViewMyRidesComponent,
-      TripsTableComponent
+      TripsTableComponent,
     ],
-     imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+     imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, NgbModule],
   }));
 
 

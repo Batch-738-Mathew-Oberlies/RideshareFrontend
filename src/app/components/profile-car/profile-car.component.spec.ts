@@ -29,6 +29,9 @@ import { BsNavbarComponent } from 'src/app/bs-navbar/bs-navbar.component';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { TripsTableComponent } from '../trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from '../trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('ProfileCarComponent', () => {
   let component: ProfileCarComponent;
@@ -37,6 +40,7 @@ describe('ProfileCarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AppComponent,
         RegisterComponent,
         DriverComponent,
         AdminComponent,
@@ -61,11 +65,13 @@ describe('ProfileCarComponent', () => {
         UserRegisterComponent,
         HomePageComponent,
         BsNavbarComponent,
+        TripsComponent,
+        CreateTripComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
-        TripsTableComponent
+        TripsTableComponent,
       ],
-      imports: [AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule]
+      imports: [AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, NgbModule]
     })
     .compileComponents();
   }));

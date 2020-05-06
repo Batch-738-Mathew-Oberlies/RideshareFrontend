@@ -30,6 +30,9 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
 import { TripsTableComponent } from '../trips-table/trips-table.component';
+import { AppComponent } from 'src/app/app.component';
+import { TripsComponent, CreateTripComponent } from '../trips/trips.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('SignupModalComponent', () => {
   let component: SignupModalComponent;
@@ -38,6 +41,7 @@ describe('SignupModalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AppComponent,
         RegisterComponent,
         DriverComponent,
         AdminComponent,
@@ -62,11 +66,13 @@ describe('SignupModalComponent', () => {
         UserRegisterComponent,
         HomePageComponent,
         BsNavbarComponent,
+        TripsComponent,
+        CreateTripComponent,
         ScheduleComponent,
         ViewMyRidesComponent,
-        TripsTableComponent
+        TripsTableComponent,
       ],
-      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, ModalModule.forRoot()]
+      imports: [HttpClientModule, AppRoutingModule, FormsModule, ReactiveFormsModule, ModalModule.forRoot(), NgbModule]
     })
     .compileComponents();
   }));
