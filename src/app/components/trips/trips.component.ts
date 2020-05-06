@@ -273,9 +273,9 @@ export class TripsComponent implements OnInit {
 }
 
 @Component ({
-  template:`
+  template: `
       <div class="modal-header">
-        <button type="button" (click)="activeModal.dismiss()" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" (click)="activeModal.dismiss(); refresh();" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
@@ -285,8 +285,11 @@ export class TripsComponent implements OnInit {
   `,
 })
 export class SuccessModal {
-
   constructor(
     public activeModal: NgbActiveModal
   ) { }
+
+  refresh() {
+    location.reload();
+  }
 }

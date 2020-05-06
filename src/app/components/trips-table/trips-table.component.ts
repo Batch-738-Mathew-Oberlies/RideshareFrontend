@@ -54,20 +54,20 @@ export class TripsTableComponent implements OnInit {
   checkDate(d: Date)
   {
     let dateCheck: boolean = false;
- 
+
     if(this.currDate <= new Date(d))
     {
         dateCheck = true;
     }
-    
+
     if(this.showPast)
     {
         dateCheck=!dateCheck;
     }
-    
+
     return dateCheck;
   }
-  
+
   showAllTrips()
   {
     this.showAll=!this.showAll;
@@ -80,7 +80,7 @@ export class TripsTableComponent implements OnInit {
   filterByOpenSeats(t:Trip)
   {
     let show: boolean=true;
-    
+
     if(this.showAll==false && t.availableSeats==0)
     {
         show=false;
@@ -116,7 +116,6 @@ export class TripsTableComponent implements OnInit {
 
   updateAvailableSeats(trip: Trip, event: any) {
     trip.availableSeats = event.target.value;
-    alert(JSON.stringify(trip));
     this.tripService.updateTrip(trip).subscribe();
   }
 
