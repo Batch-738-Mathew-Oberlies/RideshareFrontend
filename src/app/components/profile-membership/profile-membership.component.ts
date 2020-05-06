@@ -36,7 +36,7 @@ export class ProfileMembershipComponent implements OnInit {
     this.currentUser = this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
       (response) => {
         this.profileObject = response;
-        
+
         this.isDriver = this.profileObject.driver;
         this.isActive = this.profileObject.active;
         this.isAcceptingRides = this.profileObject.acceptingRides;
@@ -53,16 +53,17 @@ export class ProfileMembershipComponent implements OnInit {
     if(this.getBoolean(this.isDriver) == false){
       this.isAcceptingRides = false;
     }
-    
+
     this.profileObject.driver = this.isDriver;
     this.profileObject.active = this.isActive;
-    
+
     this.profileObject.acceptingRides = this.isAcceptingRides;
 
     this.userService.updateUserInfo(this.profileObject).subscribe(
-      () => { 
+      () => {
         this.success = true;
         this.statusMessage = "Updated Successfully!"
+        this.userService.storeUser(this.profileObject);
       },
       (errorObj) => {
         this.errorExists = true;
@@ -81,7 +82,7 @@ export class ProfileMembershipComponent implements OnInit {
          case true:
          case "true":
              return true;
-         default: 
+         default:
              return false;
      }
  }
@@ -90,7 +91,7 @@ export class ProfileMembershipComponent implements OnInit {
    * Disables submit button if the form fields have not been changed from their original value.
    */
   disableButton(){
-    
+
     if(this.getBoolean(this.isDriver) != this.profileObject.driver || this.getBoolean(this.isActive) != this.profileObject.active || this.getBoolean(this.isAcceptingRides) != this.profileObject.acceptingRides ){
       this.button = false;
     } else {
