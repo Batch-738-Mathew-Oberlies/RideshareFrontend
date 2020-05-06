@@ -53,7 +53,14 @@
           <td>
             {{trip.destination.street + " " + trip.destination.city + " " + trip.destination.state + " " + trip.destination.zip}}
           </td>
-          <td>
+          <td *ngIf="trip.driver.userId == this.id">
+            <select (change)="updateAvailableSeats(trip, $event)" value={{trip.availableSeats}}>
+              <option *ngFor="let seat of seatChangeOptions(trip)" [value]="seat">
+                  {{seat}}
+              </option>
+            </select>
+          </td>
+          <td *ngIf="trip.driver.userId !== this.id">
             {{trip.availableSeats}}
           </td>
 
