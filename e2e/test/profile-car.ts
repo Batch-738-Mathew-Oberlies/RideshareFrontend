@@ -25,14 +25,16 @@ describe("Profile Car Components Tests", () => {
     element(by.id("navbarDropdown")).click();
     browser.wait(protractor.ExpectedConditions.visibilityOf(element(by.id("profileDropdown"))), 15000);
     element(by.id("profileDropdown")).click();
-    browser.wait(protractor.ExpectedConditions.visibilityOf(pc.form), 15000);
+    browser.wait(protractor.ExpectedConditions.visibilityOf(element(by.id("contactInfoForm"))), 15000);
     expect(browser.getCurrentUrl()).toBe("http://localhost:4200/profile");
     element(by.id("carInfoButton")).click();
+    browser.wait(protractor.ExpectedConditions.visibilityOf(pc.form), 15000);
     expect(pc.form.isPresent()).toBe(true);
   });
 
   it("Test 2: car form should be pre-populated with user's current info", () => {
     browser.waitForAngular();
+    browser.sleep(2500);
     browser.ignoreSynchronization=true
     expect(pc.make.getAttribute("value")).toBeTruthy();
     expect(pc.model.getAttribute("value")).toBeTruthy();
@@ -50,36 +52,40 @@ describe("Profile Car Components Tests", () => {
     pc.avail.clear();
     pc.setAvail(5);
     expect(pc.submit.isEnabled()).toBe(false);
+
+    pc.avail.clear();
+    pc.setAvail(2);
+    expect(pc.submit.isEnabled()).toBe(true);
   });
 
-  it("Test 5: all form elements must be valid in order to submit "), () => {
+  it("Test 5: all form elements must be valid in order to submit ", () => {
     pc.make.clear();
     pc.setMake("Mercedes!");
     expect(pc.submit.isEnabled()).toBe(false);
     pc.make.clear();
-    pc.setMake("Mercedes-Benz");
+    pc.setMake("Nissan");
     expect(pc.submit.isEnabled()).toBe(true);
 
     pc.model.clear();
     pc.setModel("$300");
     expect(pc.submit.isEnabled()).toBe(false);
     pc.model.clear();
-    pc.setModel("300CE");
+    pc.setModel("Rogue");
     expect(pc.submit.isEnabled()).toBe(true);
 
     pc.nrSeats.clear();
     pc.setNrSeats(8);
     expect(pc.submit.isEnabled()).toBe(false);
     pc.nrSeats.clear();
-    pc.setNrSeats(5);
+    pc.setNrSeats(4);
     expect(pc.submit.isEnabled()).toBe(true);
 
     pc.avail.clear();
-    pc.setAvail(8);
+    pc.setAvail(7);
     expect(pc.submit.isEnabled()).toBe(false);
     pc.avail.clear();
-    pc.setAvail(5);
+    pc.setAvail(4);
     expect(pc.submit.isEnabled()).toBe(true);
-  }
+  })
 
 })
