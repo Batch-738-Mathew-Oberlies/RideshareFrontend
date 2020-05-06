@@ -30,7 +30,7 @@ describe("Profile Membership Component Tests", () => {
     expect(element(by.id("membershipDiv")).isPresent()).toBe(true);
   });
 
-  it("Test 1: Profile Membership form is prefilled with information", () => {
+  it("Test 2: Profile Membership form is prefilled with information", () => {
     browser.waitForAngular();
     browser.sleep(2500);
     browser.ignoreSynchronization=true;
@@ -39,11 +39,11 @@ describe("Profile Membership Component Tests", () => {
     expect(pm.active.getAttribute("value")).toBeTruthy();
   })
 
-  it("Test 2: Submit button is disabled when values are the same", () => {
+  it("Test 3: Submit button is disabled when values are the same", () => {
     expect(pm.submit.isEnabled()).toBe(false);
   })
 
-  it("Test 3: Driver acceptingRides buttons display toggle", () => {
+  it("Test 4: Driver acceptingRides buttons display toggle", () => {
     pm.setDriver("Rider");
     expect(pm.driver.getAttribute("value")).toBe("false");
     expect(pm.acceptingRides.isPresent()).toBe(false);
@@ -54,7 +54,7 @@ describe("Profile Membership Component Tests", () => {
     expect(pm.acceptingRides.isPresent()).toBe(true);
   })
 
-  it("Test 4: Successful form data send", () => {
+  it("Test 5: Successful form data send", () => {
     pm.active.getAttribute("value").then(function(value) {
       if (value == "true") {
         pm.setActive("Inactive");

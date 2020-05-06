@@ -54,10 +54,10 @@
       <div class="col-sm-7">
         <h6>Accepting Rides:</h6>
         <div id="acceptingRidesBtn" class="btn-group" (change)="disableButton()">
-          <button id="yes" type="button" class="btn btn-secondary"
+          <button type="button" class="btn btn-secondary"
             [ngClass]="isAcceptingRides?'btn btn-primary active':'btn btn-secondary'"
             (click)="changeIsAcceptingRides(true); disableButton();">Yes</button>
-          <button id="no" type="button" class="btn btn-secondary"
+          <button type="button" class="btn btn-secondary"
             [ngClass]="isAcceptingRides?'btn btn-secondary':'btn btn-primary active'"
             (click)="changeIsAcceptingRides(false); disableButton()">No</button>
         </div>

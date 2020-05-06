@@ -18,7 +18,7 @@ describe("Profile Contact Components Tests", () => {
     expect(browser.getCurrentUrl()).toBe("http://localhost:4200/landingPage");
   });
 
-  it('Test 1: user should be able to navigate to profile-car', () => {
+  it('Test 1: user should be able to navigate to profile-contact', () => {
     browser.waitForAngular();
     browser.ignoreSynchronization=true
     browser.wait(protractor.ExpectedConditions.visibilityOf(element(by.id("navbarDropdown"))), 15000);
@@ -49,7 +49,6 @@ describe("Profile Contact Components Tests", () => {
     pc.firstName.clear();
     pc.setFirstName("Toby!");
     expect(pc.submit.isEnabled()).toBe(false);
-    element(by.className("error")).isPresent().then
     element(by.className("error")).getText().then(function(text) {
       expect(text.includes("First name cannot contain numbers or symbols"));
     })

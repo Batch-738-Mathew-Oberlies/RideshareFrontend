@@ -17,24 +17,8 @@ export class ProfileLocation {
     form = element(by.id('profileLocationForm'));
     submit = element(by.id('submit'));
     httpSuccess = element(by.id('response-success'));
-    httpError = element(by.id('response-error'));    
 
     constructor(){}
-
-    populateForm = (hstreet, haddressapt, hcity, hstate, hzipcode, wstreet, wapt, wcity, wstate, wzip) => {
-
-        this.setHomeStreet(hstreet);
-        this.setHomeAddressApt(haddressapt);
-        this.setHomeCity(hcity);
-        this.setHomeState(hstate);
-        this.setHomeZipcode(hzipcode);
-
-        this.setWorkStreet(wstreet);
-        this.setWorkAddressApt(wapt);
-        this.setWorkCity(wcity);
-        this.setWorkState(wstate);
-        this.setWorkZipcode(wzip);
-    }
 
     setHomeCity = (hcity: any) => {
         this.homeCity.sendKeys(hcity);
