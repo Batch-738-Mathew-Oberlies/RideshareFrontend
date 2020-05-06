@@ -1,5 +1,5 @@
 #right-panel {
-    font-family: 'Roboto','sans-serif';
+    font-family: 'Roboto', sans-serif;
     line-height: 30px;
     padding-left: 2%;
     float: right;
@@ -17,18 +17,18 @@
   #right-panel i {
     font-size: 12px;
   }
- 
+
   html, body {
     height: 100%;
     margin: 0;
     padding: 0;
   }
- 
+
   #map {
     height: 100%;
     width: 50%;
   }
- 
+
   #output {
     font-size: 11px;
   }
