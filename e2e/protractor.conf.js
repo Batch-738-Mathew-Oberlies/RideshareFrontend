@@ -15,11 +15,19 @@ exports.config = {
     './test/register.spec.js',
     './test/usernav.spec.js',
     './test/signupmodaltest.ts',
-    './test/tripcomponent.spec.js'
+    './test/tripcomponent.spec.js',
+    './test/profile-contact.ts',
+    './test/profile-location.ts',
+    './test/profile-membership.ts',
+    './test/profile-car.ts',
   ],
-
   suites: {
-    signup: './test/signupmodaltest.ts'
+    car: './test/profile-car.ts',
+    contact:  './test/profile-contact.ts',
+    location:  './test/profile-location.ts',
+    membership:  './test/profile-membership.ts',
+    signup: './test/signupmodaltest.ts',
+    trips: './test/tripcomponent.spec.js',
   },
   capabilities: {
     browserName: 'chrome'
