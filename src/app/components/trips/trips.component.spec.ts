@@ -33,7 +33,7 @@ import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { TripsTableComponent } from '../trips-table/trips-table.component';
 import { ModalModule } from 'ngx-bootstrap';
 
-fdescribe('TripsComponent', () => {
+describe('TripsComponent', () => {
   let comp: TripsComponent;
   let create: CreateTripComponent;
   let fixture: ComponentFixture<TripsComponent>;
