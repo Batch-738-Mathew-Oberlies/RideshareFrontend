@@ -14,7 +14,8 @@ exports.config = {
     './test/landingpage.spec.js',
     './test/register.spec.js',
     './test/usernav.spec.js',
-    './test/profile-tests.ts',
+    './test/signupmodaltest.ts',
+    './test/tripcomponent.spec.js',
     './test/profile-contact.ts',
     './test/profile-location.ts',
     './test/profile-membership.ts',
@@ -29,7 +30,7 @@ exports.config = {
     trips: './test/tripcomponent.spec.js',
   },
   capabilities: {
-    browserName: 'firefox'
+    browserName: 'chrome'
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
