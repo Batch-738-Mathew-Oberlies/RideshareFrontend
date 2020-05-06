@@ -1,5 +1,5 @@
 <div class="container mainContainer">
-  <i class="fa fa-home" style="font-family:'FontAwesome';"></i>
+  <em class="fa fa-home" style="font-family:'FontAwesome', sans-serif;"></em>
 
   <div *ngIf="success==true">
     <div class="row justify-content-center">
@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-    
+
   <div *ngIf="errorExists==true">
     <div class="row justify-content-center">
       <div *ngFor="let error of errorArray" class="alert alert-danger alert-dismissible">

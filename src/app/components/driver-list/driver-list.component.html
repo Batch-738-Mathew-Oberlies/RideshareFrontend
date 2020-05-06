@@ -18,7 +18,7 @@
           <tr *ngFor="let driver of availableDrivers">
             <td class="col" style="width: 4px;">
               <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" [attr.data-target]="'#' + driver.label" style="padding: 0%;">
-                <span class="fas fa-address-card" style="font-family:'FontAwesome'; padding-left: 4px; padding-right: 4px;"></span>
+                <span class="fas fa-address-card" style="font-family:'FontAwesome', sans-serif; padding-left: 4px; padding-right: 4px;"></span>
               </button>
                 <div class="col-lg-5">
                   <div class="modal" [attr.id]="driver.label" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
