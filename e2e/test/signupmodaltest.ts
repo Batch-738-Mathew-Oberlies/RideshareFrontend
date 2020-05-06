@@ -40,16 +40,12 @@ describe('signup modal', () => {
     it('Test 4: modal prompts user to confirm new address and then shows success/failure message', () => {
         signupModal.open();
         signupModal.populateForm('test', 'test', 'test@test.com', '111-111-1111',
-        'username','1 Morgantown', '11730 Plaza America Dr', '205', 'Reston', 
+        'username','1 Morgantown', '11730 Plaza America Dr', 'STE 205', 'Reston', 
         'VA', '20190', 'Rider');
         signupModal.submit.click();
-        browser.wait(protractor.ExpectedConditions.alertIsPresent(), 10000)
-        browser.switchTo().alert().accept();
 
-        //waiting for backend response.
-        //@TODO: exchange signupModal.httpError with signupModal.httpSuccess before release
-        browser.wait(protractor.ExpectedConditions.visibilityOf(signupModal.httpError), 10000);
-        expect(signupModal.httpError.isPresent()).toBe(true);
+        browser.wait(protractor.ExpectedConditions.visibilityOf(signupModal.httpSuccess), 10000);
+        expect(signupModal.httpSuccess.isPresent()).toBe(true);
         signupModal.close();
     })
 
@@ -72,10 +68,8 @@ describe('signup modal', () => {
         'VA', '20190', 'Rider');
         signupModal.submit.click();
         
-        //waiting for backend response.
-        //@TODO: exchange signupModal.httpError with signupModal.httpSuccess before release
-        browser.wait(protractor.ExpectedConditions.visibilityOf(signupModal.httpError), 10000);
-        expect(signupModal.httpError.isPresent()).toBe(true);
+        browser.wait(protractor.ExpectedConditions.visibilityOf(signupModal.httpSuccess), 10000);
+        expect(signupModal.httpSuccess.isPresent()).toBe(true);
         signupModal.close();
     })
 
