@@ -3,6 +3,8 @@ import { CarService } from 'src/app/services/car-service/car.service';
 import { Car } from 'src/app/models/car';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Trip } from 'src/app/models/trip';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user-service/user.service';
 
 @Component({
   selector: 'app-profile-car',
@@ -11,8 +13,8 @@ import { Trip } from 'src/app/models/trip';
 })
 export class ProfileCarComponent implements OnInit {
 
+  newCar: boolean;
   currentCar: Car;
-  currentTrip: Trip;
   success :boolean;
   errorExists: boolean;
   errorArray: any;
@@ -22,20 +24,26 @@ export class ProfileCarComponent implements OnInit {
   carForm: FormGroup;
   make = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 -]+')]);
   model = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 -]+')]);
+  year = new FormControl('', [Validators.pattern('[0-9]+'), Validators.min(0)]);
+  color = new FormControl('', Validators.pattern('[a-zA-Z ]+'));
   nrSeats = new FormControl('', [Validators.required, Validators.min(1), Validators.max(6)]);
-  availableSeats = new FormControl('', [Validators.required, Validators.min(0), (control: AbstractControl) => Validators.max(this.nrSeats.value)(control)]);
 
-  constructor(private carService: CarService, private formBuilder: FormBuilder) {
-
-    this.carService.getCarTripByUserId(sessionStorage.getItem("userid")).subscribe(
-      (carTrip) => {
-        this.currentCar = carTrip.car;
-        this.currentTrip = carTrip.currentTrip;
-
-        this.make.setValue(this.currentCar.make);
-        this.model.setValue(this.currentCar.model);
-        this.nrSeats.setValue(this.currentCar.seats);
-        this.availableSeats.setValue(this.currentTrip.availableSeats);
+  constructor(private carService: CarService, private userService: UserService, private formBuilder: FormBuilder) {
+    console.log(this.newCar);
+    this.carService.getCarByUserId2(sessionStorage.getItem("userid")).subscribe(
+      (car) => {
+        if (car != null){
+          this.newCar = false;
+          this.currentCar = car;
+          this.make.setValue(this.currentCar.make);
+          this.model.setValue(this.currentCar.model);
+          this.year.setValue(this.currentCar.year);
+          this.color.setValue(this.currentCar.color);
+          this.nrSeats.setValue(this.currentCar.seats);
+        } else {
+          this.newCar = true;
+          this.currentCar = new Car();
+        }
       }
     );
 
@@ -43,7 +51,8 @@ export class ProfileCarComponent implements OnInit {
       make: this.make,
       model: this.model,
       nrSeats: this.nrSeats,
-      availableSeats: this.availableSeats,
+      year: this.year,
+      color: this.color,
       currentCar: this.currentCar,
     })
   }
@@ -57,18 +66,37 @@ export class ProfileCarComponent implements OnInit {
     this.errorArray = [];
     this.currentCar.make = this.carForm.value.make;
     this.currentCar.model= this.carForm.value.model;
+    this.currentCar.year= this.carForm.value.year;
+    this.currentCar.color= this.carForm.value.color;
     this.currentCar.seats = this.carForm.value.nrSeats;
-    this.currentTrip.availableSeats = this.carForm.value.availableSeats;
 
-    this.carService.updateCarTrip(this.currentCar, this.currentTrip).subscribe(
-      () => {
-        this.success = true;
-        this.statusMessage = "Updated Successfully!";
-      },
-      (errorObj) => {
-        this.errorExists = true;
-        this.errorArray = errorObj.error.errors;
-      }
-    )
+    if (this.newCar == true){
+      this.userService.getUserById2(sessionStorage.getItem("userid")).subscribe(
+        (user) => {
+          this.currentCar.user = user;
+          this.carService.createCar(this.currentCar).subscribe(
+            () => {
+              this.success = true;
+              this.statusMessage = "Created Successfully!";
+             },
+            (errorObj) => {
+              this.errorExists = true;
+              this.errorArray = errorObj.error.errors;
+            }
+          )
+        }
+      )
+    } else {
+      this.carService.updateCarInfo2(this.currentCar).subscribe(
+        () => {
+          this.success = true;
+          this.statusMessage = "Updated Successfully!";
+        },
+        (errorObj) => {
+          this.errorExists = true;
+          this.errorArray = errorObj.error.errors;
+        }
+      )
+    }
   }
 }

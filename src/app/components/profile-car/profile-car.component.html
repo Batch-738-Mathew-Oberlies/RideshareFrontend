@@ -51,6 +51,39 @@
 
     <div class="form-group row">
       <div class="col-sm-1"></div>
+      <label for="year" class="col-sm-4 col-form-label">Year:</label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" id="year" name="year" min="0" formControlName="year"
+          value="{{ currentCar?.year }}" required>
+        <p class="error" *ngIf="(year.dirty || year.touched) && year.invalid">
+          Year must be a postive number.
+        </p>
+        <p class="error" *ngIf="year.errors?.pattern">
+          Year can only contain numbers.
+        </p>
+        <div *ngFor="let error of errorArray">
+          <p *ngIf="error.includes('year')" class="error">{{ error }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-1"></div>
+      <label for="color" class="col-sm-4 col-form-label">Color:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="color" name="color" formControlName="color"
+          value="{{ currentCar?.color }}" required>
+        <p class="error" *ngIf="(color.dirty || color.touched) && color.invalid && color.errors?.pattern">
+          Color can only contain letters and spaces.
+        </p>
+        <div *ngFor="let error of errorArray">
+          <p *ngIf="error.includes('color')" class="error">{{ error }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-1"></div>
       <label for="Nrseats" class="col-sm-4 col-form-label ">Total seats:</label>
       <div class="col-sm-4">
         <input type="number" class="form-control" id="nrSeats" name="nrSeats" formControlName="nrSeats"
@@ -67,7 +100,7 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <!-- <div class="form-group row">
       <div class="col-sm-1"></div>
       <label for="availableSeats" class="col-sm-4 col-form-label ">Available seats:</label>
       <div class="col-sm-4">
@@ -83,7 +116,7 @@
           Available seats must be at least 0.
         </p>
       </div>
-    </div>
+    </div> -->
 
     <button id="submit" type="submit" [disabled]="!carForm.valid || !carForm.dirty" class="btn btn-primary myBtn">Save</button>
   </form>
