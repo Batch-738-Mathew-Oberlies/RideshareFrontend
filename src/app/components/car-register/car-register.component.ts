@@ -70,7 +70,7 @@ export class CarRegisterComponent implements OnInit {
    */
   addCar() {
     if (this.validationService.validateSeats(this.car.seats)) {
-      this.carService.createCar(this.car, this.userId);
+      this.carService.createCar(this.car);
     }
   }
 
