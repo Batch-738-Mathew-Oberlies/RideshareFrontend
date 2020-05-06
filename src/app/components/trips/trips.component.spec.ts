@@ -32,10 +32,10 @@ import { ScheduleComponent } from '../schedule/schedule.component';
 import { ViewMyRidesComponent } from '../view-my-rides/view-my-rides.component';
 import { TripsTableComponent } from '../trips-table/trips-table.component';
 import { ModalModule } from 'ngx-bootstrap';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 describe('TripsComponent', () => {
   let comp: TripsComponent;
-  let create: CreateTripComponent;
   let fixture: ComponentFixture<TripsComponent>;
   let create: CreateTripComponent;
   let createFixture: ComponentFixture<CreateTripComponent>;
@@ -75,8 +75,7 @@ describe('TripsComponent', () => {
         ScheduleComponent,
         ViewMyRidesComponent,
         TripsTableComponent,
-        CreateTripComponent,
-       ],
+      ],
       imports: [
         BrowserModule,
         HttpClientModule,
@@ -92,9 +91,14 @@ describe('TripsComponent', () => {
         { provide: FormBuilder, useValue: formBuilder }
       ]
     })
-    .compileComponents().then(() => {fixture = TestBed.createComponent(TripsComponent);
-                                     comp = fixture.componentInstance; // TripComponent test instance
-                                     create = createFixture.componentInstance; // Trip Scheduler Modal
+      .overrideModule(BrowserDynamicTestingModule, { set: { entryComponents: [CreateTripComponent] } })
+      .compileComponents().then(() => {
+      modalService = TestBed.get(NgbModal);
+      modalRef = modalService.open(CreateTripComponent);
+      fixture = TestBed.createComponent(TripsComponent);
+      comp = fixture.componentInstance;
+      spyOn(modalService, 'open').and.returnValue(modalRef);
+      spyOn(console, 'log').and.callThrough();
     });
   }));
 
@@ -102,6 +106,7 @@ describe('TripsComponent', () => {
     fixture = TestBed.createComponent(TripsComponent);
     comp = fixture.componentInstance;
     comp.user = JSON.parse(`{"userId":3,"userName":"gpichmann0","batch":{"batchNumber":1,"batchLocation":"Morgantown"},"firstName":"Grady","lastName":"Pichmann","email":"gpichmann0@artisteer.com","phoneNumber":"212-374-3466","driver":true,"active":true,"acceptingRides":true,"homeAddress":{"id":22,"street":"20505 S Dixie Hwy","apt":null,"city":"Miami","state":"FL","zip":"33189"},"workAddress":{"id":9,"street":"Sad","apt":null,"city":"Inbetween","state":"AL","zip":"11111"}}`);
+
     createFixture = TestBed.createComponent(CreateTripComponent);
     create = createFixture.componentInstance;
     create.user = comp.user;
@@ -119,24 +124,35 @@ describe('TripsComponent', () => {
     });
 
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
     expect(comp).toBeTruthy();
   });
 
+  it(`Modal Opened`, () => {
+    comp.open(comp.user);
+    expect(modalService.open).toHaveBeenCalled();
+  });
+
+  it(`Modal Closed`, () => {
+    comp.open(comp.user);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      modalRef.close();
+    });
+    fixture.whenStable().then(() => {
+      expect(console.log).toHaveBeenCalledWith('close');
+    });
+  });
+
   it(`should have this.user.driver is true`, async(() => {
-    fixture = TestBed.createComponent(TripsComponent);
-    comp = fixture.debugElement.componentInstance;
     expect(comp.user.driver).toBeTruthy();
   }));
 
-  it(`should set submitted to true`, async(() => {
-    create.submit();
-    expect(create.submitted).toBeTruthy();
-  }));
-
   it(`should call the submit method`, async(() => {
+
     modalService = TestBed.get(NgbModal);
 
     comp.open(comp.user);
