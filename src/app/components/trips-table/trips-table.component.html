@@ -42,19 +42,19 @@
             {{trip.name}} 
           </td>
           <td>
-            {{trip.tripDate | date}}
+            {{trip.tripDate | date:'short' }}
           </td>
           <td>
             {{trip.driver.firstName + " " + trip.driver.lastName}}
           </td>
           <td>
-            {{trip.departure.street + " " + trip.departure.city + " " + trip.departure.state + " " + trip.departure.zip}}
+            {{trip.departure.street | titlecase}} {{trip.departure.city | titlecase}} {{trip.departure.state}} {{trip.departure.zip}}
           </td>
           <td>
-            {{trip.destination.street + " " + trip.destination.city + " " + trip.destination.state + " " + trip.destination.zip}}
+            {{trip.destination.street | titlecase}} {{trip.destination.city | titlecase}} {{trip.destination.state}} {{trip.destination.zip}}
           </td>
           <td *ngIf="trip.driver.userId == this.id">
-            <select (change)="updateAvailableSeats(trip, $event)" value={{trip.availableSeats}}>
+            <select (change)="updateAvailableSeats(trip, $event)" [value]="trip.availableSeats">
               <option *ngFor="let seat of seatChangeOptions(trip)" [value]="seat">
                   {{seat}}
               </option>
