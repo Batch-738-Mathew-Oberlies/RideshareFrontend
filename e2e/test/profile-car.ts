@@ -4,7 +4,7 @@ import { protractor } from 'protractor/built/ptor';
 
 var pc = new profileCar();
 
-describe("Profile Contact Components Tests", () => {
+describe("Profile Car Components Tests", () => {
   browser.get('http://localhost:4200');
 
   it('Test 0: user should be able to login', () => {

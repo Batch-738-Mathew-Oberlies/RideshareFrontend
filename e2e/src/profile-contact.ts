@@ -9,14 +9,6 @@ export class profileContact {
   submit = element(by.id('submit'));
   form = element(by.id('contactInfoForm'));
   httpSuccess = element(by.id('response-success'));
-  httpError   = element(by.id('response-error'));
-
-  populateForm = (firstname, lastname, email, phone) => {
-    this.setFirstName(firstname);
-    this.setLastName(lastname);
-    this.setEmail(email);
-    this.setPhoneNumber(phone);
-  };
 
   setFirstName = (name) => {
     this.firstName.sendKeys(name);
